@@ -15,7 +15,7 @@ export function Header() {
     <header className={s.header}>
       <Link href="/" className={s.logo}>
         <span className={s.prompt}>~/</span>
-        <span>devlearn</span>
+        <span>dxlearn</span>
       </Link>
 
       <nav className={s.nav}>
