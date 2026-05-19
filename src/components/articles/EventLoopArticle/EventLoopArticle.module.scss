@@ -1,0 +1,626 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+// ─── Layout ──────────────────────────────────────────────────────────────────
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.sectionTitle {
+  font-size: $text-lg;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  padding-bottom: $space-4;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.prose {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  code {
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: $accent;
+    background: $accent-dim;
+    padding: 1px $space-2;
+    border-radius: $radius-sm;
+  }
+}
+
+// ─── Demo ────────────────────────────────────────────────────────────────────
+
+.demo {
+  @include terminal-border;
+  border-radius: $radius-lg;
+  background: $bg-surface;
+  overflow: hidden;
+}
+
+.demoHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-5;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.demoTitle {
+  @include terminal-label;
+  color: $text-muted;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.btn {
+  @include terminal-label;
+  padding: $space-1 $space-3;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  color: $text-secondary;
+  background: transparent;
+  cursor: pointer;
+  transition: all $t-fast;
+  @include focus-ring;
+
+  &:hover {
+    border-color: $border-strong;
+    color: $text-primary;
+    background: $bg-hover;
+  }
+
+  &.primary {
+    border-color: rgba(0, 229, 160, 0.4);
+    color: $accent;
+    background: $accent-dim;
+
+    &:hover { background: rgba(0, 229, 160, 0.18); }
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+.stepInfo {
+  @include terminal-label;
+  color: $text-muted;
+  padding: 0 $space-5;
+  line-height: 1;
+}
+
+// ─── Code editor ─────────────────────────────────────────────────────────────
+
+.codePane {
+  padding: $space-5;
+  border-bottom: 1px solid $border-subtle;
+  overflow-x: auto;
+  @include custom-scrollbar;
+}
+
+.codeLine {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-4;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  line-height: $line-loose;
+  border-radius: $radius-sm;
+  padding: 0 $space-2;
+  transition: background $t-fast;
+
+  &.highlighted {
+    background: rgba(0, 229, 160, 0.08);
+
+    .lineNum { color: $accent; }
+    .lineText { color: $text-primary; }
+  }
+}
+
+.lineNum {
+  color: $text-muted;
+  user-select: none;
+  flex-shrink: 0;
+  width: 24px;
+  text-align: right;
+  font-size: $text-xs;
+  padding-top: 2px;
+}
+
+.lineText {
+  color: $text-secondary;
+  flex: 1;
+  white-space: pre;
+}
+
+// ─── Queues grid ─────────────────────────────────────────────────────────────
+
+.queues {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0;
+
+  @include mobile {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.queue {
+  padding: $space-4;
+  border-right: 1px solid $border-subtle;
+
+  &:last-child { border-right: none; }
+
+  @include mobile {
+    border-bottom: 1px solid $border-subtle;
+    border-right: 1px solid $border-subtle;
+
+    &:nth-child(2n) { border-right: none; }
+    &:nth-child(n+3) { border-bottom: none; }
+  }
+}
+
+.queueLabel {
+  @include terminal-label;
+  color: $text-muted;
+  margin-bottom: $space-3;
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $text-muted;
+    flex-shrink: 0;
+
+    &.callstack { background: $info; }
+    &.micro { background: $accent; }
+    &.macro { background: $warn; }
+    &.log { background: $text-muted; }
+  }
+}
+
+.queueItems {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  min-height: 80px;
+}
+
+.queueItem {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  padding: $space-1 $space-2;
+  border-radius: $radius-sm;
+  border: 1px solid;
+  white-space: nowrap;
+  animation: slideIn 150ms ease;
+
+  &.callstack {
+    color: $info;
+    border-color: rgba(77, 184, 255, 0.3);
+    background: $info-dim;
+  }
+
+  &.micro {
+    color: $accent;
+    border-color: rgba(0, 229, 160, 0.3);
+    background: $accent-dim;
+  }
+
+  &.macro {
+    color: $warn;
+    border-color: rgba(240, 192, 64, 0.3);
+    background: $warn-dim;
+  }
+
+  &.log {
+    color: $text-secondary;
+    border-color: $border-subtle;
+    background: $bg-elevated;
+  }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ─── Status ──────────────────────────────────────────────────────────────────
+
+.status {
+  padding: $space-3 $space-5;
+  border-top: 1px solid $border-subtle;
+  @include terminal-label;
+  color: $text-muted;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+
+  .cursor {
+    display: inline-block;
+    width: 6px;
+    height: 12px;
+    background: $accent;
+    animation: blink 1s step-end infinite;
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+// ─── Snippet selector ────────────────────────────────────────────────────────
+
+.snippetTabs {
+  display: flex;
+  gap: $space-1;
+  padding: $space-3 $space-5;
+  border-bottom: 1px solid $border-subtle;
+  flex-wrap: wrap;
+}
+
+.snippetTab {
+  @include terminal-label;
+  padding: $space-1 $space-3;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  color: $text-muted;
+  cursor: pointer;
+  transition: all $t-fast;
+  background: transparent;
+  @include focus-ring;
+
+  &:hover {
+    color: $text-secondary;
+    border-color: $border-default;
+  }
+
+  &.active {
+    color: $accent;
+    border-color: rgba(0, 229, 160, 0.4);
+    background: $accent-dim;
+  }
+}
+
+// ─── Browser Arch ─────────────────────────────────────────────────────────────
+
+.archGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-2;
+
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.archCard {
+  @include terminal-border;
+  border-radius: $radius-md;
+  padding: $space-4;
+  background: $bg-surface;
+}
+
+.archCardTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  margin-bottom: $space-2;
+}
+
+.archCardDesc {
+  font-size: $text-xs;
+  color: $text-muted;
+  line-height: $line-normal;
+}
+
+.archCardAccent {
+  composes: archCard;
+  border-color: rgba(0, 229, 160, 0.2);
+  background: $accent-dim;
+
+  .archCardTitle { color: $accent; }
+}
+
+// ─── Call Stack visual ───────────────────────────────────────────────────────
+
+.stackVisual {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding: $space-5;
+  @include terminal-border;
+  border-radius: $radius-md;
+  background: $bg-surface;
+}
+
+.stackRow {
+  display: flex;
+  gap: $space-4;
+  align-items: flex-start;
+}
+
+.stackLabel {
+  @include terminal-label;
+  color: $text-muted;
+  flex-shrink: 0;
+  width: 80px;
+  padding-top: 2px;
+}
+
+.stackFrames {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: $space-1;
+  flex: 1;
+}
+
+.stackFrame {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  padding: $space-1 $space-3;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  color: $text-secondary;
+  background: $bg-elevated;
+
+  &.top {
+    border-color: rgba(77, 184, 255, 0.4);
+    color: $info;
+    background: $info-dim;
+  }
+
+  &.overflow {
+    border-color: rgba(255, 95, 106, 0.4);
+    color: $error;
+    background: $error-dim;
+    animation: pulse 1s ease infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+// ─── Sources table ───────────────────────────────────────────────────────────
+
+.sourcesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sourcesCol {
+  @include terminal-border;
+  border-radius: $radius-md;
+  background: $bg-surface;
+  overflow: hidden;
+}
+
+.sourcesHead {
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-elevated;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: $weight-bold;
+
+  &.micro { color: $accent; }
+  &.macro { color: $warn; }
+}
+
+.sourcesList {
+  padding: $space-3 $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.sourcesItem {
+  display: flex;
+  align-items: baseline;
+  gap: $space-3;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+
+  &::before {
+    content: '─';
+    color: $text-muted;
+    flex-shrink: 0;
+  }
+
+  code {
+    font-size: $text-xs;
+    color: $accent;
+    background: $accent-dim;
+    padding: 1px $space-2;
+    border-radius: $radius-sm;
+  }
+
+  &.macro code {
+    color: $warn;
+    background: $warn-dim;
+  }
+}
+
+// ─── Render pipeline ─────────────────────────────────────────────────────────
+
+.pipeline {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  @include terminal-border;
+  border-radius: $radius-md;
+  overflow: hidden;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.pipelineStep {
+  flex: 1;
+  padding: $space-4;
+  border-right: 1px solid $border-subtle;
+  background: $bg-surface;
+  position: relative;
+
+  &:last-child { border-right: none; }
+
+  @include mobile {
+    border-right: none;
+    border-bottom: 1px solid $border-subtle;
+    &:last-child { border-bottom: none; }
+  }
+}
+
+.pipelineArrow {
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $text-muted;
+  font-size: $text-xs;
+  z-index: 1;
+  background: $bg-base;
+  padding: 2px 0;
+
+  @include mobile { display: none; }
+}
+
+.pipelineNum {
+  @include terminal-label;
+  color: $text-muted;
+  margin-bottom: $space-1;
+}
+
+.pipelineTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  margin-bottom: $space-2;
+}
+
+.pipelineDesc {
+  font-size: $text-xs;
+  color: $text-muted;
+  line-height: $line-normal;
+}
+
+// ─── Inline badge ─────────────────────────────────────────────────────────────
+
+.inlineBadge {
+  display: inline-flex;
+  align-items: center;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  padding: 1px $space-2;
+  border-radius: $radius-sm;
+  border: 1px solid;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  &.micro {
+    color: $accent;
+    border-color: rgba(0, 229, 160, 0.3);
+    background: $accent-dim;
+  }
+
+  &.macro {
+    color: $warn;
+    border-color: rgba(240, 192, 64, 0.3);
+    background: $warn-dim;
+  }
+}
+
+// ─── Order visual ─────────────────────────────────────────────────────────────
+
+.orderList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  @include terminal-border;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.orderItem {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  padding: $space-4 $space-5;
+  border-bottom: 1px solid $border-subtle;
+
+  &:last-child { border-bottom: none; }
+
+  &:nth-child(2n) { background: $bg-surface; }
+}
+
+.orderNum {
+  @include terminal-label;
+  color: $text-muted;
+  flex-shrink: 0;
+  width: 24px;
+}
+
+.orderText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  flex: 1;
+
+  strong { color: $text-primary; }
+}
+
+.orderBadge {
+  @include terminal-label;
+  flex-shrink: 0;
+  padding: 1px $space-2;
+  border-radius: $radius-sm;
+  border: 1px solid;
+
+  &.sync {
+    color: $info;
+    border-color: rgba(77, 184, 255, 0.3);
+    background: $info-dim;
+  }
+  &.micro {
+    color: $accent;
+    border-color: rgba(0, 229, 160, 0.3);
+    background: $accent-dim;
+  }
+  &.macro {
+    color: $warn;
+    border-color: rgba(240, 192, 64, 0.3);
+    background: $warn-dim;
+  }
+}

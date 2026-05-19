@@ -1,0 +1,277 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.demo {
+  @include terminal-border;
+  border-radius: $radius-lg;
+  background: $bg-surface;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-5;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+
+  .title {
+    @include terminal-label;
+    color: $text-muted;
+  }
+}
+
+.configRow {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  padding: $space-4 $space-5;
+  border-bottom: 1px solid $border-subtle;
+  flex-wrap: wrap;
+}
+
+.configLabel {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-muted;
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.numberInput {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  padding: $space-1 $space-3;
+  background: $bg-elevated;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  color: $text-primary;
+  outline: none;
+  width: 72px;
+  transition: border-color $t-fast;
+
+  &:focus {
+    border-color: $accent;
+  }
+
+  &::placeholder {
+    color: $text-muted;
+  }
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-secondary;
+  cursor: pointer;
+  user-select: none;
+
+  input[type='checkbox'] {
+    accent-color: $error;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+  }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.btn {
+  @include terminal-label;
+  @include focus-ring;
+  padding: $space-1 $space-3;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $text-secondary;
+  cursor: pointer;
+  transition: all $t-fast;
+
+  &:hover:not(:disabled) {
+    border-color: $border-strong;
+    color: $text-primary;
+    background: $bg-hover;
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  &.primary {
+    border-color: rgba(0, 229, 160, 0.4);
+    color: $accent;
+    background: $accent-dim;
+
+    &:hover:not(:disabled) {
+      background: rgba(0, 229, 160, 0.2);
+    }
+  }
+
+  &.secondary {
+    border-color: rgba(77, 184, 255, 0.4);
+    color: $info;
+    background: $info-dim;
+
+    &:hover:not(:disabled) {
+      background: rgba(77, 184, 255, 0.2);
+    }
+  }
+}
+
+.stepsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+  padding: $space-3 $space-5;
+  border-bottom: 1px solid $border-subtle;
+  transition: background $t-normal;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &.idle {
+    background: transparent;
+  }
+
+  &.active {
+    background: rgba(0, 229, 160, 0.06);
+    border-left: 2px solid $accent;
+    padding-left: calc($space-5 - 2px);
+  }
+
+  &.done {
+    background: $bg-elevated;
+    opacity: 0.85;
+  }
+
+  &.skipped {
+    background: transparent;
+    opacity: 0.35;
+  }
+
+  &.caught {
+    background: rgba(255, 95, 106, 0.06);
+    border-left: 2px solid $error;
+    padding-left: calc($space-5 - 2px);
+  }
+}
+
+.stepIcon {
+  font-size: $text-sm;
+  flex-shrink: 0;
+  width: 16px;
+  text-align: center;
+  line-height: $line-normal;
+  margin-top: 2px;
+
+  .idle & { color: $text-muted; }
+  .active & { color: $accent; }
+  .done & { color: $accent; }
+  .skipped & { color: $text-muted; }
+  .caught & { color: $error; }
+}
+
+.stepBadge {
+  @include terminal-label;
+  flex-shrink: 0;
+  padding: 1px $space-2;
+  border-radius: $radius-sm;
+  border: 1px solid;
+
+  &.then {
+    color: $accent;
+    border-color: rgba(0, 229, 160, 0.3);
+    background: $accent-dim;
+  }
+
+  &.catch {
+    color: $error;
+    border-color: rgba(255, 95, 106, 0.3);
+    background: $error-dim;
+  }
+}
+
+.stepCode {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-secondary;
+  flex: 1;
+  line-height: $line-normal;
+  white-space: pre;
+}
+
+.stepValue {
+  @include terminal-label;
+  flex-shrink: 0;
+  padding: 1px $space-2;
+  border-radius: $radius-sm;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: $weight-regular;
+  border: 1px solid $border-subtle;
+  background: $bg-base;
+  color: $text-muted;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stepValueOk {
+  composes: stepValue;
+  color: $accent;
+  border-color: rgba(0, 229, 160, 0.2);
+  background: $accent-dim;
+}
+
+.stepValueErr {
+  composes: stepValue;
+  color: $error;
+  border-color: rgba(255, 95, 106, 0.2);
+  background: $error-dim;
+}
+
+.footer {
+  padding: $space-4 $space-5;
+  border-top: 1px solid $border-subtle;
+  background: $bg-elevated;
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+}
+
+.result {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-primary;
+
+  span {
+    color: $accent;
+  }
+}
+
+.resultLabel {
+  @include terminal-label;
+  color: $text-muted;
+  margin-right: $space-2;
+}

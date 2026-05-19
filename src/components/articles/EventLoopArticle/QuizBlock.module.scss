@@ -1,0 +1,321 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.quiz {
+  @include terminal-border;
+  border-radius: $radius-lg;
+  background: $bg-surface;
+  overflow: hidden;
+}
+
+// ─── Header ───────────────────────────────────────────────────────────────────
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-5;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.headerTitle {
+  @include terminal-label;
+  color: $text-muted;
+}
+
+.headerMeta {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.counter {
+  @include terminal-label;
+  color: $text-muted;
+}
+
+.diffBadge {
+  @include terminal-label;
+  padding: 1px $space-2;
+  border-radius: $radius-sm;
+  border: 1px solid;
+
+  &.easy {
+    color: $accent;
+    border-color: rgba(0, 229, 160, 0.3);
+    background: $accent-dim;
+  }
+  &.medium {
+    color: $warn;
+    border-color: rgba(240, 192, 64, 0.3);
+    background: $warn-dim;
+  }
+  &.hard {
+    color: $error;
+    border-color: rgba(255, 95, 106, 0.3);
+    background: $error-dim;
+  }
+}
+
+// ─── Progress ─────────────────────────────────────────────────────────────────
+
+.progress {
+  height: 2px;
+  background: $border-subtle;
+}
+
+.progressFill {
+  height: 100%;
+  background: $accent;
+  transition: width $t-slow;
+  box-shadow: 0 0 6px $accent-glow;
+}
+
+// ─── Body ─────────────────────────────────────────────────────────────────────
+
+.body {
+  padding: $space-6 $space-6 $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.question {
+  font-size: $text-base;
+  color: $text-secondary;
+}
+
+// ─── Code block ───────────────────────────────────────────────────────────────
+
+.codeWrapper {
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  background: $bg-base;
+  overflow: hidden;
+}
+
+.codePre {
+  margin: 0;
+  padding: $space-4 $space-5;
+  overflow-x: auto;
+  @include custom-scrollbar;
+
+  :global(.hljs) {
+    background: transparent;
+    padding: 0;
+    font-family: $font-mono;
+    font-size: $text-sm;
+    line-height: $line-loose;
+  }
+}
+
+.codePlain {
+  margin: 0;
+  padding: $space-4 $space-5;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  line-height: $line-loose;
+  color: $text-secondary;
+  overflow-x: auto;
+}
+
+// ─── Options ─────────────────────────────────────────────────────────────────
+
+.options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-2;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  background: $bg-base;
+  cursor: pointer;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  text-align: left;
+  transition: all $t-fast;
+  @include focus-ring;
+
+  &:hover:not(.answered) {
+    border-color: $border-strong;
+    color: $text-primary;
+    background: $bg-elevated;
+  }
+
+  &.selected:not(.correct):not(.wrong) {
+    border-color: $border-strong;
+    color: $text-primary;
+    background: $bg-elevated;
+  }
+
+  &.correct {
+    border-color: rgba(0, 229, 160, 0.5);
+    color: $accent;
+    background: $accent-dim;
+    cursor: default;
+  }
+
+  &.wrong {
+    border-color: rgba(255, 95, 106, 0.5);
+    color: $error;
+    background: $error-dim;
+    cursor: default;
+  }
+
+  &.answered {
+    cursor: default;
+  }
+}
+
+.optionKey {
+  @include terminal-label;
+  color: $text-muted;
+  flex-shrink: 0;
+  width: 16px;
+
+  .correct & { color: $accent; }
+  .wrong & { color: $error; }
+}
+
+.optionLabel {
+  flex: 1;
+}
+
+.optionIcon {
+  flex-shrink: 0;
+  font-style: normal;
+}
+
+// ─── Explanation ──────────────────────────────────────────────────────────────
+
+.explanation {
+  padding: $space-4;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  background: $bg-elevated;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  animation: fadeIn $t-normal ease;
+
+  &.correct {
+    border-color: rgba(0, 229, 160, 0.25);
+    background: $accent-dim;
+  }
+  &.wrong {
+    border-color: rgba(255, 95, 106, 0.2);
+    background: $error-dim;
+  }
+
+  .expLabel {
+    @include terminal-label;
+    margin-bottom: $space-2;
+    display: block;
+
+    .correct & { color: $accent; }
+    .wrong & { color: $error; }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ─── Footer ───────────────────────────────────────────────────────────────────
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-6;
+  border-top: 1px solid $border-subtle;
+  background: $bg-elevated;
+}
+
+.nextBtn {
+  @include terminal-label;
+  padding: $space-2 $space-4;
+  border: 1px solid rgba(0, 229, 160, 0.4);
+  border-radius: $radius-sm;
+  color: $accent;
+  background: $accent-dim;
+  cursor: pointer;
+  transition: all $t-fast;
+  @include focus-ring;
+
+  &:hover { background: rgba(0, 229, 160, 0.18); }
+  &:disabled { opacity: 0.3; cursor: default; pointer-events: none; }
+}
+
+.footerHint {
+  @include terminal-label;
+  color: $text-muted;
+}
+
+// ─── Score screen ─────────────────────────────────────────────────────────────
+
+.scoreScreen {
+  padding: $space-10 $space-6;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-5;
+}
+
+.scoreTitle {
+  font-size: $text-lg;
+  font-weight: $weight-bold;
+  color: $text-primary;
+}
+
+.scoreNum {
+  font-size: $text-3xl;
+  font-weight: $weight-bold;
+  color: $accent;
+  line-height: 1;
+}
+
+.scoreTotal {
+  font-size: $text-md;
+  color: $text-muted;
+}
+
+.scoreFeedback {
+  font-size: $text-base;
+  color: $text-secondary;
+  max-width: 320px;
+  line-height: $line-normal;
+}
+
+.retryBtn {
+  @include terminal-label;
+  padding: $space-2 $space-5;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  color: $text-secondary;
+  background: transparent;
+  cursor: pointer;
+  transition: all $t-fast;
+  margin-top: $space-2;
+  @include focus-ring;
+
+  &:hover {
+    border-color: $border-strong;
+    color: $text-primary;
+    background: $bg-elevated;
+  }
+}

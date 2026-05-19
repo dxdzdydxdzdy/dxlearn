@@ -1,0 +1,212 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.calc {
+  @include terminal-border;
+  border-radius: $radius-lg;
+  background: $bg-surface;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: $space-3 $space-5;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.title {
+  @include terminal-label;
+  color: $text-muted;
+}
+
+.body {
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.selectorRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-4;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.selectorCard {
+  padding: $space-4;
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  background: $bg-base;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  transition: border-color $t-normal, background $t-normal, box-shadow $t-slow;
+}
+
+.cardWinner {
+  border-color: $accent;
+  background: $accent-dim;
+  box-shadow: 0 0 14px $accent-glow;
+}
+
+.cardLoser {
+  opacity: 0.5;
+}
+
+.cardLabel {
+  @include terminal-label;
+  color: $text-muted;
+  font-size: $text-xs;
+}
+
+.selectorInput {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  padding: $space-2 $space-3;
+  background: $bg-surface;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  color: $text-primary;
+  outline: none;
+  width: 100%;
+  transition: border-color $t-fast;
+
+  &:focus { border-color: $accent; }
+}
+
+.scoreGrid {
+  display: flex;
+  gap: $space-2;
+}
+
+.scoreCell {
+  flex: 1;
+  text-align: center;
+  padding: $space-2;
+  background: $bg-elevated;
+  border-radius: $radius-sm;
+  border: 1px solid $border-subtle;
+}
+
+.scoreCellLabel {
+  font-family: $font-mono;
+  font-size: 9px;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: $letter-wide;
+  margin-bottom: $space-1;
+}
+
+.scoreCellValue {
+  font-family: $font-mono;
+  font-size: $text-xl;
+  font-weight: $weight-bold;
+  line-height: 1;
+}
+
+.scoreId { color: $error; }
+.scoreClass { color: $warn; }
+.scoreTag { color: $accent; }
+
+.scoreTuple {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  text-align: center;
+}
+
+.result {
+  text-align: center;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-radius: $radius-md;
+  border: 1px solid $border-default;
+  font-family: $font-mono;
+  font-size: $text-sm;
+}
+
+.resultTie {
+  color: $warn;
+}
+
+.resultWin {
+  color: $accent;
+
+  strong { color: $text-primary; }
+}
+
+.examples {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.examplesLabel {
+  @include terminal-label;
+  color: $text-muted;
+  font-size: $text-xs;
+}
+
+.exampleList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.exampleRow {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-2 $space-3;
+  border-radius: $radius-sm;
+  border: 1px solid $border-subtle;
+  background: $bg-base;
+  flex-wrap: wrap;
+}
+
+.exampleSel {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $accent;
+  flex-shrink: 0;
+}
+
+.exampleDesc {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-muted;
+  flex: 1;
+}
+
+.exampleBtns {
+  display: flex;
+  gap: $space-1;
+  flex-shrink: 0;
+}
+
+.exBtn {
+  @include terminal-label;
+  @include focus-ring;
+  padding: 2px $space-2;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $text-muted;
+  cursor: pointer;
+  transition: all $t-fast;
+  font-size: 10px;
+  letter-spacing: 0;
+  text-transform: none;
+
+  &:hover {
+    border-color: $accent;
+    color: $accent;
+    background: $accent-dim;
+  }
+}

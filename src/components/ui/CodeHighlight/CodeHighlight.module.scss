@@ -1,0 +1,46 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.wrapper {
+  position: relative;
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  background: $bg-surface;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-elevated;
+}
+
+.lang {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  letter-spacing: $letter-wide;
+  text-transform: uppercase;
+  color: $text-muted;
+}
+
+.filename {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+}
+
+.pre {
+  margin: 0;
+  @include custom-scrollbar;
+
+  :global(.hljs) {
+    background: $bg-surface;
+    padding: $space-5;
+    font-family: $font-mono;
+    font-size: $text-sm;
+    line-height: $line-loose;
+  }
+}

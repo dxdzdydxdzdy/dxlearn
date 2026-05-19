@@ -1,0 +1,70 @@
+@use './tokens' as *;
+
+// ─── Responsive ──────────────────────────────────────────────────────────────
+
+@mixin mobile {
+  @media (max-width: 768px) { @content; }
+}
+
+@mixin tablet {
+  @media (max-width: 1024px) { @content; }
+}
+
+// ─── Terminal decorations ─────────────────────────────────────────────────────
+
+@mixin terminal-border($sides: all) {
+  @if $sides == all {
+    border: 1px solid $border-default;
+  } @else if $sides == top {
+    border-top: 1px solid $border-default;
+  } @else if $sides == bottom {
+    border-bottom: 1px solid $border-default;
+  } @else if $sides == left {
+    border-left: 1px solid $border-default;
+  }
+}
+
+@mixin terminal-label {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  font-weight: $weight-regular;
+  letter-spacing: $letter-wider;
+  text-transform: uppercase;
+  color: $text-muted;
+}
+
+@mixin accent-glow-effect {
+  box-shadow: 0 0 0 1px $accent, 0 0 12px $accent-glow;
+}
+
+// ─── Focus ───────────────────────────────────────────────────────────────────
+
+@mixin focus-ring {
+  outline: none;
+  &:focus-visible {
+    outline: 1px solid $accent;
+    outline-offset: 2px;
+  }
+}
+
+// ─── Truncate ────────────────────────────────────────────────────────────────
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ─── Scrollbar ───────────────────────────────────────────────────────────────
+
+@mixin custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: $border-default transparent;
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb {
+    background: $border-default;
+    border-radius: 2px;
+    &:hover { background: $border-strong; }
+  }
+}

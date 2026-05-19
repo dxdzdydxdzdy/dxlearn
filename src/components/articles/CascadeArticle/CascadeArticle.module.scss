@@ -1,0 +1,127 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  border-bottom: 1px solid $border-subtle;
+  padding-bottom: $space-4;
+}
+
+.prose {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  code {
+    color: $accent;
+    background: $accent-dim;
+    border-radius: $radius-sm;
+    padding: 1px $space-2;
+    font-family: $font-mono;
+    font-size: $text-sm;
+  }
+
+  strong { color: $text-primary; }
+}
+
+.pyramid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: $space-4 0;
+}
+
+.pyramidLayer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-3;
+  padding: $space-3 $space-6;
+  border-radius: $radius-md;
+  margin-bottom: 2px;
+  transition: opacity $t-fast;
+}
+
+.layerLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: $weight-bold;
+  color: $text-primary;
+}
+
+.layerSub {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-muted;
+}
+
+.layerBadge {
+  font-family: $font-mono;
+  font-size: 10px;
+  padding: 1px $space-2;
+  border-radius: $radius-sm;
+  color: $bg-base;
+  font-weight: $weight-bold;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.tableHead {
+  background: $bg-elevated;
+
+  th {
+    padding: $space-3 $space-4;
+    text-align: left;
+    color: $text-muted;
+    @include terminal-label;
+    border-bottom: 1px solid $border-default;
+    letter-spacing: $letter-wide;
+  }
+}
+
+.tableRow {
+  border-bottom: 1px solid $border-subtle;
+  transition: background $t-fast;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  td {
+    padding: $space-3 $space-4;
+    color: $text-secondary;
+    vertical-align: middle;
+  }
+
+  td:first-child {
+    color: $text-primary;
+    font-weight: $weight-bold;
+  }
+}
+
+.scoreId { color: $error; font-weight: $weight-bold; }
+.scoreClass { color: $warn; font-weight: $weight-bold; }
+.scoreTag { color: $accent; font-weight: $weight-bold; }
+.scoreInline { color: #b48eff; font-weight: $weight-bold; }

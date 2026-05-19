@@ -1,0 +1,123 @@
+@use '../styles/tokens' as *;
+@use '../styles/mixins' as *;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: $space-20 $space-8;
+  max-width: 900px;
+  margin: 0 auto;
+
+  @include mobile {
+    padding: $space-16 $space-5;
+  }
+}
+
+.eyebrow {
+  @include terminal-label;
+  color: $accent;
+  margin-bottom: $space-5;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: $accent;
+  }
+}
+
+.title {
+  font-size: $text-3xl;
+  font-weight: $weight-bold;
+  line-height: $line-tight;
+  color: $text-primary;
+  margin-bottom: $space-6;
+
+  @include mobile {
+    font-size: $text-2xl;
+  }
+}
+
+.titleMuted {
+  color: $text-muted;
+}
+
+.subtitle {
+  font-size: $text-md;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 540px;
+  margin-bottom: $space-10;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: $space-6;
+  flex-wrap: wrap;
+}
+
+.divider {
+  width: 1px;
+  height: 16px;
+  background: $border-default;
+}
+
+.meta {
+  @include terminal-label;
+  color: $text-muted;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+  margin-top: $space-20;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  @include terminal-border;
+  border-radius: $radius-md;
+  padding: $space-5;
+  background: $bg-surface;
+  transition: border-color $t-normal, background $t-normal;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $border-strong;
+    background: $bg-elevated;
+  }
+}
+
+.cardLabel {
+  @include terminal-label;
+  color: $text-muted;
+  margin-bottom: $space-2;
+}
+
+.cardTitle {
+  font-size: $text-base;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  margin-bottom: $space-2;
+}
+
+.cardDesc {
+  font-size: $text-sm;
+  color: $text-muted;
+  line-height: $line-normal;
+}

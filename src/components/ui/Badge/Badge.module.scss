@@ -1,0 +1,49 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  font-weight: $weight-regular;
+  letter-spacing: $letter-wide;
+  text-transform: uppercase;
+  padding: 1px $space-2;
+  border-radius: $radius-sm;
+  border: 1px solid;
+  line-height: $line-tight;
+  white-space: nowrap;
+
+  &.default {
+    color: $text-muted;
+    border-color: $border-subtle;
+    background: transparent;
+  }
+
+  &.accent {
+    color: $accent;
+    border-color: rgba(0, 229, 160, 0.3);
+    background: $accent-dim;
+  }
+
+  &.warn {
+    color: $warn;
+    border-color: rgba(240, 192, 64, 0.3);
+    background: $warn-dim;
+  }
+
+  &.error {
+    color: $error;
+    border-color: rgba(255, 95, 106, 0.3);
+    background: $error-dim;
+  }
+
+  &.info {
+    color: $info;
+    border-color: rgba(77, 184, 255, 0.3);
+    background: $info-dim;
+  }
+}

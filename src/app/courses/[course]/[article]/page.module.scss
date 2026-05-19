@@ -1,0 +1,121 @@
+@use '../../../../styles/tokens' as *;
+@use '../../../../styles/mixins' as *;
+
+.wrapper {
+  display: flex;
+  min-height: calc(100dvh - $header-height);
+}
+
+.sidebar {
+  width: $sidebar-width;
+  flex-shrink: 0;
+  position: sticky;
+  top: $header-height;
+  height: calc(100dvh - $header-height);
+  border-right: 1px solid $border-subtle;
+  overflow-y: auto;
+  padding: $space-6 0;
+  @include custom-scrollbar;
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  padding: $space-10 $space-8;
+
+  @include mobile {
+    padding: $space-8 $space-5;
+  }
+}
+
+.article {
+  max-width: $content-max;
+  margin: 0 auto;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  @include terminal-label;
+  color: $text-muted;
+  margin-bottom: $space-8;
+
+  a {
+    color: $text-muted;
+    transition: color $t-fast;
+    &:hover { color: $text-secondary; }
+  }
+
+  span { color: $border-default; }
+}
+
+.titleBlock {
+  margin-bottom: $space-10;
+  padding-bottom: $space-8;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.articleTitle {
+  font-size: $text-2xl;
+  font-weight: $weight-bold;
+  line-height: $line-tight;
+  color: $text-primary;
+  margin-bottom: $space-4;
+}
+
+.articleDesc {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin-top: $space-4;
+}
+
+.tag {
+  @include terminal-label;
+  color: $text-muted;
+  border: 1px solid $border-subtle;
+  padding: 2px $space-3;
+  border-radius: $radius-sm;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  gap: $space-4;
+  margin-top: $space-16;
+  padding-top: $space-8;
+  border-top: 1px solid $border-subtle;
+}
+
+.navLink {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  max-width: 240px;
+
+  &.right { text-align: right; }
+}
+
+.navLabel {
+  @include terminal-label;
+  color: $text-muted;
+}
+
+.navTitle {
+  font-size: $text-sm;
+  color: $text-secondary;
+  transition: color $t-fast;
+
+  .navLink:hover & { color: $accent; }
+}

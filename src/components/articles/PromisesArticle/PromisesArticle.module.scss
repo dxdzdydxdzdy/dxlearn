@@ -1,0 +1,58 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+// ─── Layout ──────────────────────────────────────────────────────────────────
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sectionTitle {
+  font-size: $text-2xl;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  padding-bottom: $space-4;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.prose {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  code {
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: $accent;
+    background: $accent-dim;
+    padding: 1px $space-2;
+    border-radius: $radius-sm;
+  }
+
+  strong {
+    color: $text-primary;
+  }
+
+  em {
+    color: $text-primary;
+    font-style: italic;
+  }
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-4;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}

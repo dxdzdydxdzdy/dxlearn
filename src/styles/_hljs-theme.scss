@@ -1,0 +1,83 @@
+@use './tokens' as *;
+
+// ─── Highlight.js theme — devlearn terminal dark ──────────────────────────────
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  color: $text-primary;
+  background: $bg-surface;
+}
+
+// Keywords: const, let, function, return, async, await...
+.hljs-keyword,
+.hljs-selector-tag {
+  color: #7db5ff;
+}
+
+// Built-ins: console, Promise, setTimeout, Math...
+.hljs-built_in,
+.hljs-class .hljs-title {
+  color: #87ceeb;
+}
+
+// Strings and template literals
+.hljs-string,
+.hljs-template-variable,
+.hljs-template-tag {
+  color: #e8b86d;
+}
+
+// Comments
+.hljs-comment,
+.hljs-quote {
+  color: $text-muted;
+  font-style: italic;
+}
+
+// Numbers
+.hljs-number,
+.hljs-regexp,
+.hljs-literal {
+  color: $accent;
+}
+
+// Function names and titles
+.hljs-title,
+.hljs-title.function_,
+.hljs-title.class_,
+.hljs-function .hljs-title {
+  color: #87ceeb;
+}
+
+// Params / variables
+.hljs-params {
+  color: $text-secondary;
+}
+
+.hljs-variable,
+.hljs-attr {
+  color: #aad4ef;
+}
+
+// true, false, null, undefined
+.hljs-literal {
+  color: #b5a0ff;
+}
+
+// Operators and punctuation
+.hljs-operator,
+.hljs-punctuation {
+  color: $text-secondary;
+}
+
+// Symbols, properties
+.hljs-property,
+.hljs-symbol {
+  color: #a0d4ef;
+}
+
+// Meta (decorators, annotations)
+.hljs-meta {
+  color: $text-muted;
+}

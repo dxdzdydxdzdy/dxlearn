@@ -1,0 +1,280 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.demo {
+  @include terminal-border;
+  border-radius: $radius-lg;
+  background: $bg-surface;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-5;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+
+  .title {
+    @include terminal-label;
+    color: $text-muted;
+  }
+}
+
+.tabs {
+  display: flex;
+  gap: $space-1;
+  padding: $space-3 $space-5;
+  border-bottom: 1px solid $border-subtle;
+  flex-wrap: wrap;
+  background: $bg-elevated;
+}
+
+.tab {
+  @include terminal-label;
+  @include focus-ring;
+  padding: $space-1 $space-3;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  color: $text-muted;
+  cursor: pointer;
+  transition: all $t-fast;
+  background: transparent;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: $text-xs;
+
+  &:hover {
+    color: $text-secondary;
+    border-color: $border-default;
+  }
+
+  &.active {
+    color: $accent;
+    border-color: rgba(0, 229, 160, 0.4);
+    background: $accent-dim;
+  }
+}
+
+.body {
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.promisesGrid {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.promiseRow {
+  display: grid;
+  grid-template-columns: 28px 1fr auto auto 80px 24px;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-radius: $radius-md;
+  border: 1px solid $border-subtle;
+  transition: border-color $t-normal;
+
+  @include mobile {
+    grid-template-columns: 28px 1fr auto;
+    grid-template-rows: auto auto auto;
+
+    .progressWrap { grid-column: 1 / -1; }
+    .promiseStatus { grid-column: -1; grid-row: 1; }
+  }
+}
+
+.promiseLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: $weight-bold;
+  color: $text-primary;
+}
+
+.sliderWrap {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100px;
+  height: 3px;
+  border-radius: 2px;
+  background: $bg-base;
+  outline: none;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: $accent;
+    cursor: pointer;
+  }
+
+  &::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: $accent;
+    cursor: pointer;
+    border: none;
+  }
+}
+
+.sliderValue {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-muted;
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.failCheckbox {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-secondary;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+
+  input[type='checkbox'] {
+    accent-color: $error;
+    width: 13px;
+    height: 13px;
+    cursor: pointer;
+  }
+}
+
+.progressWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.progressBar {
+  height: $space-2;
+  border-radius: 2px;
+  background: $bg-base;
+  overflow: hidden;
+  border: 1px solid $border-subtle;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 50ms linear;
+  background: $accent;
+
+  &.failed {
+    background: $error;
+  }
+}
+
+.promiseStatus {
+  font-size: $text-base;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding-top: $space-2;
+  border-top: 1px solid $border-subtle;
+}
+
+.btn {
+  @include terminal-label;
+  @include focus-ring;
+  padding: $space-2 $space-4;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $text-secondary;
+  cursor: pointer;
+  transition: all $t-fast;
+
+  &:hover:not(:disabled) {
+    border-color: $border-strong;
+    color: $text-primary;
+    background: $bg-hover;
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  &.primary {
+    border-color: rgba(0, 229, 160, 0.4);
+    color: $accent;
+    background: $accent-dim;
+
+    &:hover:not(:disabled) {
+      background: rgba(0, 229, 160, 0.2);
+    }
+  }
+}
+
+.resultBox {
+  border-radius: $radius-md;
+  padding: $space-4;
+  border: 1px solid;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  line-height: $line-loose;
+
+  &.resolved {
+    color: $accent;
+    border-color: rgba(0, 229, 160, 0.3);
+    background: $accent-dim;
+  }
+
+  &.rejected {
+    color: $error;
+    border-color: rgba(255, 95, 106, 0.3);
+    background: $error-dim;
+  }
+
+  &.settled {
+    color: $text-secondary;
+    border-color: $border-default;
+    background: $bg-elevated;
+  }
+}
+
+.resultLabel {
+  @include terminal-label;
+  display: block;
+  margin-bottom: $space-2;
+  color: $text-muted;
+}
+
+.resultValue {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.descText {
+  font-size: $text-xs;
+  color: $text-muted;
+  font-family: $font-mono;
+  letter-spacing: 0;
+}

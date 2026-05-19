@@ -1,0 +1,123 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  border-bottom: 1px solid $border-subtle;
+  padding-bottom: $space-4;
+}
+
+.prose {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  code {
+    color: $accent;
+    background: $accent-dim;
+    border-radius: $radius-sm;
+    padding: 1px $space-2;
+    font-family: $font-mono;
+    font-size: $text-sm;
+  }
+
+  strong { color: $text-primary; }
+}
+
+.axisDemo {
+  display: flex;
+  gap: $space-4;
+  flex-wrap: wrap;
+}
+
+.axisDemoBox {
+  flex: 1;
+  min-width: 200px;
+  padding: $space-4;
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  background: $bg-elevated;
+}
+
+.axisDemoTitle {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-muted;
+  margin-bottom: $space-3;
+}
+
+.axisDemoItems {
+  display: flex;
+  gap: $space-2;
+  height: 60px;
+  align-items: stretch;
+}
+
+.axisDemoItem {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.4);
+  border-radius: $radius-sm;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $accent;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.tableHead {
+  background: $bg-elevated;
+
+  th {
+    padding: $space-3 $space-4;
+    text-align: left;
+    color: $text-muted;
+    @include terminal-label;
+    border-bottom: 1px solid $border-default;
+    letter-spacing: $letter-wide;
+  }
+}
+
+.tableRow {
+  border-bottom: 1px solid $border-subtle;
+  transition: background $t-fast;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  td {
+    padding: $space-3 $space-4;
+    color: $text-secondary;
+    vertical-align: top;
+  }
+
+  td:first-child {
+    color: $text-primary;
+    font-weight: $weight-bold;
+  }
+}

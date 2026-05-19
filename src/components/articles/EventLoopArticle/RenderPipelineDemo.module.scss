@@ -1,0 +1,239 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.demo {
+  @include terminal-border;
+  border-radius: $radius-lg;
+  background: $bg-surface;
+  overflow: hidden;
+}
+
+.demoHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-5;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.demoTitle {
+  @include terminal-label;
+  color: $text-muted;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.playBtn {
+  @include terminal-label;
+  padding: $space-1 $space-3;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  color: $text-secondary;
+  background: transparent;
+  cursor: pointer;
+  transition: all $t-fast;
+  @include focus-ring;
+
+  &:hover {
+    border-color: $accent;
+    color: $accent;
+    background: $accent-dim;
+  }
+
+  &.playing {
+    border-color: rgba(0, 229, 160, 0.4);
+    color: $accent;
+    background: $accent-dim;
+  }
+}
+
+.speed {
+  @include terminal-label;
+  color: $text-muted;
+  padding: $space-1 $space-2;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  background: transparent;
+  transition: all $t-fast;
+  @include focus-ring;
+
+  &:hover {
+    color: $text-secondary;
+    border-color: $border-default;
+  }
+}
+
+// ─── Pipeline flow ────────────────────────────────────────────────────────────
+
+.flow {
+  display: flex;
+  align-items: stretch;
+  padding: $space-6;
+  gap: 0;
+  overflow-x: auto;
+  @include custom-scrollbar;
+
+  @include mobile {
+    flex-direction: column;
+    padding: $space-4;
+  }
+}
+
+.stepWrapper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.step {
+  flex: 1;
+  min-width: 100px;
+  padding: $space-4;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  background: $bg-base;
+  cursor: pointer;
+  transition: border-color $t-normal, background $t-normal, box-shadow $t-slow;
+  @include focus-ring;
+
+  &:hover {
+    border-color: $border-default;
+    background: $bg-elevated;
+  }
+
+  &.active {
+    border-color: $accent;
+    background: $accent-dim;
+    box-shadow: 0 0 16px $accent-glow;
+  }
+}
+
+.stepNum {
+  @include terminal-label;
+  color: $text-muted;
+  margin-bottom: $space-2;
+  transition: color $t-normal;
+
+  .active & { color: $accent; }
+}
+
+.stepTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: $weight-bold;
+  color: $text-secondary;
+  margin-bottom: $space-2;
+  transition: color $t-normal;
+
+  .active & { color: $text-primary; }
+}
+
+.stepIo {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.stepIoLine {
+  font-size: $text-xs;
+  color: $text-muted;
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  transition: color $t-normal;
+
+  .ioKey {
+    opacity: 0.6;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+    width: 20px;
+  }
+
+  .ioVal {
+    color: $text-muted;
+  }
+
+  .active & .ioVal { color: $text-secondary; }
+}
+
+// ─── Arrow between steps ──────────────────────────────────────────────────────
+
+.arrow {
+  flex-shrink: 0;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $text-muted;
+  font-size: $text-sm;
+  transition: color $t-normal;
+
+  &.lit {
+    color: $accent;
+    text-shadow: 0 0 8px $accent-glow;
+  }
+
+  @include mobile {
+    width: auto;
+    height: 24px;
+    transform: rotate(90deg);
+  }
+}
+
+// ─── Description panel ────────────────────────────────────────────────────────
+
+.descPanel {
+  padding: $space-4 $space-5;
+  border-top: 1px solid $border-subtle;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.descNum {
+  @include terminal-label;
+  color: $accent;
+  flex-shrink: 0;
+}
+
+.descText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  flex: 1;
+
+  strong { color: $text-primary; }
+}
+
+// ─── Progress bar ─────────────────────────────────────────────────────────────
+
+.progressBar {
+  height: 2px;
+  background: $border-subtle;
+  margin: 0 $space-5 $space-4;
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: $accent;
+  border-radius: 1px;
+  transition: width $t-slow;
+  box-shadow: 0 0 6px $accent-glow;
+}

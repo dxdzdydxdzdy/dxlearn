@@ -1,0 +1,242 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.demo {
+  @include terminal-border;
+  border-radius: $radius-lg;
+  background: $bg-surface;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: $space-3 $space-5;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.title {
+  @include terminal-label;
+  color: $text-muted;
+}
+
+.chain {
+  display: flex;
+  align-items: flex-start;
+  padding: $space-6 $space-5;
+  gap: 0;
+  overflow-x: auto;
+  @include custom-scrollbar;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.nodeWrap {
+  display: flex;
+  align-items: center;
+  gap: 0;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.node {
+  min-width: 148px;
+  padding: $space-3;
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  background: $bg-base;
+  transition: border-color $t-normal, background $t-normal, box-shadow $t-slow;
+  flex-shrink: 0;
+
+  &.idle {
+    border-color: $border-subtle;
+  }
+
+  &.searching {
+    border-color: $warn;
+    background: $warn-dim;
+    box-shadow: 0 0 12px rgba(240, 192, 64, 0.2);
+  }
+
+  &.found {
+    border-color: $accent;
+    background: $accent-dim;
+    box-shadow: 0 0 14px $accent-glow;
+  }
+
+  &.passed {
+    opacity: 0.5;
+    border-color: $border-subtle;
+  }
+
+  &.notfound {
+    border-color: $error;
+    background: $error-dim;
+    opacity: 0.6;
+  }
+}
+
+.nodeLabel {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  margin-bottom: $space-2;
+
+  .found & { color: $accent; }
+  .searching & { color: $warn; }
+  .notfound & { color: $error; }
+}
+
+.nodeProps {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nodeProp {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  line-height: 1.4;
+}
+
+.arrow {
+  flex-shrink: 0;
+  width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $text-muted;
+  font-size: $text-sm;
+  padding-top: 28px;
+  transition: color $t-normal;
+
+  &.arrowLit { color: $accent; }
+
+  @include mobile {
+    width: auto;
+    height: 24px;
+    padding-top: 0;
+    transform: rotate(90deg);
+    justify-content: center;
+  }
+}
+
+.controls {
+  padding: $space-4 $space-5;
+  border-top: 1px solid $border-subtle;
+  background: $bg-elevated;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.inputLabel {
+  @include terminal-label;
+  color: $text-muted;
+}
+
+.input {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  padding: $space-1 $space-3;
+  background: $bg-base;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  color: $text-primary;
+  outline: none;
+  width: 140px;
+  transition: border-color $t-fast;
+
+  &:focus { border-color: $accent; }
+  &:disabled { opacity: 0.5; }
+}
+
+.btn {
+  @include terminal-label;
+  @include focus-ring;
+  padding: $space-1 $space-3;
+  border: 1px solid rgba(0, 229, 160, 0.4);
+  border-radius: $radius-sm;
+  color: $accent;
+  background: $accent-dim;
+  cursor: pointer;
+  transition: all $t-fast;
+
+  &:hover:not(:disabled) { background: rgba(0, 229, 160, 0.18); }
+  &:disabled { opacity: 0.35; cursor: default; }
+}
+
+.btnSecondary {
+  @include terminal-label;
+  @include focus-ring;
+  padding: $space-1 $space-3;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  color: $text-secondary;
+  background: transparent;
+  cursor: pointer;
+  transition: all $t-fast;
+
+  &:hover { border-color: $border-strong; color: $text-primary; }
+}
+
+.presets {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.preset {
+  @include terminal-label;
+  @include focus-ring;
+  padding: 2px $space-3;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  color: $text-muted;
+  background: transparent;
+  cursor: pointer;
+  transition: all $t-fast;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: $text-xs;
+
+  &:hover { border-color: $border-default; color: $text-secondary; }
+}
+
+.result {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  padding: $space-2 $space-4;
+  border-radius: $radius-sm;
+  border: 1px solid;
+}
+
+.resultOk {
+  composes: result;
+  color: $accent;
+  border-color: rgba(0, 229, 160, 0.3);
+  background: $accent-dim;
+}
+
+.resultErr {
+  composes: result;
+  color: $error;
+  border-color: rgba(255, 95, 106, 0.3);
+  background: $error-dim;
+}

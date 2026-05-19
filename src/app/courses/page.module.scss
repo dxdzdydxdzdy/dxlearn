@@ -1,0 +1,114 @@
+@use '../../styles/tokens' as *;
+@use '../../styles/mixins' as *;
+
+.page {
+  padding: $space-12 $space-8;
+  max-width: 900px;
+  margin: 0 auto;
+
+  @include mobile {
+    padding: $space-8 $space-5;
+  }
+}
+
+.header {
+  margin-bottom: $space-10;
+  padding-bottom: $space-8;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.eyebrow {
+  @include terminal-label;
+  color: $text-muted;
+  margin-bottom: $space-4;
+}
+
+.title {
+  font-size: $text-xl;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  margin-bottom: $space-3;
+}
+
+.subtitle {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.courseList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.courseCard {
+  display: block;
+  @include terminal-border;
+  border-radius: $radius-md;
+  background: $bg-surface;
+  padding: $space-6;
+  transition: border-color $t-normal, background $t-normal;
+
+  &:hover {
+    border-color: $border-strong;
+    background: $bg-elevated;
+
+    .courseArrow { transform: translateX(4px); color: $accent; }
+  }
+}
+
+.courseTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $space-4;
+  margin-bottom: $space-4;
+}
+
+.courseTitle {
+  font-size: $text-md;
+  font-weight: $weight-bold;
+  color: $text-primary;
+}
+
+.courseArrow {
+  color: $text-muted;
+  transition: transform $t-fast, color $t-fast;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.courseDesc {
+  font-size: $text-sm;
+  color: $text-muted;
+  line-height: $line-normal;
+  margin-bottom: $space-5;
+}
+
+.articleChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.chip {
+  @include terminal-label;
+  padding: 2px $space-3;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  color: $text-muted;
+  background: $bg-base;
+  transition: border-color $t-fast, color $t-fast;
+
+  &:hover {
+    border-color: $border-strong;
+    color: $text-secondary;
+  }
+
+  &.interactive {
+    border-color: rgba(0, 229, 160, 0.2);
+    color: $accent;
+    background: $accent-dim;
+  }
+}

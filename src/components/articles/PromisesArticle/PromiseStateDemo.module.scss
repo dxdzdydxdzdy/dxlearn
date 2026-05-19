@@ -1,0 +1,276 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.demo {
+  @include terminal-border;
+  border-radius: $radius-lg;
+  background: $bg-surface;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: $space-3 $space-5;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+
+  .title {
+    @include terminal-label;
+    color: $text-muted;
+  }
+}
+
+.body {
+  padding: $space-6;
+}
+
+.diagram {
+  display: flex;
+  align-items: center;
+  gap: $space-6;
+
+  @include mobile {
+    flex-direction: column;
+    gap: $space-4;
+  }
+}
+
+.node {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding: $space-4;
+  border-radius: $radius-md;
+  border-left: 3px solid;
+  background: $bg-elevated;
+  min-width: 120px;
+  transition: all $t-normal;
+  opacity: 0.4;
+
+  &.active {
+    opacity: 1;
+  }
+
+  &.pending {
+    border-color: $warn;
+
+    &.active {
+      box-shadow: 0 0 12px rgba(240, 192, 64, 0.25);
+    }
+  }
+
+  &.fulfilled {
+    border-color: $accent;
+
+    &.active {
+      box-shadow: 0 0 12px rgba(0, 229, 160, 0.25);
+    }
+  }
+
+  &.rejected {
+    border-color: $error;
+
+    &.active {
+      box-shadow: 0 0 12px rgba(255, 95, 106, 0.25);
+    }
+  }
+}
+
+.nodeDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  .pending & { background: $warn; }
+  .fulfilled & { background: $accent; }
+  .rejected & { background: $error; }
+}
+
+.nodeHeader {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.nodeName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: $weight-bold;
+
+  .pending & { color: $warn; }
+  .fulfilled & { color: $accent; }
+  .rejected & { color: $error; }
+}
+
+.nodeDesc {
+  font-size: $text-xs;
+  color: $text-muted;
+}
+
+.nodeValue {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-secondary;
+  padding: $space-1 $space-2;
+  background: $bg-base;
+  border-radius: $radius-sm;
+  border: 1px solid $border-subtle;
+  word-break: break-all;
+}
+
+.arrows {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  flex: 1;
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.arrow {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.arrowLine {
+  height: 1px;
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: currentColor;
+  }
+
+  &::after {
+    content: '▶';
+    font-size: 8px;
+    flex-shrink: 0;
+  }
+}
+
+.arrowRow {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.arrowLabel {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  white-space: nowrap;
+  opacity: 0.8;
+}
+
+.arrowResolve {
+  color: $accent;
+}
+
+.arrowReject {
+  color: $error;
+}
+
+.rightNodes {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.controls {
+  margin-top: $space-6;
+  padding-top: $space-5;
+  border-top: 1px solid $border-subtle;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  flex-wrap: wrap;
+}
+
+.input {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  padding: $space-2 $space-3;
+  background: $bg-elevated;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  color: $text-primary;
+  outline: none;
+  transition: border-color $t-fast;
+  width: 140px;
+
+  &:focus {
+    border-color: $accent;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &::placeholder {
+    color: $text-muted;
+  }
+}
+
+.btn {
+  @include terminal-label;
+  @include focus-ring;
+  padding: $space-2 $space-4;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $text-secondary;
+  cursor: pointer;
+  transition: all $t-fast;
+
+  &:hover:not(:disabled) {
+    border-color: $border-strong;
+    color: $text-primary;
+    background: $bg-hover;
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  &.resolve {
+    border-color: rgba(0, 229, 160, 0.4);
+    color: $accent;
+    background: $accent-dim;
+
+    &:hover:not(:disabled) {
+      background: rgba(0, 229, 160, 0.2);
+    }
+  }
+
+  &.reject {
+    border-color: rgba(255, 95, 106, 0.4);
+    color: $error;
+    background: $error-dim;
+
+    &:hover:not(:disabled) {
+      background: rgba(255, 95, 106, 0.2);
+    }
+  }
+
+  &.reset {
+    border-color: rgba(240, 192, 64, 0.4);
+    color: $warn;
+    background: $warn-dim;
+
+    &:hover:not(:disabled) {
+      background: rgba(240, 192, 64, 0.2);
+    }
+  }
+}

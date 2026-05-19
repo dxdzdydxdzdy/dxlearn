@@ -1,0 +1,67 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+
+.section {
+  margin-bottom: $space-12;
+
+  & + & {
+    padding-top: $space-12;
+    border-top: 1px solid $border-subtle;
+  }
+}
+
+.h1 {
+  font-size: $text-2xl;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  line-height: $line-tight;
+  margin-bottom: $space-6;
+
+  .prefix {
+    color: $text-muted;
+    font-weight: $weight-regular;
+    margin-right: $space-3;
+  }
+}
+
+.h2 {
+  font-size: $text-lg;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  line-height: $line-tight;
+  margin-bottom: $space-4;
+  margin-top: $space-8;
+}
+
+.h3 {
+  font-size: $text-base;
+  font-weight: $weight-bold;
+  color: $text-secondary;
+  letter-spacing: $letter-wide;
+  text-transform: uppercase;
+  margin-bottom: $space-3;
+  margin-top: $space-6;
+}
+
+.p {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  margin-bottom: $space-4;
+
+  code {
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: $accent;
+    background: $accent-dim;
+    padding: 1px $space-2;
+    border-radius: $radius-sm;
+  }
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid $border-subtle;
+  margin: $space-8 0;
+}

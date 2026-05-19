@@ -1,0 +1,227 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.demo {
+  @include terminal-border;
+  border-radius: $radius-lg;
+  background: $bg-surface;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-5;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+  flex-wrap: wrap;
+  gap: $space-3;
+}
+
+.title {
+  @include terminal-label;
+  color: $text-muted;
+}
+
+.tabs {
+  display: flex;
+  gap: $space-2;
+}
+
+.tab {
+  @include terminal-label;
+  @include focus-ring;
+  padding: $space-1 $space-3;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $text-muted;
+  cursor: pointer;
+  transition: all $t-fast;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: $text-xs;
+
+  &:hover { border-color: $border-strong; color: $text-secondary; }
+}
+
+.tabActive {
+  border-color: rgba(0, 229, 160, 0.4);
+  color: $accent;
+  background: $accent-dim;
+}
+
+.chart {
+  padding: $space-5;
+  position: relative;
+  overflow-x: auto;
+  @include custom-scrollbar;
+}
+
+.timeAxis {
+  position: relative;
+  height: 20px;
+  margin-bottom: $space-3;
+  margin-left: 160px;
+}
+
+.tick {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-left: 1px solid $border-subtle;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.tickLabel {
+  font-family: $font-mono;
+  font-size: 9px;
+  color: $text-muted;
+  margin-left: $space-1;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  position: relative;
+  z-index: 1;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  gap: $space-3;
+}
+
+.rowLabel {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  width: 160px;
+  flex-shrink: 0;
+}
+
+.typeBadge {
+  font-family: $font-mono;
+  font-size: 9px;
+  font-weight: $weight-bold;
+  color: $bg-base;
+  padding: 1px 4px;
+  border-radius: $radius-sm;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.rowName {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-secondary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rowTrack {
+  flex: 1;
+  position: relative;
+  height: 100%;
+  background: $bg-base;
+  border-radius: $radius-sm;
+  border: 1px solid $border-subtle;
+  overflow: visible;
+}
+
+.bar {
+  position: absolute;
+  top: 4px;
+  height: calc(100% - 8px);
+  border-radius: $radius-sm;
+  transition: opacity $t-fast;
+  cursor: default;
+}
+
+.barBlocking {
+  background: rgba(255, 95, 106, 0.6);
+  border: 1px solid rgba(255, 95, 106, 0.8);
+}
+
+.barHovered {
+  filter: brightness(1.2);
+  z-index: 10;
+}
+
+.tooltip {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: $bg-elevated;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  padding: 2px $space-2;
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-primary;
+  white-space: nowrap;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.fcp {
+  position: absolute;
+  top: 20px;
+  bottom: $space-5;
+  left: 172px;
+  right: $space-5;
+  pointer-events: none;
+}
+
+.fcpLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-left: 2px dashed $accent;
+  opacity: 0.5;
+  transition: left 0.4s ease;
+}
+
+.fcpLabel {
+  position: absolute;
+  bottom: -24px;
+  transform: translateX(-50%);
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $accent;
+  white-space: nowrap;
+  transition: left 0.4s ease;
+}
+
+.legend {
+  display: flex;
+  gap: $space-4;
+  flex-wrap: wrap;
+  padding: $space-3 $space-5;
+  border-top: 1px solid $border-subtle;
+  background: $bg-elevated;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-muted;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}

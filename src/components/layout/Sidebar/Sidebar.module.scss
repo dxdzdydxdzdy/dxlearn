@@ -1,0 +1,106 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+
+.sidebar {
+  position: fixed;
+  top: $header-height;
+  left: 0;
+  bottom: 0;
+  width: $sidebar-width;
+  z-index: $z-sidebar;
+  background: $bg-base;
+  border-right: 1px solid $border-subtle;
+  overflow-y: auto;
+  padding: $space-6 0;
+  @include custom-scrollbar;
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.section {
+  margin-bottom: $space-6;
+}
+
+.sectionLabel {
+  @include terminal-label;
+  padding: 0 $space-5 $space-2;
+  color: $text-muted;
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+
+  &::before {
+    content: '//';
+    color: $text-muted;
+    opacity: 0.5;
+  }
+}
+
+.courseGroup {
+  margin-bottom: $space-4;
+}
+
+.courseTitle {
+  @include terminal-label;
+  padding: $space-2 $space-5;
+  color: $text-secondary;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+
+  &::before {
+    content: '▸';
+    font-size: $text-sm;
+    color: $text-muted;
+  }
+
+  &.open::before {
+    content: '▾';
+    color: $accent;
+  }
+}
+
+.articleList {
+  padding: 0;
+}
+
+.articleLink {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-5 $space-2 calc($space-5 + 14px);
+  font-size: $text-sm;
+  color: $text-muted;
+  line-height: $line-tight;
+  transition: color $t-fast, background $t-fast;
+  border-left: 2px solid transparent;
+  margin-left: $space-5;
+  padding-left: $space-4;
+
+  &:hover {
+    color: $text-secondary;
+    background: $bg-hover;
+  }
+
+  &.active {
+    color: $accent;
+    border-left-color: $accent;
+    background: $accent-dim;
+  }
+}
+
+.articleDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: $text-muted;
+  flex-shrink: 0;
+
+  .active & {
+    background: $accent;
+  }
+}
