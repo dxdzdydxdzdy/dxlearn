@@ -1,0 +1,75 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.timeline { @include terminal-border; border-radius: $radius-lg; background: $bg-surface; overflow: hidden; }
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: $space-3 $space-5; background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle; flex-wrap: wrap; gap: $space-3;
+}
+.title { @include terminal-label; color: $text-muted; }
+.controls { display: flex; gap: $space-2; }
+.btn {
+  @include terminal-label; @include focus-ring;
+  padding: $space-1 $space-3; border: 1px solid rgba(0,229,160,0.4);
+  border-radius: $radius-sm; color: $accent; background: $accent-dim;
+  cursor: pointer; transition: all $t-fast;
+  &:hover:not(:disabled) { background: rgba(0,229,160,0.18); }
+  &:disabled { opacity: 0.35; cursor: default; }
+}
+.btnSecondary {
+  @include terminal-label; @include focus-ring;
+  padding: $space-1 $space-3; border: 1px solid $border-default;
+  border-radius: $radius-sm; color: $text-secondary; background: transparent;
+  cursor: pointer; transition: all $t-fast;
+  &:hover { border-color: $border-strong; color: $text-primary; }
+}
+
+.chart { padding: $space-4 $space-5 $space-2; position: relative; }
+
+.timeAxis { position: relative; height: 20px; margin-left: 64px; margin-bottom: $space-3; }
+.tick {
+  position: absolute; top: 0; height: 100%; border-left: 1px solid $border-subtle;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.tickLabel { font-family: $font-mono; font-size: 9px; color: $text-muted; margin-left: 2px; }
+
+.row { display: flex; align-items: center; gap: $space-3; height: 36px; margin-bottom: $space-2; }
+.rowLabel { width: 64px; flex-shrink: 0; }
+.strategyBadge { font-family: $font-mono; font-size: $text-xs; font-weight: $weight-bold; }
+.rowTrack { flex: 1; position: relative; height: 24px; background: $bg-base; border-radius: $radius-sm; border: 1px solid $border-subtle; }
+
+.phase {
+  position: absolute; top: 3px; height: calc(100% - 6px);
+  border-radius: 3px; min-width: 0; transition: width 0.04s linear;
+}
+
+.marker {
+  position: absolute; top: -18px; transform: translateX(-50%);
+  font-family: $font-mono; pointer-events: none;
+}
+.markerLabel {
+  font-size: 9px; color: var(--mc); font-weight: $weight-bold;
+  display: block; text-align: center;
+}
+
+.cursor {
+  position: absolute; top: 20px; bottom: $space-2; width: 1px;
+  background: rgba(255,255,255,0.2); pointer-events: none; z-index: 2;
+  transition: left 0.04s linear;
+}
+
+.tooltip {
+  padding: $space-2 $space-5; min-height: 32px; display: flex; align-items: center; gap: $space-3;
+  background: $bg-elevated; border-top: 1px solid $border-subtle;
+}
+.tooltipPhase { font-family: $font-mono; font-size: $text-xs; font-weight: $weight-bold; flex-shrink: 0; }
+.tooltipNote { font-family: $font-mono; font-size: $text-xs; color: $text-secondary; }
+.tooltipHint { font-family: $font-mono; font-size: $text-xs; color: $text-muted; }
+
+.legend {
+  display: flex; gap: $space-4; flex-wrap: wrap;
+  padding: $space-3 $space-5; border-top: 1px solid $border-subtle;
+}
+.legendItem { display: flex; align-items: center; gap: $space-2; font-family: $font-mono; font-size: $text-xs; color: $text-muted; }
+.legendDot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }

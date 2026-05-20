@@ -1,0 +1,11 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+.root { display: flex; flex-direction: column; gap: $space-10; }
+.section { display: flex; flex-direction: column; gap: $space-5; }
+.sectionTitle { font-size: $text-xl; font-weight: $weight-bold; color: $text-primary; border-bottom: 1px solid $border-subtle; padding-bottom: $space-4; }
+.prose { font-size: $text-base; color: $text-secondary; line-height: $line-loose; code { color: $accent; background: $accent-dim; border-radius: $radius-sm; padding: 1px $space-2; font-family: $font-mono; font-size: $text-sm; } strong { color: $text-primary; } }
+.table { width: 100%; border-collapse: collapse; font-family: $font-mono; font-size: $text-sm; border: 1px solid $border-default; border-radius: $radius-md; overflow: hidden; }
+.tableHead { background: $bg-elevated; th { padding: $space-3 $space-4; text-align: left; color: $text-muted; @include terminal-label; border-bottom: 1px solid $border-default; } }
+.tableRow { border-bottom: 1px solid $border-subtle; transition: background $t-fast; &:last-child { border-bottom: none; } &:hover { background: $bg-elevated; } td { padding: $space-3 $space-4; color: $text-secondary; vertical-align: top; } td:first-child { font-weight: $weight-bold; color: $text-primary; } }
+.good { color: $accent; }
+.bad { color: $error; }

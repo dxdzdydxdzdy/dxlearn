@@ -9,6 +9,12 @@ import { PrototypesArticle } from '@/components/articles/PrototypesArticle/Proto
 import { CriticalRenderingPathArticle } from '@/components/articles/CriticalRenderingPathArticle/CriticalRenderingPathArticle';
 import { CascadeArticle } from '@/components/articles/CascadeArticle/CascadeArticle';
 import { FlexboxArticle } from '@/components/articles/FlexboxArticle/FlexboxArticle';
+import { HttpRequestArticle } from '@/components/articles/HttpRequestArticle/HttpRequestArticle';
+import { HowBrowserWorksArticle } from '@/components/articles/HowBrowserWorksArticle/HowBrowserWorksArticle';
+import { OopArticle } from '@/components/articles/OopArticle/OopArticle';
+import { ProgressiveSsrArticle } from '@/components/articles/ProgressiveSsrArticle/ProgressiveSsrArticle';
+import { StorageArticle } from '@/components/articles/StorageArticle/StorageArticle';
+import { CsrVsSsrArticle } from '@/components/articles/CsrVsSsrArticle/CsrVsSsrArticle';
 import { PlaceholderArticle } from '@/components/articles/PlaceholderArticle/PlaceholderArticle';
 import s from './page.module.scss';
 
@@ -43,6 +49,12 @@ export default async function ArticlePage({ params }: Props) {
     if (cSlug === 'javascript' && aSlug === 'promises') return <PromisesArticle />;
     if (cSlug === 'javascript' && aSlug === 'prototypes') return <PrototypesArticle />;
     if (cSlug === 'browser' && aSlug === 'critical-rendering-path') return <CriticalRenderingPathArticle />;
+    if (cSlug === 'general' && aSlug === 'http-request') return <HttpRequestArticle />;
+    if (cSlug === 'general' && aSlug === 'how-browser-works') return <HowBrowserWorksArticle />;
+    if (cSlug === 'general' && aSlug === 'oop') return <OopArticle />;
+    if (cSlug === 'general' && aSlug === 'progressive-ssr') return <ProgressiveSsrArticle />;
+    if (cSlug === 'general' && aSlug === 'storage') return <StorageArticle />;
+    if (cSlug === 'general' && aSlug === 'csr-vs-ssr') return <CsrVsSsrArticle />;
     if (cSlug === 'css' && aSlug === 'cascade') return <CascadeArticle />;
     if (cSlug === 'css' && aSlug === 'flexbox') return <FlexboxArticle />;
     return <PlaceholderArticle title={article!.title} />;

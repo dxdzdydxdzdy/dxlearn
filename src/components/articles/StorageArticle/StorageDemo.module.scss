@@ -1,0 +1,69 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.demo { @include terminal-border; border-radius: $radius-lg; background: $bg-surface; overflow: hidden; }
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: $space-3 $space-5; background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle; flex-wrap: wrap; gap: $space-3;
+}
+.title { @include terminal-label; color: $text-muted; }
+.tabs { display: flex; gap: $space-2; }
+.tab {
+  @include terminal-label; @include focus-ring;
+  padding: $space-1 $space-3; border: 1px solid $border-default;
+  border-radius: $radius-sm; background: transparent; color: $text-muted;
+  cursor: pointer; transition: all $t-fast; letter-spacing: 0; text-transform: none; font-size: $text-xs;
+  &:hover { border-color: $border-strong; color: $text-secondary; }
+}
+.tabActive { border-color: rgba(0,229,160,0.4) !important; color: $accent !important; background: $accent-dim !important; }
+
+.body { display: grid; grid-template-columns: 1fr 1fr; @include mobile { grid-template-columns: 1fr; } }
+
+.writePanel {
+  padding: $space-4 $space-5; border-right: 1px solid $border-subtle; display: flex; flex-direction: column; gap: $space-3;
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+.readPanel { padding: $space-4 $space-5; display: flex; flex-direction: column; gap: $space-3; }
+.panelHeader { display: flex; align-items: center; justify-content: space-between; }
+.panelLabel { @include terminal-label; color: $text-muted; font-size: $text-xs; }
+.inputRow { display: flex; align-items: center; gap: $space-2; flex-wrap: wrap; }
+.sep { font-family: $font-mono; color: $text-muted; }
+.input {
+  font-family: $font-mono; font-size: $text-sm; padding: $space-1 $space-2;
+  background: $bg-base; border: 1px solid $border-default; border-radius: $radius-sm;
+  color: $text-primary; outline: none; min-width: 0; flex: 1;
+  &:focus { border-color: $accent; }
+}
+.btn {
+  @include terminal-label; @include focus-ring;
+  padding: $space-1 $space-3; border: 1px solid rgba(0,229,160,0.4);
+  border-radius: $radius-sm; color: $accent; background: $accent-dim;
+  cursor: pointer; transition: all $t-fast; white-space: nowrap;
+  &:hover { background: rgba(0,229,160,0.18); }
+}
+.msg { font-family: $font-mono; font-size: $text-xs; color: $accent; }
+.clearBtn {
+  @include terminal-label; font-size: 10px; padding: 1px $space-2;
+  border: 1px solid $border-subtle; border-radius: $radius-sm;
+  background: transparent; color: $text-muted; cursor: pointer;
+  &:hover { color: $error; border-color: $error; }
+}
+.empty { font-family: $font-mono; font-size: $text-xs; color: $text-muted; padding: $space-2 0; }
+.entries { display: flex; flex-direction: column; gap: $space-1; }
+.entry {
+  display: flex; align-items: center; gap: $space-2; padding: $space-1 $space-2;
+  background: $bg-base; border-radius: $radius-sm; border: 1px solid $border-subtle;
+}
+.entryKey { font-family: $font-mono; font-size: $text-xs; color: $accent; flex-shrink: 0; }
+.entryEq { font-family: $font-mono; font-size: $text-xs; color: $text-muted; }
+.entryVal { font-family: $font-mono; font-size: $text-xs; color: $text-secondary; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.deleteBtn {
+  font-family: $font-mono; font-size: $text-sm; color: $text-muted; background: none;
+  border: none; cursor: pointer; padding: 0 $space-1; flex-shrink: 0;
+  &:hover { color: $error; }
+}
+.footer {
+  padding: $space-3 $space-5; border-top: 1px solid $border-subtle;
+  background: $bg-elevated; font-family: $font-mono; font-size: $text-xs; color: $text-muted;
+}

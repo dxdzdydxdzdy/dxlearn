@@ -1,0 +1,69 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.demo { @include terminal-border; border-radius: $radius-lg; background: $bg-surface; overflow: hidden; }
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: $space-3 $space-5; background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle; flex-wrap: wrap; gap: $space-3;
+}
+.title { @include terminal-label; color: $text-muted; }
+.controls { display: flex; gap: $space-2; }
+.btn {
+  @include terminal-label; @include focus-ring;
+  padding: $space-1 $space-3; border: 1px solid rgba(0,229,160,0.4);
+  border-radius: $radius-sm; color: $accent; background: $accent-dim;
+  cursor: pointer; transition: all $t-fast;
+  &:hover:not(:disabled) { background: rgba(0,229,160,0.18); }
+  &:disabled { opacity: 0.35; cursor: default; }
+}
+.btnSecondary {
+  @include terminal-label; @include focus-ring;
+  padding: $space-1 $space-3; border: 1px solid $border-default;
+  border-radius: $radius-sm; color: $text-secondary; background: transparent;
+  cursor: pointer; transition: all $t-fast;
+  &:hover { border-color: $border-strong; color: $text-primary; }
+}
+
+.body { display: grid; grid-template-columns: 1fr 240px; min-height: 280px; @include mobile { grid-template-columns: 1fr; } }
+
+.page {
+  padding: $space-4; display: flex; flex-direction: column; gap: $space-2;
+  border-right: 1px solid $border-subtle;
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.block {
+  border-radius: $radius-sm; border: 1px solid $border-subtle;
+  padding: $space-2 $space-3; min-height: 52px;
+  transition: border-color $t-normal, background $t-normal;
+}
+.block.waiting { background: $bg-base; opacity: 0.4; }
+.block.skeleton { background: $bg-elevated; border-color: $border-default; }
+.block.loaded { background: $accent-dim; border-color: rgba(0,229,160,0.4); }
+
+.blockTag { font-family: $font-mono; font-size: 10px; color: $text-muted; margin-bottom: $space-1; }
+.waiting { font-family: $font-mono; font-size: $text-xs; color: $text-muted; }
+.skeletonContent { display: flex; flex-direction: column; gap: $space-1; padding-top: 2px; }
+.skeletonLine {
+  height: 8px; background: linear-gradient(90deg, $border-default 25%, $border-strong 50%, $border-default 75%);
+  background-size: 200% 100%; border-radius: $radius-sm;
+  animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.loadedContent { font-family: $font-mono; font-size: $text-xs; color: $accent; }
+
+.log {
+  padding: $space-4; background: $bg-base; display: flex; flex-direction: column; gap: $space-2;
+  overflow-y: auto; @include custom-scrollbar;
+}
+.logLabel { @include terminal-label; color: $text-muted; font-size: $text-xs; margin-bottom: $space-1; }
+.logLine { font-family: $font-mono; font-size: 10px; color: $text-muted; display: flex; gap: $space-2; }
+.logTime { color: $border-strong; width: 36px; flex-shrink: 0; }
+.logStreaming { color: $warn !important; }
+.logDone { color: $accent !important; }
+.logComplete { font-family: $font-mono; font-size: $text-xs; color: $accent; margin-top: $space-2; }
+.hint {
+  padding: $space-4 $space-5; font-family: $font-mono;
+  font-size: $text-xs; color: $text-muted; text-align: center;
+}

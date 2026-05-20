@@ -1,0 +1,59 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.demo { @include terminal-border; border-radius: $radius-lg; background: $bg-surface; overflow: hidden; }
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: $space-3 $space-5; background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle; flex-wrap: wrap; gap: $space-2;
+}
+.title { @include terminal-label; color: $text-muted; }
+.hint { font-family: $font-mono; font-size: $text-xs; color: $text-muted; }
+
+.body { display: grid; grid-template-columns: 160px 1fr; @include mobile { grid-template-columns: 1fr; } }
+
+.shapeList {
+  display: flex; flex-direction: column; padding: $space-4;
+  border-right: 1px solid $border-subtle; gap: $space-2;
+  @include mobile { flex-direction: row; border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.shapeBtn {
+  @include focus-ring;
+  display: flex; align-items: center; gap: $space-2;
+  padding: $space-2 $space-3; border: 1px solid $border-default;
+  border-radius: $radius-sm; background: transparent; color: $text-secondary;
+  cursor: pointer; font-family: $font-mono; font-size: $text-xs;
+  transition: all $t-fast;
+  &:hover { border-color: var(--shape-color); color: var(--shape-color); }
+}
+.shapeBtnActive { border-color: var(--shape-color) !important; color: var(--shape-color) !important; background: color-mix(in srgb, var(--shape-color) 10%, transparent) !important; }
+.shapeIcon { font-size: $text-base; }
+
+.detail {
+  display: grid; grid-template-columns: 1fr 1fr;
+  padding: $space-4; gap: $space-4;
+  border-left: 3px solid var(--shape-color);
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.paramsPanel { display: flex; flex-direction: column; gap: $space-3; }
+.panelLabel { @include terminal-label; color: $text-muted; font-size: $text-xs; margin-bottom: $space-1; }
+.paramRow { display: flex; align-items: center; gap: $space-3; }
+.paramLabel { font-family: $font-mono; font-size: $text-xs; color: $text-muted; width: 48px; flex-shrink: 0; }
+.paramRange { flex: 1; accent-color: var(--shape-color); }
+.paramVal { font-family: $font-mono; font-size: $text-sm; color: $text-primary; width: 24px; text-align: right; }
+
+.resultPanel { display: flex; align-items: center; justify-content: center; }
+.resultArea { text-align: center; }
+.resultLabel { @include terminal-label; color: $text-muted; font-size: $text-xs; margin-bottom: $space-2; }
+.resultValue { font-family: $font-mono; font-size: 48px; font-weight: $weight-bold; line-height: 1; }
+.resultFormula { font-family: $font-mono; font-size: $text-xs; color: $text-muted; margin-top: $space-2; }
+
+.code { border-top: 1px solid $border-subtle; background: $bg-base; }
+.codeLabel { @include terminal-label; color: $text-muted; font-size: $text-xs; padding: $space-3 $space-5 0; }
+.codeBlock {
+  font-family: $font-mono; font-size: $text-xs; color: $text-secondary;
+  padding: $space-3 $space-5 $space-4; margin: 0; white-space: pre; overflow-x: auto;
+  @include custom-scrollbar;
+}
