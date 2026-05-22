@@ -474,6 +474,21 @@ export const courses: Course[] = [
     description: 'Бандлинг, лоадеры, плагины и оптимизация сборки.',
     articles: [],
   },
+
+  {
+    slug: 'devops',
+    title: 'DevOps',
+    description: 'CI/CD, Kubernetes, IaC, Observability, DevSecOps — карта доменов.',
+    articles: [
+      {
+        slug: 'what-devops-knows',
+        title: 'Что должен знать DevOps',
+        description: 'Карта доменов: Linux, CI/CD, K8s, Cloud/IaC, Observability, DevSecOps — навыки по уровням.',
+        tags: ['overview', 'roadmap'],
+        interactive: true,
+      },
+    ],
+  },
 ];
 
 export function getCourse(slug: string): Course | undefined {

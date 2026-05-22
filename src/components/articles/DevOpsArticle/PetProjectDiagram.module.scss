@@ -1,0 +1,225 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.root {
+  background: $bg-surface;
+  border: 1px solid $border-default;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  font-family: $font-mono;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-default;
+}
+
+.label {
+  font-size: $text-sm;
+  color: $text-muted;
+  letter-spacing: $letter-wide;
+}
+
+.coverageChip {
+  display: flex;
+  align-items: baseline;
+  gap: $space-2;
+}
+
+.coverageNum {
+  font-size: $text-md;
+  font-weight: $weight-bold;
+  color: $accent;
+}
+
+.coverageText {
+  font-size: $text-xs;
+  color: $text-muted;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.left {
+  border-right: 1px solid $border-default;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+
+  @include mobile {
+    border-right: none;
+    border-bottom: 1px solid $border-default;
+  }
+}
+
+.right {
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.sectionLabel {
+  font-size: $text-xs;
+  color: $text-muted;
+  letter-spacing: $letter-wide;
+  text-transform: uppercase;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-3;
+  background: $bg-elevated;
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $t-fast;
+  text-align: left;
+  width: 100%;
+
+  &:hover {
+    border-color: $border-strong;
+    background: $bg-hover;
+  }
+}
+
+.chipOn {
+  border-color: $accent;
+  background: $accent-dim;
+}
+
+.chipIcon {
+  font-size: $text-base;
+  flex-shrink: 0;
+}
+
+.chipBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.chipName {
+  font-size: $text-xs;
+  color: $text-primary;
+  font-weight: $weight-bold;
+}
+
+.chipDesc {
+  font-size: 10px;
+  color: $text-muted;
+}
+
+.chipCheck {
+  font-size: $text-xs;
+  color: $accent;
+  font-weight: $weight-bold;
+  flex-shrink: 0;
+  width: 14px;
+  text-align: center;
+}
+
+.domainGrid {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.domainCard {
+  padding: $space-2 $space-3;
+  background: $bg-elevated;
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  transition: all $t-fast;
+  opacity: 0.45;
+}
+
+.domainCardOn {
+  opacity: 1;
+  border-color: color-mix(in srgb, var(--dc, $accent) 40%, transparent);
+  background: color-mix(in srgb, var(--dc, $accent) 6%, $bg-elevated);
+}
+
+.domainCardTop {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.domainCardIcon {
+  font-size: $text-sm;
+}
+
+.domainCardName {
+  font-size: $text-xs;
+  color: $text-primary;
+  flex: 1;
+}
+
+.domainStatus {
+  font-size: $text-xs;
+  color: $text-muted;
+
+  .domainCardOn & {
+    color: var(--dc, $accent);
+  }
+}
+
+.coverers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-1;
+  margin-top: $space-1;
+  padding-left: calc($space-2 + $text-sm);
+}
+
+.coverer {
+  font-size: 10px;
+  padding: 1px $space-2;
+  background: color-mix(in srgb, var(--dc, $accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--dc, $accent) 25%, transparent);
+  border-radius: $radius-sm;
+  color: var(--dc, $accent);
+}
+
+.bar {
+  height: 3px;
+  background: $border-subtle;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: $space-2;
+}
+
+.barFill {
+  height: 100%;
+  background: $accent;
+  border-radius: 2px;
+  transition: width $t-slow;
+}
+
+.barLabel {
+  font-size: $text-xs;
+  color: $text-muted;
+  text-align: right;
+}

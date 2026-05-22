@@ -1,0 +1,186 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  border-bottom: 1px solid $border-subtle;
+  padding-bottom: $space-4;
+}
+
+.prose {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  code {
+    color: $accent;
+    background: $accent-dim;
+    border-radius: $radius-sm;
+    padding: 1px $space-2;
+    font-family: $font-mono;
+    font-size: $text-sm;
+  }
+
+  strong { color: $text-primary; }
+}
+
+.roleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-4;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.roleCard {
+  background: $bg-elevated;
+  border: 1px solid $border-default;
+  border-radius: $radius-lg;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.roleIcon {
+  font-size: $text-xl;
+}
+
+.roleTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: $weight-bold;
+  color: $text-primary;
+}
+
+.roleDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.roleTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-1;
+  margin-top: $space-1;
+}
+
+.roleTag {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  padding: 1px $space-2;
+  border-radius: $radius-sm;
+  background: $accent-dim;
+  color: $accent;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 2px solid $border-default;
+  margin-left: $space-4;
+  padding-left: $space-5;
+}
+
+.timelineItem {
+  position: relative;
+  padding-bottom: $space-6;
+
+  &:last-child { padding-bottom: 0; }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -21px;
+    top: 4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $accent;
+    border: 2px solid $bg-base;
+  }
+}
+
+.timelineYear {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $accent;
+  font-weight: $weight-bold;
+  letter-spacing: $letter-wide;
+  margin-bottom: $space-1;
+}
+
+.timelineTitle {
+  font-size: $text-sm;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  margin-bottom: $space-1;
+}
+
+.timelineDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.tableHead {
+  background: $bg-elevated;
+
+  th {
+    padding: $space-3 $space-4;
+    text-align: left;
+    color: $text-muted;
+    @include terminal-label;
+    border-bottom: 1px solid $border-default;
+  }
+}
+
+.tableRow {
+  border-bottom: 1px solid $border-subtle;
+  transition: background $t-fast;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  td {
+    padding: $space-3 $space-4;
+    color: $text-secondary;
+    vertical-align: top;
+  }
+
+  td:first-child {
+    color: $text-primary;
+    font-weight: $weight-bold;
+  }
+}
+
+.accent { color: $accent; }
+.warn { color: $warn; }

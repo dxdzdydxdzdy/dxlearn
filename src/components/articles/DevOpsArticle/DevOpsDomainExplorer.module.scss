@@ -1,0 +1,303 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.explorer {
+  background: $bg-surface;
+  border: 1px solid $border-default;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  font-family: $font-mono;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-default;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.title {
+  font-size: $text-sm;
+  color: $text-muted;
+  letter-spacing: $letter-wide;
+}
+
+.levelTabs {
+  display: flex;
+  gap: $space-2;
+}
+
+.levelTab {
+  padding: $space-1 $space-3;
+  background: transparent;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-muted;
+  cursor: pointer;
+  transition: all $t-fast;
+  letter-spacing: $letter-wide;
+
+  &:hover {
+    border-color: var(--lc, $accent);
+    color: var(--lc, $accent);
+  }
+}
+
+.levelTabActive {
+  background: color-mix(in srgb, var(--lc, $accent) 12%, transparent);
+  border-color: var(--lc, $accent);
+  color: var(--lc, $accent);
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  min-height: 440px;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.domainList {
+  border-right: 1px solid $border-default;
+  display: flex;
+  flex-direction: column;
+
+  @include mobile {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-right: none;
+    border-bottom: 1px solid $border-default;
+  }
+}
+
+.domainBtn {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $border-subtle;
+  text-align: left;
+  cursor: pointer;
+  transition: background $t-fast;
+  width: 100%;
+
+  &:last-child { border-bottom: none; }
+
+  &:hover { background: $bg-hover; }
+
+  @include mobile {
+    width: auto;
+    flex: 1;
+    min-width: 120px;
+    border-bottom: none;
+    border-right: 1px solid $border-subtle;
+  }
+}
+
+.domainBtnActive {
+  background: color-mix(in srgb, var(--dc, $accent) 8%, transparent);
+  border-left: 2px solid var(--dc, $accent);
+  padding-left: calc($space-4 - 2px);
+}
+
+.domainIcon {
+  font-size: $text-base;
+  flex-shrink: 0;
+}
+
+.domainName {
+  font-size: $text-xs;
+  color: $text-secondary;
+  line-height: $line-tight;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 3px solid var(--dc, $accent);
+}
+
+.detailHeader {
+  padding: $space-4 $space-5;
+  border-bottom: 1px solid $border-default;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.detailTitle {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  font-size: $text-md;
+  font-weight: $weight-bold;
+  color: $text-primary;
+}
+
+.detailIcon {
+  font-size: $text-lg;
+}
+
+.detailTagline {
+  font-size: $text-sm;
+  color: $text-muted;
+  font-style: italic;
+}
+
+.toolList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin-top: $space-1;
+}
+
+.tool {
+  font-size: $text-xs;
+  padding: 2px $space-2;
+  background: $bg-elevated;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  color: $text-secondary;
+  letter-spacing: $letter-wide;
+}
+
+.detailTabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid $border-default;
+}
+
+.detailTab {
+  padding: $space-3 $space-4;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-muted;
+  cursor: pointer;
+  transition: all $t-fast;
+  letter-spacing: $letter-wide;
+
+  &:hover { color: $text-secondary; }
+}
+
+.detailTabActive {
+  color: $text-primary;
+  border-bottom-color: var(--dc, $accent);
+}
+
+.skillList {
+  display: flex;
+  flex-direction: column;
+  padding: $space-4 $space-5;
+  gap: $space-3;
+}
+
+.skillItem {
+  display: flex;
+  gap: $space-3;
+  align-items: flex-start;
+}
+
+.skillCheck {
+  font-size: $text-sm;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.skillText {
+  font-size: $text-sm;
+  color: $text-primary;
+  line-height: $line-normal;
+}
+
+.skillNote {
+  font-size: $text-xs;
+  color: $text-muted;
+  font-style: italic;
+}
+
+.questionList {
+  display: flex;
+  flex-direction: column;
+  padding: $space-4 $space-5;
+  gap: $space-3;
+}
+
+.noQ {
+  font-size: $text-sm;
+  color: $text-muted;
+  text-align: center;
+  padding: $space-8 0;
+}
+
+.qCard {
+  background: $bg-elevated;
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: border-color $t-fast;
+  overflow: hidden;
+
+  &:hover { border-color: $border-strong; }
+}
+
+.qRow {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+}
+
+.qMark {
+  font-size: $text-md;
+  font-weight: $weight-bold;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+.qText {
+  font-size: $text-sm;
+  color: $text-primary;
+  flex: 1;
+  line-height: $line-normal;
+}
+
+.qToggle {
+  font-size: $text-xs;
+  color: $text-muted;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.qHint {
+  padding: $space-3 $space-4;
+  background: $bg-base;
+  border-top: 1px solid $border-subtle;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.qHintLabel {
+  color: $accent;
+  font-weight: $weight-bold;
+}
