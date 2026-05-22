@@ -4,6 +4,7 @@ export interface Article {
   description: string;
   tags?: string[];
   interactive: boolean;
+  section?: string;
 }
 
 export interface Course {
@@ -486,6 +487,180 @@ export const courses: Course[] = [
         description: '8 доменов бэкенд-разработки: от языка и баз данных до архитектуры и безопасности. Junior → Senior.',
         tags: ['roadmap', 'overview'],
         interactive: true,
+      },
+
+      // ── Базы данных ──────────────────────────────────────────────
+      {
+        slug: 'sql-queries',
+        title: 'SQL запросы',
+        description: 'SELECT, JOIN, GROUP BY, подзапросы, CTE, window functions — от простого к сложному.',
+        tags: ['sql', 'databases'],
+        interactive: true,
+        section: 'Базы данных',
+      },
+      {
+        slug: 'postgresql-indexes',
+        title: 'Индексы в PostgreSQL',
+        description: 'B-tree, Hash, GIN, BRIN — какой когда использовать. EXPLAIN ANALYZE и медленные запросы.',
+        tags: ['postgresql', 'performance'],
+        interactive: true,
+        section: 'Базы данных',
+      },
+      {
+        slug: 'transactions-acid',
+        title: 'Транзакции и ACID',
+        description: 'Атомарность, консистентность, изоляция, долговечность. Уровни изоляции и их практические последствия.',
+        tags: ['databases', 'concepts'],
+        interactive: true,
+        section: 'Базы данных',
+      },
+      {
+        slug: 'orm-migrations',
+        title: 'ORM и миграции',
+        description: 'SQLAlchemy / Prisma / TypeORM, N+1 проблема, миграции схемы без даунтайма.',
+        tags: ['orm', 'databases'],
+        interactive: false,
+        section: 'Базы данных',
+      },
+
+      // ── Кэширование ──────────────────────────────────────────────
+      {
+        slug: 'redis-basics',
+        title: 'Redis: структуры и команды',
+        description: 'String, Hash, List, Set, Sorted Set, Pub/Sub. Когда и зачем каждая структура.',
+        tags: ['redis', 'cache'],
+        interactive: true,
+        section: 'Кэширование',
+      },
+      {
+        slug: 'cache-patterns',
+        title: 'Паттерны кэширования',
+        description: 'Cache-aside, write-through, write-behind. Cache invalidation. Cache stampede и защита от него.',
+        tags: ['cache', 'patterns'],
+        interactive: true,
+        section: 'Кэширование',
+      },
+
+      // ── Брокеры сообщений ────────────────────────────────────────
+      {
+        slug: 'rabbitmq-basics',
+        title: 'RabbitMQ',
+        description: 'Exchange типы, routing, очереди, ACK/NACK, Dead Letter Queue, retry с backoff.',
+        tags: ['rabbitmq', 'messaging'],
+        interactive: true,
+        section: 'Брокеры сообщений',
+      },
+      {
+        slug: 'kafka-basics',
+        title: 'Apache Kafka',
+        description: 'Топики, партиции, consumer groups, offset, retention. Когда Kafka, когда RabbitMQ.',
+        tags: ['kafka', 'messaging'],
+        interactive: true,
+        section: 'Брокеры сообщений',
+      },
+      {
+        slug: 'async-patterns',
+        title: 'Паттерны асинхронности',
+        description: 'Idempotent consumer, Outbox pattern, Saga. Гарантии доставки: at-least-once, exactly-once.',
+        tags: ['patterns', 'messaging'],
+        interactive: false,
+        section: 'Брокеры сообщений',
+      },
+
+      // ── API дизайн ───────────────────────────────────────────────
+      {
+        slug: 'rest-api-design',
+        title: 'REST API: принципы и практика',
+        description: 'Ресурсы, методы, статус-коды, versioning, идемпотентность, rate limiting.',
+        tags: ['rest', 'api'],
+        interactive: true,
+        section: 'API дизайн',
+      },
+      {
+        slug: 'grpc-basics',
+        title: 'gRPC и Protobuf',
+        description: 'Protobuf-схема, унарные и стримовые вызовы, сравнение с REST, когда использовать.',
+        tags: ['grpc', 'api'],
+        interactive: false,
+        section: 'API дизайн',
+      },
+      {
+        slug: 'websocket-sse',
+        title: 'WebSocket и SSE',
+        description: 'Full-duplex соединение vs Server-Sent Events. Трейдинг, чаты, live-уведомления.',
+        tags: ['websocket', 'realtime'],
+        interactive: true,
+        section: 'API дизайн',
+      },
+
+      // ── Безопасность ─────────────────────────────────────────────
+      {
+        slug: 'auth-jwt',
+        title: 'JWT и сессии',
+        description: 'Структура JWT, access/refresh токены, сессии. Где хранить, как инвалидировать.',
+        tags: ['auth', 'security'],
+        interactive: true,
+        section: 'Безопасность',
+      },
+      {
+        slug: 'oauth-openid',
+        title: 'OAuth 2.0 и OpenID Connect',
+        description: 'Authorization Code Flow, PKCE, refresh rotation. "Войти через Google" под капотом.',
+        tags: ['oauth', 'auth'],
+        interactive: true,
+        section: 'Безопасность',
+      },
+      {
+        slug: 'owasp-top10',
+        title: 'OWASP Top 10',
+        description: 'SQL injection, XSS, IDOR, SSRF и другие уязвимости — с примерами и защитой.',
+        tags: ['security', 'owasp'],
+        interactive: true,
+        section: 'Безопасность',
+      },
+
+      // ── Архитектура ──────────────────────────────────────────────
+      {
+        slug: 'microservices',
+        title: 'Монолит vs микросервисы',
+        description: 'Когда монолит лучше. Признаки того, что пора делить. Strangler Fig, модульный монолит.',
+        tags: ['architecture', 'microservices'],
+        interactive: true,
+        section: 'Архитектура',
+      },
+      {
+        slug: 'architecture-patterns',
+        title: 'Паттерны: Outbox, Saga, Circuit Breaker',
+        description: 'Надёжные паттерны для распределённых систем. Когда и как применять каждый.',
+        tags: ['patterns', 'architecture'],
+        interactive: false,
+        section: 'Архитектура',
+      },
+      {
+        slug: 'system-design',
+        title: 'System Design: с чего начать',
+        description: 'Как подходить к задачам проектирования систем. URL shortener, паста, лента новостей.',
+        tags: ['system-design', 'interview'],
+        interactive: true,
+        section: 'Архитектура',
+      },
+
+      // ── Инфраструктура ───────────────────────────────────────────
+      {
+        slug: 'docker-backend',
+        title: 'Docker для бэкенда',
+        description: 'Многоэтапные сборки, оптимизация образов, docker-compose для локальной разработки.',
+        tags: ['docker', 'infra'],
+        interactive: false,
+        section: 'Инфраструктура',
+      },
+      {
+        slug: 's3-storage',
+        title: 'S3 хранилища',
+        description: 'Объектное хранилище, presigned URL, прямая загрузка с клиента, бэкапы БД.',
+        tags: ['s3', 'storage', 'infra'],
+        interactive: false,
+        section: 'Инфраструктура',
       },
     ],
   },

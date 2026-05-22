@@ -66,6 +66,28 @@
 
 .articleList {
   padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.subSection {
+  @include terminal-label;
+  padding: $space-3 $space-5 $space-1;
+  color: $text-muted;
+  opacity: 0.65;
+  margin-top: $space-1;
+  font-size: 9px;
+  letter-spacing: $letter-wider;
+
+  &::before {
+    content: '──';
+    margin-right: $space-2;
+    opacity: 0.4;
+  }
+}
+
+.nested {
+  padding-left: $space-2;
 }
 
 .articleLink {
