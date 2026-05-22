@@ -1,0 +1,293 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.root {
+  background: $bg-surface;
+  border: 1px solid $border-default;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  font-family: $font-mono;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-default;
+}
+
+.topLabel {
+  font-size: $text-sm;
+  color: $text-muted;
+  letter-spacing: $letter-wide;
+}
+
+.presets {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.preset {
+  padding: 2px $space-3;
+  background: $bg-base;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-secondary;
+  cursor: pointer;
+  transition: all $t-fast;
+
+  &:hover {
+    border-color: $accent;
+    color: $accent;
+  }
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 0;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.left {
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+  border-right: 1px solid $border-default;
+
+  @include mobile {
+    border-right: none;
+    border-bottom: 1px solid $border-default;
+  }
+}
+
+.right {
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.bitGrid {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.bitHeaderRow {
+  display: grid;
+  grid-template-columns: 130px 44px 44px 44px 44px 1fr;
+  gap: $space-2;
+  align-items: center;
+}
+
+.bitHeader {
+  font-size: $text-xs;
+  color: $text-muted;
+  text-align: center;
+  letter-spacing: $letter-wide;
+  cursor: default;
+  padding: $space-1;
+  border-radius: $radius-sm;
+  transition: background $t-fast;
+
+  &:hover {
+    background: $accent-dim;
+    color: $accent;
+  }
+}
+
+.bitRow {
+  display: grid;
+  grid-template-columns: 130px 44px 44px 44px 44px 1fr;
+  gap: $space-2;
+  align-items: center;
+}
+
+.whoLabel {
+  font-size: $text-xs;
+  font-weight: $weight-bold;
+}
+
+.bit {
+  width: 44px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $bg-base;
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: $weight-bold;
+  color: $text-muted;
+  cursor: pointer;
+  transition: all $t-fast;
+
+  &:hover {
+    border-color: var(--bc, $accent);
+    color: var(--bc, $accent);
+  }
+}
+
+.bitOn {
+  background: color-mix(in srgb, var(--bc, $accent) 15%, transparent);
+  border-color: var(--bc, $accent);
+  color: var(--bc, $accent);
+}
+
+.octNum {
+  font-size: $text-base;
+  font-weight: $weight-bold;
+  text-align: center;
+}
+
+.canDo {
+  font-size: $text-xs;
+  color: $text-muted;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+}
+
+.resultRow {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  font-size: $text-sm;
+}
+
+.resultLabel {
+  color: $text-muted;
+  font-size: $text-xs;
+  width: 50px;
+}
+
+.resultOctal {
+  font-size: $text-lg;
+  font-weight: $weight-bold;
+  color: $accent;
+  letter-spacing: 0.1em;
+}
+
+.resultFile {
+  color: $text-muted;
+}
+
+.resultSymbolic {
+  font-size: $text-base;
+  color: $accent;
+  letter-spacing: 0.05em;
+}
+
+.explain {
+  padding: $space-3;
+  background: $accent-dim;
+  border: 1px solid $accent;
+  border-radius: $radius-md;
+}
+
+.explainBit {
+  font-size: $text-xl;
+  font-weight: $weight-bold;
+  color: $accent;
+  margin-bottom: $space-2;
+}
+
+.explainText {
+  font-size: $text-xs;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.tips {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.tipTitle {
+  font-size: $text-xs;
+  color: $text-muted;
+  letter-spacing: $letter-wide;
+  text-transform: uppercase;
+  margin-bottom: $space-1;
+}
+
+.tip {
+  display: flex;
+  gap: $space-2;
+  align-items: baseline;
+}
+
+.tipOct {
+  font-size: $text-sm;
+  font-weight: $weight-bold;
+  color: $accent;
+  width: 28px;
+}
+
+.tipDesc {
+  font-size: $text-xs;
+  color: $text-secondary;
+}
+
+.tipNote {
+  margin-top: $space-2;
+  font-size: $text-xs;
+  color: $warn;
+  line-height: $line-normal;
+  padding: $space-2 $space-3;
+  background: $warn-dim;
+  border-radius: $radius-sm;
+}
+
+.cheatSheet {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  padding: $space-3;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+}
+
+.cheatTitle {
+  font-size: $text-xs;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: $letter-wide;
+  margin-bottom: $space-1;
+}
+
+.cheatRow {
+  font-size: $text-xs;
+  color: $text-secondary;
+  display: flex;
+  gap: $space-2;
+}
+
+.cheatNum {
+  color: $accent;
+  font-weight: $weight-bold;
+  width: 16px;
+}

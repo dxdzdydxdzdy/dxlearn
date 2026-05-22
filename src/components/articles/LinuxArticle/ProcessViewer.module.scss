@@ -1,0 +1,253 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.root {
+  background: $bg-surface;
+  border: 1px solid $border-default;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  font-family: $font-mono;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-default;
+}
+
+.topLabel {
+  font-size: $text-sm;
+  color: $text-muted;
+  letter-spacing: $letter-wide;
+}
+
+.topHint {
+  font-size: $text-xs;
+  color: $text-muted;
+  font-style: italic;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.procList {
+  border-right: 1px solid $border-default;
+  overflow-y: auto;
+  @include custom-scrollbar;
+
+  @include mobile {
+    border-right: none;
+    border-bottom: 1px solid $border-default;
+  }
+}
+
+.procHeader {
+  display: grid;
+  grid-template-columns: 52px 1fr 52px 52px 44px;
+  gap: $space-2;
+  padding: $space-2 $space-3;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-default;
+}
+
+.colPid { font-size: $text-xs; color: $text-muted; @include terminal-label; text-align: right; }
+.colName { font-size: $text-xs; color: $text-muted; @include terminal-label; }
+.colCpu { font-size: $text-xs; color: $text-muted; @include terminal-label; text-align: right; }
+.colMem { font-size: $text-xs; color: $text-muted; @include terminal-label; text-align: right; }
+.colStat { font-size: $text-xs; color: $text-muted; @include terminal-label; text-align: center; }
+
+.proc {
+  display: grid;
+  grid-template-columns: 52px 1fr 52px 52px 44px;
+  gap: $space-2;
+  padding: $space-2 $space-3;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $border-subtle;
+  cursor: pointer;
+  transition: background $t-fast;
+  text-align: left;
+  width: 100%;
+
+  &:hover { background: $bg-hover; }
+  &:last-child { border-bottom: none; }
+
+  .colPid { font-size: $text-xs; color: $text-muted; font-family: $font-mono; text-align: right; }
+  .colCpu { font-size: $text-xs; font-family: $font-mono; text-align: right; color: $text-secondary; }
+  .colMem { font-size: $text-xs; font-family: $font-mono; text-align: right; color: $text-secondary; }
+  .colStat { font-size: $text-xs; font-family: $font-mono; text-align: center; font-weight: $weight-bold; }
+}
+
+.procActive {
+  background: $accent-dim;
+  border-left: 2px solid $accent;
+}
+
+.procDying {
+  opacity: 0.3;
+  transition: opacity 0.5s;
+}
+
+.procName {
+  font-size: $text-sm;
+  color: $text-primary;
+  display: block;
+}
+
+.procUser {
+  font-size: $text-xs;
+  color: $text-muted;
+  display: block;
+}
+
+.panel {
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  background: $bg-base;
+}
+
+.procDetail {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.detailLine {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.detailKey {
+  font-size: $text-xs;
+  color: $text-muted;
+  width: 36px;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.detailVal {
+  font-size: $text-xs;
+  color: $text-secondary;
+  line-height: $line-normal;
+  flex: 1;
+}
+
+.signals {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.signalLabel {
+  font-size: $text-xs;
+  color: $text-muted;
+  letter-spacing: $letter-wide;
+  text-transform: uppercase;
+}
+
+.signalBtns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.sigBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $space-2 $space-3;
+  background: $bg-elevated;
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $t-fast;
+  gap: 2px;
+
+  &:hover {
+    border-color: $border-strong;
+  }
+}
+
+.sigBtnActive {
+  border-color: $accent;
+  background: $accent-dim;
+
+  .sigName, .sigNum { color: $accent; }
+}
+
+.sigNum {
+  font-size: $text-xs;
+  color: $text-muted;
+  font-family: $font-mono;
+}
+
+.sigName {
+  font-size: $text-xs;
+  color: $text-secondary;
+  font-family: $font-mono;
+  font-weight: $weight-bold;
+}
+
+.sigDesc {
+  font-size: $text-xs;
+  color: $text-secondary;
+  line-height: $line-normal;
+  border-left: 2px solid $border-default;
+  padding-left: $space-3;
+}
+
+.sendBtn {
+  padding: $space-2 $space-4;
+  background: $accent-dim;
+  border: 1px solid $accent;
+  border-radius: $radius-md;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $accent;
+  cursor: pointer;
+  transition: all $t-fast;
+  font-weight: $weight-bold;
+
+  &:hover {
+    background: $accent;
+    color: $bg-base;
+  }
+}
+
+.actionLog {
+  display: flex;
+  gap: $space-2;
+  padding: $space-2 $space-3;
+  background: $bg-surface;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  overflow-x: auto;
+  @include custom-scrollbar;
+}
+
+.logPrompt {
+  color: $accent;
+  font-size: $text-sm;
+  flex-shrink: 0;
+}
+
+.logCmd {
+  font-size: $text-xs;
+  color: $text-secondary;
+  white-space: nowrap;
+}

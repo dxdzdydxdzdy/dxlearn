@@ -15,7 +15,9 @@ import { OopArticle } from '@/components/articles/OopArticle/OopArticle';
 import { ProgressiveSsrArticle } from '@/components/articles/ProgressiveSsrArticle/ProgressiveSsrArticle';
 import { StorageArticle } from '@/components/articles/StorageArticle/StorageArticle';
 import { CsrVsSsrArticle } from '@/components/articles/CsrVsSsrArticle/CsrVsSsrArticle';
+import { BackendArticle } from '@/components/articles/BackendArticle/BackendArticle';
 import { DevOpsArticle } from '@/components/articles/DevOpsArticle/DevOpsArticle';
+import { LinuxArticle } from '@/components/articles/LinuxArticle/LinuxArticle';
 import { PlaceholderArticle } from '@/components/articles/PlaceholderArticle/PlaceholderArticle';
 import s from './page.module.scss';
 
@@ -58,7 +60,9 @@ export default async function ArticlePage({ params }: Props) {
     if (cSlug === 'general' && aSlug === 'csr-vs-ssr') return <CsrVsSsrArticle />;
     if (cSlug === 'css' && aSlug === 'cascade') return <CascadeArticle />;
     if (cSlug === 'css' && aSlug === 'flexbox') return <FlexboxArticle />;
+    if (cSlug === 'backend' && aSlug === 'backend-roadmap') return <BackendArticle />;
     if (cSlug === 'devops' && aSlug === 'what-devops-knows') return <DevOpsArticle />;
+    if (cSlug === 'devops' && aSlug === 'linux-basics') return <LinuxArticle />;
     return <PlaceholderArticle title={article!.title} />;
   }
 

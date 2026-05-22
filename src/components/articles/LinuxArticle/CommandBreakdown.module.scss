@@ -1,0 +1,192 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.root {
+  background: $bg-surface;
+  border: 1px solid $border-default;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  font-family: $font-mono;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-default;
+}
+
+.topLabel {
+  font-size: $text-sm;
+  color: $text-muted;
+  letter-spacing: $letter-wide;
+}
+
+.topHint {
+  font-size: $text-xs;
+  color: $text-muted;
+  font-style: italic;
+}
+
+.tabs {
+  display: flex;
+  overflow-x: auto;
+  @include custom-scrollbar;
+  border-bottom: 1px solid $border-default;
+}
+
+.tab {
+  padding: $space-3 $space-4;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-muted;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all $t-fast;
+
+  &:hover { color: $text-secondary; }
+}
+
+.tabActive {
+  color: $text-primary;
+  border-bottom-color: $accent;
+}
+
+.body {
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.usecase {
+  font-size: $text-sm;
+  color: $text-muted;
+  font-style: italic;
+}
+
+.cmdLine {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $space-2;
+  padding: $space-4;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+}
+
+.prompt {
+  color: $accent;
+  font-size: $text-base;
+  flex-shrink: 0;
+  margin-right: $space-1;
+}
+
+.token {
+  padding: $space-1 $space-2;
+  border: 1px solid color-mix(in srgb, var(--tc, $accent) 30%, transparent);
+  border-radius: $radius-sm;
+  background: color-mix(in srgb, var(--tc, $accent) 8%, transparent);
+  font-family: $font-mono;
+  font-size: $text-base;
+  color: var(--tc, $accent);
+  cursor: pointer;
+  transition: all $t-fast;
+
+  &:hover {
+    border-color: var(--tc, $accent);
+    background: color-mix(in srgb, var(--tc, $accent) 16%, transparent);
+  }
+}
+
+.tokenActive {
+  border-color: var(--tc, $accent);
+  background: color-mix(in srgb, var(--tc, $accent) 20%, transparent);
+  box-shadow: 0 0 0 1px var(--tc, $accent);
+}
+
+// role color variants - token already uses --tc so no extra classes needed
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-3;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legendText {
+  font-size: $text-xs;
+  color: $text-muted;
+}
+
+.explain {
+  padding: $space-4;
+  border: 1px solid color-mix(in srgb, var(--tc, $accent) 40%, transparent);
+  border-left: 3px solid var(--tc, $accent);
+  border-radius: $radius-md;
+  background: color-mix(in srgb, var(--tc, $accent) 5%, $bg-elevated);
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.explainHeader {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.explainToken {
+  font-size: $text-base;
+  font-weight: $weight-bold;
+  color: var(--tc, $accent);
+}
+
+.explainRole {
+  font-size: $text-xs;
+  padding: 2px $space-2;
+  background: color-mix(in srgb, var(--tc, $accent) 12%, transparent);
+  border-radius: $radius-sm;
+  color: var(--tc, $accent);
+}
+
+.explainTitle {
+  font-size: $text-sm;
+  font-weight: $weight-bold;
+  color: $text-primary;
+}
+
+.explainDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  font-family: $font-sans;
+}
+
+.placeholder {
+  font-size: $text-sm;
+  color: $text-muted;
+  font-style: italic;
+  padding: $space-3 $space-4;
+  border: 1px dashed $border-subtle;
+  border-radius: $radius-md;
+  text-align: center;
+}

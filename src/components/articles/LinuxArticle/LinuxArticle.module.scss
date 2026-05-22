@@ -1,0 +1,132 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  border-bottom: 1px solid $border-subtle;
+  padding-bottom: $space-4;
+}
+
+.prose {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  code {
+    color: $accent;
+    background: $accent-dim;
+    border-radius: $radius-sm;
+    padding: 1px $space-2;
+    font-family: $font-mono;
+    font-size: $text-sm;
+  }
+
+  strong { color: $text-primary; }
+}
+
+.inlineCode {
+  color: $accent;
+  background: $accent-dim;
+  border-radius: $radius-sm;
+  padding: 1px $space-2;
+  font-family: $font-mono;
+  font-size: $text-sm;
+}
+
+.conceptGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-4;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.conceptCard {
+  background: $bg-elevated;
+  border: 1px solid $border-default;
+  border-radius: $radius-lg;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.conceptIcon {
+  font-size: $text-xl;
+}
+
+.conceptTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: $weight-bold;
+  color: $text-primary;
+}
+
+.conceptDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.tableHead {
+  background: $bg-elevated;
+
+  th {
+    padding: $space-3 $space-4;
+    text-align: left;
+    color: $text-muted;
+    @include terminal-label;
+    border-bottom: 1px solid $border-default;
+  }
+}
+
+.tableRow {
+  border-bottom: 1px solid $border-subtle;
+  transition: background $t-fast;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  td {
+    padding: $space-3 $space-4;
+    color: $text-secondary;
+    vertical-align: top;
+    line-height: $line-normal;
+  }
+
+  td:first-child {
+    color: $accent;
+    font-weight: $weight-bold;
+    white-space: nowrap;
+  }
+}
+
+.signalTable {
+  td:nth-child(2) { color: $text-primary; font-weight: $weight-bold; }
+}

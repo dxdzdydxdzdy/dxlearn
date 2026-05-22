@@ -476,6 +476,21 @@ export const courses: Course[] = [
   },
 
   {
+    slug: 'backend',
+    title: 'Backend',
+    description: 'Базы данных, API, брокеры, кэш, авторизация — всё что нужно знать бэкенд-разработчику.',
+    articles: [
+      {
+        slug: 'backend-roadmap',
+        title: 'Backend Roadmap 2026',
+        description: '8 доменов бэкенд-разработки: от языка и баз данных до архитектуры и безопасности. Junior → Senior.',
+        tags: ['roadmap', 'overview'],
+        interactive: true,
+      },
+    ],
+  },
+
+  {
     slug: 'devops',
     title: 'DevOps',
     description: 'CI/CD, Kubernetes, IaC, Observability, DevSecOps — карта доменов.',
@@ -485,6 +500,13 @@ export const courses: Course[] = [
         title: 'Что должен знать DevOps',
         description: 'Карта доменов: Linux, CI/CD, K8s, Cloud/IaC, Observability, DevSecOps — навыки по уровням.',
         tags: ['overview', 'roadmap'],
+        interactive: true,
+      },
+      {
+        slug: 'linux-basics',
+        title: 'База по Linux',
+        description: 'Процессы, файловая система, права доступа, сеть — фундамент для любого DevOps-инженера.',
+        tags: ['linux', 'basics'],
         interactive: true,
       },
     ],
