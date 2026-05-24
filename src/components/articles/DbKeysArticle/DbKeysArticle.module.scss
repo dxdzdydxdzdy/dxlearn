@@ -1,0 +1,322 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $text-primary;
+  font-family: $font-mono;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  &::before {
+    content: '§';
+    color: $accent;
+    font-size: $text-base;
+  }
+}
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+// ── Callout (accent) ──────────────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.3);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Warning ───────────────────────────────────────────────────────────────────
+
+.warning {
+  background: $error-dim;
+  border: 1px solid rgba(255, 95, 106, 0.3);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.warningLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $error;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.warningText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Info (blue) ───────────────────────────────────────────────────────────────
+
+.info {
+  background: $info-dim;
+  border: 1px solid rgba(77, 184, 255, 0.3);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.infoLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $info;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.infoText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Key cards grid ────────────────────────────────────────────────────────────
+
+.keyGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-3;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.keyCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-top: 3px solid var(--kc, #{$accent});
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.keyName {
+  font-size: $text-sm;
+  font-weight: 700;
+  font-family: $font-mono;
+  color: var(--kc, #{$accent});
+}
+
+.keyProps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.keyProp {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  display: flex;
+  gap: $space-2;
+
+  &::before {
+    content: '·';
+    color: $text-muted;
+    flex-shrink: 0;
+    font-family: $font-mono;
+  }
+}
+
+// ── ON DELETE table ───────────────────────────────────────────────────────────
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $text-sm;
+
+  th {
+    background: $bg-elevated;
+    padding: $space-2 $space-4;
+    text-align: left;
+    font-family: $font-mono;
+    font-size: 11px;
+    color: $text-muted;
+    letter-spacing: $letter-wider;
+    border-bottom: 1px solid $border-subtle;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: $space-2 $space-4;
+    color: $text-secondary;
+    border-bottom: 1px solid $border-subtle;
+    vertical-align: top;
+    line-height: $line-normal;
+
+    &:first-child {
+      font-family: $font-mono;
+      color: $text-primary;
+      white-space: nowrap;
+    }
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+// ── UUID comparison ───────────────────────────────────────────────────────────
+
+.uuidGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.uuidCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.uuidName {
+  font-size: $text-sm;
+  font-weight: 700;
+  font-family: $font-mono;
+  color: $text-primary;
+}
+
+.uuidSample {
+  font-size: 10px;
+  font-family: $font-mono;
+  color: $text-muted;
+  word-break: break-all;
+  line-height: $line-loose;
+}
+
+.uuidDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.uuidTag {
+  font-size: 11px;
+  font-family: $font-mono;
+  padding: 2px $space-2;
+  border-radius: $radius-sm;
+  align-self: flex-start;
+}
+
+.tagGood {
+  background: rgba(0, 229, 160, 0.1);
+  color: $accent;
+  border: 1px solid rgba(0, 229, 160, 0.2);
+}
+
+.tagWarn {
+  background: $warn-dim;
+  color: $warn;
+  border: 1px solid rgba(240, 192, 64, 0.2);
+}
+
+// ── Index summary ─────────────────────────────────────────────────────────────
+
+.indexList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.indexRow {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: $space-4;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  align-items: center;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $space-1;
+  }
+}
+
+.indexConstraint {
+  font-size: $text-sm;
+  font-family: $font-mono;
+  color: $text-primary;
+}
+
+.indexResult {
+  font-size: $text-sm;
+  color: $text-secondary;
+}
+
+.yes {
+  color: #57ab5a;
+  font-family: $font-mono;
+  font-size: 11px;
+}
+
+.no {
+  color: $error;
+  font-family: $font-mono;
+  font-size: 11px;
+}

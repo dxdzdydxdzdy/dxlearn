@@ -1,3 +1,17 @@
+// ════════════════════════════════════════════════════════════════════════════
+//  СТРУКТУРА КУРСОВ — единый файл управления
+// ════════════════════════════════════════════════════════════════════════════
+//
+//  Добавить статью:    a('slug', 'Название', 'Описание')
+//  Статья с тегами:    a('slug', 'Название', 'Описание', ['tag1', 'tag2'])
+//  Интерактивная:      a('slug', 'Название', 'Описание', ['tag'], true)
+//  Создать раздел:     s('Название раздела', [ ...статьи ])
+//  Добавить курс:      c('slug', 'Название', 'Описание', [ ...статьи/разделы ])
+//
+// ════════════════════════════════════════════════════════════════════════════
+
+// ── Типы (используются в sidebar, page.tsx) ───────────────────────────────────
+
 export interface Article {
   slug: string;
   title: string;
@@ -14,679 +28,189 @@ export interface Course {
   articles: Article[];
 }
 
+// ── DSL хелперы ────────────────────────────────────────────────────────────────
+
+type ArticleNode = Omit<Article, 'section'>;
+type SectionNode = { __s: string; items: ArticleNode[] };
+type Node = ArticleNode | SectionNode;
+
+/** Статья */
+const a = (slug: string, title: string, description: string, tags: string[] = [], interactive = false): ArticleNode =>
+  ({ slug, title, description, tags, interactive });
+
+/** Раздел (группирует статьи в сайдбаре) */
+const s = (name: string, items: ArticleNode[]): SectionNode =>
+  ({ __s: name, items });
+
+/** Курс */
+const c = (slug: string, title: string, description: string, items: Node[]): Course => ({
+  slug, title, description,
+  articles: items.flatMap(node =>
+    '__s' in node
+      ? node.items.map(art => ({ ...art, section: node.__s }))
+      : [node]
+  ),
+});
+
+// ════════════════════════════════════════════════════════════════════════════
+//  КУРСЫ
+// ════════════════════════════════════════════════════════════════════════════
+
 export const courses: Course[] = [
-  {
-    slug: 'general',
-    title: 'Общие вопросы',
-    description: 'Фундаментальные вопросы веб-разработки: браузер, протоколы, архитектура.',
-    articles: [
-      {
-        slug: 'http-request',
-        title: 'Из чего состоит HTTP запрос',
-        description: 'Метод, URL, заголовки, тело запроса и ответа. Коды состояния.',
-        tags: ['network'],
-        interactive: true,
-      },
-      {
-        slug: 'how-browser-works',
-        title: 'Как работает браузер',
-        description: 'Жизнь запроса: от ввода URL до отображения страницы.',
-        tags: ['network', 'browser'],
-        interactive: true,
-      },
-      {
-        slug: 'oop',
-        title: 'ООП',
-        description: 'Инкапсуляция, наследование, полиморфизм — принципы объектно-ориентированного программирования.',
-        tags: ['concepts'],
-        interactive: true,
-      },
-      {
-        slug: 'progressive-ssr',
-        title: 'Прогрессивный SSR',
-        description: 'Streaming SSR, Suspense и прогрессивная гидратация.',
-        tags: ['ssr', 'performance'],
-        interactive: true,
-      },
-      {
-        slug: 'storage',
-        title: 'localStorage, sessionStorage и cookie',
-        description: 'Различия в области видимости, сроке жизни и доступе к хранилищам браузера.',
-        tags: ['browser'],
-        interactive: true,
-      },
-      {
-        slug: 'csr-vs-ssr',
-        title: 'CSR vs SSR',
-        description: 'Client-Side и Server-Side Rendering: когда что применять.',
-        tags: ['architecture'],
-        interactive: true,
-      },
-    ],
-  },
 
-  {
-    slug: 'javascript',
-    title: 'JavaScript',
-    description: 'Глубокое погружение в механизмы языка — от Event Loop до прототипов.',
-    articles: [
-      {
-        slug: 'event-loop',
-        title: 'Event Loop',
-        description: 'Как браузер выполняет код: Call Stack, Microtask Queue, Macrotask Queue и порядок их обработки.',
-        tags: ['runtime', 'async'],
-        interactive: true,
-      },
-      {
-        slug: 'promises',
-        title: 'Promises & async/await',
-        description: 'Цепочки промисов, обработка ошибок и сахар async/await под капотом.',
-        tags: ['async'],
-        interactive: true,
-      },
-      {
-        slug: 'prototypes',
-        title: 'Прототипы',
-        description: 'Прототипная цепочка, [[Prototype]], Object.create и классы ES6.',
-        tags: ['oop'],
-        interactive: true,
-      },
-      {
-        slug: 'data-types',
-        title: 'Типы данных',
-        description: 'Примитивы и объекты, typeof, преобразование типов.',
-        tags: ['basics'],
-        interactive: false,
-      },
-      {
-        slug: 'let-var-const',
-        title: 'let, var и const',
-        description: 'Области видимости, hoisting и temporal dead zone.',
-        tags: ['basics'],
-        interactive: false,
-      },
-      {
-        slug: 'hoisting',
-        title: 'Hoisting',
-        description: 'Как JavaScript поднимает объявления переменных и функций.',
-        tags: ['basics'],
-        interactive: false,
-      },
-      {
-        slug: 'closures',
-        title: 'Замыкания',
-        description: 'Что такое замыкание, лексическое окружение и практические паттерны.',
-        tags: ['functions'],
-        interactive: false,
-      },
-      {
-        slug: 'this',
-        title: 'this',
-        description: 'Как определяется контекст this в разных ситуациях.',
-        tags: ['functions'],
-        interactive: false,
-      },
-      {
-        slug: 'call-bind-apply',
-        title: 'call, bind и apply',
-        description: 'Явная привязка контекста и частичное применение.',
-        tags: ['functions'],
-        interactive: false,
-      },
-      {
-        slug: 'hof',
-        title: 'HOF — Higher-Order Functions',
-        description: 'Функции высшего порядка: map, filter, reduce и собственные реализации.',
-        tags: ['functions'],
-        interactive: false,
-      },
-      {
-        slug: 'iife',
-        title: 'IIFE',
-        description: 'Immediately Invoked Function Expression — зачем и когда применять.',
-        tags: ['functions'],
-        interactive: false,
-      },
-      {
-        slug: 'currying',
-        title: 'Каррирование',
-        description: 'Преобразование функции с несколькими аргументами в цепочку функций.',
-        tags: ['functions'],
-        interactive: false,
-      },
-      {
-        slug: 'equality-operators',
-        title: 'Разница == и ===',
-        description: 'Абстрактное и строгое сравнение, алгоритм приведения типов.',
-        tags: ['basics'],
-        interactive: false,
-      },
-      {
-        slug: 'null-undefined',
-        title: 'null и undefined',
-        description: 'Сходства, различия и тонкости работы с отсутствующими значениями.',
-        tags: ['basics'],
-        interactive: false,
-      },
-      {
-        slug: 'nan',
-        title: 'NaN',
-        description: 'Почему NaN !== NaN и как правильно проверять числа.',
-        tags: ['basics'],
-        interactive: false,
-      },
-      {
-        slug: 'spread-rest',
-        title: 'spread и rest',
-        description: 'Оператор распространения и сборки аргументов в массив.',
-        tags: ['syntax'],
-        interactive: false,
-      },
-      {
-        slug: 'use-strict',
-        title: 'Директива use strict',
-        description: 'Что включает строгий режим и почему он важен.',
-        tags: ['basics'],
-        interactive: false,
-      },
-      {
-        slug: 'dom',
-        title: 'DOM',
-        description: 'Document Object Model: дерево узлов, манипуляция элементами, события.',
-        tags: ['browser'],
-        interactive: false,
-      },
-      {
-        slug: 'property-check',
-        title: 'Как определить наличие свойства в объекте',
-        description: 'in, hasOwnProperty, hasOwn, optional chaining — что и когда использовать.',
-        tags: ['objects'],
-        interactive: false,
-      },
-      {
-        slug: 'inheritance',
-        title: 'Наследование',
-        description: 'Прототипное vs классическое наследование, паттерны и подводные камни.',
-        tags: ['oop'],
-        interactive: false,
-      },
-      {
-        slug: 'function-overloading',
-        title: 'Перегрузка функций',
-        description: 'Как эмулировать перегрузку в JavaScript без статической типизации.',
-        tags: ['functions'],
-        interactive: false,
-      },
-      {
-        slug: 'null-prototype-object',
-        title: 'Объект без прототипа',
-        description: 'Object.create(null) и зачем создавать объекты без Object.prototype.',
-        tags: ['objects'],
-        interactive: false,
-      },
-      {
-        slug: 'garbage-collector',
-        title: 'Сборщик мусора',
-        description: 'Mark-and-sweep, достижимость, утечки памяти и WeakRef.',
-        tags: ['runtime'],
-        interactive: false,
-      },
-      {
-        slug: 'collections',
-        title: 'Map, WeakMap, Set, WeakSet',
-        description: 'Коллекции ES6: когда использовать вместо объектов и массивов.',
-        tags: ['data-structures'],
-        interactive: false,
-      },
-    ],
-  },
+  // ── Общие вопросы ──────────────────────────────────────────────────────────
+  c('general', 'Общие вопросы', 'Фундаментальные вопросы веб-разработки: браузер, протоколы, архитектура.', [
+    a('http-request',       'Из чего состоит HTTP запрос',       'Метод, URL, заголовки, тело запроса и ответа. Коды состояния.',                           ['network'],               true),
+    a('how-browser-works',  'Как работает браузер',              'Жизнь запроса: от ввода URL до отображения страницы.',                                    ['network', 'browser'],    true),
+    a('oop',                'ООП',                               'Инкапсуляция, наследование, полиморфизм — принципы объектно-ориентированного программирования.', ['concepts'],          true),
+    a('progressive-ssr',    'Прогрессивный SSR',                 'Streaming SSR, Suspense и прогрессивная гидратация.',                                     ['ssr', 'performance'],    true),
+    a('storage',            'localStorage, sessionStorage и cookie', 'Различия в области видимости, сроке жизни и доступе к хранилищам браузера.',           ['browser'],              true),
+    a('csr-vs-ssr',         'CSR vs SSR',                        'Client-Side и Server-Side Rendering: когда что применять.',                               ['architecture'],          true),
+  ]),
 
-  {
-    slug: 'css',
-    title: 'CSS',
-    description: 'Современный CSS: cascade, specificity, layout-алгоритмы.',
-    articles: [
-      {
-        slug: 'cascade',
-        title: 'Cascade & Specificity',
-        description: 'Как браузер определяет, какое правило применить. Specificity calculator.',
-        tags: ['fundamentals'],
-        interactive: true,
-      },
-      {
-        slug: 'flexbox',
-        title: 'Flexbox',
-        description: 'Интерактивный разбор flex-модели: главная ось, поперечная, выравнивание.',
-        tags: ['layout'],
-        interactive: true,
-      },
-    ],
-  },
+  // ── JavaScript ─────────────────────────────────────────────────────────────
+  c('javascript', 'JavaScript', 'Глубокое погружение в механизмы языка — от Event Loop до прототипов.', [
+    a('event-loop',            'Event Loop',                    'Как браузер выполняет код: Call Stack, Microtask Queue, Macrotask Queue и порядок их обработки.', ['runtime', 'async'],  true),
+    a('promises',              'Promises & async/await',        'Цепочки промисов, обработка ошибок и сахар async/await под капотом.',                       ['async'],                true),
+    a('prototypes',            'Прототипы',                     'Прототипная цепочка, [[Prototype]], Object.create и классы ES6.',                           ['oop'],                  true),
+    a('data-types',            'Типы данных',                   'Примитивы и объекты, typeof, преобразование типов.',                                        ['basics']),
+    a('let-var-const',         'let, var и const',              'Области видимости, hoisting и temporal dead zone.',                                         ['basics']),
+    a('hoisting',              'Hoisting',                      'Как JavaScript поднимает объявления переменных и функций.',                                 ['basics']),
+    a('closures',              'Замыкания',                     'Что такое замыкание, лексическое окружение и практические паттерны.',                       ['functions']),
+    a('this',                  'this',                          'Как определяется контекст this в разных ситуациях.',                                        ['functions']),
+    a('call-bind-apply',       'call, bind и apply',            'Явная привязка контекста и частичное применение.',                                          ['functions']),
+    a('hof',                   'HOF — Higher-Order Functions',  'Функции высшего порядка: map, filter, reduce и собственные реализации.',                    ['functions']),
+    a('iife',                  'IIFE',                          'Immediately Invoked Function Expression — зачем и когда применять.',                       ['functions']),
+    a('currying',              'Каррирование',                  'Преобразование функции с несколькими аргументами в цепочку функций.',                       ['functions']),
+    a('equality-operators',    'Разница == и ===',              'Абстрактное и строгое сравнение, алгоритм приведения типов.',                               ['basics']),
+    a('null-undefined',        'null и undefined',              'Сходства, различия и тонкости работы с отсутствующими значениями.',                         ['basics']),
+    a('nan',                   'NaN',                           'Почему NaN !== NaN и как правильно проверять числа.',                                       ['basics']),
+    a('spread-rest',           'spread и rest',                 'Оператор распространения и сборки аргументов в массив.',                                   ['syntax']),
+    a('use-strict',            'Директива use strict',          'Что включает строгий режим и почему он важен.',                                             ['basics']),
+    a('dom',                   'DOM',                           'Document Object Model: дерево узлов, манипуляция элементами, события.',                    ['browser']),
+    a('property-check',        'Как определить наличие свойства в объекте', 'in, hasOwnProperty, hasOwn, optional chaining — что и когда использовать.',    ['objects']),
+    a('inheritance',           'Наследование',                  'Прототипное vs классическое наследование, паттерны и подводные камни.',                    ['oop']),
+    a('function-overloading',  'Перегрузка функций',            'Как эмулировать перегрузку в JavaScript без статической типизации.',                       ['functions']),
+    a('null-prototype-object', 'Объект без прототипа',          'Object.create(null) и зачем создавать объекты без Object.prototype.',                      ['objects']),
+    a('garbage-collector',     'Сборщик мусора',                'Mark-and-sweep, достижимость, утечки памяти и WeakRef.',                                   ['runtime']),
+    a('collections',           'Map, WeakMap, Set, WeakSet',    'Коллекции ES6: когда использовать вместо объектов и массивов.',                             ['data-structures']),
+  ]),
 
-  {
-    slug: 'html',
-    title: 'HTML',
-    description: 'Семантика, доступность и нативные возможности браузера.',
-    articles: [
-      {
-        slug: 'template-tag',
-        title: 'Тег template',
-        description: 'Ленивые фрагменты DOM: как работает <template> и зачем нужен.',
-        tags: ['dom'],
-        interactive: false,
-      },
-    ],
-  },
+  // ── CSS ────────────────────────────────────────────────────────────────────
+  c('css', 'CSS', 'Современный CSS: cascade, specificity, layout-алгоритмы.', [
+    a('cascade', 'Cascade & Specificity', 'Как браузер определяет, какое правило применить. Specificity calculator.', ['fundamentals'], true),
+    a('flexbox', 'Flexbox',              'Интерактивный разбор flex-модели: главная ось, поперечная, выравнивание.',  ['layout'],       true),
+  ]),
 
-  {
-    slug: 'react',
-    title: 'React',
-    description: 'Компонентная модель, хуки, рендеринг и оптимизации.',
-    articles: [],
-  },
+  // ── HTML ───────────────────────────────────────────────────────────────────
+  c('html', 'HTML', 'Семантика, доступность и нативные возможности браузера.', [
+    a('template-tag', 'Тег template', 'Ленивые фрагменты DOM: как работает <template> и зачем нужен.', ['dom']),
+  ]),
 
-  {
-    slug: 'state-management',
-    title: 'State Management',
-    description: 'Redux, Zustand, Jotai, Context — управление состоянием.',
-    articles: [],
-  },
+  // ── React ──────────────────────────────────────────────────────────────────
+  c('react', 'React', 'Компонентная модель, хуки, рендеринг и оптимизации.', []),
 
-  {
-    slug: 'typescript',
-    title: 'TypeScript',
-    description: 'Система типов, компилятор и продвинутые возможности TS.',
-    articles: [
-      {
-        slug: 'ts-vs-js',
-        title: 'Плюсы и минусы TS vs JS',
-        description: 'Зачем TypeScript, где он помогает и где добавляет сложность.',
-        tags: ['basics'],
-        interactive: false,
-      },
-      {
-        slug: 'ts-compiler',
-        title: 'Компилятор TypeScript',
-        description: 'tsconfig, этапы компиляции, declaration files и incremental builds.',
-        tags: ['tooling'],
-        interactive: false,
-      },
-      {
-        slug: 'any-unknown-never-void',
-        title: 'any, unknown, never, void',
-        description: 'Специальные типы и когда каждый из них уместен.',
-        tags: ['types'],
-        interactive: false,
-      },
-      {
-        slug: 'union-intersection',
-        title: 'union и intersection',
-        description: 'Объединение и пересечение типов: A | B и A & B.',
-        tags: ['types'],
-        interactive: false,
-      },
-      {
-        slug: 'class-interface-type',
-        title: 'class, interface и type',
-        description: 'Различия между тремя способами описать форму объекта.',
-        tags: ['types'],
-        interactive: false,
-      },
-      {
-        slug: 'extends-implements',
-        title: 'extends и implements',
-        description: 'Наследование классов vs реализация интерфейса.',
-        tags: ['oop'],
-        interactive: false,
-      },
-      {
-        slug: 'access-modifiers',
-        title: 'Модификаторы доступа',
-        description: 'public, private, protected, readonly — области видимости в классах.',
-        tags: ['oop'],
-        interactive: false,
-      },
-      {
-        slug: 'getters-setters',
-        title: 'Геттеры и сеттеры',
-        description: 'get/set в классах и объектных литералах.',
-        tags: ['oop'],
-        interactive: false,
-      },
-      {
-        slug: 'super-constructor',
-        title: 'super() в конструкторе',
-        description: 'Вызов конструктора базового класса и правила использования super.',
-        tags: ['oop'],
-        interactive: false,
-      },
-      {
-        slug: 'abstract',
-        title: 'abstract классы',
-        description: 'Абстрактные классы как контракты для подклассов.',
-        tags: ['oop'],
-        interactive: false,
-      },
-      {
-        slug: 'generics',
-        title: 'Generics',
-        description: 'Обобщённые типы: параметры, constraints и инференс.',
-        tags: ['types'],
-        interactive: false,
-      },
-      {
-        slug: 'conditional-types',
-        title: 'Условные типы',
-        description: 'T extends U ? X : Y — типы как функции от типов.',
-        tags: ['advanced'],
-        interactive: false,
-      },
-      {
-        slug: 'mapped-types',
-        title: 'Mapped Types',
-        description: 'Трансформация типов через { [K in keyof T]: ... }.',
-        tags: ['advanced'],
-        interactive: false,
-      },
-      {
-        slug: 'utility-types',
-        title: 'Utility Types',
-        description: 'Partial, Required, Pick, Omit, Record, ReturnType и другие.',
-        tags: ['types'],
-        interactive: false,
-      },
-      {
-        slug: 'keyof',
-        title: 'keyof',
-        description: 'Оператор keyof и его применение в generic-функциях.',
-        tags: ['advanced'],
-        interactive: false,
-      },
-      {
-        slug: 'type-assertion',
-        title: 'Type Assertion',
-        description: 'as и ! — явное приведение типов и когда это оправдано.',
-        tags: ['types'],
-        interactive: false,
-      },
-      {
-        slug: 'enum',
-        title: 'Enum',
-        description: 'Числовые и строковые перечисления, const enum и альтернативы.',
-        tags: ['types'],
-        interactive: false,
-      },
-      {
-        slug: 'decorators',
-        title: 'Decorators',
-        description: 'Метапрограммирование через декораторы классов, методов и свойств.',
-        tags: ['advanced'],
-        interactive: false,
-      },
-      {
-        slug: 'mixins',
-        title: 'Mixins',
-        description: 'Паттерн примесей для составного наследования без иерархии.',
-        tags: ['patterns'],
-        interactive: false,
-      },
-      {
-        slug: 'ts-modules',
-        title: 'Модули в TypeScript',
-        description: 'ES-модули, namespace, declaration merging и paths.',
-        tags: ['tooling'],
-        interactive: false,
-      },
-      {
-        slug: 'readonly',
-        title: 'readonly',
-        description: 'Неизменяемые поля в типах, классах и as const.',
-        tags: ['types'],
-        interactive: false,
-      },
-      {
-        slug: 'function-overloading',
-        title: 'Перегрузка функций в TS',
-        description: 'Сигнатуры перегрузки и реализационная подпись.',
-        tags: ['functions'],
-        interactive: false,
-      },
-    ],
-  },
+  // ── State Management ───────────────────────────────────────────────────────
+  c('state-management', 'State Management', 'Redux, Zustand, Jotai, Context — управление состоянием.', []),
 
-  {
-    slug: 'browser',
-    title: 'Browser',
-    description: 'Как браузер превращает HTML в пиксели.',
-    articles: [
-      {
-        slug: 'critical-rendering-path',
-        title: 'Critical Rendering Path',
-        description: 'DOM, CSSOM, Render Tree, Layout, Paint, Composite — шаг за шагом.',
-        tags: ['performance'],
-        interactive: true,
-      },
-    ],
-  },
+  // ── TypeScript ─────────────────────────────────────────────────────────────
+  c('typescript', 'TypeScript', 'Система типов, компилятор и продвинутые возможности TS.', [
+    a('ts-vs-js',              'Плюсы и минусы TS vs JS',        'Зачем TypeScript, где он помогает и где добавляет сложность.',                             ['basics']),
+    a('ts-compiler',           'Компилятор TypeScript',          'tsconfig, этапы компиляции, declaration files и incremental builds.',                     ['tooling']),
+    a('any-unknown-never-void','any, unknown, never, void',      'Специальные типы и когда каждый из них уместен.',                                         ['types']),
+    a('union-intersection',    'union и intersection',           'Объединение и пересечение типов: A | B и A & B.',                                         ['types']),
+    a('class-interface-type',  'class, interface и type',        'Различия между тремя способами описать форму объекта.',                                   ['types']),
+    a('extends-implements',    'extends и implements',           'Наследование классов vs реализация интерфейса.',                                           ['oop']),
+    a('access-modifiers',      'Модификаторы доступа',           'public, private, protected, readonly — области видимости в классах.',                     ['oop']),
+    a('getters-setters',       'Геттеры и сеттеры',              'get/set в классах и объектных литералах.',                                                ['oop']),
+    a('super-constructor',     'super() в конструкторе',         'Вызов конструктора базового класса и правила использования super.',                       ['oop']),
+    a('abstract',              'abstract классы',                'Абстрактные классы как контракты для подклассов.',                                         ['oop']),
+    a('generics',              'Generics',                       'Обобщённые типы: параметры, constraints и инференс.',                                     ['types']),
+    a('conditional-types',     'Условные типы',                  'T extends U ? X : Y — типы как функции от типов.',                                       ['advanced']),
+    a('mapped-types',          'Mapped Types',                   'Трансформация типов через { [K in keyof T]: ... }.',                                      ['advanced']),
+    a('utility-types',         'Utility Types',                  'Partial, Required, Pick, Omit, Record, ReturnType и другие.',                             ['types']),
+    a('keyof',                 'keyof',                          'Оператор keyof и его применение в generic-функциях.',                                     ['advanced']),
+    a('type-assertion',        'Type Assertion',                 'as и ! — явное приведение типов и когда это оправдано.',                                  ['types']),
+    a('enum',                  'Enum',                           'Числовые и строковые перечисления, const enum и альтернативы.',                           ['types']),
+    a('decorators',            'Decorators',                     'Метапрограммирование через декораторы классов, методов и свойств.',                       ['advanced']),
+    a('mixins',                'Mixins',                         'Паттерн примесей для составного наследования без иерархии.',                               ['patterns']),
+    a('ts-modules',            'Модули в TypeScript',            'ES-модули, namespace, declaration merging и paths.',                                      ['tooling']),
+    a('readonly',              'readonly',                       'Неизменяемые поля в типах, классах и as const.',                                          ['types']),
+    a('function-overloading',  'Перегрузка функций в TS',        'Сигнатуры перегрузки и реализационная подпись.',                                          ['functions']),
+  ]),
 
-  {
-    slug: 'webpack',
-    title: 'Webpack',
-    description: 'Бандлинг, лоадеры, плагины и оптимизация сборки.',
-    articles: [],
-  },
+  // ── Browser ────────────────────────────────────────────────────────────────
+  c('browser', 'Browser', 'Как браузер превращает HTML в пиксели.', [
+    a('critical-rendering-path', 'Critical Rendering Path', 'DOM, CSSOM, Render Tree, Layout, Paint, Composite — шаг за шагом.', ['performance'], true),
+  ]),
 
-  {
-    slug: 'backend',
-    title: 'Backend',
-    description: 'Базы данных, API, брокеры, кэш, авторизация — всё что нужно знать бэкенд-разработчику.',
-    articles: [
-      {
-        slug: 'backend-roadmap',
-        title: 'Backend Roadmap 2026',
-        description: '8 доменов бэкенд-разработки: от языка и баз данных до архитектуры и безопасности. Junior → Senior.',
-        tags: ['roadmap', 'overview'],
-        interactive: true,
-      },
+  // ── Webpack ────────────────────────────────────────────────────────────────
+  c('webpack', 'Webpack', 'Бандлинг, лоадеры, плагины и оптимизация сборки.', []),
 
-      // ── Базы данных ──────────────────────────────────────────────
-      {
-        slug: 'sql-queries',
-        title: 'SQL запросы',
-        description: 'SELECT, JOIN, GROUP BY, подзапросы, CTE, window functions — от простого к сложному.',
-        tags: ['sql', 'databases'],
-        interactive: true,
-        section: 'Базы данных',
-      },
-      {
-        slug: 'postgresql-indexes',
-        title: 'Индексы в PostgreSQL',
-        description: 'B-tree, Hash, GIN, BRIN — какой когда использовать. EXPLAIN ANALYZE и медленные запросы.',
-        tags: ['postgresql', 'performance'],
-        interactive: true,
-        section: 'Базы данных',
-      },
-      {
-        slug: 'transactions-acid',
-        title: 'Транзакции и ACID',
-        description: 'Атомарность, консистентность, изоляция, долговечность. Уровни изоляции и их практические последствия.',
-        tags: ['databases', 'concepts'],
-        interactive: true,
-        section: 'Базы данных',
-      },
-      {
-        slug: 'orm-migrations',
-        title: 'ORM и миграции',
-        description: 'SQLAlchemy / Prisma / TypeORM, N+1 проблема, миграции схемы без даунтайма.',
-        tags: ['orm', 'databases'],
-        interactive: false,
-        section: 'Базы данных',
-      },
+  // ── Базы данных ────────────────────────────────────────────────────────────
+  c('databases', 'Базы данных', 'Реляционные и NoSQL СУБД, SQL от простого к сложному, индексы, транзакции, ORM.', [
+    a('databases-intro',   'Введение в базы данных',  'История БД, реляционная модель, SQL vs NoSQL, типы хранилищ и как выбрать нужное.',                         ['databases', 'sql', 'nosql'], true),
+    a('db-keys',           'Ключи и ограничения',     'PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK — как работают, чем отличаются, что создаёт индекс автоматически.', ['databases', 'sql'],          true),
+    a('sql-queries',       'SQL запросы',             'SELECT, WHERE, GROUP BY, подзапросы, CTE, оконные функции — базовые конструкции языка.',                    ['sql', 'databases'],         true),
+    a('sql-joins',         'JOIN — объединение таблиц','INNER, LEFT, RIGHT, FULL, CROSS, SELF JOIN — все типы с визуализацией, 10 задач и 22 вопроса.',             ['sql', 'databases'],         true),
+    a('sql-dml',           'INSERT, UPDATE, DELETE',  'DML-команды: как добавлять, изменять и удалять данные. RETURNING, ON CONFLICT, upsert и мест где всё идёт не так.', ['sql', 'databases'],         true),
+    a('postgresql-indexes','Индексы в PostgreSQL',    'B-tree, Hash, GIN, BRIN — какой когда использовать. EXPLAIN ANALYZE и медленные запросы.',                  ['postgresql', 'performance'], true),
+    a('transactions-acid', 'Транзакции и ACID',       'Атомарность, консистентность, изоляция, долговечность. Уровни изоляции и их практические последствия.',     ['databases', 'concepts'],    true),
+    a('orm-migrations',    'ORM и миграции',          'SQLAlchemy / Prisma / TypeORM, N+1 проблема, миграции схемы без даунтайма.',                                 ['orm', 'databases']),
+  ]),
 
-      // ── Кэширование ──────────────────────────────────────────────
-      {
-        slug: 'redis-basics',
-        title: 'Redis: структуры и команды',
-        description: 'String, Hash, List, Set, Sorted Set, Pub/Sub. Когда и зачем каждая структура.',
-        tags: ['redis', 'cache'],
-        interactive: true,
-        section: 'Кэширование',
-      },
-      {
-        slug: 'cache-patterns',
-        title: 'Паттерны кэширования',
-        description: 'Cache-aside, write-through, write-behind. Cache invalidation. Cache stampede и защита от него.',
-        tags: ['cache', 'patterns'],
-        interactive: true,
-        section: 'Кэширование',
-      },
+  // ── Backend ────────────────────────────────────────────────────────────────
+  c('backend', 'Backend', 'API, брокеры, кэш, авторизация, архитектура — всё что нужно знать бэкенд-разработчику.', [
 
-      // ── Брокеры сообщений ────────────────────────────────────────
-      {
-        slug: 'rabbitmq-basics',
-        title: 'RabbitMQ',
-        description: 'Exchange типы, routing, очереди, ACK/NACK, Dead Letter Queue, retry с backoff.',
-        tags: ['rabbitmq', 'messaging'],
-        interactive: true,
-        section: 'Брокеры сообщений',
-      },
-      {
-        slug: 'kafka-basics',
-        title: 'Apache Kafka',
-        description: 'Топики, партиции, consumer groups, offset, retention. Когда Kafka, когда RabbitMQ.',
-        tags: ['kafka', 'messaging'],
-        interactive: true,
-        section: 'Брокеры сообщений',
-      },
-      {
-        slug: 'async-patterns',
-        title: 'Паттерны асинхронности',
-        description: 'Idempotent consumer, Outbox pattern, Saga. Гарантии доставки: at-least-once, exactly-once.',
-        tags: ['patterns', 'messaging'],
-        interactive: false,
-        section: 'Брокеры сообщений',
-      },
+    a('backend-roadmap', 'Backend Roadmap 2026', '8 доменов бэкенд-разработки: от языка и баз данных до архитектуры и безопасности. Junior → Senior.', ['roadmap', 'overview'], true),
 
-      // ── API дизайн ───────────────────────────────────────────────
-      {
-        slug: 'rest-api-design',
-        title: 'REST API: принципы и практика',
-        description: 'Ресурсы, методы, статус-коды, versioning, идемпотентность, rate limiting.',
-        tags: ['rest', 'api'],
-        interactive: true,
-        section: 'API дизайн',
-      },
-      {
-        slug: 'grpc-basics',
-        title: 'gRPC и Protobuf',
-        description: 'Protobuf-схема, унарные и стримовые вызовы, сравнение с REST, когда использовать.',
-        tags: ['grpc', 'api'],
-        interactive: false,
-        section: 'API дизайн',
-      },
-      {
-        slug: 'websocket-sse',
-        title: 'WebSocket и SSE',
-        description: 'Full-duplex соединение vs Server-Sent Events. Трейдинг, чаты, live-уведомления.',
-        tags: ['websocket', 'realtime'],
-        interactive: true,
-        section: 'API дизайн',
-      },
+    s('Кэширование', [
+      a('redis-basics',    'Redis: структуры и команды', 'String, Hash, List, Set, Sorted Set, Pub/Sub. Когда и зачем каждая структура.',                             ['redis', 'cache'],     true),
+      a('cache-patterns',  'Паттерны кэширования',       'Cache-aside, write-through, write-behind. Cache invalidation. Cache stampede и защита от него.',            ['cache', 'patterns'],  true),
+    ]),
 
-      // ── Безопасность ─────────────────────────────────────────────
-      {
-        slug: 'auth-jwt',
-        title: 'JWT и сессии',
-        description: 'Структура JWT, access/refresh токены, сессии. Где хранить, как инвалидировать.',
-        tags: ['auth', 'security'],
-        interactive: true,
-        section: 'Безопасность',
-      },
-      {
-        slug: 'oauth-openid',
-        title: 'OAuth 2.0 и OpenID Connect',
-        description: 'Authorization Code Flow, PKCE, refresh rotation. "Войти через Google" под капотом.',
-        tags: ['oauth', 'auth'],
-        interactive: true,
-        section: 'Безопасность',
-      },
-      {
-        slug: 'owasp-top10',
-        title: 'OWASP Top 10',
-        description: 'SQL injection, XSS, IDOR, SSRF и другие уязвимости — с примерами и защитой.',
-        tags: ['security', 'owasp'],
-        interactive: true,
-        section: 'Безопасность',
-      },
+    s('Брокеры сообщений', [
+      a('rabbitmq-basics', 'RabbitMQ',                  'Exchange типы, routing, очереди, ACK/NACK, Dead Letter Queue, retry с backoff.',                            ['rabbitmq', 'messaging'], true),
+      a('kafka-basics',    'Apache Kafka',               'Топики, партиции, consumer groups, offset, retention. Когда Kafka, когда RabbitMQ.',                        ['kafka', 'messaging'],    true),
+      a('async-patterns',  'Паттерны асинхронности',     'Idempotent consumer, Outbox pattern, Saga. Гарантии доставки: at-least-once, exactly-once.',               ['patterns', 'messaging']),
+    ]),
 
-      // ── Архитектура ──────────────────────────────────────────────
-      {
-        slug: 'microservices',
-        title: 'Монолит vs микросервисы',
-        description: 'Когда монолит лучше. Признаки того, что пора делить. Strangler Fig, модульный монолит.',
-        tags: ['architecture', 'microservices'],
-        interactive: true,
-        section: 'Архитектура',
-      },
-      {
-        slug: 'architecture-patterns',
-        title: 'Паттерны: Outbox, Saga, Circuit Breaker',
-        description: 'Надёжные паттерны для распределённых систем. Когда и как применять каждый.',
-        tags: ['patterns', 'architecture'],
-        interactive: false,
-        section: 'Архитектура',
-      },
-      {
-        slug: 'system-design',
-        title: 'System Design: с чего начать',
-        description: 'Как подходить к задачам проектирования систем. URL shortener, паста, лента новостей.',
-        tags: ['system-design', 'interview'],
-        interactive: true,
-        section: 'Архитектура',
-      },
+    s('API дизайн', [
+      a('rest-api-design', 'REST API: принципы и практика', 'Ресурсы, методы, статус-коды, versioning, идемпотентность, rate limiting.',                             ['rest', 'api'],        true),
+      a('grpc-basics',     'gRPC и Protobuf',               'Protobuf-схема, унарные и стримовые вызовы, сравнение с REST, когда использовать.',                     ['grpc', 'api']),
+      a('websocket-sse',   'WebSocket и SSE',               'Full-duplex соединение vs Server-Sent Events. Трейдинг, чаты, live-уведомления.',                       ['websocket', 'realtime'], true),
+    ]),
 
-      // ── Инфраструктура ───────────────────────────────────────────
-      {
-        slug: 'docker-backend',
-        title: 'Docker для бэкенда',
-        description: 'Многоэтапные сборки, оптимизация образов, docker-compose для локальной разработки.',
-        tags: ['docker', 'infra'],
-        interactive: false,
-        section: 'Инфраструктура',
-      },
-      {
-        slug: 's3-storage',
-        title: 'S3 хранилища',
-        description: 'Объектное хранилище, presigned URL, прямая загрузка с клиента, бэкапы БД.',
-        tags: ['s3', 'storage', 'infra'],
-        interactive: false,
-        section: 'Инфраструктура',
-      },
-    ],
-  },
+    s('Безопасность', [
+      a('auth-jwt',    'JWT и сессии',              'Структура JWT, access/refresh токены, сессии. Где хранить, как инвалидировать.',                                 ['auth', 'security'],   true),
+      a('oauth-openid','OAuth 2.0 и OpenID Connect','Authorization Code Flow, PKCE, refresh rotation. "Войти через Google" под капотом.',                            ['oauth', 'auth'],      true),
+      a('owasp-top10', 'OWASP Top 10',              'SQL injection, XSS, IDOR, SSRF и другие уязвимости — с примерами и защитой.',                                   ['security', 'owasp'],  true),
+    ]),
 
-  {
-    slug: 'devops',
-    title: 'DevOps',
-    description: 'CI/CD, Kubernetes, IaC, Observability, DevSecOps — карта доменов.',
-    articles: [
-      {
-        slug: 'what-devops-knows',
-        title: 'Что должен знать DevOps',
-        description: 'Карта доменов: Linux, CI/CD, K8s, Cloud/IaC, Observability, DevSecOps — навыки по уровням.',
-        tags: ['overview', 'roadmap'],
-        interactive: true,
-      },
-      {
-        slug: 'linux-basics',
-        title: 'База по Linux',
-        description: 'Процессы, файловая система, права доступа, сеть — фундамент для любого DevOps-инженера.',
-        tags: ['linux', 'basics'],
-        interactive: true,
-      },
-    ],
-  },
+    s('Архитектура', [
+      a('microservices',        'Монолит vs микросервисы',              'Когда монолит лучше. Признаки того, что пора делить. Strangler Fig, модульный монолит.',    ['architecture', 'microservices'], true),
+      a('architecture-patterns','Паттерны: Outbox, Saga, Circuit Breaker','Надёжные паттерны для распределённых систем. Когда и как применять каждый.',              ['patterns', 'architecture']),
+      a('system-design',        'System Design: с чего начать',         'Как подходить к задачам проектирования систем. URL shortener, паста, лента новостей.',       ['system-design', 'interview'], true),
+    ]),
+
+    s('Инфраструктура', [
+      a('docker-backend', 'Docker для бэкенда', 'Многоэтапные сборки, оптимизация образов, docker-compose для локальной разработки.', ['docker', 'infra']),
+      a('s3-storage',     'S3 хранилища',       'Объектное хранилище, presigned URL, прямая загрузка с клиента, бэкапы БД.',          ['s3', 'storage', 'infra']),
+    ]),
+
+  ]),
+
+  // ── DevOps ─────────────────────────────────────────────────────────────────
+  c('devops', 'DevOps', 'CI/CD, Kubernetes, IaC, Observability, DevSecOps — карта доменов.', [
+    a('what-devops-knows', 'Что должен знать DevOps', 'Карта доменов: Linux, CI/CD, K8s, Cloud/IaC, Observability, DevSecOps — навыки по уровням.', ['overview', 'roadmap'], true),
+    a('linux-basics',      'База по Linux',            'Процессы, файловая система, права доступа, сеть — фундамент для любого DevOps-инженера.',    ['linux', 'basics'],    true),
+  ]),
+
 ];
+
+// ════════════════════════════════════════════════════════════════════════════
+//  API (используется в остальных файлах — не трогать)
+// ════════════════════════════════════════════════════════════════════════════
 
 export function getCourse(slug: string): Course | undefined {
   return courses.find((c) => c.slug === slug);

@@ -1,0 +1,336 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.demo {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  background: $bg-surface;
+}
+
+// ── Controls ──────────────────────────────────────────────────────────────────
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-2;
+  padding: $space-2 $space-3;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.presetGroup {
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+  flex-wrap: wrap;
+}
+
+.presetLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  margin-right: $space-1;
+}
+
+.preset {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-1 $space-2;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+
+  &:hover {
+    color: $text-secondary;
+    border-color: rgba(255,255,255,0.12);
+  }
+}
+
+.presetActive {
+  color: $accent;
+  border-color: $accent;
+  background: $accent-dim;
+}
+
+.modeTabs {
+  display: flex;
+  gap: $space-1;
+}
+
+.modeTab {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-1 $space-3;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+
+  &:hover { color: $text-secondary; }
+}
+
+.modeTabActive {
+  color: $accent;
+  border-color: $accent;
+  background: $accent-dim;
+}
+
+// ── Index bar ─────────────────────────────────────────────────────────────────
+
+.indexBar {
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-surface;
+}
+
+.indexBarLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.indexNodes {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-1;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: $space-1;
+}
+
+.indexNode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.indexVal {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: 2px $space-2;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.indexNodeBefore .indexVal {
+  opacity: 0.35;
+}
+
+.indexNodeReached .indexVal {
+  color: $accent;
+  border-color: $accent;
+  background: $accent-dim;
+}
+
+.indexNodeEntry .indexEntryArrow {
+  display: block;
+}
+
+.indexEntryArrow {
+  display: none;
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $accent;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+
+// ── Table ─────────────────────────────────────────────────────────────────────
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $text-sm;
+
+  th {
+    background: $bg-elevated;
+    padding: $space-2 $space-3;
+    text-align: left;
+    font-family: $font-mono;
+    font-size: 11px;
+    color: $text-muted;
+    letter-spacing: $letter-wider;
+    border-bottom: 1px solid $border-subtle;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: $space-2 $space-3;
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: $text-secondary;
+    border-bottom: 1px solid $border-subtle;
+    transition: background 0.18s, color 0.18s;
+
+    &:first-child { color: $text-muted; }
+  }
+}
+
+.tr {
+  transition: background 0.18s;
+}
+
+.trActive {
+  background: rgba(240, 192, 64, 0.1);
+
+  td { color: $warn; }
+}
+
+.trMatched {
+  background: rgba(0, 229, 160, 0.08);
+
+  td { color: $accent; }
+}
+
+.trExamined {
+  opacity: 0.45;
+}
+
+.trSkipped {
+  opacity: 0.2;
+}
+
+.salaryMatch {
+  font-weight: 700;
+  color: $accent !important;
+}
+
+.statusCol {
+  width: 80px;
+  text-align: center;
+}
+
+.iconOk   { color: $accent; font-family: $font-mono; }
+.iconNo   { color: $text-muted; opacity: 0.6; font-family: $font-mono; }
+.iconCheck { color: $warn; font-family: $font-mono; }
+.nullVal  { color: $text-muted; opacity: 0.5; }
+
+// ── Playback ──────────────────────────────────────────────────────────────────
+
+.playbar {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  padding: $space-3 $space-4;
+  border-top: 1px solid $border-subtle;
+  flex-wrap: wrap;
+}
+
+.playBtns {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.playBtn {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $bg-base;
+  background: $accent;
+  border: none;
+  border-radius: $radius-md;
+  padding: $space-2 $space-4;
+  cursor: pointer;
+  transition: opacity 0.15s;
+
+  &:hover { opacity: 0.85; }
+}
+
+.playBtnPause {
+  background: $warn;
+}
+
+.resetBtn {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-2 $space-3;
+  cursor: pointer;
+  transition: color 0.15s;
+
+  &:hover { color: $text-secondary; }
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.statsHint {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.statItem {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+
+  strong { color: $text-secondary; }
+}
+
+.statSep { color: $border-default; }
+
+.statBad  {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: #ff7b72;
+}
+
+.statGood {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $accent;
+}
+
+// ── EXPLAIN line ──────────────────────────────────────────────────────────────
+
+.explainLine {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  padding: $space-2 $space-4;
+  background: $bg-base;
+  border-top: 1px solid $border-subtle;
+}
+
+.explainKw {
+  color: $accent;
+  font-weight: 700;
+}
+
+.explainRows {
+  color: $text-muted;
+}

@@ -4,6 +4,7 @@ import typescript from 'highlight.js/lib/languages/typescript';
 import css from 'highlight.js/lib/languages/css';
 import html from 'highlight.js/lib/languages/xml';
 import bash from 'highlight.js/lib/languages/bash';
+import sql from 'highlight.js/lib/languages/sql';
 import s from './CodeHighlight.module.scss';
 
 hljs.registerLanguage('javascript', javascript);
@@ -14,6 +15,7 @@ hljs.registerLanguage('css', css);
 hljs.registerLanguage('html', html);
 hljs.registerLanguage('bash', bash);
 hljs.registerLanguage('sh', bash);
+hljs.registerLanguage('sql', sql);
 
 interface Props {
   code: string;

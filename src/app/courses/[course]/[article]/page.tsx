@@ -18,6 +18,12 @@ import { CsrVsSsrArticle } from '@/components/articles/CsrVsSsrArticle/CsrVsSsrA
 import { BackendArticle } from '@/components/articles/BackendArticle/BackendArticle';
 import { DevOpsArticle } from '@/components/articles/DevOpsArticle/DevOpsArticle';
 import { LinuxArticle } from '@/components/articles/LinuxArticle/LinuxArticle';
+import { DatabasesIntroArticle } from '@/components/articles/DatabasesIntroArticle/DatabasesIntroArticle';
+import { DbKeysArticle } from '@/components/articles/DbKeysArticle/DbKeysArticle';
+import { SqlQueriesArticle } from '@/components/articles/SqlQueriesArticle/SqlQueriesArticle';
+import { SqlJoinsArticle } from '@/components/articles/SqlJoinsArticle/SqlJoinsArticle';
+import { SqlDmlArticle } from '@/components/articles/SqlDmlArticle/SqlDmlArticle';
+import { PostgresIndexesArticle } from '@/components/articles/PostgresIndexesArticle/PostgresIndexesArticle';
 import { PlaceholderArticle } from '@/components/articles/PlaceholderArticle/PlaceholderArticle';
 import s from './page.module.scss';
 
@@ -61,6 +67,12 @@ export default async function ArticlePage({ params }: Props) {
     if (cSlug === 'css' && aSlug === 'cascade') return <CascadeArticle />;
     if (cSlug === 'css' && aSlug === 'flexbox') return <FlexboxArticle />;
     if (cSlug === 'backend' && aSlug === 'backend-roadmap') return <BackendArticle />;
+    if (cSlug === 'databases' && aSlug === 'databases-intro') return <DatabasesIntroArticle />;
+    if (cSlug === 'databases' && aSlug === 'db-keys') return <DbKeysArticle />;
+    if (cSlug === 'databases' && aSlug === 'sql-queries') return <SqlQueriesArticle />;
+    if (cSlug === 'databases' && aSlug === 'sql-joins')   return <SqlJoinsArticle />;
+    if (cSlug === 'databases' && aSlug === 'sql-dml')          return <SqlDmlArticle />;
+    if (cSlug === 'databases' && aSlug === 'postgresql-indexes') return <PostgresIndexesArticle />;
     if (cSlug === 'devops' && aSlug === 'what-devops-knows') return <DevOpsArticle />;
     if (cSlug === 'devops' && aSlug === 'linux-basics') return <LinuxArticle />;
     return <PlaceholderArticle title={article!.title} />;

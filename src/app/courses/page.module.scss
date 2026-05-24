@@ -3,7 +3,7 @@
 
 .page {
   padding: $space-12 $space-8;
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
 
   @include mobile {
@@ -11,104 +11,252 @@
   }
 }
 
+// ── Header ────────────────────────────────────────────────────────────────────
+
 .header {
   margin-bottom: $space-10;
-  padding-bottom: $space-8;
-  border-bottom: 1px solid $border-subtle;
 }
 
 .eyebrow {
-  @include terminal-label;
+  font-family: $font-mono;
+  font-size: $text-sm;
   color: $text-muted;
-  margin-bottom: $space-4;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-3;
 }
 
 .title {
   font-size: $text-xl;
   font-weight: $weight-bold;
   color: $text-primary;
-  margin-bottom: $space-3;
+  margin-bottom: $space-2;
 }
 
 .subtitle {
   font-size: $text-base;
-  color: $text-secondary;
-  line-height: $line-normal;
+  color: $text-muted;
 }
 
-.courseList {
-  display: flex;
-  flex-direction: column;
-  gap: $space-3;
-}
+// ── Grid ──────────────────────────────────────────────────────────────────────
 
-.courseCard {
-  display: block;
-  @include terminal-border;
-  border-radius: $radius-md;
-  background: $bg-surface;
-  padding: $space-6;
-  transition: border-color $t-normal, background $t-normal;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(156px, auto);
+  grid-auto-flow: row dense;
+  gap: $space-4;
 
-  &:hover {
-    border-color: $border-strong;
-    background: $bg-elevated;
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-    .courseArrow { transform: translateX(4px); color: $accent; }
+  @include mobile {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
   }
 }
 
-.courseTop {
+.cardBig { grid-column: span 2; grid-row: span 2; }
+.cardMed { grid-column: span 2; }
+
+// ── Card ──────────────────────────────────────────────────────────────────────
+
+.card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: $bg-surface;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  padding: $space-5;
+  text-decoration: none;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+
+  // Radial glow in top-left corner on hover
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at 0% 0%,
+      var(--cg, #{$accent-dim}) 0%,
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  &:hover {
+    border-color: var(--cc, #{$accent});
+    background: $bg-elevated;
+    box-shadow:
+      0 0 0 1px var(--cc, #{$accent}),
+      0 0 28px var(--cg, #{$accent-dim}),
+      inset 0 0 40px var(--cg, #{$accent-dim});
+
+    &::before { opacity: 1; }
+    .cardTitle { color: var(--cc, #{$accent}); }
+    .cardArrow { transform: translateX(4px); color: var(--cc, #{$accent}); }
+  }
+
+  > * { position: relative; z-index: 1; }
+}
+
+.cardEmpty {
+  opacity: 0.38;
+  pointer-events: none;
+  cursor: default;
+}
+
+// ── Card internals ────────────────────────────────────────────────────────────
+
+.cardTop {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: $space-4;
-  margin-bottom: $space-4;
+  margin-bottom: $space-3;
 }
 
-.courseTitle {
+.cardIcon {
+  font-family: $font-mono;
   font-size: $text-md;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--cc, #{$accent});
+  letter-spacing: -0.02em;
+}
+
+.cardArrow {
+  font-family: $font-mono;
+  color: $text-muted;
+  transition: transform 0.18s ease, color 0.18s ease;
+  flex-shrink: 0;
+}
+
+.comingSoon {
+  font-size: 10px;
+  font-family: $font-mono;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  border: 1px solid $border-subtle;
+  padding: 1px $space-2;
+  border-radius: $radius-sm;
+}
+
+.cardEyebrow {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-1;
+}
+
+.cardTitle {
+  font-size: $text-base;
   font-weight: $weight-bold;
   color: $text-primary;
+  line-height: $line-normal;
+  transition: color 0.22s ease;
+  margin-bottom: $space-1;
 }
 
-.courseArrow {
-  color: $text-muted;
-  transition: transform $t-fast, color $t-fast;
-  flex-shrink: 0;
-  margin-top: 2px;
+.cardBig .cardTitle {
+  font-size: $text-md;
+  margin-bottom: $space-2;
 }
 
-.courseDesc {
+.cardDesc {
   font-size: $text-sm;
   color: $text-muted;
   line-height: $line-normal;
-  margin-bottom: $space-5;
+  flex-shrink: 0;
 }
 
-.articleChips {
+// ── Big card body ─────────────────────────────────────────────────────────────
+
+.cardBody {
+  flex: 1;
+  margin-top: $space-4;
+  overflow: hidden;
+}
+
+.cardSections {
   display: flex;
   flex-wrap: wrap;
   gap: $space-2;
 }
 
-.chip {
-  @include terminal-label;
-  padding: 2px $space-3;
-  border: 1px solid $border-subtle;
-  border-radius: $radius-sm;
+.sectionChip {
+  font-size: 11px;
+  font-family: $font-mono;
   color: $text-muted;
   background: $bg-base;
-  transition: border-color $t-fast, color $t-fast;
+  border: 1px solid $border-subtle;
+  padding: 2px $space-2;
+  border-radius: $radius-sm;
+  white-space: nowrap;
+  transition: border-color 0.18s;
 
-  &:hover {
-    border-color: $border-strong;
-    color: $text-secondary;
+  .card:hover & {
+    border-color: rgba(255,255,255,0.1);
   }
+}
 
-  &.interactive {
-    border-color: rgba(0, 229, 160, 0.2);
-    color: $accent;
-    background: $accent-dim;
-  }
+.cardArticles {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.cardArticleItem {
+  font-size: $text-sm;
+  color: $text-muted;
+  line-height: $line-normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.cardArticleMore {
+  font-size: $text-sm;
+  color: $text-muted;
+  opacity: 0.5;
+  font-family: $font-mono;
+}
+
+.dot {
+  color: var(--cc, #{$accent});
+  font-size: 8px;
+  flex-shrink: 0;
+}
+
+// ── Footer ────────────────────────────────────────────────────────────────────
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  margin-top: auto;
+  padding-top: $space-3;
+}
+
+.cardCount {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $text-muted;
+}
+
+.cardInteractive {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: var(--cc, #{$accent});
+  opacity: 0.8;
 }

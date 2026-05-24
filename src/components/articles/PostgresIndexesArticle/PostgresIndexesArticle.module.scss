@@ -1,0 +1,329 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $text-primary;
+  font-family: $font-mono;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  &::before {
+    content: '§';
+    color: $accent;
+    font-size: $text-base;
+  }
+}
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+// ── Index type cards ──────────────────────────────────────────────────────────
+
+.typeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.typeCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-top: 3px solid var(--kc, #{$accent});
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.typeName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: var(--kc, #{$accent});
+}
+
+.typeTag {
+  font-size: 10px;
+  font-family: $font-mono;
+  color: $text-muted;
+  letter-spacing: $letter-wide;
+}
+
+.typeDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  margin-top: $space-1;
+}
+
+.typeWhen {
+  font-size: 11px;
+  color: $text-muted;
+  line-height: $line-normal;
+  margin-top: $space-1;
+
+  strong {
+    color: var(--kc, #{$accent});
+    font-weight: 600;
+  }
+}
+
+// ── Two cols ──────────────────────────────────────────────────────────────────
+
+.twoCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-4;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.colCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+}
+
+.colTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+  margin-bottom: $space-3;
+}
+
+.colList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.colItem {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  display: flex;
+  gap: $space-2;
+
+  &::before {
+    content: '•';
+    color: $accent;
+    flex-shrink: 0;
+    font-family: $font-mono;
+  }
+}
+
+.colItemWarn {
+  &::before { content: '⚠'; color: $warn; }
+}
+
+// ── Callout ───────────────────────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid $accent;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Warning ───────────────────────────────────────────────────────────────────
+
+.warning {
+  background: rgba(255, 123, 114, 0.08);
+  border: 1px solid rgba(255, 123, 114, 0.3);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.warningLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: #ff7b72;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.warningText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Info ──────────────────────────────────────────────────────────────────────
+
+.info {
+  background: $info-dim;
+  border: 1px solid rgba(77, 184, 255, 0.3);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.infoLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $info;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.infoText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── EXPLAIN output ────────────────────────────────────────────────────────────
+
+.explainBlock {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: 1.8;
+  overflow-x: auto;
+}
+
+.explainLine { display: block; }
+
+.explainNode  { color: #ff7b72; }
+.explainIndex { color: $accent; }
+.explainCost  { color: $text-muted; }
+.explainActual { color: $warn; }
+.explainRows  { color: $info; }
+.explainComment { color: $text-muted; opacity: 0.6; }
+
+// ── Rules grid ────────────────────────────────────────────────────────────────
+
+.rulesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.ruleCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.ruleDo {
+  border-left: 3px solid $accent;
+}
+
+.ruleDont {
+  border-left: 3px solid #ff7b72;
+}
+
+.ruleLabel {
+  font-size: 10px;
+  font-family: $font-mono;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-1;
+
+  .ruleDo &   { color: $accent; }
+  .ruleDont & { color: #ff7b72; }
+}
+
+.ruleText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+// ── Summary table ─────────────────────────────────────────────────────────────
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $text-sm;
+
+  th {
+    background: $bg-elevated;
+    padding: $space-2 $space-4;
+    text-align: left;
+    font-family: $font-mono;
+    font-size: 11px;
+    color: $text-muted;
+    letter-spacing: $letter-wider;
+    border-bottom: 1px solid $border-subtle;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: $space-2 $space-4;
+    color: $text-secondary;
+    border-bottom: 1px solid $border-subtle;
+    vertical-align: top;
+
+    &:first-child {
+      font-family: $font-mono;
+      color: $accent;
+      white-space: nowrap;
+    }
+  }
+
+  tr:last-child td { border-bottom: none; }
+}

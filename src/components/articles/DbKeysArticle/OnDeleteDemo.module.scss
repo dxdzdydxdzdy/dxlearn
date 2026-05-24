@@ -1,0 +1,218 @@
+@use '../../../styles/tokens' as *;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+// ── Action selector ───────────────────────────────────────────────────────────
+
+.actions {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.actionBtn {
+  font-size: $text-sm;
+  font-family: $font-mono;
+  padding: $space-1 $space-3;
+  border-radius: $radius-md;
+  border: 1px solid $border-default;
+  background: $bg-elevated;
+  color: $text-secondary;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+
+  &:hover {
+    border-color: $border-strong;
+    color: $text-primary;
+  }
+}
+
+.actionBtnActive {
+  border-color: $accent;
+  color: $accent;
+  background: $accent-dim;
+}
+
+// ── Tables area ───────────────────────────────────────────────────────────────
+
+.tables {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr;
+  gap: 0;
+  align-items: start;
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 48px; // align with first data row
+  color: $text-muted;
+  font-family: $font-mono;
+  font-size: $text-sm;
+}
+
+.tableCard {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.tableTitle {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  background: $bg-elevated;
+  padding: $space-2 $space-3;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.tableHead {
+  display: grid;
+  padding: $space-1 $space-3;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.th {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $text-muted;
+  letter-spacing: $letter-wide;
+}
+
+.tableBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: grid;
+  padding: $space-2 $space-3;
+  border-bottom: 1px solid $border-subtle;
+  transition: background 0.2s, opacity 0.3s;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.rowDeleted {
+  opacity: 0.25;
+  text-decoration: line-through;
+  background: rgba(255, 95, 106, 0.05);
+}
+
+.rowAffected {
+  background: rgba(0, 229, 160, 0.05);
+}
+
+.cell {
+  font-size: $text-sm;
+  color: $text-secondary;
+  font-family: $font-mono;
+}
+
+.cellNull {
+  color: $text-muted;
+  font-style: italic;
+}
+
+.cellKey {
+  color: $accent;
+}
+
+// ── Row for deps table: 2 cols (id, name) ─────────────────────────────────────
+
+.depsHead { grid-template-columns: 40px 1fr; }
+.depsRow  { grid-template-columns: 40px 1fr; }
+
+// ── Row for users table: 3 cols (id, name, dept_id) ──────────────────────────
+
+.usersHead { grid-template-columns: 40px 1fr 64px; }
+.usersRow  { grid-template-columns: 40px 1fr 64px; }
+
+// ── Delete button ─────────────────────────────────────────────────────────────
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.deleteBtn {
+  font-size: $text-sm;
+  font-family: $font-mono;
+  padding: $space-2 $space-4;
+  border-radius: $radius-md;
+  border: 1px solid rgba(255, 95, 106, 0.4);
+  background: rgba(255, 95, 106, 0.08);
+  color: $error;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+
+  &:hover {
+    border-color: $error;
+    background: rgba(255, 95, 106, 0.14);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.resetBtn {
+  font-size: $text-sm;
+  font-family: $font-mono;
+  padding: $space-2 $space-4;
+  border-radius: $radius-md;
+  border: 1px solid $border-default;
+  background: transparent;
+  color: $text-muted;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+
+  &:hover {
+    color: $text-secondary;
+    border-color: $border-strong;
+  }
+}
+
+// ── Error / result ────────────────────────────────────────────────────────────
+
+.error {
+  background: $error-dim;
+  border: 1px solid rgba(255, 95, 106, 0.3);
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  font-size: $text-sm;
+  font-family: $font-mono;
+  color: $error;
+  white-space: pre-wrap;
+  line-height: $line-loose;
+}
+
+.success {
+  background: rgba(0, 229, 160, 0.06);
+  border: 1px solid rgba(0, 229, 160, 0.2);
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  font-size: $text-sm;
+  font-family: $font-mono;
+  color: $accent;
+  line-height: $line-loose;
+}
+
+.label {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}

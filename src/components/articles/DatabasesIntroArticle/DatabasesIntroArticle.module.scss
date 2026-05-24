@@ -1,0 +1,339 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+// ── Section ──────────────────────────────────────────────────────────────────
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $text-primary;
+  font-family: $font-mono;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  &::before {
+    content: '§';
+    color: $accent;
+    font-size: $text-base;
+  }
+}
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+// ── Problem box ───────────────────────────────────────────────────────────────
+
+.problemBox {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-left: 3px solid $text-muted;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.problemTitle {
+  font-size: $text-sm;
+  font-family: $font-mono;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.problemList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.problemItem {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  display: flex;
+  gap: $space-2;
+
+  &::before {
+    content: '→';
+    color: $text-muted;
+    flex-shrink: 0;
+    font-family: $font-mono;
+  }
+}
+
+// ── Callout ───────────────────────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid $accent;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Comparison table ──────────────────────────────────────────────────────────
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $text-sm;
+
+  th {
+    background: $bg-elevated;
+    padding: $space-3 $space-4;
+    text-align: left;
+    font-family: $font-mono;
+    font-size: 11px;
+    color: $text-muted;
+    letter-spacing: $letter-wider;
+    border-bottom: 1px solid $border-subtle;
+    font-weight: 500;
+  }
+
+  td {
+    padding: $space-3 $space-4;
+    color: $text-secondary;
+    border-bottom: 1px solid $border-subtle;
+    vertical-align: top;
+    line-height: $line-normal;
+
+    &:first-child {
+      font-family: $font-mono;
+      font-size: 11px;
+      color: $text-muted;
+      white-space: nowrap;
+    }
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.yes {
+  color: #57ab5a;
+  font-family: $font-mono;
+  font-size: 11px;
+}
+
+.no {
+  color: $error;
+  font-family: $font-mono;
+  font-size: 11px;
+}
+
+.partial {
+  color: #d29922;
+  font-family: $font-mono;
+  font-size: 11px;
+}
+
+// ── NoSQL types grid ──────────────────────────────────────────────────────────
+
+.typeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-4;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.typeCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-top: 3px solid var(--tc);
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.typeHeader {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.typeIcon {
+  font-size: $text-lg;
+}
+
+.typeName {
+  font-size: $text-sm;
+  font-weight: 600;
+  color: var(--tc);
+  font-family: $font-mono;
+}
+
+.typeDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.typeExamples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-1;
+  margin-top: $space-1;
+}
+
+.typeExample {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $text-muted;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  padding: 2px $space-2;
+  border-radius: $radius-sm;
+}
+
+.typeWhen {
+  font-size: 11px;
+  color: $text-muted;
+  line-height: $line-normal;
+  padding-top: $space-2;
+  border-top: 1px solid $border-subtle;
+}
+
+// ── Choose guide ──────────────────────────────────────────────────────────────
+
+.choiceList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.choiceItem {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: $space-4;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  align-items: start;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $space-2;
+  }
+}
+
+.choiceCondition {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.choiceAnswer {
+  font-size: $text-sm;
+  font-family: $font-mono;
+  color: $accent;
+}
+
+// ── Two-col layout ────────────────────────────────────────────────────────────
+
+.twoCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-4;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.colCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+}
+
+.colTitle {
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+  font-family: $font-mono;
+  margin-bottom: $space-3;
+}
+
+.colList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.colItem {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  display: flex;
+  gap: $space-2;
+
+  &::before {
+    content: '•';
+    color: $text-muted;
+    flex-shrink: 0;
+  }
+}
+
+// ── Accent text ───────────────────────────────────────────────────────────────
+
+.accent {
+  color: $accent;
+}

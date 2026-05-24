@@ -1,0 +1,276 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $text-primary;
+  font-family: $font-mono;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  &::before {
+    content: '§';
+    color: $accent;
+    font-size: $text-base;
+  }
+}
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+// ── Callout ───────────────────────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid $accent;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Warning ───────────────────────────────────────────────────────────────────
+
+.warning {
+  background: rgba(255, 123, 114, 0.08);
+  border: 1px solid rgba(255, 123, 114, 0.3);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.warningLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: #ff7b72;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.warningText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Two cols ──────────────────────────────────────────────────────────────────
+
+.twoCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-4;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.colCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+}
+
+.colTitle {
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+  font-family: $font-mono;
+  margin-bottom: $space-3;
+}
+
+.colList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.colItem {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  display: flex;
+  gap: $space-2;
+
+  &::before {
+    content: '•';
+    color: $accent;
+    flex-shrink: 0;
+    font-family: $font-mono;
+  }
+}
+
+// ── Execution order ───────────────────────────────────────────────────────────
+
+.execOrder {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: $space-2;
+  row-gap: $space-4;
+}
+
+.execStep {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $space-1;
+  position: relative;
+  // make room for the arrow on the right
+  padding-right: $space-5;
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
+.execKw {
+  font-size: $text-sm;
+  font-family: $font-mono;
+  color: $accent;
+  background: $accent-dim;
+  border: 1px solid $accent;
+  padding: $space-1 $space-2;
+  border-radius: $radius-sm;
+  white-space: nowrap;
+}
+
+.execDesc {
+  font-size: 11px;
+  color: $text-muted;
+  white-space: nowrap;
+}
+
+.execArrow {
+  position: absolute;
+  right: 0;
+  top: 0;
+  // vertically center with the keyword box:
+  // keyword box = $space-1 (4px) top pad + ~12px font + $space-1 (4px) bottom pad = ~20px
+  // arrow character is ~14px, so offset = (20 - 14) / 2 = 3px
+  padding-top: 3px;
+  color: $text-muted;
+  font-family: $font-mono;
+  line-height: 1;
+  transform: translateX(50%);
+}
+
+// ── Aggregate table ───────────────────────────────────────────────────────────
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $text-sm;
+
+  th {
+    background: $bg-elevated;
+    padding: $space-2 $space-4;
+    text-align: left;
+    font-family: $font-mono;
+    font-size: 11px;
+    color: $text-muted;
+    letter-spacing: $letter-wider;
+    border-bottom: 1px solid $border-subtle;
+    font-weight: 500;
+  }
+
+  td {
+    padding: $space-2 $space-4;
+    color: $text-secondary;
+    border-bottom: 1px solid $border-subtle;
+    vertical-align: top;
+
+    &:first-child {
+      font-family: $font-mono;
+      color: $accent;
+    }
+  }
+
+  tr:last-child td { border-bottom: none; }
+}
+
+// ── NULL info grid ────────────────────────────────────────────────────────────
+
+.nullGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nullCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3;
+}
+
+.nullCardTitle {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.nullCardCode {
+  font-size: $text-sm;
+  font-family: $font-mono;
+  color: $text-primary;
+  margin-bottom: $space-1;
+}
+
+.nullCardDesc {
+  font-size: 11px;
+  color: $text-secondary;
+  line-height: $line-normal;
+}

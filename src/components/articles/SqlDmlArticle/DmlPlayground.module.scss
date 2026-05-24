@@ -1,0 +1,326 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.playground {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  background: $bg-surface;
+}
+
+// ── Table panel ───────────────────────────────────────────────────────────────
+
+.tablePanel {
+  display: flex;
+  flex-direction: column;
+}
+
+.tableHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-2 $space-3;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+  gap: $space-3;
+}
+
+.tableTabs {
+  display: flex;
+  gap: $space-1;
+}
+
+.tableTab {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  padding: $space-1 $space-2;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+
+  &:hover {
+    color: $text-secondary;
+    border-color: $border-subtle;
+  }
+}
+
+.tableTabActive {
+  color: $accent;
+  border-color: $accent;
+  background: $accent-dim;
+}
+
+.rowCount {
+  font-size: 10px;
+  color: inherit;
+  opacity: 0.7;
+  background: rgba(255,255,255,0.06);
+  border-radius: $radius-sm;
+  padding: 0 4px;
+}
+
+.resetBtn {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  background: transparent;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-1 $space-2;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+
+  &:hover {
+    color: #ff7b72;
+    border-color: #ff7b72;
+  }
+}
+
+.tableWrap {
+  overflow-x: auto;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.emptyTable {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  padding: $space-6 $space-4;
+  text-align: center;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $text-sm;
+
+  th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: $bg-elevated;
+    padding: $space-2 $space-3;
+    text-align: left;
+    font-family: $font-mono;
+    font-size: 11px;
+    color: $text-muted;
+    letter-spacing: $letter-wider;
+    border-bottom: 1px solid $border-subtle;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+}
+
+.tr {
+  transition: background 0.25s ease;
+
+  &:nth-child(even) {
+    background: rgba(255,255,255,0.02);
+  }
+}
+
+.trInsert {
+  background: rgba(0, 229, 160, 0.1) !important;
+  outline: 1px solid rgba(0, 229, 160, 0.25);
+  outline-offset: -1px;
+
+  .td { color: $accent; }
+}
+
+.trUpdate {
+  background: rgba(240, 192, 64, 0.1) !important;
+  outline: 1px solid rgba(240, 192, 64, 0.25);
+  outline-offset: -1px;
+
+  .td { color: #f0c040; }
+}
+
+.td {
+  padding: $space-2 $space-3;
+  color: $text-secondary;
+  border-bottom: 1px solid $border-subtle;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  white-space: nowrap;
+
+  &:first-child { color: $text-muted; }
+}
+
+.null {
+  color: $text-muted;
+  font-style: italic;
+  opacity: 0.6;
+}
+
+// ── Editor ────────────────────────────────────────────────────────────────────
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding: $space-3;
+  border-top: 1px solid $border-subtle;
+}
+
+.exampleBar {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.groupTabs {
+  display: flex;
+  gap: $space-1;
+}
+
+.groupTab {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-1 $space-3;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+
+  &:hover {
+    color: $text-secondary;
+    border-color: rgba(255,255,255,0.15);
+  }
+}
+
+.groupTabActive {
+  color: $accent;
+  border-color: $accent;
+  background: $accent-dim;
+}
+
+.exampleBtns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-1;
+}
+
+.exBtn {
+  font-size: 11px;
+  color: $text-muted;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-1 $space-2;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+
+  &:hover {
+    color: $text-secondary;
+    border-color: rgba(255,255,255,0.15);
+  }
+}
+
+.textarea {
+  width: 100%;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  color: $text-primary;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  line-height: $line-normal;
+  padding: $space-3;
+  resize: vertical;
+  min-height: 100px;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-color: $accent;
+  }
+}
+
+.runBtn {
+  align-self: flex-start;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $bg-base;
+  background: $accent;
+  border: none;
+  border-radius: $radius-md;
+  padding: $space-2 $space-5;
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity 0.15s, transform 0.1s;
+
+  &:hover { opacity: 0.88; }
+  &:active { transform: scale(0.97); }
+}
+
+// ── Result ────────────────────────────────────────────────────────────────────
+
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  border-top: 1px solid $border-subtle;
+}
+
+.resultOk {
+  background: rgba(0, 229, 160, 0.05);
+  border-top-color: rgba(0, 229, 160, 0.2);
+}
+
+.resultError {
+  background: rgba(255, 123, 114, 0.06);
+  border-top-color: rgba(255, 123, 114, 0.25);
+}
+
+.resultIcon {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+
+  .resultOk & { color: $accent; }
+  .resultError & { color: #ff7b72; }
+}
+
+.resultMsg {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  display: flex;
+  align-items: baseline;
+  gap: $space-2;
+  flex-wrap: wrap;
+
+  .resultOk & { color: $accent; }
+  .resultError & { color: #ff7b72; }
+}
+
+.resultHint {
+  font-size: 11px;
+  color: $text-muted;
+  font-weight: 400;
+}
+
+.returning {
+  margin-top: $space-1;
+}
+
+.returningLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-1;
+}
