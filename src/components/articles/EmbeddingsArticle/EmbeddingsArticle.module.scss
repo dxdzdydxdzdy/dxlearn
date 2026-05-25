@@ -1,0 +1,481 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $text-primary;
+  font-family: $font-mono;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  &::before {
+    content: '§';
+    color: $accent;
+    font-size: $text-base;
+  }
+}
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+  em     { color: $info; font-style: normal; }
+  code {
+    font-family: $font-mono;
+    font-size: 0.9em;
+    color: $accent;
+    background: $accent-dim;
+    padding: 1px 5px;
+    border-radius: $radius-sm;
+  }
+}
+
+// ── Code blocks ───────────────────────────────────────────────────────────────
+
+.codeBlock {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+  overflow-x: auto;
+
+  code {
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: $text-secondary;
+    line-height: $line-loose;
+    white-space: pre;
+  }
+}
+
+.codeBlockSm {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  overflow-x: auto;
+  margin-top: $space-2;
+
+  code {
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: $text-secondary;
+    line-height: $line-loose;
+    white-space: pre;
+  }
+}
+
+// ── Callout / Info / Warning ──────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  strong { color: $text-primary; font-weight: 600; }
+}
+
+.infoCard {
+  background: $info-dim;
+  border: 1px solid rgba(77, 184, 255, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.infoLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $info;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.infoText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+.warningCard {
+  background: rgba(255, 95, 106, 0.06);
+  border: 1px solid rgba(255, 95, 106, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.warningLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: #ff5f6a;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.warningText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Math box ──────────────────────────────────────────────────────────────────
+
+.mathBox {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  align-items: flex-start;
+}
+
+.mathFormula {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-mono;
+  font-size: $text-md;
+}
+
+.mathVar { color: $text-primary; font-weight: 700; }
+.mathOp  { color: $text-muted; }
+
+.mathFrac {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.mathNum {
+  color: $accent;
+  font-size: $text-base;
+  padding-bottom: 2px;
+  border-bottom: 1px solid $border-default;
+}
+
+.mathDen {
+  color: $text-secondary;
+  font-size: $text-base;
+}
+
+.mathLegend {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+
+  code {
+    color: $accent;
+    background: $accent-dim;
+    padding: 1px 4px;
+    border-radius: $radius-sm;
+  }
+}
+
+// ── Similarity table ──────────────────────────────────────────────────────────
+
+.simTable {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.simHeader {
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr;
+  padding: $space-2 $space-4;
+  background: $bg-elevated;
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.simRow {
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  align-items: center;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.simPair {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+}
+
+.simScore {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  text-align: center;
+}
+
+.simInterp {
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+// ── Analogy display ───────────────────────────────────────────────────────────
+
+.analogyDisplay {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-3;
+}
+
+.analogyEq {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.analogyTerm {
+  font-family: $font-mono;
+  font-size: $text-lg;
+  font-weight: 700;
+}
+
+.analogyOp {
+  font-family: $font-mono;
+  font-size: $text-lg;
+  color: $text-muted;
+}
+
+.analogyNote {
+  font-size: $text-sm;
+  color: $text-muted;
+  font-style: italic;
+}
+
+// ── Two cols ──────────────────────────────────────────────────────────────────
+
+.twoCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.colCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+}
+
+.colTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  margin-bottom: $space-2;
+}
+
+// ── Models grid ───────────────────────────────────────────────────────────────
+
+.modelsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.modelCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.modelName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.modelDims {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.modelNote {
+  font-size: $text-sm;
+  color: $text-secondary;
+}
+
+// ── Flow steps ────────────────────────────────────────────────────────────────
+
+.flowSteps {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.flowStep {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  background: $bg-surface;
+  border-bottom: 1px solid $border-subtle;
+  align-items: start;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.stepNum {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  color: $accent;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 229, 160, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.stepBody { display: flex; flex-direction: column; gap: $space-1; }
+.stepTitle { font-family: $font-mono; font-size: $text-sm; font-weight: 600; color: $text-primary; }
+.stepDesc  { font-size: $text-sm; color: $text-secondary; line-height: $line-normal; }
+
+// ── Usecase grid ──────────────────────────────────────────────────────────────
+
+.usecaseGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.usecaseCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.usecaseTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.usecaseDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+// ── Practice list ─────────────────────────────────────────────────────────────
+
+.practiceList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.practiceItem {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: $space-3;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  align-items: start;
+}
+
+.practiceIcon {
+  font-size: $text-base;
+  text-align: center;
+  margin-top: 2px;
+}
+
+.practiceBody { display: flex; flex-direction: column; gap: $space-1; }
+
+.practiceTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.practiceDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}

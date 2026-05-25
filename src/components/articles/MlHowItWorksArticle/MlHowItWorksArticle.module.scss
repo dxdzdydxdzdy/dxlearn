@@ -1,0 +1,532 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+// ── Article shell ─────────────────────────────────────────────────────────────
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $text-primary;
+  font-family: $font-mono;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  &::before {
+    content: '§';
+    color: $accent;
+    font-size: $text-base;
+  }
+}
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+  em { color: $info; font-style: normal; }
+  code {
+    font-family: $font-mono;
+    font-size: 0.9em;
+    color: $accent;
+    background: $accent-dim;
+    padding: 1px 5px;
+    border-radius: $radius-sm;
+  }
+}
+
+// ── Code block ────────────────────────────────────────────────────────────────
+
+.codeBlock {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+  overflow-x: auto;
+
+  code {
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: $text-secondary;
+    line-height: $line-loose;
+    white-space: pre;
+  }
+}
+
+// ── Callout / Info / Warning / Analogy ────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+.infoCard {
+  background: $info-dim;
+  border: 1px solid rgba(77, 184, 255, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.infoLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $info;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.infoText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  code {
+    font-family: $font-mono;
+    font-size: 0.9em;
+    color: $info;
+    background: rgba(77, 184, 255, 0.1);
+    padding: 1px 5px;
+    border-radius: $radius-sm;
+  }
+
+  strong { color: $text-primary; font-weight: 600; }
+}
+
+.warningCard {
+  background: rgba(255, 95, 106, 0.06);
+  border: 1px solid rgba(255, 95, 106, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.warningLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: #ff5f6a;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.warningText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+.analogyCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-left: 3px solid $accent;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.analogyLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.analogyText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Two cols ──────────────────────────────────────────────────────────────────
+
+.twoCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.colCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+}
+
+.colTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+  margin-bottom: $space-3;
+}
+
+.colList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.colItem {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  display: flex;
+  gap: $space-2;
+
+  &::before {
+    content: '•';
+    color: $text-muted;
+    flex-shrink: 0;
+    font-family: $font-mono;
+  }
+}
+
+.colItemGood {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  display: flex;
+  gap: $space-2;
+
+  &::before {
+    content: '✓';
+    color: $accent;
+    flex-shrink: 0;
+    font-family: $font-mono;
+  }
+}
+
+// ── Math box ──────────────────────────────────────────────────────────────────
+
+.mathBox {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  align-items: flex-start;
+}
+
+.mathRow {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  flex-wrap: wrap;
+  font-family: $font-mono;
+  font-size: $text-md;
+  font-weight: 600;
+}
+
+.mathVar   { color: $text-primary; font-size: $text-lg; }
+.mathOp    { color: $text-muted; }
+.mathBlue  { color: $info; }
+.mathYellow{ color: $warn; }
+.mathOrange{ color: #ff9070; }
+
+.mathLegend {
+  display: flex;
+  gap: $space-5;
+  flex-wrap: wrap;
+  font-family: $font-mono;
+  font-size: $text-sm;
+}
+
+// ── Network diagram ───────────────────────────────────────────────────────────
+
+.networkDiagram {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-5;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
+
+.netLayer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-2;
+  flex-shrink: 0;
+}
+
+.netLayerLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wide;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.netLayerSub {
+  font-size: 10px;
+  color: $text-muted;
+  text-align: center;
+  max-width: 90px;
+  line-height: $line-normal;
+}
+
+.netNode {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid;
+  background: $bg-elevated;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.netNodeOut {
+  padding: $space-1 $space-2;
+  border: 1.5px solid rgba(0, 229, 160, 0.4);
+  border-radius: $radius-md;
+  background: $bg-elevated;
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $accent;
+  white-space: nowrap;
+}
+
+.netArrow {
+  font-family: $font-mono;
+  font-size: $text-base;
+  color: $text-muted;
+  flex-shrink: 0;
+}
+
+// ── Flow steps ────────────────────────────────────────────────────────────────
+
+.flowSteps {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.flowStep {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  background: $bg-surface;
+  border-bottom: 1px solid $border-subtle;
+  align-items: start;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.stepNum {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  color: $accent;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 229, 160, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.stepBody {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.stepTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.stepDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+// ── Depth diagram ─────────────────────────────────────────────────────────────
+
+.depthDiagram {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.depthRow {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  background: $bg-surface;
+  border-bottom: 1px solid $border-subtle;
+  align-items: center;
+
+  &:last-child { border-bottom: none; }
+
+  &:nth-child(1) .depthIcon { color: $text-muted; }
+  &:nth-child(2) .depthIcon { color: $info; }
+  &:nth-child(3) .depthIcon { color: $warn; }
+  &:nth-child(4) .depthIcon { color: #ff9070; }
+  &:nth-child(5) .depthIcon { color: $accent; }
+}
+
+.depthIcon {
+  font-size: $text-base;
+  text-align: center;
+  font-family: $font-mono;
+}
+
+.depthContent {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.depthLayer {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+  white-space: nowrap;
+}
+
+.depthArrow {
+  color: $text-muted;
+  font-family: $font-mono;
+}
+
+.depthLearns {
+  font-size: $text-sm;
+  color: $text-secondary;
+}
+
+// ── Split diagram ─────────────────────────────────────────────────────────────
+
+.splitDiagram {
+  display: flex;
+  gap: $space-2;
+  height: 80px;
+
+  @include mobile {
+    flex-direction: column;
+    height: auto;
+  }
+}
+
+.splitPart {
+  border: 1px solid;
+  border-radius: $radius-md;
+  padding: $space-3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: $space-1;
+  min-width: 0;
+}
+
+.splitLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.splitDesc {
+  font-size: $text-sm;
+  color: $text-muted;
+  line-height: $line-normal;
+}
+
+// ── Summary grid ──────────────────────────────────────────────────────────────
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.summaryItem {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+}
+
+.summaryTerm {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $accent;
+  margin-bottom: $space-1;
+}
+
+.summaryDef {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}

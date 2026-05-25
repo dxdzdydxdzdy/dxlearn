@@ -1,0 +1,444 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+// ── Article shell ─────────────────────────────────────────────────────────────
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $text-primary;
+  font-family: $font-mono;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  &::before {
+    content: '§';
+    color: $accent;
+    font-size: $text-base;
+  }
+}
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+}
+
+// ── Code block ────────────────────────────────────────────────────────────────
+
+.codeBlock {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+  overflow-x: auto;
+
+  code {
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: $text-secondary;
+    line-height: $line-loose;
+    white-space: pre;
+  }
+}
+
+// ── Callout / Info / Warning ──────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+.infoCard {
+  background: $info-dim;
+  border: 1px solid rgba(77, 184, 255, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.infoLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $info;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.infoText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  strong { color: $text-primary; font-weight: 600; }
+}
+
+.warningCard {
+  background: rgba(255, 95, 106, 0.06);
+  border: 1px solid rgba(255, 95, 106, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.warningLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: #ff5f6a;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.warningText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Token examples ────────────────────────────────────────────────────────────
+
+.tokenExamples {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.tokenExample {
+  display: grid;
+  grid-template-columns: 160px 24px 1fr 1fr;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tokenExText {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-primary;
+}
+
+.tokenExArrow {
+  color: $text-muted;
+  font-family: $font-mono;
+  text-align: center;
+}
+
+.tokenExTokens {
+  display: flex;
+  gap: $space-1;
+  flex-wrap: wrap;
+}
+
+.tokenBadge {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $accent;
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.2);
+  border-radius: $radius-sm;
+  padding: 1px $space-2;
+}
+
+.tokenExNote {
+  font-size: $text-sm;
+  color: $text-muted;
+  line-height: $line-normal;
+}
+
+// ── Architecture grid ─────────────────────────────────────────────────────────
+
+.archGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.archCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.archName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.archExample {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.archDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+// ── Block diagram ─────────────────────────────────────────────────────────────
+
+.blockDiagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-5;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+}
+
+.blockLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  text-align: center;
+}
+
+.blockArrow {
+  font-size: $text-lg;
+  color: $text-muted;
+}
+
+.blockRepeat {
+  width: 100%;
+  max-width: 440px;
+  border: 1px dashed $border-default;
+  border-radius: $radius-md;
+  padding: $space-3;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.blockRepeatLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  text-align: center;
+}
+
+.blockInner {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.blockBox {
+  border: 1px solid;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+}
+
+.blockName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.blockSub {
+  font-size: $text-sm;
+  color: $text-muted;
+  margin-top: $space-1;
+}
+
+// ── Context table ─────────────────────────────────────────────────────────────
+
+.contextTable {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.ctxHeader {
+  display: grid;
+  grid-template-columns: 1fr 80px 120px;
+  padding: $space-2 $space-4;
+  background: $bg-elevated;
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.ctxRow {
+  display: grid;
+  grid-template-columns: 1fr 80px 120px;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  align-items: center;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.ctxModel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-primary;
+}
+
+.ctxNum {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $accent;
+  font-weight: 700;
+}
+
+.ctxPages {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+// ── Sampling grid ─────────────────────────────────────────────────────────────
+
+.samplingGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.samplingCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.samplingName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.samplingDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+// ── Flow steps ────────────────────────────────────────────────────────────────
+
+.flowSteps {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.flowStep {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  background: $bg-surface;
+  border-bottom: 1px solid $border-subtle;
+  align-items: start;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.stepNum {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  color: $accent;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 229, 160, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.stepBody {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.stepTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.stepDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}

@@ -10,7 +10,7 @@ hljs.registerLanguage('javascript', javascript);
 export interface QuizQuestion {
   id: string;
   difficulty: 'easy' | 'medium' | 'hard';
-  code: string;
+  code?: string;
   question: string;
   options: string[];
   correct: number;
@@ -41,7 +41,9 @@ export function QuizBlock({ questions }: Props) {
   const isAnswered = selected !== null;
   const isCorrect = selected === question.correct;
 
-  const highlighted = hljs.highlight(question.code.trim(), { language: 'javascript' }).value;
+  const highlighted = question.code
+    ? hljs.highlight(question.code.trim(), { language: 'javascript' }).value
+    : null;
 
   function handleSelect(idx: number) {
     if (isAnswered) return;
@@ -108,14 +110,16 @@ export function QuizBlock({ questions }: Props) {
       <div className={s.body}>
         <p className={s.question}>{question.question}</p>
 
-        <div className={s.codeWrapper}>
-          <pre className={s.codePre}>
-            <code
-              className="hljs language-javascript"
-              dangerouslySetInnerHTML={{ __html: highlighted }}
-            />
-          </pre>
-        </div>
+        {highlighted && (
+          <div className={s.codeWrapper}>
+            <pre className={s.codePre}>
+              <code
+                className="hljs language-javascript"
+                dangerouslySetInnerHTML={{ __html: highlighted }}
+              />
+            </pre>
+          </div>
+        )}
 
         <div className={s.options}>
           {question.options.map((opt, i) => {

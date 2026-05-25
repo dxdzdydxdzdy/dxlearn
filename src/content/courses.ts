@@ -200,6 +200,42 @@ export const courses: Course[] = [
 
   ]),
 
+  // ── ML & AI ────────────────────────────────────────────────────────────────
+  c('ml-ai', 'ML & AI', 'Как работают нейросети и языковые модели, как строить RAG, обучать модели и внедрять AI в продакшн.', [
+
+    s('Как это устроено', [
+      a('ml-how-it-works',  'Нейросети: как работает под капотом',   'Нейрон, веса, слои, функция потерь, градиентный спуск — с нуля и понятно.',                                          ['ml', 'basics'],          true),
+      a('llm-architecture', 'LLM под капотом',                       'Токены, трансформеры, attention, context window, temperature — как языковая модель генерирует текст.',               ['llm', 'transformers'],   true),
+      a('embeddings',       'Эмбеддинги: текст → числа',             'Векторное пространство, cosine similarity, семантический поиск — основа RAG и поиска.',                             ['embeddings', 'vectors'], true),
+    ]),
+
+    s('Работа с AI API', [
+      a('ai-api-integration', 'AI API: подключаем и используем', 'OpenAI/Anthropic SDK, streaming, function calling, structured output, обработка ошибок.',    ['api', 'openai'],        true),
+      a('prompt-engineering', 'Prompt Engineering',               'System prompt, few-shot, chain-of-thought, XML-структура, JSON output — как управлять моделью.', ['prompts', 'llm'],       true),
+    ]),
+
+    s('RAG', [
+      a('rag-architecture',  'RAG: архитектура от A до Z', 'Chunking, embedding, vector search, reranking, generation — строим свой поиск по документам.',     ['rag', 'search'],   true),
+      a('vector-databases',  'Векторные базы данных',      'pgvector, Qdrant, Pinecone, FAISS — как работают индексы HNSW, когда что выбрать.',               ['vectors', 'db'],   true),
+    ]),
+
+    s('Агенты', [
+      a('ai-agents',     'AI Агенты: tool calling и ReAct', 'Function calling, ReAct паттерн, memory, multi-agent системы — когда нужны и как устроены.', ['agents', 'llm'], true),
+      a('ai-frameworks', 'LangChain и LlamaIndex',          'Что дают фреймворки, когда нужны, когда проще без них — архитектурные паттерны.',            ['langchain'],     true),
+    ]),
+
+    s('Обучение', [
+      a('fine-tuning',       'Fine-tuning: когда и как',     'Когда нужен vs prompt engineering, LoRA/QLoRA, форматы датасетов, evaluation, Hugging Face.', ['fine-tuning', 'training'], true),
+      a('ml-training-loop',  'Обучение модели с нуля',       'PyTorch основы, датасет, training loop, loss, overfitting, validation — концептуально.',      ['pytorch', 'training'],    true),
+    ]),
+
+    s('Продакшн', [
+      a('ai-in-production', 'AI в проде',         'Latency, cost, caching ответов, evals (как тестировать LLM), мониторинг галлюцинаций.',         ['production', 'ai'], true),
+      a('ai-safety',        'Безопасность AI',    'Prompt injection, hallucinations, guardrails, jailbreak, Red Teaming — когда не доверять модели.', ['safety', 'ai'],     true),
+    ]),
+
+  ]),
+
   // ── DevOps ─────────────────────────────────────────────────────────────────
   c('devops', 'DevOps', 'CI/CD, Kubernetes, IaC, Observability, DevSecOps — карта доменов.', [
     a('what-devops-knows', 'Что должен знать DevOps', 'Карта доменов: Linux, CI/CD, K8s, Cloud/IaC, Observability, DevSecOps — навыки по уровням.', ['overview', 'roadmap'], true),

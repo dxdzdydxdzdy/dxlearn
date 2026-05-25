@@ -1,0 +1,378 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+// ── Container ─────────────────────────────────────────────────────────────────
+
+.container {
+  background: $bg-surface;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  overflow: hidden;
+}
+
+// ── Tabs ──────────────────────────────────────────────────────────────────────
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-elevated;
+}
+
+.tab {
+  padding: $space-3 $space-5;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color $t-normal, border-color $t-normal;
+  margin-bottom: -1px;
+
+  &:hover { color: $text-secondary; }
+}
+
+.tabActive {
+  color: $accent;
+  border-bottom-color: $accent;
+}
+
+// ── Panel ─────────────────────────────────────────────────────────────────────
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  padding: $space-5;
+}
+
+.panelHead {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.panelTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.panelSub {
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+// ── Example buttons ───────────────────────────────────────────────────────────
+
+.exampleBtns {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.exBtn {
+  padding: $space-1 $space-3;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $t-normal;
+
+  &:hover {
+    color: $text-secondary;
+    border-color: $border-default;
+  }
+}
+
+.exBtnActive {
+  color: $accent;
+  border-color: rgba(0, 229, 160, 0.4);
+  background: $accent-dim;
+}
+
+// ── Input display ─────────────────────────────────────────────────────────────
+
+.inputDisplay {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+}
+
+.inputLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.inputText {
+  font-family: $font-mono;
+  font-size: $text-base;
+  color: $text-primary;
+}
+
+// ── Token display ─────────────────────────────────────────────────────────────
+
+.tokenDisplay {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+}
+
+.tokenCount {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $accent;
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.2);
+  border-radius: $radius-sm;
+  padding: 1px $space-2;
+  letter-spacing: 0;
+}
+
+.tokenRow {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+  margin-top: $space-1;
+}
+
+.tokenChip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid;
+  border-radius: $radius-md;
+  padding: $space-1 $space-3;
+  gap: 2px;
+}
+
+.tokenText {
+  font-family: $font-mono;
+  font-size: $text-base;
+  font-weight: 600;
+  white-space: pre;
+}
+
+.tokenId {
+  font-family: $font-mono;
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+// ── Stats ─────────────────────────────────────────────────────────────────────
+
+.statsRow {
+  display: flex;
+  gap: $space-4;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-5;
+  flex: 1;
+}
+
+.statNum {
+  font-family: $font-mono;
+  font-size: $text-lg;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.statLabel {
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+// ── Note ──────────────────────────────────────────────────────────────────────
+
+.note {
+  font-size: $text-sm;
+  color: $text-muted;
+  line-height: $line-normal;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-left: 2px solid $text-muted;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+}
+
+// ── Temperature control ───────────────────────────────────────────────────────
+
+.tempControl {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.tempRow {
+  display: flex;
+  align-items: baseline;
+  gap: $space-2;
+}
+
+.tempLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+}
+
+.tempValue {
+  font-family: $font-mono;
+  font-size: $text-lg;
+  font-weight: 700;
+  color: $warn;
+}
+
+.tempSlider {
+  width: 100%;
+  cursor: pointer;
+  accent-color: $warn;
+}
+
+.tempScale {
+  display: flex;
+  justify-content: space-between;
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+}
+
+// ── Chart ─────────────────────────────────────────────────────────────────────
+
+.chart {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.chartRow {
+  display: grid;
+  grid-template-columns: 120px 1fr 52px;
+  align-items: center;
+  gap: $space-3;
+}
+
+.chartToken {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  text-align: right;
+}
+
+.chartBarWrap {
+  background: $bg-elevated;
+  border-radius: 2px;
+  height: 20px;
+  overflow: hidden;
+}
+
+.chartBar {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 150ms ease;
+}
+
+.chartPct {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  text-align: right;
+}
+
+// ── Generate area ─────────────────────────────────────────────────────────────
+
+.genArea {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.genPrompt {
+  font-family: $font-mono;
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  min-height: 48px;
+}
+
+.genPromptText { color: $text-primary; }
+
+.genToken {
+  font-weight: 600;
+}
+
+.genCursor {
+  color: $accent;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.genBtns {
+  display: flex;
+  gap: $space-2;
+}
+
+.genBtn {
+  padding: $space-2 $space-4;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-inverted;
+  background: $accent;
+  border: none;
+  border-radius: $radius-md;
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity $t-normal;
+
+  &:hover { opacity: 0.85; }
+}
+
+.resetBtn {
+  padding: $space-2 $space-4;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: color $t-normal;
+
+  &:hover { color: $text-secondary; }
+}

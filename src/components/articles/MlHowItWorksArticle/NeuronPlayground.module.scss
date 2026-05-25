@@ -1,0 +1,297 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+// ── Playground shell ──────────────────────────────────────────────────────────
+
+.playground {
+  background: $bg-surface;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: $space-3;
+  padding: $space-3 $space-5;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-elevated;
+}
+
+.headerTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.headerSub {
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 0;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ── Controls (left panel) ─────────────────────────────────────────────────────
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-right: 1px solid $border-subtle;
+
+  @include mobile {
+    border-right: none;
+    border-bottom: 1px solid $border-subtle;
+  }
+}
+
+.controlGroup {
+  padding: $space-4;
+  border-bottom: 1px solid $border-subtle;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.groupTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+  margin-bottom: $space-1;
+}
+
+.groupDesc {
+  font-size: $text-sm;
+  color: $text-muted;
+  line-height: $line-normal;
+  margin-bottom: $space-3;
+}
+
+// ── Slider ────────────────────────────────────────────────────────────────────
+
+.sliderRow {
+  display: grid;
+  grid-template-columns: 32px 1fr 40px;
+  align-items: center;
+  gap: $space-2;
+  margin-bottom: $space-2;
+
+  &:last-child { margin-bottom: 0; }
+}
+
+.sliderLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  text-align: right;
+}
+
+.sliderTrack {
+  position: relative;
+  height: 6px;
+  background: $bg-base;
+  border-radius: 3px;
+  border: 1px solid $border-subtle;
+}
+
+.sliderFill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  border-radius: 3px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.sliderInput {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  height: 100%;
+
+  // show custom thumb via overlay approach
+  &::-webkit-slider-thumb { cursor: pointer; }
+}
+
+.sliderValue {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  text-align: right;
+}
+
+// ── Visualization (right panel) ───────────────────────────────────────────────
+
+.viz {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding: $space-4;
+}
+
+// ── SVG neuron ────────────────────────────────────────────────────────────────
+
+.neuronSvg {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  align-self: center;
+}
+
+// SVG element classes (used as CSS classes on SVG elements)
+.svgInputCircle {
+  fill: $bg-elevated;
+  stroke: $border-default;
+  stroke-width: 1.5;
+}
+
+.svgInputLabel {
+  font-family: $font-mono;
+  font-size: 9px;
+  fill: $info;
+  font-weight: 600;
+}
+
+.svgInputValue {
+  font-family: $font-mono;
+  font-size: 8px;
+  fill: $text-secondary;
+}
+
+.svgWLabel {
+  font-family: $font-mono;
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.svgBiasLabel {
+  font-family: $font-mono;
+  font-size: 8px;
+  fill: #ff9070;
+}
+
+.svgNeuron {
+  fill: $bg-base;
+  stroke: $accent;
+  stroke-width: 2;
+}
+
+.svgNeuronLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  fill: $accent;
+  font-weight: 700;
+}
+
+.svgNeuronValue {
+  font-family: $font-mono;
+  font-size: 8px;
+  fill: $text-muted;
+}
+
+.svgReluBox {
+  fill: $bg-elevated;
+  stroke-width: 1.5;
+}
+
+.svgReluLabel {
+  font-family: $font-mono;
+  font-size: 8px;
+  fill: $text-muted;
+}
+
+.svgReluValue {
+  font-family: $font-mono;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+// ── Calc box ──────────────────────────────────────────────────────────────────
+
+.calcBox {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.calcTitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.calcFormula {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+}
+
+.calcVar {
+  color: $text-primary;
+  font-weight: 700;
+}
+
+.calcOp {
+  color: $text-muted;
+}
+
+.calcTerm {
+  font-weight: 600;
+}
+
+.calcResult {
+  font-weight: 700;
+  font-size: $text-base;
+}
+
+.calcReluRow {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  flex-wrap: wrap;
+}
+
+.calcReluLabel {
+  color: $text-muted;
+}
+
+.calcReluResult {
+  font-size: $text-base;
+  font-weight: 700;
+}
+
+.statusBadge {
+  border: 1px solid;
+  border-radius: $radius-md;
+  padding: $space-2 $space-3;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  line-height: $line-normal;
+}

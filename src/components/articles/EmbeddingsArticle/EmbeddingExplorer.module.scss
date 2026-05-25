@@ -1,0 +1,273 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.explorer {
+  background: $bg-surface;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: $space-3;
+  padding: $space-3 $space-5;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-elevated;
+}
+
+.headerTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.headerSub {
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 0;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ── Map ───────────────────────────────────────────────────────────────────────
+
+.mapWrap {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding: $space-4;
+  border-right: 1px solid $border-subtle;
+
+  @include mobile {
+    border-right: none;
+    border-bottom: 1px solid $border-subtle;
+  }
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+}
+
+.wordGroup {
+  cursor: pointer;
+}
+
+.wordLabel {
+  font-family: $font-mono;
+  font-size: 9px;
+  transition: fill 120ms ease;
+  pointer-events: none;
+  user-select: none;
+}
+
+.legend {
+  display: flex;
+  gap: $space-4;
+  flex-wrap: wrap;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legendLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+// ── Panel ─────────────────────────────────────────────────────────────────────
+
+.panel {
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-6 0;
+}
+
+.hintIcon {
+  font-family: $font-mono;
+  font-size: $text-xl;
+  color: $text-muted;
+}
+
+.hintText {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  text-align: center;
+}
+
+.selectedWord {
+  font-family: $font-mono;
+  font-size: $text-base;
+  font-weight: 700;
+  text-align: center;
+}
+
+// ── Result ────────────────────────────────────────────────────────────────────
+
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.pairRow {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.pairWord {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.pairVs {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.scoreWrap {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.scoreLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.scoreNum {
+  font-family: $font-mono;
+  font-size: $text-xl;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.scoreBar {
+  height: 4px;
+  background: $bg-base;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.scoreBarFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 200ms ease, background 200ms ease;
+}
+
+.scoreInterp {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  line-height: $line-normal;
+}
+
+// ── Vector bars ───────────────────────────────────────────────────────────────
+
+.vectorRow {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.vecLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.vecBars {
+  display: flex;
+  gap: 3px;
+  height: 28px;
+  align-items: flex-end;
+}
+
+.vecBar {
+  flex: 1;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: 2px;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.vecBarFill {
+  width: 100%;
+  border-radius: 1px;
+  opacity: 0.7;
+  transition: height 200ms ease;
+}
+
+.vecDimLabels {
+  display: flex;
+  gap: 3px;
+}
+
+.vecDimLabel {
+  flex: 1;
+  font-family: $font-mono;
+  font-size: 8px;
+  color: $text-muted;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: clip;
+  white-space: nowrap;
+}
+
+.resetBtn {
+  padding: $space-1 $space-3;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: color $t-normal;
+
+  &:hover { color: $text-secondary; }
+}

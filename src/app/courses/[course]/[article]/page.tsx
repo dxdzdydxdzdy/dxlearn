@@ -29,6 +29,9 @@ import { AuthJwtArticle } from '@/components/articles/AuthJwtArticle/AuthJwtArti
 import { OAuthArticle } from '@/components/articles/OAuthArticle/OAuthArticle';
 import { OwaspArticle } from '@/components/articles/OwaspArticle/OwaspArticle';
 import { RedisArticle } from '@/components/articles/RedisArticle/RedisArticle';
+import { MlHowItWorksArticle } from '@/components/articles/MlHowItWorksArticle/MlHowItWorksArticle';
+import { LlmArchitectureArticle } from '@/components/articles/LlmArchitectureArticle/LlmArchitectureArticle';
+import { EmbeddingsArticle } from '@/components/articles/EmbeddingsArticle/EmbeddingsArticle';
 import { PlaceholderArticle } from '@/components/articles/PlaceholderArticle/PlaceholderArticle';
 import s from './page.module.scss';
 
@@ -85,6 +88,9 @@ export default async function ArticlePage({ params }: Props) {
     if (cSlug === 'databases' && aSlug === 'postgresql-indexes') return <PostgresIndexesArticle />;
     if (cSlug === 'devops' && aSlug === 'what-devops-knows') return <DevOpsArticle />;
     if (cSlug === 'devops' && aSlug === 'linux-basics') return <LinuxArticle />;
+    if (cSlug === 'ml-ai' && aSlug === 'ml-how-it-works') return <MlHowItWorksArticle />;
+    if (cSlug === 'ml-ai' && aSlug === 'llm-architecture') return <LlmArchitectureArticle />;
+    if (cSlug === 'ml-ai' && aSlug === 'embeddings') return <EmbeddingsArticle />;
     return <PlaceholderArticle title={article!.title} />;
   }
 
