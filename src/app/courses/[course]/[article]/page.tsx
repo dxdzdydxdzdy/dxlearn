@@ -24,6 +24,11 @@ import { SqlQueriesArticle } from '@/components/articles/SqlQueriesArticle/SqlQu
 import { SqlJoinsArticle } from '@/components/articles/SqlJoinsArticle/SqlJoinsArticle';
 import { SqlDmlArticle } from '@/components/articles/SqlDmlArticle/SqlDmlArticle';
 import { PostgresIndexesArticle } from '@/components/articles/PostgresIndexesArticle/PostgresIndexesArticle';
+import { RestApiArticle } from '@/components/articles/RestApiArticle/RestApiArticle';
+import { AuthJwtArticle } from '@/components/articles/AuthJwtArticle/AuthJwtArticle';
+import { OAuthArticle } from '@/components/articles/OAuthArticle/OAuthArticle';
+import { OwaspArticle } from '@/components/articles/OwaspArticle/OwaspArticle';
+import { RedisArticle } from '@/components/articles/RedisArticle/RedisArticle';
 import { PlaceholderArticle } from '@/components/articles/PlaceholderArticle/PlaceholderArticle';
 import s from './page.module.scss';
 
@@ -67,6 +72,11 @@ export default async function ArticlePage({ params }: Props) {
     if (cSlug === 'css' && aSlug === 'cascade') return <CascadeArticle />;
     if (cSlug === 'css' && aSlug === 'flexbox') return <FlexboxArticle />;
     if (cSlug === 'backend' && aSlug === 'backend-roadmap') return <BackendArticle />;
+    if (cSlug === 'backend' && aSlug === 'rest-api-design') return <RestApiArticle />;
+    if (cSlug === 'backend' && aSlug === 'auth-jwt')        return <AuthJwtArticle />;
+    if (cSlug === 'backend' && aSlug === 'oauth-openid')   return <OAuthArticle />;
+    if (cSlug === 'backend' && aSlug === 'owasp-top10')    return <OwaspArticle />;
+    if (cSlug === 'backend' && aSlug === 'redis-basics')   return <RedisArticle />;
     if (cSlug === 'databases' && aSlug === 'databases-intro') return <DatabasesIntroArticle />;
     if (cSlug === 'databases' && aSlug === 'db-keys') return <DbKeysArticle />;
     if (cSlug === 'databases' && aSlug === 'sql-queries') return <SqlQueriesArticle />;

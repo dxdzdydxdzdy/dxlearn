@@ -1,0 +1,222 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.viewer {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  background: $bg-surface;
+}
+
+// ── Tabs ──────────────────────────────────────────────────────────────────────
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  background: $bg-base;
+  border-bottom: 1px solid $border-subtle;
+  padding: $space-2;
+  gap: $space-1;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+  padding: $space-1 $space-2;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  white-space: nowrap;
+
+  &:hover {
+    border-color: rgba(255,255,255,0.12);
+    background: $bg-hover;
+  }
+}
+
+.tabActive {
+  border-color: var(--tc, #{$accent});
+  background: rgba(0,0,0,0.3);
+}
+
+.tabMethod {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: $letter-wide;
+}
+
+.tabLabel {
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.tabStatus {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+// ── Panels ────────────────────────────────────────────────────────────────────
+
+.panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: $border-subtle;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  background: $bg-surface;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  min-height: 220px;
+  overflow-x: auto;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-2;
+  margin-bottom: $space-1;
+}
+
+.panelTitle {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.methodBadge {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--mc, #{$accent});
+  background: rgba(0, 229, 160, 0.1);
+  border: 1px solid var(--mc, #{$accent});
+  border-radius: $radius-sm;
+  padding: 1px $space-2;
+}
+
+.statusBadge {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--sc, #{$accent});
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--sc, #{$accent});
+  border-radius: $radius-sm;
+  padding: 1px $space-2;
+}
+
+// ── HTTP message ──────────────────────────────────────────────────────────────
+
+.httpLine {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  padding-bottom: $space-2;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.httpMethod {
+  color: var(--mc, #{$accent});
+  font-weight: 700;
+}
+
+.httpPath {
+  color: $text-primary;
+}
+
+.httpVer {
+  color: $text-muted;
+}
+
+.statusCode {
+  font-weight: 700;
+}
+
+.statusText {
+  font-weight: 600;
+}
+
+.headers {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.header {
+  font-family: $font-mono;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.headerKey {
+  color: $info;
+}
+
+.headerVal {
+  color: $text-secondary;
+}
+
+.bodySep {
+  height: 1px;
+  background: $border-subtle;
+  margin: $space-1 0;
+}
+
+.body {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-secondary;
+  line-height: 1.6;
+  margin: 0;
+  white-space: pre;
+}
+
+.emptyBody {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  opacity: 0.5;
+  margin-top: $space-1;
+}
+
+// ── Note ──────────────────────────────────────────────────────────────────────
+
+.note {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  background: rgba(0,0,0,0.2);
+  border-top: 1px solid var(--sc, #{$border-subtle});
+}
+
+.noteIcon {
+  flex-shrink: 0;
+  font-size: $text-sm;
+  line-height: 1.5;
+}
+
+.noteText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}

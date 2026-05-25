@@ -1,0 +1,223 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.decoder {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  background: $bg-surface;
+}
+
+// ── Tabs ──────────────────────────────────────────────────────────────────────
+
+.tabs {
+  display: flex;
+  gap: $space-1;
+  padding: $space-2 $space-3;
+  background: $bg-base;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-1 $space-3;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  background: $bg-elevated;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: $bg-hover;
+  }
+}
+
+.tabActive {
+  border-color: $accent;
+  background: rgba(0, 229, 160, 0.06);
+}
+
+.tabLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.tabTtl {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+// ── Token display ─────────────────────────────────────────────────────────────
+
+.tokenWrap {
+  padding: $space-4 $space-5;
+  background: $bg-base;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.tokenLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-3;
+}
+
+.tokenLines {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: $font-mono;
+  font-size: 12px;
+  line-height: 1.7;
+  word-break: break-all;
+}
+
+.tokenRow {
+  display: flex;
+  align-items: baseline;
+  gap: $space-1;
+}
+
+.tokenDot {
+  color: $text-muted;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.partH { color: #ff9070; }
+.partP { color: #00e5a0; }
+.partS { color: #9b59e0; }
+
+// ── Legend ────────────────────────────────────────────────────────────────────
+
+.legend {
+  display: flex;
+  gap: $space-5;
+  margin-top: $space-3;
+  flex-wrap: wrap;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-secondary;
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+// ── Panels ────────────────────────────────────────────────────────────────────
+
+.panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: $border-subtle;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  background: $bg-surface;
+  padding: $space-4 $space-5;
+  min-height: 200px;
+}
+
+.panelTitle {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-3;
+}
+
+// ── Field list ────────────────────────────────────────────────────────────────
+
+.fieldList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: $space-3;
+  align-items: start;
+}
+
+.fieldKey {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $info;
+  padding-top: 1px;
+  white-space: nowrap;
+}
+
+.fieldRight {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fieldVal {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-primary;
+  word-break: break-all;
+}
+
+.fieldNote {
+  font-size: 11px;
+  color: $text-muted;
+  line-height: 1.4;
+}
+
+// ── Signature note ────────────────────────────────────────────────────────────
+
+.sigNote {
+  padding: $space-3 $space-5;
+  background: rgba(155, 89, 224, 0.05);
+  border-top: 1px solid rgba(155, 89, 224, 0.2);
+}
+
+.sigTitle {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: #9b59e0;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.sigFormula {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-secondary;
+  line-height: 1.7;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.sigWarn {
+  font-size: 11px;
+  color: $text-muted;
+  margin-top: $space-2;
+}

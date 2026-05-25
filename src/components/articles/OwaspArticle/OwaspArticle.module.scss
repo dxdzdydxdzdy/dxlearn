@@ -1,0 +1,458 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $text-primary;
+  font-family: $font-mono;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  &::before {
+    content: '§';
+    color: $accent;
+    font-size: $text-base;
+  }
+}
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+// ── Callout / Warning / Info ──────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid $accent;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+.warning {
+  background: rgba(255, 123, 114, 0.08);
+  border: 1px solid rgba(255, 123, 114, 0.3);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.warningLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: #ff7b72;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.warningText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+.info {
+  background: $info-dim;
+  border: 1px solid rgba(77, 184, 255, 0.3);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.infoLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $info;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.infoText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Two cols ──────────────────────────────────────────────────────────────────
+
+.twoCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-4;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.colCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+}
+
+.colTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+  margin-bottom: $space-3;
+}
+
+.colList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.colItem {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  display: flex;
+  gap: $space-2;
+
+  &::before {
+    content: '•';
+    color: $accent;
+    flex-shrink: 0;
+    font-family: $font-mono;
+  }
+}
+
+.colItemGood {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  display: flex;
+  gap: $space-2;
+
+  &::before {
+    content: '✓';
+    color: $accent;
+    flex-shrink: 0;
+    font-family: $font-mono;
+  }
+}
+
+.colItemBad {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  display: flex;
+  gap: $space-2;
+  opacity: 0.7;
+
+  &::before {
+    content: '✗';
+    color: #ff7b72;
+    flex-shrink: 0;
+    font-family: $font-mono;
+  }
+}
+
+// ── Code block ────────────────────────────────────────────────────────────────
+
+.codeBlock {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+  overflow-x: auto;
+
+  code {
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: $text-secondary;
+    line-height: $line-loose;
+    white-space: pre;
+  }
+}
+
+.codeComment  { color: $text-muted; }
+.codeKeyword  { color: #ff9070; }
+.codeString   { color: $accent; }
+.codeFunc     { color: $info; }
+.codeNum      { color: $warn; }
+
+// ── Flow steps ────────────────────────────────────────────────────────────────
+
+.flowSteps {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.flowStep {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  background: $bg-surface;
+  border-bottom: 1px solid $border-subtle;
+  align-items: start;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.stepNum {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--fc, #{$accent});
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid;
+  border-color: var(--fc, rgba(0, 229, 160, 0.3));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.stepBody {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.stepTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.stepDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.stepCode {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  background: $bg-base;
+  padding: $space-1 $space-2;
+  border-radius: $radius-sm;
+  margin-top: $space-1;
+  border: 1px solid $border-subtle;
+  display: inline-block;
+}
+
+// ── Storage cards ─────────────────────────────────────────────────────────────
+
+.storageGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.storageCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-top: 3px solid var(--sc, #{$border-subtle});
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.storageTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.threatBadge {
+  display: inline-flex;
+  align-items: center;
+  font-family: $font-mono;
+  font-size: 10px;
+  padding: 2px $space-2;
+  border-radius: $radius-sm;
+  border: 1px solid;
+  width: fit-content;
+}
+
+.threatHigh {
+  color: #ff7b72;
+  border-color: rgba(255, 123, 114, 0.3);
+  background: rgba(255, 123, 114, 0.06);
+}
+
+.threatMed {
+  color: $warn;
+  border-color: rgba(240, 192, 64, 0.3);
+  background: rgba(240, 192, 64, 0.06);
+}
+
+.threatLow {
+  color: $accent;
+  border-color: rgba(0, 229, 160, 0.3);
+  background: rgba(0, 229, 160, 0.06);
+}
+
+.storageList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin-top: $space-1;
+}
+
+.storageItem {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  display: flex;
+  gap: $space-2;
+
+  &::before {
+    content: '—';
+    color: $text-muted;
+    flex-shrink: 0;
+    font-family: $font-mono;
+  }
+}
+
+// ── Inline code ───────────────────────────────────────────────────────────────
+
+.code {
+  font-family: $font-mono;
+  font-size: 0.9em;
+  color: $accent;
+  background: $accent-dim;
+  padding: 1px 5px;
+  border-radius: $radius-sm;
+  white-space: nowrap;
+}
+
+// ── Summary table ─────────────────────────────────────────────────────────────
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $text-sm;
+
+  th {
+    background: $bg-elevated;
+    padding: $space-2 $space-4;
+    text-align: left;
+    font-family: $font-mono;
+    font-size: 11px;
+    color: $text-muted;
+    letter-spacing: $letter-wider;
+    border-bottom: 1px solid $border-subtle;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: $space-2 $space-4;
+    color: $text-secondary;
+    border-bottom: 1px solid $border-subtle;
+    vertical-align: top;
+
+    &:first-child {
+      font-family: $font-mono;
+      color: $accent;
+      white-space: nowrap;
+    }
+  }
+
+  tr:last-child td { border-bottom: none; }
+}
+
+// ── Security pitfalls ─────────────────────────────────────────────────────────
+
+.pitfallList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.pitfall {
+  background: rgba(255, 123, 114, 0.05);
+  border: 1px solid rgba(255, 123, 114, 0.2);
+  border-left: 3px solid #ff7b72;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+}
+
+.pitfallTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: #ff7b72;
+  margin-bottom: $space-1;
+}
+
+.pitfallDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.pitfallFix {
+  font-size: $text-sm;
+  color: $accent;
+  margin-top: $space-1;
+  font-family: $font-mono;
+}
