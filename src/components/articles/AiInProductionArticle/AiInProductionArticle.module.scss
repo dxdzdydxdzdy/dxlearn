@@ -1,0 +1,510 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $text-primary;
+  font-family: $font-mono;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  &::before { content: '§'; color: $accent; font-size: $text-base; }
+}
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+  em     { color: $info; font-style: normal; }
+  code {
+    font-family: $font-mono;
+    font-size: 0.9em;
+    color: $accent;
+    background: $accent-dim;
+    padding: 1px 5px;
+    border-radius: $radius-sm;
+  }
+}
+
+// ── Pillars grid ──────────────────────────────────────────────────────────────
+
+.pillarsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-2;
+
+  @include mobile { grid-template-columns: repeat(2, 1fr); }
+}
+
+.pillar {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  text-align: center;
+}
+
+.pillarIcon {
+  font-size: 1.5rem;
+}
+
+.pillarName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.pillarDesc {
+  font-size: 11px;
+  color: $text-muted;
+  line-height: $line-normal;
+}
+
+// ── Latency metrics ───────────────────────────────────────────────────────────
+
+.latencyMetrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.latencyCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.latencyName {
+  font-family: $font-mono;
+  font-size: $text-base;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.latencyFull {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.latencyDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.latencyTarget {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $accent;
+  border-top: 1px solid $border-subtle;
+  padding-top: $space-2;
+  margin-top: $space-1;
+}
+
+// ── Code block ────────────────────────────────────────────────────────────────
+
+.codeBlock {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+
+  code {
+    display: block;
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: $text-secondary;
+    line-height: $line-loose;
+    white-space: pre;
+    padding: $space-4 $space-5;
+    overflow-x: auto;
+  }
+}
+
+.codeBlockHeader {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  padding: $space-2 $space-5;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-elevated;
+  letter-spacing: $letter-wider;
+}
+
+// ── Info card ─────────────────────────────────────────────────────────────────
+
+.infoCard {
+  background: $info-dim;
+  border: 1px solid rgba(77, 184, 255, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.infoLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $info;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.infoText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Cache types ───────────────────────────────────────────────────────────────
+
+.cacheTypes {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.cacheCard {
+  padding: $space-4 $space-5;
+  border-bottom: 1px solid $border-subtle;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+
+  &:last-child { border-bottom: none; }
+}
+
+.cacheNum {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  color: $accent;
+  letter-spacing: $letter-wider;
+}
+
+.cacheName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.cacheDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.cacheCode {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-3 $space-4;
+  white-space: pre;
+  overflow-x: auto;
+  line-height: $line-loose;
+}
+
+// ── Router diagram ────────────────────────────────────────────────────────────
+
+.routerDiagram {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-5;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.routerInput {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  min-width: 180px;
+}
+
+.routerInputLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.routerInputExamples {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.routerExample {
+  font-size: 11px;
+  color: $text-secondary;
+  font-style: italic;
+}
+
+.routerArrow {
+  font-family: $font-mono;
+  font-size: $text-lg;
+  color: $text-muted;
+}
+
+.routerBox {
+  background: $bg-elevated;
+  border: 2px solid rgba(0, 229, 160, 0.4);
+  border-radius: $radius-md;
+  padding: $space-3 $space-5;
+  text-align: center;
+}
+
+.routerBoxLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $accent;
+}
+
+.routerBoxDesc {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.routerTargets {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.routerTarget {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  min-width: 140px;
+}
+
+.routerTargetName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.routerTargetModel {
+  font-size: 11px;
+  color: $text-secondary;
+}
+
+.routerTargetCost {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.routerTargetPct {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+}
+
+// ── Callout ───────────────────────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  strong { color: $text-primary; }
+}
+
+// ── Eval pyramid ──────────────────────────────────────────────────────────────
+
+.evalPyramid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.evalLevel {
+  padding: $space-4 $space-5;
+  border-bottom: 1px solid $border-subtle;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  transition: background $t-normal;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.evalLevelName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.evalLevelDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.evalLevelCost {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+// ── Obs tools ─────────────────────────────────────────────────────────────────
+
+.obsTools {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.obsToolCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.obsToolName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $accent;
+}
+
+.obsToolDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.obsToolFeature {
+  font-size: 11px;
+  color: $text-muted;
+  border-top: 1px solid $border-subtle;
+  padding-top: $space-2;
+  margin-top: $space-1;
+  font-style: italic;
+}
+
+// ── Error table ───────────────────────────────────────────────────────────────
+
+.errorTable {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.errorHead {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr;
+  padding: $space-2 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.errorHCell {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.errorRow {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  align-items: flex-start;
+  gap: $space-2;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.errorCode {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: #ff5f6a;
+}
+
+.errorCell {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}

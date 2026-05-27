@@ -1,0 +1,571 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+// ── Layout ────────────────────────────────────────────────────────────────────
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $text-primary;
+  font-family: $font-mono;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  &::before { content: '§'; color: $accent; font-size: $text-base; }
+}
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+  em     { color: $info; font-style: normal; }
+  code {
+    font-family: $font-mono;
+    font-size: 0.9em;
+    color: $accent;
+    background: $accent-dim;
+    padding: 1px 5px;
+    border-radius: $radius-sm;
+  }
+}
+
+// ── Code block ────────────────────────────────────────────────────────────────
+
+.codeBlock {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+  overflow-x: auto;
+
+  code {
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: $text-secondary;
+    line-height: $line-loose;
+    white-space: pre;
+  }
+}
+
+// ── Callout / Info / Warning ──────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+.infoCard {
+  background: $info-dim;
+  border: 1px solid rgba(77, 184, 255, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.infoLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $info;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.infoText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  code {
+    font-family: $font-mono;
+    font-size: 0.9em;
+    color: $info;
+    background: rgba(77, 184, 255, 0.1);
+    padding: 1px 5px;
+    border-radius: $radius-sm;
+  }
+}
+
+.warningCard {
+  background: rgba(255, 95, 106, 0.06);
+  border: 1px solid rgba(255, 95, 106, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.warningLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: #ff5f6a;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.warningText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Two cols ──────────────────────────────────────────────────────────────────
+
+.twoCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.colCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.colTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-base;
+  color: $text-muted;
+}
+
+// ── Two-phase pipeline diagram ────────────────────────────────────────────────
+
+.phases {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.phaseBlock {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.phaseHeader {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.phaseIcon {
+  font-size: $text-base;
+}
+
+.phaseName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.phaseSub {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  margin-left: auto;
+}
+
+.phaseSteps {
+  display: flex;
+  flex-direction: column;
+  padding: $space-2 0;
+}
+
+.phaseStep {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+  padding: $space-2 $space-4;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: calc(#{$space-4} + 10px);
+    top: 28px;
+    bottom: -4px;
+    width: 1px;
+    background: $border-subtle;
+  }
+
+  &:last-child::before { display: none; }
+}
+
+.phaseStepDot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.phaseStepBody {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: $space-2;
+}
+
+.phaseStepName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.phaseStepDesc {
+  font-size: 12px;
+  color: $text-muted;
+  line-height: $line-normal;
+}
+
+// ── Chunking strategies grid ──────────────────────────────────────────────────
+
+.chunkGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-2;
+
+  @include mobile  { grid-template-columns: 1fr 1fr; }
+  @include tablet  { grid-template-columns: 1fr 1fr; }
+}
+
+.chunkCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.chunkCardHead {
+  padding: $space-3;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.chunkCardName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.chunkCardSize {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  margin-top: 2px;
+}
+
+.chunkCardBody {
+  padding: $space-3;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.chunkCardPro {
+  font-size: 11px;
+  color: $accent;
+  line-height: $line-normal;
+}
+
+.chunkCardCon {
+  font-size: 11px;
+  color: #ff9070;
+  line-height: $line-normal;
+}
+
+// ── Embedding models table ────────────────────────────────────────────────────
+
+.modelTable {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.modelTableHead {
+  display: grid;
+  grid-template-columns: 1fr 80px 80px 90px 80px;
+  padding: $space-2 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+
+  @include mobile { grid-template-columns: 1fr 60px 60px; }
+}
+
+.modelTableHCell {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+
+  &:nth-child(n+4) {
+    @include mobile { display: none; }
+  }
+}
+
+.modelRow {
+  display: grid;
+  grid-template-columns: 1fr 80px 80px 90px 80px;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  align-items: center;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  @include mobile { grid-template-columns: 1fr 60px 60px; }
+}
+
+.modelName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.modelCell {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+
+  &:nth-child(n+4) {
+    @include mobile { display: none; }
+  }
+}
+
+.modelBadge {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: $radius-sm;
+  border: 1px solid;
+}
+
+// ── Reranking: two-stage diagram ──────────────────────────────────────────────
+
+.stagesDiagram {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+
+  @include mobile { flex-direction: column; }
+}
+
+.stageBlock {
+  flex: 1;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  border-right: 1px solid $border-subtle;
+
+  &:last-child { border-right: none; }
+
+  @include mobile {
+    border-right: none;
+    border-bottom: 1px solid $border-subtle;
+    &:last-child { border-bottom: none; }
+  }
+}
+
+.stageArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 $space-2;
+  color: $text-muted;
+  font-size: $text-lg;
+  flex-shrink: 0;
+
+  @include mobile { padding: $space-2 0; transform: rotate(90deg); }
+}
+
+.stageNum {
+  font-family: $font-mono;
+  font-size: $text-base;
+  font-weight: 700;
+}
+
+.stageName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.stageModel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.stageIO {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.stagePros {
+  font-size: 11px;
+  color: $accent;
+}
+
+.stageCons {
+  font-size: 11px;
+  color: #ff9070;
+}
+
+// ── RAGAS metrics grid ────────────────────────────────────────────────────────
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.metricCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.metricName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.metricFormula {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $accent;
+  background: $accent-dim;
+  padding: $space-2 $space-3;
+  border-radius: $radius-sm;
+  line-height: $line-normal;
+}
+
+.metricDesc {
+  font-size: $text-sm;
+  color: $text-muted;
+  line-height: $line-normal;
+}
+
+// ── Problems list ─────────────────────────────────────────────────────────────
+
+.problemsList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.problem {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: $space-3;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  transition: background $t-normal;
+
+  &:hover { background: $bg-surface; }
+}
+
+.problemNum {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: #ff5f6a;
+  margin-top: 2px;
+}
+
+.problemBody {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.problemTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.problemSymptom {
+  font-size: $text-sm;
+  color: #ff5f6a;
+  line-height: $line-normal;
+}
+
+.problemFix {
+  font-size: $text-sm;
+  color: $accent;
+  line-height: $line-normal;
+}

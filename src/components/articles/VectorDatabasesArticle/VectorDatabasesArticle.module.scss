@@ -1,0 +1,334 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+// ── Layout ────────────────────────────────────────────────────────────────────
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $text-primary;
+  font-family: $font-mono;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  &::before { content: '§'; color: $accent; font-size: $text-base; }
+}
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+  em     { color: $info; font-style: normal; }
+  code {
+    font-family: $font-mono;
+    font-size: 0.9em;
+    color: $accent;
+    background: $accent-dim;
+    padding: 1px 5px;
+    border-radius: $radius-sm;
+  }
+}
+
+// ── Code block ────────────────────────────────────────────────────────────────
+
+.codeBlock {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+  overflow-x: auto;
+
+  code {
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: $text-secondary;
+    line-height: $line-loose;
+    white-space: pre;
+  }
+}
+
+// ── Callout / Info / Warning ──────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+.infoCard {
+  background: $info-dim;
+  border: 1px solid rgba(77, 184, 255, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.infoLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $info;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.infoText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  code {
+    font-family: $font-mono;
+    font-size: 0.9em;
+    color: $info;
+    background: rgba(77, 184, 255, 0.1);
+    padding: 1px 5px;
+    border-radius: $radius-sm;
+  }
+}
+
+.warningCard {
+  background: rgba(255, 95, 106, 0.06);
+  border: 1px solid rgba(255, 95, 106, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.warningLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: #ff5f6a;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.warningText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Two cols ──────────────────────────────────────────────────────────────────
+
+.twoCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.colCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.colTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-base;
+  color: $text-muted;
+}
+
+// ── Big comparison table ──────────────────────────────────────────────────────
+
+.compareTable {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.compareTableHead {
+  display: grid;
+  grid-template-columns: 140px 1fr 80px 80px 90px 80px;
+  padding: $space-2 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+  min-width: 600px;
+}
+
+.compareTableHCell {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.compareRow {
+  display: grid;
+  grid-template-columns: 140px 1fr 80px 80px 90px 80px;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  align-items: center;
+  min-width: 600px;
+  transition: background $t-normal;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.dbName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.dbTagline {
+  font-size: $text-sm;
+  color: $text-muted;
+  line-height: $line-normal;
+}
+
+.dbCell {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.dbBadge {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: $radius-sm;
+  border: 1px solid;
+  display: inline-block;
+}
+
+// ── HNSW params grid ──────────────────────────────────────────────────────────
+
+.paramGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.paramCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.paramName {
+  font-family: $font-mono;
+  font-size: $text-base;
+  font-weight: 700;
+}
+
+.paramDefault {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.paramEffect {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.paramTrade {
+  font-size: 11px;
+  color: $text-muted;
+  border-top: 1px solid $border-subtle;
+  padding-top: $space-2;
+  margin-top: $space-1;
+}
+
+// ── Decision matrix ───────────────────────────────────────────────────────────
+
+.whenGrid {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.whenRow {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: $space-3;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  align-items: center;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.whenCondition {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.whenChoice {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.whenDb {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  padding: 2px $space-3;
+  border-radius: $radius-sm;
+  border: 1px solid;
+}
+
+.whenReason {
+  font-size: $text-sm;
+  color: $text-muted;
+}

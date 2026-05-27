@@ -32,6 +32,16 @@ import { RedisArticle } from '@/components/articles/RedisArticle/RedisArticle';
 import { MlHowItWorksArticle } from '@/components/articles/MlHowItWorksArticle/MlHowItWorksArticle';
 import { LlmArchitectureArticle } from '@/components/articles/LlmArchitectureArticle/LlmArchitectureArticle';
 import { EmbeddingsArticle } from '@/components/articles/EmbeddingsArticle/EmbeddingsArticle';
+import { AiApiArticle } from '@/components/articles/AiApiArticle/AiApiArticle';
+import { PromptEngineeringArticle } from '@/components/articles/PromptEngineeringArticle/PromptEngineeringArticle';
+import { RagArchitectureArticle } from '@/components/articles/RagArchitectureArticle/RagArchitectureArticle';
+import { VectorDatabasesArticle } from '@/components/articles/VectorDatabasesArticle/VectorDatabasesArticle';
+import { AiAgentsArticle } from '@/components/articles/AiAgentsArticle/AiAgentsArticle';
+import { AiFrameworksArticle } from '@/components/articles/AiFrameworksArticle/AiFrameworksArticle';
+import { FineTuningArticle } from '@/components/articles/FineTuningArticle/FineTuningArticle';
+import { MlTrainingLoopArticle } from '@/components/articles/MlTrainingLoopArticle/MlTrainingLoopArticle';
+import { AiInProductionArticle } from '@/components/articles/AiInProductionArticle/AiInProductionArticle';
+import { AiSafetyArticle } from '@/components/articles/AiSafetyArticle/AiSafetyArticle';
 import { PlaceholderArticle } from '@/components/articles/PlaceholderArticle/PlaceholderArticle';
 import s from './page.module.scss';
 
@@ -91,6 +101,16 @@ export default async function ArticlePage({ params }: Props) {
     if (cSlug === 'ml-ai' && aSlug === 'ml-how-it-works') return <MlHowItWorksArticle />;
     if (cSlug === 'ml-ai' && aSlug === 'llm-architecture') return <LlmArchitectureArticle />;
     if (cSlug === 'ml-ai' && aSlug === 'embeddings') return <EmbeddingsArticle />;
+    if (cSlug === 'ml-ai' && aSlug === 'ai-api-integration') return <AiApiArticle />;
+    if (cSlug === 'ml-ai' && aSlug === 'prompt-engineering') return <PromptEngineeringArticle />;
+    if (cSlug === 'ml-ai' && aSlug === 'rag-architecture') return <RagArchitectureArticle />;
+    if (cSlug === 'ml-ai' && aSlug === 'vector-databases') return <VectorDatabasesArticle />;
+    if (cSlug === 'ml-ai' && aSlug === 'ai-agents') return <AiAgentsArticle />;
+    if (cSlug === 'ml-ai' && aSlug === 'ai-frameworks') return <AiFrameworksArticle />;
+    if (cSlug === 'ml-ai' && aSlug === 'fine-tuning') return <FineTuningArticle />;
+    if (cSlug === 'ml-ai' && aSlug === 'ml-training-loop') return <MlTrainingLoopArticle />;
+    if (cSlug === 'ml-ai' && aSlug === 'ai-in-production') return <AiInProductionArticle />;
+    if (cSlug === 'ml-ai' && aSlug === 'ai-safety') return <AiSafetyArticle />;
     return <PlaceholderArticle title={article!.title} />;
   }
 

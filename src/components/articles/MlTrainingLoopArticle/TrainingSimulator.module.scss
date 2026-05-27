@@ -1,0 +1,258 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.widget {
+  background: $bg-surface;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+// ── Header ────────────────────────────────────────────────────────────────────
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: $space-3;
+  padding: $space-3 $space-5;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.title {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.subtitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+// ── Body ──────────────────────────────────────────────────────────────────────
+
+.body {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+// ── Left ──────────────────────────────────────────────────────────────────────
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  padding: $space-4;
+  border-right: 1px solid $border-subtle;
+  background: $bg-base;
+
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.blockLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+// ── Scenario list ─────────────────────────────────────────────────────────────
+
+.scenarioList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.scenarioBtn {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3;
+  cursor: pointer;
+  text-align: left;
+  transition: all $t-normal;
+
+  &:hover:not(:disabled) { background: $bg-surface; }
+  &:disabled { opacity: 0.5; cursor: default; }
+}
+
+.scenarioBtnOn {
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+.scenarioName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-muted;
+}
+
+// ── Legend ────────────────────────────────────────────────────────────────────
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.legendLine {
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+}
+
+// ── Stats ─────────────────────────────────────────────────────────────────────
+
+.statsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.statRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.statValue {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+// ── Actions ───────────────────────────────────────────────────────────────────
+
+.actions {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.runBtn {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $bg-base;
+  background: $accent;
+  border: none;
+  border-radius: $radius-md;
+  padding: $space-2 $space-4;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity $t-normal;
+
+  &:hover:not(:disabled) { opacity: 0.88; }
+  &:disabled { opacity: 0.45; cursor: default; }
+}
+
+.resetBtn {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-2 $space-4;
+  cursor: pointer;
+  width: 100%;
+  transition: border-color $t-normal;
+
+  &:hover { border-color: $border-default; }
+}
+
+// ── Right ─────────────────────────────────────────────────────────────────────
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  padding: $space-4 $space-5;
+}
+
+.chartWrap {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chartSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.chartEmpty {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  text-align: center;
+  padding: $space-8;
+}
+
+// ── Diagnosis ─────────────────────────────────────────────────────────────────
+
+.diagnosis {
+  border: 1px solid;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.diagnosisLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: $letter-wider;
+}
+
+.diagnosisText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.diagnosisFix {
+  font-size: $text-sm;
+  color: $accent;
+  line-height: $line-normal;
+
+  strong { color: $text-primary; font-weight: 600; }
+}

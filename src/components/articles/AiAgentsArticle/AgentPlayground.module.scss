@@ -1,0 +1,318 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.playground {
+  background: $bg-surface;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+// ── Header ────────────────────────────────────────────────────────────────────
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: $space-3;
+  padding: $space-3 $space-5;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.title {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.subtitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+// ── Body ──────────────────────────────────────────────────────────────────────
+
+.body {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 460px;
+
+  @include mobile  { grid-template-columns: 1fr; }
+  @include tablet  { grid-template-columns: 240px 1fr; }
+}
+
+// ── Left panel ────────────────────────────────────────────────────────────────
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  padding: $space-4;
+  border-right: 1px solid $border-subtle;
+  background: $bg-base;
+
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.leftBlock {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.blockLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+// ── Query buttons ─────────────────────────────────────────────────────────────
+
+.queryList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.queryBtn {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  transition: border-color $t-normal, background $t-normal;
+
+  &:hover { border-color: $border-default; }
+  &:disabled { cursor: default; opacity: 0.6; }
+}
+
+.queryBtnOn {
+  border-color: rgba(0, 229, 160, 0.4) !important;
+  background: rgba(0, 229, 160, 0.06) !important;
+}
+
+.queryText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.queryMeta {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+}
+
+// ── Tools list ────────────────────────────────────────────────────────────────
+
+.toolList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.toolItem {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-2;
+  padding: $space-2 $space-3;
+  border-radius: $radius-sm;
+  border: 1px solid transparent;
+  transition: all $t-normal;
+}
+
+.toolItemUsed {
+  border-color: rgba(77, 184, 255, 0.3);
+  background: rgba(77, 184, 255, 0.06);
+}
+
+.toolIcon {
+  font-size: $text-base;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+.toolName {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  color: $text-secondary;
+}
+
+.toolDesc {
+  font-size: 11px;
+  color: $text-muted;
+}
+
+// ── Actions ───────────────────────────────────────────────────────────────────
+
+.actions {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.runBtn {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $bg-base;
+  background: $accent;
+  border: none;
+  border-radius: $radius-md;
+  padding: $space-2 $space-4;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity $t-normal;
+
+  &:hover { opacity: 0.88; }
+  &:disabled { opacity: 0.45; cursor: default; }
+}
+
+.resetBtn {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-2 $space-4;
+  cursor: pointer;
+  width: 100%;
+  transition: border-color $t-normal;
+
+  &:hover { border-color: $border-default; }
+}
+
+// ── Right: ReAct trace ────────────────────────────────────────────────────────
+
+.right {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.traceHeader {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.traceLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.traceDot {
+  font-size: 10px;
+  color: $accent;
+  animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+.trace {
+  flex: 1;
+  overflow-y: auto;
+  padding: $space-3;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  max-height: 420px;
+}
+
+.traceEmpty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  line-height: $line-loose;
+  padding: $space-8;
+}
+
+// ── Step blocks ───────────────────────────────────────────────────────────────
+
+.step {
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  animation: stepIn 0.25s ease forwards;
+}
+
+@keyframes stepIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.stepLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.stepTool {
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.stepContent {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+.stepCode {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-secondary;
+  margin: 0;
+  white-space: pre-wrap;
+  line-height: $line-loose;
+}
+
+// ── Thinking dots ─────────────────────────────────────────────────────────────
+
+.thinking {
+  display: flex;
+  gap: $space-1;
+  padding: $space-3 $space-4;
+}
+
+.thinkDot {
+  font-size: 10px;
+  color: $accent;
+  animation: thinkPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes thinkPulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}

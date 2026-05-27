@@ -1,0 +1,260 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.widget {
+  background: $bg-surface;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+// ── Header ────────────────────────────────────────────────────────────────────
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: $space-3;
+  padding: $space-3 $space-5;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.title {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.subtitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+// ── Body ──────────────────────────────────────────────────────────────────────
+
+.body {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 480px;
+
+  @include mobile  { grid-template-columns: 1fr; }
+  @include tablet  { grid-template-columns: 220px 1fr; }
+}
+
+// ── Left panel ────────────────────────────────────────────────────────────────
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+  padding: $space-4;
+  border-right: 1px solid $border-subtle;
+  background: $bg-base;
+
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.selectorBlock {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.selectorLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+// ── Task list ─────────────────────────────────────────────────────────────────
+
+.taskList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.taskBtn {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  gap: $space-3;
+  align-items: flex-start;
+  transition: border-color $t-normal, background $t-normal;
+
+  &:hover { border-color: $border-default; }
+}
+
+.taskBtnOn {
+  border-color: rgba(0, 229, 160, 0.4) !important;
+  background: rgba(0, 229, 160, 0.06) !important;
+}
+
+.taskIcon {
+  font-size: $text-base;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+.taskName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-secondary;
+}
+
+.taskDesc {
+  font-size: 11px;
+  color: $text-muted;
+  margin-top: 2px;
+}
+
+// ── Approach list ─────────────────────────────────────────────────────────────
+
+.approachList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.approachBtn {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  transition: border-color $t-normal, background $t-normal;
+
+  &:hover { background: $bg-surface; }
+}
+
+.approachBtnOn {
+  background: rgba(255,255,255,0.03) !important;
+}
+
+.approachTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.approachName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-muted;
+}
+
+.approachVerdict {
+  font-size: 11px;
+  color: $text-muted;
+}
+
+// ── Score dots ────────────────────────────────────────────────────────────────
+
+.scoreDots {
+  display: flex;
+  gap: 3px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: $border-subtle;
+  transition: background $t-normal;
+}
+
+.dotFilled {
+  background: $accent;
+}
+
+// ── Right panel ───────────────────────────────────────────────────────────────
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: hidden;
+}
+
+.whyCard {
+  display: flex;
+  gap: $space-3;
+  align-items: flex-start;
+  padding: $space-4 $space-5;
+  background: rgba(0, 229, 160, 0.04);
+  border-bottom: 1px solid $border-subtle;
+}
+
+.whyIcon {
+  font-size: $text-base;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+.whyText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Code pane ─────────────────────────────────────────────────────────────────
+
+.codePane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.codePaneHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-2 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.codeLang {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.codeLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: $letter-wider;
+}
+
+.code {
+  flex: 1;
+  overflow: auto;
+  padding: $space-4 $space-5;
+  font-family: $font-mono;
+  font-size: 12px;
+  color: $text-secondary;
+  line-height: $line-loose;
+  white-space: pre;
+  margin: 0;
+  background: $bg-base;
+  max-height: 380px;
+}

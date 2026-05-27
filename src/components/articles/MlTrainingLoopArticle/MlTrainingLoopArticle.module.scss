@@ -1,0 +1,336 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $text-primary;
+  font-family: $font-mono;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  &::before { content: '§'; color: $accent; font-size: $text-base; }
+}
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+  em     { color: $info; font-style: normal; }
+  code {
+    font-family: $font-mono;
+    font-size: 0.9em;
+    color: $accent;
+    background: $accent-dim;
+    padding: 1px 5px;
+    border-radius: $radius-sm;
+  }
+}
+
+// ── Info card ─────────────────────────────────────────────────────────────────
+
+.infoCard {
+  background: $info-dim;
+  border: 1px solid rgba(77, 184, 255, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.infoLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $info;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.infoText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  em { color: $info; font-style: normal; }
+}
+
+// ── Dataset splits ────────────────────────────────────────────────────────────
+
+.splitsBlock {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.splitCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.splitNum {
+  font-family: $font-mono;
+  font-size: $text-xl;
+  font-weight: 700;
+}
+
+.splitName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.splitDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+
+  strong { color: $text-primary; }
+}
+
+// ── Code block ────────────────────────────────────────────────────────────────
+
+.codeBlock {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+
+  code {
+    display: block;
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: $text-secondary;
+    line-height: $line-loose;
+    white-space: pre;
+    padding: $space-4 $space-5;
+    overflow-x: auto;
+  }
+}
+
+.codeBlockHeader {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  padding: $space-2 $space-5;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-elevated;
+  letter-spacing: $letter-wider;
+}
+
+// ── Forward diagram ───────────────────────────────────────────────────────────
+
+.forwardDiagram {
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+  flex-wrap: wrap;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.forwardStep {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 100px;
+}
+
+.forwardStepLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.forwardStepValue {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-primary;
+}
+
+.forwardArrow {
+  font-family: $font-mono;
+  font-size: $text-lg;
+  color: $text-muted;
+}
+
+// ── Loss types ────────────────────────────────────────────────────────────────
+
+.lossTypes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.lossCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.lossName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $accent;
+}
+
+.lossUse {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.lossDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+// ── Hyperparams list ──────────────────────────────────────────────────────────
+
+.hparamsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.hparam {
+  padding: $space-4 $space-5;
+  border-bottom: 1px solid $border-subtle;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  transition: background $t-normal;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.hparamName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $accent;
+}
+
+.hparamTypical {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.hparamDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+
+  code {
+    font-family: $font-mono;
+    font-size: 0.9em;
+    color: $accent;
+    background: $accent-dim;
+    padding: 1px 4px;
+    border-radius: $radius-sm;
+  }
+}
+
+// ── GPU tricks ────────────────────────────────────────────────────────────────
+
+.gpuTricks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+  @include tablet { grid-template-columns: 1fr; }
+}
+
+.gpuTrick {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.gpuTrickName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-base;
+}
+
+.gpuTrickSaving {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $accent;
+  padding: $space-2 $space-4;
+}
+
+.gpuTrickDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  padding: 0 $space-4 $space-3;
+}
+
+.gpuTrickCode {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  background: $bg-base;
+  border-top: 1px solid $border-subtle;
+  padding: $space-3 $space-4;
+  white-space: pre;
+  overflow-x: auto;
+  line-height: $line-loose;
+  flex: 1;
+}

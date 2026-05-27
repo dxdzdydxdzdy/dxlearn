@@ -1,0 +1,448 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+// ── Layout ────────────────────────────────────────────────────────────────────
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $text-primary;
+  font-family: $font-mono;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  &::before { content: '§'; color: $accent; font-size: $text-base; }
+}
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+  em     { color: $info; font-style: normal; }
+  code {
+    font-family: $font-mono;
+    font-size: 0.9em;
+    color: $accent;
+    background: $accent-dim;
+    padding: 1px 5px;
+    border-radius: $radius-sm;
+  }
+}
+
+// ── Code blocks ───────────────────────────────────────────────────────────────
+
+.codeBlock {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+  overflow-x: auto;
+
+  code {
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: $text-secondary;
+    line-height: $line-loose;
+    white-space: pre;
+  }
+}
+
+.codeBlockSm {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: 0 0 $radius-md $radius-md;
+  padding: $space-3 $space-4;
+  overflow-x: auto;
+
+  code {
+    font-family: $font-mono;
+    font-size: 12px;
+    color: $text-secondary;
+    line-height: $line-loose;
+    white-space: pre;
+  }
+}
+
+// ── Callout / Info ────────────────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+.infoCard {
+  background: $info-dim;
+  border: 1px solid rgba(77, 184, 255, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.infoLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $info;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.infoText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Compare block ─────────────────────────────────────────────────────────────
+
+.compareBlock {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.compareRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.compareBad {
+  padding: $space-4 $space-5;
+  border-right: 1px solid $border-subtle;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+
+  @include mobile {
+    border-right: none;
+    border-bottom: 1px solid $border-subtle;
+  }
+}
+
+.compareGood {
+  padding: $space-4 $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.compareLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: $letter-wider;
+}
+
+.comparePrompt {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-primary;
+  line-height: $line-normal;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-3;
+}
+
+.compareResult {
+  font-size: $text-sm;
+  color: $text-muted;
+  font-style: italic;
+}
+
+// ── 5 Building blocks ─────────────────────────────────────────────────────────
+
+.blocksGrid {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.block {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: $space-3;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  align-items: start;
+  transition: background $t-normal;
+
+  &:hover { background: $bg-surface; }
+}
+
+.blockNum {
+  font-family: $font-mono;
+  font-size: $text-md;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.blockBody {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.blockName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.blockQ {
+  color: $text-muted;
+  font-weight: 400;
+}
+
+.blockEx {
+  font-family: $font-mono;
+  font-size: 12px;
+  color: $text-secondary;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-3;
+  margin-top: $space-1;
+}
+
+.blockWhy {
+  font-size: 12px;
+  color: $text-muted;
+  line-height: $line-normal;
+}
+
+// ── Two cols ──────────────────────────────────────────────────────────────────
+
+.twoCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.colCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.colTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-base;
+  color: $text-muted;
+}
+
+// ── JSON ladder ───────────────────────────────────────────────────────────────
+
+.jsonLadder {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.ladderItem {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: $space-4;
+  align-items: start;
+
+  @include mobile { grid-template-columns: 48px 1fr; }
+}
+
+.ladderLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-1;
+  padding-top: 4px;
+}
+
+.ladderNum {
+  font-family: $font-mono;
+  font-size: $text-md;
+  font-weight: 700;
+}
+
+.ladderBar {
+  width: 8px;
+  height: 60px;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.ladderBarFill {
+  width: 100%;
+  border-radius: 4px;
+  transition: height 400ms ease;
+}
+
+.ladderPct {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.ladderRight {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.ladderLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+// ── Mistakes list ─────────────────────────────────────────────────────────────
+
+.mistakesList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-2;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.mistake {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: $space-3;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  align-items: start;
+  transition: background $t-normal;
+
+  &:hover { background: $bg-surface; }
+}
+
+.mistakeNum {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.mistakeBody {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.mistakeBad {
+  font-size: $text-sm;
+  color: #ff5f6a;
+  line-height: $line-normal;
+}
+
+.mistakeGood {
+  font-size: $text-sm;
+  color: $accent;
+  line-height: $line-normal;
+}
+
+// ── Advanced techniques grid ──────────────────────────────────────────────────
+
+.advGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+  @include tablet { grid-template-columns: repeat(2, 1fr); }
+}
+
+.advCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  transition: background $t-normal;
+
+  &:hover { background: $bg-surface; }
+}
+
+.advName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.advDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  flex: 1;
+}
+
+.advWhen {
+  font-size: 12px;
+  color: $text-muted;
+  line-height: $line-normal;
+  padding-top: $space-2;
+  border-top: 1px solid $border-subtle;
+}
+
+.advWhenLabel {
+  font-family: $font-mono;
+  font-weight: 700;
+  color: $text-muted;
+}

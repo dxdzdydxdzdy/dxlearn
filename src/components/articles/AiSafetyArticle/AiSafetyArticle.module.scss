@@ -1,0 +1,517 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $text-primary;
+  font-family: $font-mono;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  &::before { content: '§'; color: $accent; font-size: $text-base; }
+}
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+  em     { color: $info; font-style: normal; }
+  code {
+    font-family: $font-mono;
+    font-size: 0.9em;
+    color: $accent;
+    background: $accent-dim;
+    padding: 1px 5px;
+    border-radius: $radius-sm;
+  }
+}
+
+// ── Threat map ────────────────────────────────────────────────────────────────
+
+.threatMap {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.threatMapTitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-elevated;
+}
+
+.threatGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: $space-4;
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: repeat(2, 1fr); }
+}
+
+.threatCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  text-align: center;
+}
+
+.threatIcon { font-size: 1.5rem; }
+
+.threatName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.threatDesc {
+  font-size: 11px;
+  color: $text-muted;
+  line-height: $line-normal;
+}
+
+// ── Two cols ──────────────────────────────────────────────────────────────────
+
+.twoCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.colCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.colTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-base;
+  color: $text-muted;
+}
+
+.colContent {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding: $space-4;
+}
+
+.colCodeLine {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: $text-sm;
+  color: $text-secondary;
+
+  code {
+    font-family: $font-mono;
+    font-size: 0.9em;
+    color: $accent;
+    background: $accent-dim;
+    padding: 2px 6px;
+    border-radius: $radius-sm;
+    word-break: break-all;
+  }
+}
+
+.colLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+// ── Code block ────────────────────────────────────────────────────────────────
+
+.codeBlock {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+
+  code {
+    display: block;
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: $text-secondary;
+    line-height: $line-loose;
+    white-space: pre;
+    padding: $space-4 $space-5;
+    overflow-x: auto;
+  }
+}
+
+.codeBlockHeader {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  padding: $space-2 $space-5;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-elevated;
+  letter-spacing: $letter-wider;
+}
+
+// ── Hallucination types ───────────────────────────────────────────────────────
+
+.hallucinationTypes {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.hallType {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: $space-3;
+  padding: $space-4 $space-5;
+  border-bottom: 1px solid $border-subtle;
+  align-items: flex-start;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.hallTypeIcon { font-size: $text-base; line-height: 1.4; }
+
+.hallTypeBody {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.hallTypeName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.hallTypeDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.hallTypeFix {
+  font-size: $text-sm;
+  color: $accent;
+  line-height: $line-normal;
+}
+
+// ── Guardrails flow ───────────────────────────────────────────────────────────
+
+.guardrailsFlow {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.guardrailsTitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-elevated;
+}
+
+.guardrailsChain {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-2;
+  padding: $space-5;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.grStep {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.grStepNum {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: $letter-wider;
+}
+
+.grStepName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.grChecks {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.grCheck {
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.grArrow {
+  font-family: $font-mono;
+  font-size: $text-lg;
+  color: $text-muted;
+  margin-top: $space-6;
+}
+
+// ── Privacy risks ─────────────────────────────────────────────────────────────
+
+.privacyRisks {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.privacyRisk {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: $space-3;
+  padding: $space-4 $space-5;
+  border-bottom: 1px solid $border-subtle;
+  align-items: flex-start;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.privacyRiskIcon { font-size: $text-base; line-height: 1.4; }
+
+.privacyRiskBody {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.privacyRiskTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.privacyRiskDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+// ── Red team checklist ────────────────────────────────────────────────────────
+
+.redTeamChecklist {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.checklistTitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-elevated;
+}
+
+.checklistCategory {
+  border-bottom: 1px solid $border-subtle;
+
+  &:last-child { border-bottom: none; }
+}
+
+.checklistCategoryName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: #ff5f6a;
+  padding: $space-3 $space-4 $space-1;
+}
+
+.checklistItems {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  padding: $space-1 $space-4 $space-3;
+}
+
+.checklistItem {
+  display: flex;
+  gap: $space-3;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.checkBox {
+  font-family: $font-mono;
+  color: $text-muted;
+  flex-shrink: 0;
+}
+
+// ── Callout ───────────────────────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Compliance grid ───────────────────────────────────────────────────────────
+
+.complianceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.complianceCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.complianceName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $accent;
+}
+
+.complianceDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+// ── Security checklist ────────────────────────────────────────────────────────
+
+.securityChecklist {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.secCheckCategory {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.secCheckCategoryName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-base;
+}
+
+.secCheckItems {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+}
+
+.secCheckItem {
+  display: flex;
+  gap: $space-2;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.secCheckDot {
+  color: $accent;
+  font-size: 8px;
+  margin-top: 5px;
+  flex-shrink: 0;
+}

@@ -1,0 +1,259 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.lab {
+  background: $bg-surface;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.labHeader {
+  display: flex;
+  align-items: baseline;
+  gap: $space-3;
+  padding: $space-3 $space-5;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.labTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.labSub {
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+// ── Technique toggles ─────────────────────────────────────────────────────────
+
+.techniques {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-2;
+  padding: $space-4;
+  border-bottom: 1px solid $border-subtle;
+
+  @include mobile { grid-template-columns: repeat(2, 1fr); }
+}
+
+.techBtn {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  transition: border-color $t-normal, background $t-normal;
+
+  &:hover { border-color: $border-default; }
+}
+
+.techBtnOn {
+  // color/border set inline
+}
+
+.techTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.techBadge {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px $space-2;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  color: $text-muted;
+  background: transparent;
+}
+
+.techToggle {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px $space-2;
+  border-radius: $radius-sm;
+  background: $bg-elevated;
+  color: $text-muted;
+}
+
+.techLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-muted;
+}
+
+.techDesc {
+  font-size: 11px;
+  color: $text-muted;
+  line-height: $line-normal;
+}
+
+// ── Input row ─────────────────────────────────────────────────────────────────
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.inputLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  white-space: nowrap;
+  letter-spacing: $letter-wider;
+}
+
+.inputField {
+  flex: 1;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-2 $space-3;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-primary;
+
+  &:focus {
+    outline: none;
+    border-color: rgba(0, 229, 160, 0.4);
+  }
+}
+
+// ── Quality bar ───────────────────────────────────────────────────────────────
+
+.qualityWrap {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.qualityLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.qualityRow {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.qualityTrack {
+  flex: 1;
+  height: 6px;
+  background: $bg-base;
+  border-radius: 3px;
+  border: 1px solid $border-subtle;
+  overflow: hidden;
+}
+
+.qualityFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 300ms ease, background 300ms ease;
+}
+
+.qualityPct {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  width: 36px;
+  text-align: right;
+  transition: color 300ms;
+}
+
+.qualityTxt {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  width: 56px;
+  transition: color 300ms;
+}
+
+// ── Split view ────────────────────────────────────────────────────────────────
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.splitPane {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid $border-subtle;
+
+  &:last-child { border-right: none; }
+
+  @include mobile {
+    border-right: none;
+    border-bottom: 1px solid $border-subtle;
+  }
+}
+
+.splitHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-2 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.splitTitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.splitMeta {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.promptText {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  padding: $space-4;
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  min-height: 200px;
+}
+
+.responseText {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  padding: $space-4;
+  margin: 0;
+  white-space: pre-wrap;
+  min-height: 200px;
+}

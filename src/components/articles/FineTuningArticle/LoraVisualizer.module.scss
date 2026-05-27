@@ -1,0 +1,267 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.widget {
+  background: $bg-surface;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+// ── Header ────────────────────────────────────────────────────────────────────
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: $space-3;
+  padding: $space-3 $space-5;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.title {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.subtitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+// ── Body ──────────────────────────────────────────────────────────────────────
+
+.body {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+// ── Left ──────────────────────────────────────────────────────────────────────
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  padding: $space-4;
+  border-right: 1px solid $border-subtle;
+  background: $bg-base;
+
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.selectorLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.modeList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.modeBtn {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  cursor: pointer;
+  text-align: left;
+  transition: all $t-normal;
+
+  &:hover { background: $bg-surface; }
+}
+
+.modeBtnOn {
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+.modeName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-muted;
+}
+
+// ── Stats ─────────────────────────────────────────────────────────────────────
+
+.statsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.barRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.barLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+}
+
+.barTrack {
+  height: 6px;
+  background: $bg-surface;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.barValue {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  text-align: right;
+}
+
+// ── Right ─────────────────────────────────────────────────────────────────────
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  padding: $space-4 $space-5;
+}
+
+.desc {
+  border: 1px solid;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.descLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: $letter-wider;
+}
+
+.descText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+// ── Matrix visualizations ─────────────────────────────────────────────────────
+
+.matrixFull,
+.matrixLora {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  align-items: flex-start;
+}
+
+.matrixLora {
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $space-3;
+}
+
+.matrixBlock {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  align-items: center;
+}
+
+.matrixLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.matrixGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 12px);
+  gap: 2px;
+}
+
+.matrixThin {
+  display: grid;
+  grid-template-columns: repeat(3, 12px);
+  gap: 2px;
+}
+
+.matrixWide {
+  display: grid;
+  grid-template-columns: repeat(6, 12px);
+  grid-template-rows: repeat(3, 12px);
+  gap: 2px;
+}
+
+.matrixCell {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.matrixNote {
+  font-size: 11px;
+  color: $text-muted;
+  width: 100%;
+}
+
+.matrixPlus,
+.matrixTimes {
+  font-family: $font-mono;
+  font-size: $text-lg;
+  font-weight: 700;
+  color: $text-muted;
+  margin-top: $space-3;
+}
+
+// ── Pros/cons ─────────────────────────────────────────────────────────────────
+
+.proscons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.proconsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.proconsTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.proconsItem {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  padding-left: $space-3;
+  border-left: 2px solid $border-subtle;
+}

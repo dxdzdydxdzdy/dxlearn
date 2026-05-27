@@ -1,0 +1,475 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $text-primary;
+  font-family: $font-mono;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  &::before { content: '§'; color: $accent; font-size: $text-base; }
+}
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+  em     { color: $info; font-style: normal; }
+  code {
+    font-family: $font-mono;
+    font-size: 0.9em;
+    color: $accent;
+    background: $accent-dim;
+    padding: 1px 5px;
+    border-radius: $radius-sm;
+  }
+}
+
+.codeBlock {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+  overflow-x: auto;
+
+  code {
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: $text-secondary;
+    line-height: $line-loose;
+    white-space: pre;
+  }
+}
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+.infoCard {
+  background: $info-dim;
+  border: 1px solid rgba(77, 184, 255, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.infoLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $info;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.infoText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  code {
+    font-family: $font-mono;
+    font-size: 0.9em;
+    color: $info;
+    background: rgba(77, 184, 255, 0.1);
+    padding: 1px 5px;
+    border-radius: $radius-sm;
+  }
+}
+
+.warningCard {
+  background: rgba(255, 95, 106, 0.06);
+  border: 1px solid rgba(255, 95, 106, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.warningLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: #ff5f6a;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.warningText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Two cols ──────────────────────────────────────────────────────────────────
+
+.twoCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.colCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.colTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-base;
+  color: $text-muted;
+}
+
+// ── Agent anatomy diagram ─────────────────────────────────────────────────────
+
+.anatomyGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-2;
+
+  @include mobile { grid-template-columns: repeat(2, 1fr); }
+}
+
+.anatomyCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  text-align: center;
+}
+
+.anatomyIcon {
+  font-size: 1.5rem;
+}
+
+.anatomyName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.anatomyDesc {
+  font-size: 11px;
+  color: $text-muted;
+  line-height: $line-normal;
+}
+
+// ── Tool schema block ─────────────────────────────────────────────────────────
+
+.toolFlow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+
+  @include mobile { grid-template-columns: 1fr 1fr; }
+}
+
+.toolFlowStep {
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  border-right: 1px solid $border-subtle;
+  position: relative;
+
+  &:last-child { border-right: none; }
+
+  @include mobile {
+    border-right: none;
+    border-bottom: 1px solid $border-subtle;
+    &:nth-child(2n) { border-right: none; }
+  }
+}
+
+.toolFlowNum {
+  font-family: $font-mono;
+  font-size: $text-base;
+  font-weight: 700;
+}
+
+.toolFlowName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.toolFlowDesc {
+  font-size: 11px;
+  color: $text-muted;
+  line-height: $line-normal;
+}
+
+// ── Memory types ──────────────────────────────────────────────────────────────
+
+.memoryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.memoryCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.memoryName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.memoryHow {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.memoryLimit {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  border-top: 1px solid $border-subtle;
+  padding-top: $space-2;
+  margin-top: $space-1;
+}
+
+// ── Multi-agent ───────────────────────────────────────────────────────────────
+
+.multiAgentDiagram {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  align-items: center;
+}
+
+.orchestratorBox {
+  background: $bg-elevated;
+  border: 2px solid rgba(0, 229, 160, 0.4);
+  border-radius: $radius-md;
+  padding: $space-3 $space-6;
+  text-align: center;
+}
+
+.orchestratorLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $accent;
+}
+
+.orchestratorModel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.subagentRow {
+  display: flex;
+  gap: $space-3;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.subagentBox {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  text-align: center;
+  min-width: 110px;
+}
+
+.subagentIcon {
+  font-size: $text-lg;
+  display: block;
+  margin-bottom: $space-1;
+}
+
+.subagentName {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.subagentModel {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+}
+
+// ── Decision table ────────────────────────────────────────────────────────────
+
+.decisionTable {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.decisionHead {
+  display: grid;
+  grid-template-columns: 1fr 100px 100px 100px;
+  padding: $space-2 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+
+  @include mobile { grid-template-columns: 1fr 80px 80px; }
+}
+
+.decisionHCell {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+
+  &:last-child {
+    @include mobile { display: none; }
+  }
+}
+
+.decisionRow {
+  display: grid;
+  grid-template-columns: 1fr 100px 100px 100px;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  align-items: center;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  @include mobile { grid-template-columns: 1fr 80px 80px; }
+}
+
+.decisionScenario {
+  font-size: $text-sm;
+  color: $text-secondary;
+}
+
+.decisionCell {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  text-align: center;
+
+  &:last-child {
+    @include mobile { display: none; }
+  }
+}
+
+// ── Risks list ────────────────────────────────────────────────────────────────
+
+.risksList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.risk {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: $space-3;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  transition: background $t-normal;
+
+  &:hover { background: $bg-surface; }
+}
+
+.riskNum {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: #ff5f6a;
+  margin-top: 2px;
+}
+
+.riskBody {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.riskTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.riskDesc {
+  font-size: $text-sm;
+  color: #ff9070;
+  line-height: $line-normal;
+}
+
+.riskFix {
+  font-size: $text-sm;
+  color: $accent;
+  line-height: $line-normal;
+}

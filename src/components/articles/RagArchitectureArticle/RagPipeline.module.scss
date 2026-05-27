@@ -1,0 +1,495 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+// ── Outer shell ────────────────────────────────────────────────────────────────
+
+.pipeline {
+  background: $bg-surface;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+// ── Header ────────────────────────────────────────────────────────────────────
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  padding: $space-3 $space-5;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+  flex-wrap: wrap;
+
+  @include mobile { gap: $space-2; }
+}
+
+.title {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+  white-space: nowrap;
+}
+
+.stepBar {
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+  flex: 1;
+}
+
+.stepDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  transition: background $t-normal, border-color $t-normal;
+  flex-shrink: 0;
+}
+
+.stepDotActive {
+  background: $accent;
+  border-color: $accent;
+  box-shadow: 0 0 6px $accent-glow;
+}
+
+.stepDotDone {
+  background: rgba(0, 229, 160, 0.35);
+  border-color: rgba(0, 229, 160, 0.5);
+}
+
+.stepLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  white-space: nowrap;
+  min-width: 140px;
+  text-align: right;
+
+  @include mobile { min-width: unset; text-align: left; width: 100%; }
+}
+
+// ── Preset buttons ────────────────────────────────────────────────────────────
+
+.presets {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-5;
+  border-bottom: 1px solid $border-subtle;
+  flex-wrap: wrap;
+  background: $bg-base;
+}
+
+.presetsLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  white-space: nowrap;
+}
+
+.presetBtn {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-1 $space-3;
+  cursor: pointer;
+  transition: border-color $t-normal, color $t-normal, background $t-normal;
+
+  &:hover { border-color: $border-default; color: $text-secondary; }
+}
+
+.presetBtnOn {
+  border-color: rgba(0, 229, 160, 0.4) !important;
+  color: $accent !important;
+  background: $accent-dim !important;
+}
+
+// ── Body split ────────────────────────────────────────────────────────────────
+
+.body {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  flex: 1;
+
+  @include mobile  { grid-template-columns: 1fr; }
+  @include tablet  { grid-template-columns: 300px 1fr; }
+}
+
+// ── Left: chunk cards ─────────────────────────────────────────────────────────
+
+.chunks {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid $border-subtle;
+  overflow-y: auto;
+  max-height: 560px;
+
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; max-height: 320px; }
+}
+
+.chunksLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  padding: $space-2 $space-3;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.chunk {
+  padding: $space-3;
+  border-bottom: 1px solid $border-subtle;
+  border-left: 3px solid transparent;
+  transition: border-color $t-normal, background $t-normal;
+  position: relative;
+
+  &:last-child { border-bottom: none; }
+}
+
+.chunkTop {
+  border-left-color: $accent !important;
+}
+
+.chunkHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $space-1;
+}
+
+.chunkTitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  color: $text-secondary;
+}
+
+.chunkSource {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+}
+
+.chunkText {
+  font-size: 11px;
+  color: $text-muted;
+  line-height: $line-normal;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.simRow {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  margin-top: $space-2;
+}
+
+.simTrack {
+  flex: 1;
+  height: 4px;
+  background: $bg-base;
+  border-radius: 2px;
+  border: 1px solid $border-subtle;
+  overflow: hidden;
+}
+
+.simFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 40ms linear;
+}
+
+.simPct {
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 700;
+  width: 28px;
+  text-align: right;
+  transition: color $t-normal;
+}
+
+.topBadge {
+  position: absolute;
+  top: $space-2;
+  right: $space-2;
+  font-family: $font-mono;
+  font-size: 9px;
+  font-weight: 700;
+  color: $accent;
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.3);
+  border-radius: $radius-sm;
+  padding: 1px 4px;
+}
+
+// ── Right: step views ─────────────────────────────────────────────────────────
+
+.right {
+  display: flex;
+  flex-direction: column;
+  min-height: 360px;
+  padding: $space-4 $space-5;
+  gap: $space-4;
+
+  @include mobile { padding: $space-3; }
+}
+
+// ── Ready state ───────────────────────────────────────────────────────────────
+
+.readyState {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $space-3;
+  text-align: center;
+}
+
+.readyIcon {
+  font-size: 2rem;
+  opacity: 0.4;
+}
+
+.readyText {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.readySub {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  opacity: 0.6;
+}
+
+// ── Step views ────────────────────────────────────────────────────────────────
+
+.stepView {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.stepViewTitle {
+  font-family: $font-mono;
+  font-size: $text-base;
+  font-weight: 700;
+  color: $accent;
+}
+
+.stepDesc {
+  font-size: $text-sm;
+  color: $text-muted;
+  line-height: $line-normal;
+}
+
+// ── Query box ─────────────────────────────────────────────────────────────────
+
+.queryBox {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-primary;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+}
+
+.arrowDown {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  text-align: center;
+}
+
+// ── Vector box ────────────────────────────────────────────────────────────────
+
+.vectorBox {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  align-items: center;
+}
+
+.vectorNum {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $accent;
+  opacity: 0;
+  animation: fadeIn 0.2s ease forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.vectorEllipsis {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+// ── Formula ───────────────────────────────────────────────────────────────────
+
+.formulaBox {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-5;
+}
+
+.formulaText {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+}
+
+.formulaFrac {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.formulaTop {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $accent;
+  border-bottom: 1px solid $text-muted;
+  padding-bottom: 2px;
+  width: 100%;
+  text-align: center;
+}
+
+.formulaBot {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $info;
+  width: 100%;
+  text-align: center;
+}
+
+// ── Top items ─────────────────────────────────────────────────────────────────
+
+.topItem {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-2 $space-4;
+}
+
+.topRank {
+  font-family: $font-mono;
+  font-size: $text-base;
+  font-weight: 700;
+  width: 28px;
+}
+
+.topName {
+  flex: 1;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+}
+
+.topScore {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+// ── Prompt preview ────────────────────────────────────────────────────────────
+
+.promptPreview {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-secondary;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  white-space: pre-wrap;
+  line-height: $line-loose;
+  overflow-y: auto;
+  max-height: 240px;
+  flex: 1;
+}
+
+// ── Answer ────────────────────────────────────────────────────────────────────
+
+.answerBox {
+  font-size: $text-sm;
+  color: $text-primary;
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4;
+  line-height: $line-loose;
+  flex: 1;
+}
+
+.answerMeta {
+  display: flex;
+  gap: $space-4;
+  flex-wrap: wrap;
+}
+
+.answerMetaItem {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $accent;
+}
+
+// ── Action button ─────────────────────────────────────────────────────────────
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+}
+
+.runBtn {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $bg-base;
+  background: $accent;
+  border: none;
+  border-radius: $radius-md;
+  padding: $space-2 $space-6;
+  cursor: pointer;
+  transition: opacity $t-normal, transform $t-normal;
+
+  &:hover { opacity: 0.88; transform: translateY(-1px); }
+  &:active { transform: translateY(0); }
+}
