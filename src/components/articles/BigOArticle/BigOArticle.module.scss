@@ -36,7 +36,7 @@
   padding: $space-3 $space-4; border-bottom: 1px solid $border-subtle;
   flex-wrap: wrap;
   &:last-child { border-bottom: none; }
-  code { font-family: $font-mono; font-size: $text-sm; color: $accent; background: $accent-dim; padding: 2px 6px; border-radius: $radius-sm; min-width: 120px; }
+  code { font-family: $font-mono; font-size: $text-sm; color: $accent; background: $accent-dim; padding: 2px 6px; border-radius: $radius-sm; min-width: 120px; @include mobile { min-width: 0; } }
 }
 
 .ruleArrow { color: $text-muted; font-family: $font-mono; }
@@ -173,6 +173,7 @@
   display: flex; gap: $space-4; align-items: baseline;
   padding: $space-2 $space-4; border-bottom: 1px solid $border-subtle;
   &:last-child { border-bottom: none; }
+  @include mobile { flex-direction: column; gap: $space-1; }
 }
 
 .caseExLabel { font-family: $font-mono; font-size: $text-sm; font-weight: 700; color: $accent; min-width: 48px; }
@@ -184,6 +185,7 @@
 
 .methodStep {
   display: grid; grid-template-columns: 36px 1fr; gap: $space-4; align-items: flex-start;
+  @include mobile { grid-template-columns: 1fr; gap: $space-2; }
 }
 
 .methodNum {
@@ -206,6 +208,7 @@
   padding: $space-2 $space-4; background: $bg-elevated;
   border-bottom: 1px solid $border-subtle;
   font-family: $font-mono; font-size: 10px; color: $text-muted; letter-spacing: $letter-wider;
+  @include mobile { min-width: 420px; }
 }
 
 .dsRow {
@@ -213,6 +216,7 @@
   padding: $space-3 $space-4; border-bottom: 1px solid $border-subtle; align-items: center;
   &:last-child { border-bottom: none; }
   &:hover { background: $bg-elevated; }
+  @include mobile { min-width: 420px; }
 }
 
 .dsName { font-family: $font-mono; font-size: $text-sm; font-weight: 700; color: $text-primary; }

@@ -1,22 +1,30 @@
 import Link from 'next/link';
+import {
+  siMdnwebdocs, siJavascript, siCss, siHtml5,
+  siReact, siRedux, siTypescript, siGooglechrome,
+  siWebpack, siPostgresql, siNodedotjs, siDocker,
+  siAnthropic, siLeetcode,
+} from 'simple-icons';
+import type { SimpleIcon } from 'simple-icons';
+import { BrandIcon } from '@/components/ui/BrandIcon/BrandIcon';
 import { courses } from '@/content/courses';
 import s from './page.module.scss';
 
-const COURSE_META: Record<string, { color: string; icon: string }> = {
-  general:            { color: '#d2a679', icon: '◎'  },
-  javascript:         { color: '#f0db4f', icon: 'JS' },
-  css:                { color: '#c96daa', icon: 'CSS'},
-  html:               { color: '#e34c26', icon: '<>' },
-  react:              { color: '#61dafb', icon: '⚛'  },
-  'state-management': { color: '#9b59e0', icon: 'ST' },
-  typescript:         { color: '#4a9eff', icon: 'TS' },
-  browser:            { color: '#4db8ff', icon: '◫'  },
-  webpack:            { color: '#8dd6f9', icon: 'WP' },
-  databases:          { color: '#00e5a0', icon: 'DB' },
-  backend:            { color: '#57ab5a', icon: 'BE' },
-  devops:             { color: '#ff7b72', icon: 'DO' },
-  'ml-ai':            { color: '#a78bfa', icon: 'AI' },
-  algorithms:         { color: '#fb923c', icon: '∑'  },
+const COURSE_META: Record<string, { color: string; icon: SimpleIcon }> = {
+  general:            { color: '#d2a679', icon: siMdnwebdocs  },
+  javascript:         { color: '#f0db4f', icon: siJavascript  },
+  css:                { color: '#c96daa', icon: siCss          },
+  html:               { color: '#e34c26', icon: siHtml5        },
+  react:              { color: '#61dafb', icon: siReact        },
+  'state-management': { color: '#9b59e0', icon: siRedux        },
+  typescript:         { color: '#3178c6', icon: siTypescript   },
+  browser:            { color: '#4db8ff', icon: siGooglechrome },
+  webpack:            { color: '#8dd6f9', icon: siWebpack      },
+  databases:          { color: '#336791', icon: siPostgresql   },
+  backend:            { color: '#57ab5a', icon: siNodedotjs    },
+  devops:             { color: '#2496ed', icon: siDocker       },
+  'ml-ai':            { color: '#cc785c', icon: siAnthropic    },
+  algorithms:         { color: '#ffa116', icon: siLeetcode     },
 };
 
 const FEATURES = [
@@ -128,7 +136,7 @@ export default function HomePage() {
 
         <div className={s.courseGrid}>
           {courses.map(course => {
-            const meta    = COURSE_META[course.slug] ?? { color: '#00e5a0', icon: '•' };
+            const meta    = COURSE_META[course.slug];
             const isEmpty = course.articles.length === 0;
             const liveN   = course.articles.filter(a => a.interactive).length;
 
@@ -137,10 +145,14 @@ export default function HomePage() {
                 key={course.slug}
                 href={isEmpty ? '/courses' : `/courses/${course.slug}`}
                 className={`${s.courseCard}${isEmpty ? ` ${s.courseCardEmpty}` : ''}`}
-                style={{ '--cc': meta.color } as React.CSSProperties}
+                style={{ '--cc': meta?.color ?? '#00e5a0' } as React.CSSProperties}
               >
                 <div className={s.courseCardHead}>
-                  <span className={s.courseIcon}>{meta.icon}</span>
+                  <span className={s.courseIcon}>
+                    {meta
+                      ? <BrandIcon icon={meta.icon} size={18} color={meta.color} />
+                      : '•'}
+                  </span>
                   {isEmpty
                     ? <span className={s.comingSoon}>скоро</span>
                     : <span className={s.courseArrow}>→</span>
