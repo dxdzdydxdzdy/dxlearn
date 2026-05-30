@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import s from './Header.module.scss';
 
 const NAV = [
-  { href: '/courses', label: 'courses' },
+  { href: '/courses', label: 'курсы' },
 ];
 
 export function Header() {

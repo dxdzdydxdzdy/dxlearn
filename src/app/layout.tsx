@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Header } from '@/components/layout/Header/Header';
+import { Footer } from '@/components/layout/Footer/Footer';
 import { ServiceWorker } from '@/components/ServiceWorker';
 import '@/styles/globals.scss';
 
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ServiceWorker />
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
