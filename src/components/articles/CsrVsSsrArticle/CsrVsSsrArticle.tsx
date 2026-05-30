@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 import { Callout } from '@/components/ui/Callout/Callout';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
@@ -11,7 +12,7 @@ export function CsrVsSsrArticle() {
 
       {/* 1 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Зачем это знать</h2>
+        <SectionTitle>Зачем это знать</SectionTitle>
         <p className={s.prose}>
           Выбор стратегии рендеринга влияет на SEO, скорость загрузки, серверные расходы и DX.
           Нет универсального ответа — <strong>каждый подход решает свои задачи</strong>.
@@ -22,7 +23,7 @@ export function CsrVsSsrArticle() {
 
       {/* 2 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>CSR — Client-Side Rendering</h2>
+        <SectionTitle>CSR — Client-Side Rendering</SectionTitle>
         <CodeHighlight lang="html" code={`<!-- Что получает браузер от сервера: -->
 <!DOCTYPE html>
 <html>
@@ -53,7 +54,7 @@ export function CsrVsSsrArticle() {
 
       {/* 3 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>SSR — Server-Side Rendering</h2>
+        <SectionTitle>SSR — Server-Side Rendering</SectionTitle>
         <CodeHighlight lang="js" code={`// Next.js App Router (SSR по умолчанию)
 // app/products/[id]/page.tsx
 export default async function ProductPage({ params }) {
@@ -70,7 +71,7 @@ export default async function ProductPage({ params }) {
 
       {/* 4 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>SSG и ISR — статика с умом</h2>
+        <SectionTitle>SSG и ISR — статика с умом</SectionTitle>
         <CodeHighlight lang="js" code={`// SSG: генерация при сборке
 // next.config → output: 'export'
 // или в App Router: без cache: 'no-store' → кэшируется по умолчанию
@@ -96,7 +97,7 @@ export async function generateStaticParams() {
 
       {/* 5 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Шпаргалка выбора</h2>
+        <SectionTitle>Шпаргалка выбора</SectionTitle>
         <table className={s.table}>
           <thead className={s.tableHead}><tr><th>Если нужно...</th><th>Используй</th></tr></thead>
           <tbody>
@@ -119,7 +120,7 @@ export async function generateStaticParams() {
 
       {/* 6 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Самопроверка</h2>
+        <SectionTitle>Самопроверка</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

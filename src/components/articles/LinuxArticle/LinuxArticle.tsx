@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 import { Callout } from '@/components/ui/Callout/Callout';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
@@ -14,7 +15,7 @@ export function LinuxArticle() {
 
       {/* 1 — Зачем Linux */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Зачем это всё</h2>
+        <SectionTitle>Зачем это всё</SectionTitle>
         <p className={s.prose}>
           99% серверов в мире работают на Linux. Твой Docker-контейнер — это Linux.
           Kubernetes-нода — Linux. AWS EC2, Yandex Cloud VM — Linux.
@@ -38,7 +39,7 @@ export function LinuxArticle() {
 
       {/* 2 — Файловая система */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Файловая система: куда что лежит</h2>
+        <SectionTitle>Файловая система: куда что лежит</SectionTitle>
         <p className={s.prose}>
           В Linux нет "диска C:". Есть одно дерево с корнем <code>/</code>.
           Физические диски, сетевые папки, виртуальные ФС — всё монтируется в это дерево.
@@ -53,7 +54,7 @@ export function LinuxArticle() {
 
       {/* 3 — Права доступа */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Права доступа: кто что может</h2>
+        <SectionTitle>Права доступа: кто что может</SectionTitle>
         <p className={s.prose}>
           Каждый файл имеет три группы прав: <strong>владелец (u)</strong>,{' '}
           <strong>группа (g)</strong>, <strong>остальные (o)</strong>.
@@ -69,7 +70,7 @@ export function LinuxArticle() {
 
       {/* 4 — Процессы и сигналы */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Процессы: жизнь и смерть</h2>
+        <SectionTitle>Процессы: жизнь и смерть</SectionTitle>
         <p className={s.prose}>
           Каждая запущенная программа — процесс с уникальным <strong>PID</strong>.
           У каждого процесса есть родитель (<strong>PPID</strong>). Корень дерева — PID 1 (systemd).
@@ -106,7 +107,7 @@ export function LinuxArticle() {
 
       {/* 5 — Команды */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Базовые команды: разбор по частям</h2>
+        <SectionTitle>Базовые команды: разбор по частям</SectionTitle>
         <p className={s.prose}>
           В Linux команды строятся по принципу: маленькие утилиты, соединённые через <code>|</code> (pipe).
           Каждая делает одно дело хорошо. Выбери команду ниже и кликни на любой токен — узнаешь
@@ -117,7 +118,7 @@ export function LinuxArticle() {
 
       {/* 6 — systemd */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>systemd: управление сервисами</h2>
+        <SectionTitle>systemd: управление сервисами</SectionTitle>
         <p className={s.prose}>
           На большинстве современных дистрибутивов PID 1 — это <strong>systemd</strong>.
           Он управляет запуском сервисов, зависимостями, логами (journald) и таймерами.
@@ -163,7 +164,7 @@ WantedBy=multi-user.target`} />
 
       {/* 7 — Сеть */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Базовая сетевая диагностика</h2>
+        <SectionTitle>Базовая сетевая диагностика</SectionTitle>
         <p className={s.prose}>
           Сервис не отвечает — вот стандартная последовательность проверки:
         </p>
@@ -215,7 +216,7 @@ ping -c 3 10.0.1.5         # базовая доступность`} />
 
       {/* 8 — Quiz */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Самопроверка</h2>
+        <SectionTitle>Самопроверка</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

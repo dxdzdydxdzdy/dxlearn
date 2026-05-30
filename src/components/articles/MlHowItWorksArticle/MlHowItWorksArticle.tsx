@@ -1,7 +1,9 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { NeuronPlayground } from './NeuronPlayground';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { QUIZ_QUESTIONS } from './quizData';
 import s from './MlHowItWorksArticle.module.scss';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 export function MlHowItWorksArticle() {
   return (
@@ -9,20 +11,18 @@ export function MlHowItWorksArticle() {
 
       {/* ── 1. Почему не if-else ─────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Почему нельзя просто написать if-else</h2>
+        <SectionTitle>Почему нельзя просто написать if-else</SectionTitle>
         <p className={s.lead}>
           Возьмём задачу: определить что нарисовано на картинке — кошка или собака.
           Картинка — это просто сетка пикселей, каждый пиксель — число от 0 до 255.
           Картинка 100×100 = 10 000 чисел. Как написать правило?
         </p>
-        <div className={s.codeBlock}>
-          <code>{`// Попытка написать правила вручную:
+        <CodeHighlight lang="ts" code={`// Попытка написать правила вручную:
 if (pixel[300] > 128 && pixel[450] < 64) → "кошка"?
 
 // Проблема: таких пикселей 10 000.
 // Кошки бывают разные. Освещение разное. Углы разные.
-// Правила написать невозможно.`}</code>
-        </div>
+// Правила написать невозможно.`} />
         <p className={s.body}>
           Классическое программирование работает так: программист пишет правила → программа применяет к данным.
           ML переворачивает это: программист даёт данные и правильные ответы → алгоритм сам находит правила.
@@ -52,7 +52,7 @@ if (pixel[300] > 128 && pixel[450] < 64) → "кошка"?
 
       {/* ── 2. Нейрон ────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Нейрон — строительный блок</h2>
+        <SectionTitle>Нейрон — строительный блок</SectionTitle>
         <p className={s.lead}>
           Нейрон — это просто функция. Она принимает несколько чисел, что-то с ними делает,
           и выдаёт одно число. Всё.
@@ -107,14 +107,13 @@ if (pixel[300] > 128 && pixel[450] < 64) → "кошка"?
 
       {/* ── 3. Активация ─────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Активационная функция: добавляем «изгиб»</h2>
+        <SectionTitle>Активационная функция: добавляем «изгиб»</SectionTitle>
         <p className={s.lead}>
           Если просто складывать и умножать числа — это математически линейная операция.
           А цепочка линейных операций — это всё равно одна линейная операция.
           Сколько ни добавляй слоёв — толку нет.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`// Без активации: цепочка линейных операций схлопывается
+        <CodeHighlight lang="ts" code={`// Без активации: цепочка линейных операций схлопывается
 z1 = x*w1 + b1     // слой 1
 z2 = z1*w2 + b2    // слой 2
 z3 = z2*w3 + b3    // слой 3
@@ -122,15 +121,13 @@ z3 = z2*w3 + b3    // слой 3
 // Математически это то же самое что:
 z3 = x * (w1*w2*w3) + константа  // один слой!
 
-// Хоть 100 слоёв — мощности не добавляют.`}</code>
-        </div>
+// Хоть 100 слоёв — мощности не добавляют.`} />
         <p className={s.body}>
           Чтобы сеть могла учить сложные вещи — ей нужна нелинейность.
           Поэтому после каждого нейрона применяют <strong>функцию активации</strong>.
           Самая популярная: <strong>ReLU (Rectified Linear Unit)</strong>.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`# ReLU — невероятно простая функция:
+        <CodeHighlight lang="python" code={`# ReLU — невероятно простая функция:
 def relu(z):
     return max(0, z)
 
@@ -139,8 +136,7 @@ relu( 0.0)  → 0      # ноль → ноль
 relu( 3.7)  → 3.7    # положительное → пропускаем
 
 # Почему это работает? Потому что max() — нелинейная функция.
-# Она создаёт "изломы" — модель может учить нелинейные зависимости.`}</code>
-        </div>
+# Она создаёт "изломы" — модель может учить нелинейные зависимости.`} />
         <div className={s.infoCard}>
           <div className={s.infoLabel}>ЗАЧЕМ ИМЕННО ReLU?</div>
           <p className={s.infoText}>
@@ -154,7 +150,7 @@ relu( 3.7)  → 3.7    # положительное → пропускаем
 
       {/* ── 4. NeuronPlayground ───────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Попробуй сам: один нейрон</h2>
+        <SectionTitle>Попробуй сам: один нейрон</SectionTitle>
         <p className={s.body}>
           Двигай ползунки и смотри как меняется выход. Обрати внимание:
           когда z становится отрицательным — ReLU обнуляет его, и нейрон «молчит».
@@ -165,7 +161,7 @@ relu( 3.7)  → 3.7    # положительное → пропускаем
 
       {/* ── 5. Сеть из нейронов ───────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Сеть = много нейронов в слоях</h2>
+        <SectionTitle>Сеть = много нейронов в слоях</SectionTitle>
         <p className={s.lead}>
           Один нейрон мало на что способен — он просто взвешивает входы.
           Но тысячи нейронов, собранных в слои — это уже мощный инструмент.
@@ -224,14 +220,13 @@ relu( 3.7)  → 3.7    # положительное → пропускаем
 
       {/* ── 6. Loss ──────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Loss — измеряем насколько сеть ошиблась</h2>
+        <SectionTitle>Loss — измеряем насколько сеть ошиблась</SectionTitle>
         <p className={s.lead}>
           Чтобы учиться, сеть должна знать насколько она ошиблась.
           Для этого вычисляют <strong>loss (функцию потерь)</strong> — одно число,
           которое показывает «насколько плохо».
         </p>
-        <div className={s.codeBlock}>
-          <code>{`# Простейший loss — MSE (среднеквадратичная ошибка):
+        <CodeHighlight lang="ts" code={`# Простейший loss — MSE (среднеквадратичная ошибка):
 # Сеть предсказала 0.3, правильный ответ 1.0
 
 loss = (правильный - предсказанный)²
@@ -241,8 +236,7 @@ loss = (1.0 - 0.3)² = 0.49
 # Если ошиблись сильно:  (1.0 - 0.0)² = 1.0  ← плохо
 
 # Для классификации (кошка/собака) обычно используют cross-entropy:
-# чем увереннее модель в правильном ответе — тем меньше loss`}</code>
-        </div>
+# чем увереннее модель в правильном ответе — тем меньше loss`} />
         <p className={s.body}>
           <strong>Цель обучения — минимизировать loss.</strong> Мы хотим найти такие веса,
           при которых loss как можно ближе к нулю. Если loss растёт — что-то пошло не так.
@@ -270,7 +264,7 @@ loss = (1.0 - 0.3)² = 0.49
 
       {/* ── 7. Gradient Descent ──────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Градиентный спуск — как сеть учится</h2>
+        <SectionTitle>Градиентный спуск — как сеть учится</SectionTitle>
         <p className={s.lead}>
           Мы знаем что хотим (минимальный loss). Но как найти нужные веса из миллиарда вариантов?
           Ответ: <strong>градиентный спуск</strong>.
@@ -288,8 +282,7 @@ loss = (1.0 - 0.3)² = 0.49
           увеличить вес, loss вырастет или упадёт? Мы двигаемся <em>против</em> градиента —
           туда, где loss уменьшается.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`# Обновление каждого веса:
+        <CodeHighlight lang="ts" code={`# Обновление каждого веса:
 w = w - learning_rate * gradient
 
 # learning_rate (скорость обучения) — размер шага
@@ -297,8 +290,7 @@ w = w - learning_rate * gradient
 
 # Пример:
 # w = 0.5, gradient = 0.3, learning_rate = 0.01
-# w = 0.5 - 0.01 * 0.3 = 0.497  ← чуть-чуть сдвинули`}</code>
-        </div>
+# w = 0.5 - 0.01 * 0.3 = 0.497  ← чуть-чуть сдвинули`} />
         <p className={s.body}>
           <strong>Learning rate</strong> — важнейший параметр. Слишком большой: шаги огромные,
           «перепрыгиваем» минимум, loss скачет. Слишком маленький: обучение займёт вечность.
@@ -325,7 +317,7 @@ w = w - learning_rate * gradient
 
       {/* ── 8. Backpropagation ────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Backpropagation — кто виноват в ошибке?</h2>
+        <SectionTitle>Backpropagation — кто виноват в ошибке?</SectionTitle>
         <p className={s.lead}>
           Шаг 3 выше звучит просто: «вычислить градиент для каждого веса».
           Но как это сделать, если весов миллионы и они все связаны?
@@ -336,8 +328,7 @@ w = w - learning_rate * gradient
           производной сложной функции (chain rule) вычисляет: на сколько каждый вес
           виноват в ошибке.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`# Сеть ошиблась. Кто виноват?
+        <CodeHighlight lang="ts" code={`# Сеть ошиблась. Кто виноват?
 Input → Layer1 → Layer2 → Output → LOSS
 
 # Backprop идёт назад:
@@ -347,8 +338,7 @@ Input → Layer1 → Layer2 → Output → LOSS
 # ← насколько каждый вес повлиял?
 
 # Результат: у каждого из миллионов весов есть свой градиент.
-# Обновляем их все — один шаг градиентного спуска.`}</code>
-        </div>
+# Обновляем их все — один шаг градиентного спуска.`} />
         <div className={s.infoCard}>
           <div className={s.infoLabel}>КАК ЭТО РАБОТАЕТ В КОДЕ</div>
           <p className={s.infoText}>
@@ -362,7 +352,7 @@ Input → Layer1 → Layer2 → Output → LOSS
 
       {/* ── 9. Что значит Deep ────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Что значит «глубокое» обучение</h2>
+        <SectionTitle>Что значит «глубокое» обучение</SectionTitle>
         <p className={s.lead}>
           «Глубокое» — это просто «много слоёв». В 2012 году нейросеть AlexNet с 8 слоями
           выиграла конкурс ImageNet и обошла все предыдущие методы. С тех пор глубина растёт:
@@ -398,13 +388,12 @@ Input → Layer1 → Layer2 → Output → LOSS
 
       {/* ── 10. Overfitting & Split ───────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Как понять что сеть действительно научилась</h2>
+        <SectionTitle>Как понять что сеть действительно научилась</SectionTitle>
         <p className={s.lead}>
           Сеть может «выучить» обучающие примеры наизусть, не поняв общих закономерностей.
           Это называется <strong>overfitting (переобучение)</strong>.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`# Пример переобучения:
+        <CodeHighlight lang="ts" code={`# Пример переобучения:
 Train loss:      0.001  ← "отлично, почти нет ошибок"
 Validation loss: 2.800  ← КАТАСТРОФА
 
@@ -412,8 +401,7 @@ Validation loss: 2.800  ← КАТАСТРОФА
 # Но новую кошку — которую не видела — не распознаёт.
 
 # Как студент, который зазубрил ответы на билеты.
-# На экзамене с теми же вопросами — 5. Другие вопросы — не знает.`}</code>
-        </div>
+# На экзамене с теми же вопросами — 5. Другие вопросы — не знает.`} />
         <p className={s.body}>
           Чтобы честно оценить качество модели, данные делят на три части:
         </p>
@@ -448,7 +436,7 @@ Validation loss: 2.800  ← КАТАСТРОФА
 
       {/* ── Итог ─────────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Итог: как всё связано</h2>
+        <SectionTitle>Итог: как всё связано</SectionTitle>
         <div className={s.summaryGrid}>
           {[
             { term: 'Нейрон', def: 'Функция: взвешенная сумма + bias + активация' },
@@ -470,7 +458,7 @@ Validation loss: 2.800  ← КАТАСТРОФА
 
       {/* ── Quiz ─────────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверь себя</h2>
+        <SectionTitle>Проверь себя</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

@@ -1,0 +1,260 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article { display: flex; flex-direction: column; gap: $space-10; }
+.section  { display: flex; flex-direction: column; gap: $space-4; }
+
+
+.lead {
+  font-size: $text-base; color: $text-secondary; line-height: $line-loose; max-width: 72ch;
+  strong { color: $text-primary; font-weight: 600; }
+}
+.body {
+  font-size: $text-sm; color: $text-secondary; line-height: $line-loose; max-width: 72ch;
+  strong { color: $text-primary; font-weight: 600; }
+  em     { color: $info; font-style: normal; }
+  code { font-family: $font-mono; font-size: 0.9em; color: $accent; background: $accent-dim; padding: 1px 5px; border-radius: $radius-sm; }
+}
+
+// ── Rule box ──────────────────────────────────────────────────────────────────
+
+.ruleBox {
+  background: $bg-base; border: 1px solid $border-subtle;
+  border-radius: $radius-md; overflow: hidden;
+}
+
+.ruleTitle {
+  font-family: $font-mono; font-size: 11px; color: $text-muted;
+  letter-spacing: $letter-wider; padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle; background: $bg-elevated;
+}
+
+.rules { display: flex; flex-direction: column; }
+
+.rule {
+  display: flex; align-items: center; gap: $space-3;
+  padding: $space-3 $space-4; border-bottom: 1px solid $border-subtle;
+  flex-wrap: wrap;
+  &:last-child { border-bottom: none; }
+  code { font-family: $font-mono; font-size: $text-sm; color: $accent; background: $accent-dim; padding: 2px 6px; border-radius: $radius-sm; min-width: 120px; }
+}
+
+.ruleArrow { color: $text-muted; font-family: $font-mono; }
+.ruleNote  { font-size: $text-sm; color: $text-muted; }
+
+// ── Chart ─────────────────────────────────────────────────────────────────────
+
+.chartWrap {
+  background: $bg-base; border: 1px solid $border-subtle;
+  border-radius: $radius-md; overflow: hidden;
+}
+
+.chartTop {
+  display: grid; grid-template-columns: 1fr 200px;
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.chartSvgWrap {
+  padding: $space-5 $space-4 $space-2;
+  border-right: 1px solid $border-subtle;
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.chartYLabel {
+  font-family: $font-mono; font-size: 9px; color: $text-muted;
+  letter-spacing: $letter-wide; margin-bottom: $space-2;
+}
+
+.chartSvg { width: 100%; height: 200px; display: block; }
+
+.chartAxisX {
+  display: flex; justify-content: space-between;
+  font-family: $font-mono; font-size: 10px; color: $text-muted;
+  padding: $space-1 0 $space-2;
+}
+
+// ── Live values panel ─────────────────────────────────────────────────────────
+
+.liveValues {
+  padding: $space-4;
+  display: flex; flex-direction: column; gap: $space-2;
+}
+
+.liveTitle {
+  font-family: $font-mono; font-size: 10px; color: $text-muted;
+  letter-spacing: $letter-wider; margin-bottom: $space-1;
+}
+
+.liveRow {
+  display: flex; align-items: center; gap: $space-2;
+  cursor: pointer; padding: $space-1 $space-2;
+  border-radius: $radius-sm; transition: background $t-fast;
+  &:hover { background: $bg-elevated; }
+}
+
+.liveRowHidden { opacity: 0.3; }
+.liveDot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.liveLabel { font-family: $font-mono; font-size: $text-sm; color: $text-secondary; flex: 1; }
+.liveOps { font-family: $font-mono; font-size: $text-sm; font-weight: 700; min-width: 52px; text-align: right; }
+
+// ── Slider ────────────────────────────────────────────────────────────────────
+
+.sliderWrap {
+  display: flex; align-items: center; gap: $space-3;
+  padding: $space-3 $space-4; border-top: 1px solid $border-subtle;
+}
+
+.sliderLabel { font-family: $font-mono; font-size: $text-sm; color: $text-muted; }
+.slider      { flex: 1; accent-color: $accent; cursor: pointer; }
+.sliderVal   { font-family: $font-mono; font-size: $text-sm; color: $accent; min-width: 24px; text-align: right; }
+
+// ── Operations table ──────────────────────────────────────────────────────────
+
+.opsTable {
+  border-top: 1px solid $border-subtle;
+  overflow-x: auto;
+}
+
+.opsTableTitle {
+  font-family: $font-mono; font-size: 11px; color: $text-muted;
+  letter-spacing: $letter-wider; padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle; background: $bg-elevated;
+}
+
+.opsGrid { min-width: 600px; }
+
+.opsHeader {
+  display: grid; grid-template-columns: 110px repeat(8, 1fr);
+  padding: $space-2 $space-4; background: $bg-elevated;
+  font-family: $font-mono; font-size: 10px; color: $text-muted;
+  letter-spacing: $letter-wide; border-bottom: 1px solid $border-subtle;
+}
+
+.opsRow {
+  display: grid; grid-template-columns: 110px repeat(8, 1fr);
+  padding: $space-2 $space-4; border-bottom: 1px solid $border-subtle;
+  align-items: center;
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.opsNotation { font-family: $font-mono; font-size: $text-sm; font-weight: 700; }
+.opsCell { font-family: $font-mono; font-size: $text-xs; font-weight: 700; }
+
+// ── Best/avg/worst cases ──────────────────────────────────────────────────────
+
+.casesGrid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: $space-3;
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.caseCard {
+  background: $bg-elevated; border: 1px solid $border-subtle;
+  border-radius: $radius-md; padding: $space-4;
+  display: flex; flex-direction: column; gap: $space-2;
+}
+
+.caseName   { font-family: $font-mono; font-size: $text-base; font-weight: 700; color: $text-primary; }
+.caseSymbol { font-family: $font-mono; font-size: $text-sm; font-weight: 700; }
+.caseDesc   { font-size: $text-sm; color: $text-secondary; line-height: $line-normal; }
+
+.caseExample {
+  background: $bg-base; border: 1px solid $border-subtle;
+  border-radius: $radius-md; overflow: hidden;
+}
+
+.caseExTitle {
+  font-family: $font-mono; font-size: 11px; color: $text-muted;
+  letter-spacing: $letter-wider; padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle; background: $bg-elevated;
+}
+
+.caseExRow {
+  display: flex; gap: $space-4; align-items: baseline;
+  padding: $space-2 $space-4; border-bottom: 1px solid $border-subtle;
+  &:last-child { border-bottom: none; }
+}
+
+.caseExLabel { font-family: $font-mono; font-size: $text-sm; font-weight: 700; color: $accent; min-width: 48px; }
+.caseExValue { font-size: $text-sm; color: $text-secondary; }
+
+// ── Method steps ──────────────────────────────────────────────────────────────
+
+.methodSteps { display: flex; flex-direction: column; gap: $space-5; }
+
+.methodStep {
+  display: grid; grid-template-columns: 36px 1fr; gap: $space-4; align-items: flex-start;
+}
+
+.methodNum {
+  font-family: $font-mono; font-size: $text-sm; font-weight: 700;
+  color: $text-muted; padding-top: $space-1;
+}
+
+.methodBody { display: flex; flex-direction: column; gap: $space-2; }
+
+.methodTitle { font-family: $font-mono; font-size: $text-sm; color: $text-primary; font-weight: 700; }
+
+// ── DS table ──────────────────────────────────────────────────────────────────
+
+.dsTable {
+  border: 1px solid $border-subtle; border-radius: $radius-md; overflow: hidden; overflow-x: auto;
+}
+
+.dsHeader {
+  display: grid; grid-template-columns: 160px repeat(4, 1fr);
+  padding: $space-2 $space-4; background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+  font-family: $font-mono; font-size: 10px; color: $text-muted; letter-spacing: $letter-wider;
+}
+
+.dsRow {
+  display: grid; grid-template-columns: 160px repeat(4, 1fr);
+  padding: $space-3 $space-4; border-bottom: 1px solid $border-subtle; align-items: center;
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.dsName { font-family: $font-mono; font-size: $text-sm; font-weight: 700; color: $text-primary; }
+.dsCell { font-family: $font-mono; font-size: $text-sm; font-weight: 700; }
+.dsNote { font-size: 11px; color: $text-muted; padding: $space-2 $space-4; border-top: 1px solid $border-subtle; background: $bg-elevated; }
+
+// ── Code examples ─────────────────────────────────────────────────────────────
+
+.examples { display: flex; flex-direction: column; gap: $space-5; }
+.example { display: flex; flex-direction: column; gap: $space-2; }
+.exampleBadge {
+  display: inline-flex; align-self: flex-start;
+  font-family: $font-mono; font-size: $text-sm; font-weight: 700;
+  padding: 2px $space-3; border-radius: $radius-sm;
+}
+
+// ── Space examples ────────────────────────────────────────────────────────────
+
+.spaceExamples { display: flex; flex-direction: column; gap: $space-4; }
+
+.spaceRow {
+  display: grid; grid-template-columns: 80px 1fr; gap: $space-4; align-items: flex-start;
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.spaceNotation { font-family: $font-mono; font-size: $text-base; font-weight: 700; padding-top: $space-1; }
+.spaceDesc { display: flex; flex-direction: column; gap: $space-2; }
+.spaceTitle { font-family: $font-mono; font-size: $text-sm; color: $text-muted; }
+
+// ── Trade-off ─────────────────────────────────────────────────────────────────
+
+.tradeof {
+  background: $accent-dim; border: 1px solid rgba(0,229,160,0.2);
+  border-radius: $radius-md; padding: $space-4 $space-5;
+}
+
+.tradeofLabel {
+  font-family: $font-mono; font-size: 11px; color: $accent;
+  letter-spacing: $letter-wider; display: block; margin-bottom: $space-2;
+}
+
+.tradeofText {
+  font-size: $text-sm; color: $text-secondary; line-height: $line-loose;
+  em { color: $text-primary; font-style: normal; font-weight: 600; }
+}

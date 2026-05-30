@@ -1,7 +1,9 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { FrameworkComparison } from './FrameworkComparison';
 import { QUIZ_QUESTIONS } from './quizData';
 import s from './AiFrameworksArticle.module.scss';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 export function AiFrameworksArticle() {
   return (
@@ -9,7 +11,7 @@ export function AiFrameworksArticle() {
 
       {/* ── 1. Зачем вообще фреймворки ───────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Зачем нужны фреймворки</h2>
+        <SectionTitle>Зачем нужны фреймворки</SectionTitle>
         <p className={s.lead}>
           Когда ты впервые работаешь с LLM — достаточно нативного SDK:
           создал клиент, отправил сообщение, получил ответ. Но по мере роста
@@ -68,7 +70,7 @@ export function AiFrameworksArticle() {
 
       {/* ── 2. LangChain: ключевые концепции ─────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>LangChain: как устроен</h2>
+        <SectionTitle>LangChain: как устроен</SectionTitle>
         <p className={s.body}>
           LangChain — это не одна библиотека, а экосистема из нескольких пакетов.
           Понимать её удобнее через{' '}
@@ -137,9 +139,7 @@ export function AiFrameworksArticle() {
         </div>
 
         {/* LCEL пример */}
-        <div className={s.codeBlock}>
-          <div className={s.codeBlockHeader}>LCEL: цепочка промпт → модель → парсер</div>
-          <code>{`import { ChatAnthropic } from '@langchain/anthropic';
+        <CodeHighlight lang="ts" filename="LCEL: цепочка промпт → модель → парсер" code={`import { ChatAnthropic } from '@langchain/anthropic';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { StrOutputParser } from '@langchain/core/output_parsers';
 
@@ -170,13 +170,12 @@ for await (const chunk of await chain.stream({ language: 'испанский', t
 const results = await chain.batch([
   { language: 'немецкий', text: 'Доброе утро' },
   { language: 'японский', text: 'До свидания' },
-]);`}</code>
-        </div>
+]);`} />
       </section>
 
       {/* ── 3. LangGraph: агенты со сложной логикой ──────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>LangGraph: когда AgentExecutor мало</h2>
+        <SectionTitle>LangGraph: когда AgentExecutor мало</SectionTitle>
         <p className={s.body}>
           Обычный <code>AgentExecutor</code> в LangChain — это линейный цикл:
           думать → вызвать инструмент → думать → вызвать → ответить. Но что
@@ -242,7 +241,7 @@ const results = await chain.batch([
 
       {/* ── 4. LlamaIndex: как устроен ───────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>LlamaIndex: как устроен</h2>
+        <SectionTitle>LlamaIndex: как устроен</SectionTitle>
         <p className={s.body}>
           LlamaIndex строится вокруг концепции <strong>индекса</strong> —
           структурированного представления данных, по которому можно искать.
@@ -325,11 +324,10 @@ const results = await chain.batch([
         </div>
 
         {/* SubQuestion пример */}
-        <div className={s.codeBlock}>
-          <div className={s.codeBlockHeader}>SubQuestionQueryEngine — сложные вопросы по нескольким документам</div>
-          <code>{`import { VectorStoreIndex, SimpleDirectoryReader } from 'llamaindex';
+        <CodeHighlight lang="ts" filename="SubQuestionQueryEngine — сложные вопросы по нескольким документам" code={`import { VectorStoreIndex, SimpleDirectoryReader } from 'llamaindex';
 import { SubQuestionQueryEngine } from 'llamaindex';
 import { QueryEngineTool } from 'llamaindex';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 // Создаём отдельные индексы для каждого источника
 const appleIndex   = await VectorStoreIndex.fromDocuments(appleDocs);
@@ -355,13 +353,12 @@ const engine = SubQuestionQueryEngine.fromDefaults({ queryEngineTools: tools });
 
 const response = await engine.query({
   query: 'Сравни выручку Apple и Google за 2023 год. Кто вырос быстрее?',
-});`}</code>
-        </div>
+});`} />
       </section>
 
       {/* ── 5. Интерактивный виджет ───────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Выбери подход для задачи</h2>
+        <SectionTitle>Выбери подход для задачи</SectionTitle>
         <p className={s.body}>
           На каждую задачу — свой правильный выбор. Попробуй разные комбинации
           и посмотри на реальный код:
@@ -372,7 +369,7 @@ const response = await engine.query({
 
       {/* ── 6. LangSmith: observability ──────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>LangSmith: смотрим внутрь чёрного ящика</h2>
+        <SectionTitle>LangSmith: смотрим внутрь чёрного ящика</SectionTitle>
         <p className={s.body}>
           Одна из главных жалоб на фреймворки — невозможность понять, что
           происходит внутри при ошибке. LangSmith решает это: он{' '}
@@ -440,7 +437,7 @@ const response = await engine.query({
 
       {/* ── 7. Когда без фреймворка лучше ────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Когда фреймворк — лишний</h2>
+        <SectionTitle>Когда фреймворк — лишний</SectionTitle>
         <p className={s.body}>
           Фреймворки добавляют <strong>сложность</strong>. Это оправдано,
           когда без них было бы ещё сложнее. Вот сигналы, что стоит остаться
@@ -510,7 +507,7 @@ const response = await engine.query({
 
       {/* ── 8. Сравнительная таблица ──────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>LangChain vs LlamaIndex vs нативный SDK</h2>
+        <SectionTitle>LangChain vs LlamaIndex vs нативный SDK</SectionTitle>
 
         <div className={s.compareTable}>
           <div className={s.compareHead}>
@@ -542,7 +539,7 @@ const response = await engine.query({
 
       {/* ── 9. Паттерны комбинирования ───────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Как их комбинируют на практике</h2>
+        <SectionTitle>Как их комбинируют на практике</SectionTitle>
         <p className={s.body}>
           В реальных проектах редко выбирают что-то одно. Типичные комбинации:
         </p>
@@ -579,7 +576,7 @@ const response = await engine.query({
 
       {/* ── 10. Quiz ─────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверь себя</h2>
+        <SectionTitle>Проверь себя</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

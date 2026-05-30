@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { ScenarioViewer } from './ScenarioViewer';
@@ -109,7 +110,7 @@ export function RestApiArticle() {
 
       {/* 1. Зачем REST */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Зачем нужен стандарт</h2>
+        <SectionTitle>Зачем нужен стандарт</SectionTitle>
         <p className={s.lead}>
           До REST каждый API придумывал свои конвенции.
           Одни писали <code style={{ fontFamily: 'var(--font-mono)', color: '#4db8ff' }}>/getUser?id=5</code>,
@@ -141,7 +142,7 @@ export function RestApiArticle() {
 
       {/* 2. URL и ресурсы */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Ресурсы и структура URL</h2>
+        <SectionTitle>Ресурсы и структура URL</SectionTitle>
         <p className={s.lead}>
           Каждая сущность твоего приложения — это ресурс. Пользователи, заказы, продукты, сессии.
           URL — это адрес ресурса, а не инструкция что с ним делать.
@@ -209,7 +210,7 @@ app.get('/api/v1/users/:id/orders', getUserOrders);`} />
 
       {/* 3. HTTP методы */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>HTTP-методы и их семантика</h2>
+        <SectionTitle>HTTP-методы и их семантика</SectionTitle>
         <p className={s.lead}>
           Каждый метод несёт смысл. Нарушение семантики ломает кеширование,
           мешает инструментам мониторинга и путает других разработчиков.
@@ -287,7 +288,7 @@ app.delete('/users/:id', async (req, res) => {
 
       {/* 4. Статус коды */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Статус-коды — язык HTTP</h2>
+        <SectionTitle>Статус-коды — язык HTTP</SectionTitle>
         <p className={s.lead}>
           Статус-код — это машиночитаемый ответ на вопрос «что произошло?».
           Не возвращай 200 OK с <code style={{ fontFamily: 'var(--font-mono)', color: '#ff7b72' }}>{"{ success: false }"}</code> — это антипаттерн,
@@ -328,7 +329,7 @@ app.delete('/users/:id', async (req, res) => {
 
       {/* 5. Интерактивные сценарии */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Request / Response — живые примеры</h2>
+        <SectionTitle>Request / Response — живые примеры</SectionTitle>
         <p className={s.body}>
           Нажимай на сценарии и смотри как выглядят реальные HTTP-запросы и ответы.
           Обращай внимание на метод, статус-код и заголовки.
@@ -338,7 +339,7 @@ app.delete('/users/:id', async (req, res) => {
 
       {/* 6. Структура ошибки */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Структура ответа с ошибкой</h2>
+        <SectionTitle>Структура ответа с ошибкой</SectionTitle>
         <p className={s.lead}>
           Ошибки должны быть информативными и предсказуемыми.
           Стандартизируй формат ошибок — фронт будет благодарен.
@@ -410,7 +411,7 @@ app.get('/users/:id', async (req, res, next) => {
 
       {/* 7. Идемпотентность */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Идемпотентность и безопасность</h2>
+        <SectionTitle>Идемпотентность и безопасность</SectionTitle>
         <p className={s.lead}>
           Это не просто теория — от этого зависит как клиент обрабатывает сетевые ошибки.
           Если запрос идемпотентен, его можно безопасно повторить при таймауте.
@@ -451,7 +452,7 @@ app.post('/orders', async (req, res) => {
 
       {/* 8. Версионирование */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Версионирование API</h2>
+        <SectionTitle>Версионирование API</SectionTitle>
         <p className={s.lead}>
           API — публичный контракт. Если ты его сломаешь, сломаются все клиенты.
           Версионирование позволяет развивать API не ломая существующих пользователей.
@@ -498,7 +499,7 @@ router.get('/users', (req, res) => {
 
       {/* 9. Пагинация и rate limiting */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Пагинация и Rate Limiting</h2>
+        <SectionTitle>Пагинация и Rate Limiting</SectionTitle>
         <p className={s.lead}>
           Два обязательных элемента любого production API.
           Без пагинации коллекции взрываются в памяти.
@@ -567,7 +568,7 @@ app.use('/api/', limiter);`} />
 
       {/* 10. Summary table */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Шпаргалка — CRUD на REST</h2>
+        <SectionTitle>Шпаргалка — CRUD на REST</SectionTitle>
 
         <div className={s.tableWrap}>
           <table className={s.table}>
@@ -637,7 +638,7 @@ app.use('/api/', limiter);`} />
 
       {/* 11. Quiz */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Тест</h2>
+        <SectionTitle>Тест</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

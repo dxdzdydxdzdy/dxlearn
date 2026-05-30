@@ -1,7 +1,9 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import s from './AuthJwtArticle.module.scss';
 import { JwtDecoder } from './JwtDecoder';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { QUIZ_QUESTIONS } from './quizData';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 export function AuthJwtArticle() {
   return (
@@ -9,7 +11,7 @@ export function AuthJwtArticle() {
 
       {/* ── 1. Проблема ─────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>HTTP без памяти</h2>
+        <SectionTitle>HTTP без памяти</SectionTitle>
         <p className={s.lead}>
           HTTP — stateless протокол. Каждый запрос существует сам по себе: сервер
           не помнит, что вы уже авторизовались секунду назад. Это значит — без
@@ -46,7 +48,7 @@ export function AuthJwtArticle() {
 
       {/* ── 2. Сессии ───────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Сессии — старый подход</h2>
+        <SectionTitle>Сессии — старый подход</SectionTitle>
         <p className={s.body}>
           До JWT доминировали сессии. Сервер хранил состояние в памяти или Redis,
           клиент — только идентификатор в cookie.
@@ -109,7 +111,7 @@ export function AuthJwtArticle() {
 
       {/* ── 3. JWT структура ────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>JWT: три части и главный миф</h2>
+        <SectionTitle>JWT: три части и главный миф</SectionTitle>
         <p className={s.lead}>
           JSON Web Token — это три base64url-строки, разделённые точками:
           header, payload, signature. Ключевой момент который путают почти все:
@@ -147,7 +149,7 @@ export function AuthJwtArticle() {
 
       {/* ── 4. JwtDecoder ───────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Декодируем JWT вживую</h2>
+        <SectionTitle>Декодируем JWT вживую</SectionTitle>
         <p className={s.body}>
           Посмотрите на реальный токен. Обратите внимание: access содержит имя и
           роль (нужны фронтенду), refresh — только jti для rotation.
@@ -157,7 +159,7 @@ export function AuthJwtArticle() {
 
       {/* ── 5. Access + Refresh ─────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Access и Refresh: зачем два токена</h2>
+        <SectionTitle>Access и Refresh: зачем два токена</SectionTitle>
         <p className={s.lead}>
           Один токен с TTL 30 дней — удобно, но если его украдут, атакующий
           получает доступ на месяц. Один токен с TTL 15 минут — безопасно, но
@@ -189,7 +191,7 @@ export function AuthJwtArticle() {
 
       {/* ── 6. Auth flow ────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Полный цикл аутентификации</h2>
+        <SectionTitle>Полный цикл аутентификации</SectionTitle>
         <p className={s.body}>Логин, запрос, обновление токена, выход — как это выглядит на практике.</p>
 
         <p className={s.body} style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--color-text-muted)', letterSpacing: '0.08em' }}>// ШАГ 1 — ЛОГИН</p>
@@ -263,7 +265,7 @@ export function AuthJwtArticle() {
 
       {/* ── 7. Где хранить ──────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Где хранить токен в браузере</h2>
+        <SectionTitle>Где хранить токен в браузере</SectionTitle>
         <p className={s.body}>
           Это один из самых спорных вопросов. Единого «правильного» ответа нет —
           зависит от модели угроз. Вот честное сравнение.
@@ -313,11 +315,11 @@ export function AuthJwtArticle() {
 
       {/* ── 8. Express код ──────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Код: Express + JWT</h2>
+        <SectionTitle>Код: Express + JWT</SectionTitle>
         <p className={s.body}>Минимальная рабочая реализация: логин, middleware, refresh.</p>
 
         <p className={s.body}><strong>Логин — выдать оба токена:</strong></p>
-        <pre className={s.codeBlock}><code>{`const jwt     = require('jsonwebtoken');
+        <CodeHighlight lang="ts" code={`const jwt     = require('jsonwebtoken');
 const bcrypt  = require('bcrypt');
 
 app.post('/auth/login', async (req, res) => {
@@ -352,10 +354,10 @@ app.post('/auth/login', async (req, res) => {
   });
 
   res.json({ accessToken });
-});`}</code></pre>
+});`} />
 
         <p className={s.body}><strong>Middleware — верифицировать access token:</strong></p>
-        <pre className={s.codeBlock}><code>{`function authMiddleware(req, res, next) {
+        <CodeHighlight lang="ts" code={`function authMiddleware(req, res, next) {
   const header = req.headers.authorization;
   const token  = header?.startsWith('Bearer ') ? header.slice(7) : null;
 
@@ -378,10 +380,10 @@ app.post('/auth/login', async (req, res) => {
 app.get('/api/orders', authMiddleware, async (req, res) => {
   const orders = await db.getOrders(req.user.sub);  // req.user.sub = userId
   res.json(orders);
-});`}</code></pre>
+});`} />
 
         <p className={s.body}><strong>Refresh endpoint — обновить access + rotation:</strong></p>
-        <pre className={s.codeBlock}><code>{`app.post('/auth/refresh', async (req, res) => {
+        <CodeHighlight lang="ts" code={`app.post('/auth/refresh', async (req, res) => {
   const oldRefresh = req.cookies.refreshToken;
   if (!oldRefresh) return res.status(401).json({ error: 'No refresh token' });
 
@@ -415,12 +417,12 @@ app.get('/api/orders', authMiddleware, async (req, res) => {
   });
 
   res.json({ accessToken: newAccessToken });
-});`}</code></pre>
+});`} />
       </section>
 
       {/* ── 9. Инвалидация ──────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Инвалидация JWT: главная проблема</h2>
+        <SectionTitle>Инвалидация JWT: главная проблема</SectionTitle>
         <p className={s.body}>
           JWT stateless — нельзя «отозвать» токен, не добавив state. Это
           архитектурный компромисс. Вот варианты от простого к надёжному:
@@ -472,7 +474,7 @@ app.get('/api/orders', authMiddleware, async (req, res) => {
 
       {/* ── 10. Сессии vs JWT ───────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Сессии vs JWT: когда что выбрать</h2>
+        <SectionTitle>Сессии vs JWT: когда что выбрать</SectionTitle>
         <div className={s.tableWrap}>
           <table className={s.table}>
             <thead>
@@ -533,7 +535,7 @@ app.get('/api/orders', authMiddleware, async (req, res) => {
 
       {/* ── 11. Security pitfalls ───────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Типичные ошибки и уязвимости</h2>
+        <SectionTitle>Типичные ошибки и уязвимости</SectionTitle>
         <div className={s.pitfallList}>
           <div className={s.pitfall}>
             <p className={s.pitfallTitle}>⚠ alg:none — критическая уязвимость</p>
@@ -591,7 +593,7 @@ app.get('/api/orders', authMiddleware, async (req, res) => {
 
       {/* ── 12. Quiz ────────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверь себя</h2>
+        <SectionTitle>Проверь себя</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

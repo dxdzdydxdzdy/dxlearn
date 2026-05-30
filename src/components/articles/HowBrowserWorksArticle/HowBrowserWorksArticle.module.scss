@@ -3,10 +3,6 @@
 
 .root { display: flex; flex-direction: column; gap: $space-10; }
 .section { display: flex; flex-direction: column; gap: $space-5; }
-.sectionTitle {
-  font-size: $text-xl; font-weight: $weight-bold; color: $text-primary;
-  border-bottom: 1px solid $border-subtle; padding-bottom: $space-4;
-}
 .prose {
   font-size: $text-base; color: $text-secondary; line-height: $line-loose;
   code { color: $accent; background: $accent-dim; border-radius: $radius-sm; padding: 1px $space-2; font-family: $font-mono; font-size: $text-sm; }

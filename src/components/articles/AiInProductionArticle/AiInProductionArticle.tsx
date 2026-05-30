@@ -1,7 +1,9 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { CostCalculator } from './CostCalculator';
 import { QUIZ_QUESTIONS } from './quizData';
 import s from './AiInProductionArticle.module.scss';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 export function AiInProductionArticle() {
   return (
@@ -9,7 +11,7 @@ export function AiInProductionArticle() {
 
       {/* ── 1. Введение ──────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>AI в продакшне — другой мир</h2>
+        <SectionTitle>AI в продакшне — другой мир</SectionTitle>
         <p className={s.lead}>
           Прототип работает на localhost — и это ещё только начало. Продакшн
           добавляет реальных пользователей, реальные деньги и реальные ожидания.
@@ -48,7 +50,7 @@ export function AiInProductionArticle() {
 
       {/* ── 2. Latency ───────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Latency: почему LLM медленный</h2>
+        <SectionTitle>Latency: почему LLM медленный</SectionTitle>
         <p className={s.body}>
           LLM генерирует токены <em>последовательно</em>: каждый токен зависит
           от предыдущих. Нельзя параллелизировать. 200-токенный ответ = 200
@@ -88,9 +90,7 @@ export function AiInProductionArticle() {
           </div>
         </div>
 
-        <div className={s.codeBlock}>
-          <div className={s.codeBlockHeader}>Streaming в Next.js — пользователь видит токены сразу</div>
-          <code>{`// app/api/chat/route.ts
+        <CodeHighlight lang="ts" filename="Streaming в Next.js — пользователь видит токены сразу" code={`// app/api/chat/route.ts
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic();
@@ -131,13 +131,12 @@ while (true) {
   const { done, value } = await reader.read();
   if (done) break;
   setAnswer(prev => prev + new TextDecoder().decode(value));
-}`}</code>
-        </div>
+}`} />
       </section>
 
       {/* ── 3. Cost calculator ───────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Стоимость: считаем реальные цифры</h2>
+        <SectionTitle>Стоимость: считаем реальные цифры</SectionTitle>
         <p className={s.body}>
           LLM API считается в токенах. Input (промпт) и output (ответ) тарифицируются
           отдельно — output обычно в 3-5 раз дороже. При тысячах запросов в день
@@ -158,7 +157,7 @@ while (true) {
 
       {/* ── 4. Caching ───────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Кэширование: три уровня</h2>
+        <SectionTitle>Кэширование: три уровня</SectionTitle>
         <p className={s.body}>
           Кэш — самая дешёвая оптимизация. Три уровня с разной стратегией:
         </p>
@@ -224,7 +223,7 @@ const cache = new SemanticCache({
 
       {/* ── 5. Model routing ────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Model Router: умная экономия</h2>
+        <SectionTitle>Model Router: умная экономия</SectionTitle>
         <p className={s.body}>
           Не все запросы одинаково сложны. &laquo;Привет&raquo; не требует
           Claude Opus. Роутер — это небольшая классифицирующая модель (или
@@ -286,7 +285,7 @@ const cache = new SemanticCache({
 
       {/* ── 6. Evals ──────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Evals: тестирование LLM-систем</h2>
+        <SectionTitle>Evals: тестирование LLM-систем</SectionTitle>
         <p className={s.body}>
           Изменил промпт — стало лучше или хуже? Без evals ответить невозможно.
           LLM eval — это тестирование, адаптированное под нестохастический
@@ -323,9 +322,7 @@ const cache = new SemanticCache({
           </div>
         </div>
 
-        <div className={s.codeBlock}>
-          <div className={s.codeBlockHeader}>LLM-as-Judge: автоматическая оценка ответов</div>
-          <code>{`async function evaluateAnswer(
+        <CodeHighlight lang="ts" filename="LLM-as-Judge: автоматическая оценка ответов" code={`async function evaluateAnswer(
   question: string,
   answer: string,
   groundTruth: string,
@@ -362,13 +359,12 @@ const results = await Promise.all(
   )
 );
 const avgScore = results.reduce((a, r) => a + r.score, 0) / results.length;
-console.log(\`Average score: \${avgScore.toFixed(2)}/5\`);`}</code>
-        </div>
+console.log(\`Average score: \${avgScore.toFixed(2)}/5\`);`} />
       </section>
 
       {/* ── 7. Observability ─────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Observability: видеть что происходит</h2>
+        <SectionTitle>Observability: видеть что происходит</SectionTitle>
         <p className={s.body}>
           Дебажить LLM-приложение без observability — как чинить машину в темноте.
           Нужно видеть каждый вызов: что ушло, что вернулось, сколько стоило,
@@ -407,9 +403,7 @@ console.log(\`Average score: \${avgScore.toFixed(2)}/5\`);`}</code>
           </div>
         </div>
 
-        <div className={s.codeBlock}>
-          <div className={s.codeBlockHeader}>Langfuse: ручной трейсинг любого LLM</div>
-          <code>{`import { Langfuse } from 'langfuse';
+        <CodeHighlight lang="ts" filename="Langfuse: ручной трейсинг любого LLM" code={`import { Langfuse } from 'langfuse';
 
 const langfuse = new Langfuse({
   publicKey: process.env.LANGFUSE_PUBLIC_KEY,
@@ -437,23 +431,21 @@ async function answerQuestion(userId: string, question: string) {
 
   await langfuse.flushAsync();
   return response;
-}`}</code>
-        </div>
+}`} />
       </section>
 
       {/* ── 8. Structured output ─────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Structured Output: надёжный JSON</h2>
+        <SectionTitle>Structured Output: надёжный JSON</SectionTitle>
         <p className={s.body}>
           Если LLM должна вернуть JSON для обработки кодом — нельзя полагаться
           на промпт &laquo;верни JSON&raquo;. Иногда модель добавляет markdown,
           объяснение или текст до/после — и парсер падает.
         </p>
 
-        <div className={s.codeBlock}>
-          <div className={s.codeBlockHeader}>Zod + Anthropic: гарантированный структурированный ответ</div>
-          <code>{`import Anthropic from '@anthropic-ai/sdk';
+        <CodeHighlight lang="ts" filename="Zod + Anthropic: гарантированный структурированный ответ" code={`import Anthropic from '@anthropic-ai/sdk';
 import { z } from 'zod';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 // Определяем схему ответа
 const ProductSchema = z.object({
@@ -497,22 +489,19 @@ async function extractProduct(text: string): Promise<Product> {
 
   // Validate with Zod
   return ProductSchema.parse(raw);
-}`}</code>
-        </div>
+}`} />
       </section>
 
       {/* ── 9. Error handling ────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Надёжность: обработка ошибок и retry</h2>
+        <SectionTitle>Надёжность: обработка ошибок и retry</SectionTitle>
         <p className={s.body}>
           LLM API не идеален: бывают timeout'ы, rate limits, временные сбои.
           Правильная обработка ошибок — разница между приложением, которое
           падает, и тем, которое деградирует gracefully.
         </p>
 
-        <div className={s.codeBlock}>
-          <div className={s.codeBlockHeader}>Production-ready вызов с retry и fallback</div>
-          <code>{`import Anthropic from '@anthropic-ai/sdk';
+        <CodeHighlight lang="ts" filename="Production-ready вызов с retry и fallback" code={`import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
   maxRetries: 3,      // Anthropic SDK делает retry автоматически
@@ -550,8 +539,7 @@ async function callWithFallback(messages: Anthropic.MessageParam[]) {
     // Graceful degradation — вернуть заглушку
     return { content: [{ text: 'Сервис временно недоступен. Попробуйте позже.' }] };
   }
-}`}</code>
-        </div>
+}`} />
 
         <div className={s.errorTable}>
           <div className={s.errorHead}>
@@ -579,7 +567,7 @@ async function callWithFallback(messages: Anthropic.MessageParam[]) {
 
       {/* ── 10. Quiz ────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверь себя</h2>
+        <SectionTitle>Проверь себя</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

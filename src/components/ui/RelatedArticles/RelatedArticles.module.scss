@@ -1,0 +1,145 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+// --rc = card's course accent color (set inline via style prop)
+
+.section {
+  margin-top: $space-12;
+  padding-top: $space-10;
+  border-top: 1px solid $border-subtle;
+}
+
+// ── Heading ───────────────────────────────────────────────────────────────────
+
+.heading {
+  margin-bottom: $space-5;
+}
+
+.headingLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  text-transform: uppercase;
+}
+
+// ── Grid ──────────────────────────────────────────────────────────────────────
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+
+  @include tablet  { grid-template-columns: repeat(2, 1fr); }
+  @include mobile  { grid-template-columns: 1fr; }
+}
+
+// ── Card ──────────────────────────────────────────────────────────────────────
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding: $space-4 $space-5;
+  background: $bg-surface;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  text-decoration: none;
+  overflow: hidden;
+  transition: border-color $t-normal, background $t-normal, box-shadow $t-normal;
+
+  // Accent top line
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--rc, #{$accent});
+    opacity: 0;
+    transition: opacity $t-normal;
+  }
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: $bg-elevated;
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.3);
+
+    &::before { opacity: 1; }
+
+    .cardTitle { color: var(--rc, #{$accent}); }
+  }
+}
+
+// ── Card internals ────────────────────────────────────────────────────────────
+
+.cardCourse {
+  font-family: $font-mono;
+  font-size: 10px;
+  letter-spacing: $letter-wider;
+  text-transform: uppercase;
+  color: var(--rc, #{$accent});
+  opacity: 0.75;
+}
+
+.cardTitle {
+  font-size: $text-base;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  line-height: $line-normal;
+  transition: color $t-fast;
+}
+
+.cardDesc {
+  font-size: $text-sm;
+  color: $text-muted;
+  line-height: $line-normal;
+  flex: 1;
+
+  // Clamp to 2 lines
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// ── Card footer ───────────────────────────────────────────────────────────────
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: $space-2;
+}
+
+.readTime {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  padding: 1px $space-2;
+  border-radius: $radius-sm;
+}
+
+.tag {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  padding: 1px $space-2;
+  border-radius: $radius-sm;
+}
+
+.live {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: var(--rc, #{$accent});
+  background: rgba(0, 229, 160, 0.08);
+  border: 1px solid rgba(0, 229, 160, 0.2);
+  padding: 1px $space-2;
+  border-radius: $radius-sm;
+}

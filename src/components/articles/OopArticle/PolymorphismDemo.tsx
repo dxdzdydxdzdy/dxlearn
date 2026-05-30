@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import s from './PolymorphismDemo.module.scss';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 interface Shape {
   id: string;

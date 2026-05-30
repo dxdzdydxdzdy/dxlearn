@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 import { Callout } from '@/components/ui/Callout/Callout';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
@@ -19,7 +20,7 @@ export function CascadeArticle() {
 
       {/* 1 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Что такое каскад</h2>
+        <SectionTitle>Что такое каскад</SectionTitle>
         <p className={s.prose}>
           <strong>Каскад</strong> — алгоритм, по которому браузер решает, какое CSS-правило применить
           к элементу, если несколько правил претендуют на одно свойство. Его называют «каскадом»,
@@ -48,7 +49,7 @@ export function CascadeArticle() {
 
       {/* 2 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Специфичность</h2>
+        <SectionTitle>Специфичность</SectionTitle>
         <p className={s.prose}>
           Специфичность — вес селектора, записываемый как четыре числа{' '}
           <code>(инлайн, ID, класс, тег)</code>. Числа сравниваются слева направо.
@@ -84,7 +85,7 @@ div.container { color: red; }
 
       {/* 3 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Калькулятор специфичности</h2>
+        <SectionTitle>Калькулятор специфичности</SectionTitle>
         <p className={s.prose}>
           Введи два CSS-селектора и сравни их специфичность. Числа вычисляются по стандарту CSS Selectors Level 4.
         </p>
@@ -93,7 +94,7 @@ div.container { color: red; }
 
       {/* 4 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>!important и инлайн-стили</h2>
+        <SectionTitle>!important и инлайн-стили</SectionTitle>
         <CodeHighlight lang="css" code={`/* !important перекрывает всё, кроме инлайн + !important */
 .btn { color: blue !important; }
 #app .btn { color: red; } /* проигрывает !important выше */
@@ -112,7 +113,7 @@ div.container { color: red; }
 
       {/* 5 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Наследование</h2>
+        <SectionTitle>Наследование</SectionTitle>
         <p className={s.prose}>
           Некоторые CSS-свойства автоматически наследуются от родителя. Другие — нет.
           Поведение определяется спецификацией.
@@ -142,7 +143,7 @@ div.container { color: red; }
 
       {/* 6 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Origin: откуда взялись стили</h2>
+        <SectionTitle>Origin: откуда взялись стили</SectionTitle>
         <p className={s.prose}>
           Помимо специфичности, каскад учитывает <strong>происхождение</strong> стилей. Порядок
           приоритета (от высшего к низшему):
@@ -163,7 +164,7 @@ user-agent               (браузерный дефолт, напр. h1 { font
 
       {/* 7 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Самопроверка</h2>
+        <SectionTitle>Самопроверка</SectionTitle>
         <p className={s.prose}>6 задач — от базового порядка правил до !important и наследования.</p>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>

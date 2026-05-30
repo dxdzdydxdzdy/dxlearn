@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 import { Callout } from '@/components/ui/Callout/Callout';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
@@ -11,7 +12,7 @@ export function PrototypesArticle() {
 
       {/* 1 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Прототипное наследование</h2>
+        <SectionTitle>Прототипное наследование</SectionTitle>
         <p className={s.prose}>
           В Java или C++ классы — это шаблоны, из которых создаются объекты. В JavaScript
           классов в классическом смысле не существует: каждый объект напрямую наследует от другого объекта.
@@ -35,7 +36,7 @@ console.log(Object.getPrototypeOf(dog) === animal); // true`} />
 
       {/* 2 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Цепочка прототипов</h2>
+        <SectionTitle>Цепочка прототипов</SectionTitle>
         <p className={s.prose}>
           Поиск свойства идёт по цепочке: объект → его прототип → прототип прототипа → … → <code>null</code>.
           Введи имя свойства и посмотри, как движок обходит узлы.
@@ -51,7 +52,7 @@ console.log(Object.getPrototypeOf(dog) === animal); // true`} />
 
       {/* 3 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Функции-конструкторы и new</h2>
+        <SectionTitle>Функции-конструкторы и new</SectionTitle>
         <p className={s.prose}>
           До появления классов объекты создавали через <strong>функции-конструкторы</strong>.
           Ключевое слово <code>new</code> делает четыре вещи:
@@ -95,7 +96,7 @@ console.log(rex.speak === bob.speak); // true`} />
 
       {/* 4 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Object.create()</h2>
+        <SectionTitle>Object.create()</SectionTitle>
         <p className={s.prose}>
           <code>Object.create(proto)</code> создаёт новый объект и явно задаёт его прототип.
           Это самый прямолинейный способ настроить цепочку без функций-конструкторов.
@@ -119,7 +120,7 @@ console.log(bare.toString); // undefined — нет Object.prototype в цепо
 
       {/* 5 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Классы ES6 — синтаксический сахар</h2>
+        <SectionTitle>Классы ES6 — синтаксический сахар</SectionTitle>
         <p className={s.prose}>
           Синтаксис <code>class</code>, появившийся в ES6, не вводит новую модель наследования.
           Под капотом это те же функции-конструкторы и прототипы — просто записанные иначе.
@@ -166,7 +167,7 @@ Dog.prototype.speak = function() { return this.name + ': гав!'; };`} />
 
       {/* 6 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверка цепочки</h2>
+        <SectionTitle>Проверка цепочки</SectionTitle>
         <CodeHighlight lang="js" code={`const d = new Dog('Rex');
 
 // instanceof — есть ли Foo.prototype в цепочке?
@@ -208,7 +209,7 @@ console.log('eat' in d);    // true (из Animal.prototype)`} />
 
       {/* 7 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Самопроверка</h2>
+        <SectionTitle>Самопроверка</SectionTitle>
         <p className={s.prose}>6 задач — от базового поиска по цепочке до тонкостей наследования.</p>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>

@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 import { Callout } from '@/components/ui/Callout/Callout';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
@@ -11,7 +12,7 @@ export function StorageArticle() {
 
       {/* 1 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Зачем знать разницу</h2>
+        <SectionTitle>Зачем знать разницу</SectionTitle>
         <p className={s.prose}>
           Неправильный выбор хранилища = баги или уязвимости. Токен в localStorage → XSS украдёт его.
           Данные в sessionStorage → пользователь потеряет корзину, открыв новую вкладку.
@@ -39,7 +40,7 @@ export function StorageArticle() {
 
       {/* 2 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Живая демонстрация</h2>
+        <SectionTitle>Живая демонстрация</SectionTitle>
         <p className={s.prose}>
           Запиши данные в localStorage и sessionStorage. Затем обнови страницу — localStorage
           сохранится, а sessionStorage очистится при закрытии вкладки.
@@ -49,7 +50,7 @@ export function StorageArticle() {
 
       {/* 3 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Cookie: больше, чем хранилище</h2>
+        <SectionTitle>Cookie: больше, чем хранилище</SectionTitle>
         <CodeHighlight lang="js" code={`// Клиентская установка cookie
 document.cookie = 'theme=dark; max-age=2592000; SameSite=Lax';
 
@@ -73,7 +74,7 @@ fetch('/api/user'); // браузер добавит Cookie: session=abc123`} />
 
       {/* 4 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Когда что использовать</h2>
+        <SectionTitle>Когда что использовать</SectionTitle>
         <table className={s.table}>
           <thead className={s.tableHead}>
             <tr><th>Задача</th><th>Хранилище</th><th>Почему</th></tr>
@@ -99,7 +100,7 @@ fetch('/api/user'); // браузер добавит Cookie: session=abc123`} />
 
       {/* 5 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Самопроверка</h2>
+        <SectionTitle>Самопроверка</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

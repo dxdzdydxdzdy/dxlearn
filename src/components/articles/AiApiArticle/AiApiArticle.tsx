@@ -1,7 +1,9 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { ApiPlayground } from './ApiPlayground';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { QUIZ_QUESTIONS } from './quizData';
 import s from './AiApiArticle.module.scss';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 export function AiApiArticle() {
   return (
@@ -9,7 +11,7 @@ export function AiApiArticle() {
 
       {/* ── 1. Два API — один паттерн ──────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Два API, один паттерн</h2>
+        <SectionTitle>Два API, один паттерн</SectionTitle>
         <p className={s.lead}>
           OpenAI и Anthropic — разные компании, но их API устроены похоже.
           Понял один — второй освоишь за час. Основа у обоих:
@@ -18,8 +20,7 @@ export function AiApiArticle() {
         <div className={s.twoCols}>
           <div className={s.colCard}>
             <div className={s.colHeader} style={{ color: '#4db8ff' }}>OpenAI (GPT-4o)</div>
-            <div className={s.codeBlock}>
-              <code>{`import OpenAI from 'openai';
+            <CodeHighlight lang="ts" code={`import OpenAI from 'openai';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -35,13 +36,11 @@ const res = await openai.chat.completions.create({
   max_tokens: 1024,
 });
 
-console.log(res.choices[0].message.content);`}</code>
-            </div>
+console.log(res.choices[0].message.content);`} />
           </div>
           <div className={s.colCard}>
             <div className={s.colHeader} style={{ color: '#ff9070' }}>Anthropic (Claude)</div>
-            <div className={s.codeBlock}>
-              <code>{`import Anthropic from '@anthropic-ai/sdk';
+            <CodeHighlight lang="ts" code={`import Anthropic from '@anthropic-ai/sdk';
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -56,8 +55,7 @@ const res = await anthropic.messages.create({
   max_tokens: 1024,
 });
 
-console.log(res.content[0].text);`}</code>
-            </div>
+console.log(res.content[0].text);`} />
           </div>
         </div>
         <div className={s.infoCard}>
@@ -73,7 +71,7 @@ console.log(res.content[0].text);`}</code>
 
       {/* ── 2. Анатомия запроса ────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Анатомия запроса</h2>
+        <SectionTitle>Анатомия запроса</SectionTitle>
         <p className={s.lead}>
           Каждый запрос к LLM API — это набор параметров.
           Разберём каждый, чтобы ты понимал что куда ставить и почему.
@@ -137,13 +135,12 @@ console.log(res.content[0].text);`}</code>
 
       {/* ── 3. System message ──────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>System message: настройка личности</h2>
+        <SectionTitle>System message: настройка личности</SectionTitle>
         <p className={s.lead}>
           System message — самый авторитетный текст для модели. Она читает его
           как «устав» — то, что нельзя нарушать независимо от того что скажет пользователь.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`// Плохой system prompt — размытый:
+        <CodeHighlight lang="ts" code={`// Плохой system prompt — размытый:
 "Ты полезный ассистент."
 
 // Хороший — конкретный:
@@ -162,8 +159,7 @@ console.log(res.content[0].text);`}</code>
 </rules>
 <output_format>
   Сначала TL;DR (1-2 предложения), затем подробный ответ
-</output_format>"`}</code>
-        </div>
+</output_format>"`} />
         <div className={s.warningCard}>
           <div className={s.warningLabel}>⚠ PROMPT INJECTION</div>
           <p className={s.warningText}>
@@ -177,7 +173,7 @@ console.log(res.content[0].text);`}</code>
 
       {/* ── 4. Playground ──────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Интерактив: три режима API</h2>
+        <SectionTitle>Интерактив: три режима API</SectionTitle>
         <p className={s.body}>
           Посмотри как выглядят реальные запросы и ответы.
           Три таба: базовый запрос/ответ, стриминг с SSE событиями, и полный цикл tool calling.
@@ -187,13 +183,12 @@ console.log(res.content[0].text);`}</code>
 
       {/* ── 5. Streaming ───────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Streaming: почему он обязателен в продакшне</h2>
+        <SectionTitle>Streaming: почему он обязателен в продакшне</SectionTitle>
         <p className={s.lead}>
           GPT-4o генерирует ~50–100 токенов в секунду. Длинный ответ = 10+ секунд ожидания.
           Со streaming пользователь начинает читать через 200ms — остальное догоняет.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`// Next.js App Router: стриминг прямо в HTTP Response
+        <CodeHighlight lang="ts" code={`// Next.js App Router: стриминг прямо в HTTP Response
 // app/api/chat/route.ts
 
 import OpenAI from 'openai';
@@ -232,13 +227,12 @@ while (true) {
   const { done, value } = await reader.read();
   if (done) break;
   setOutput(prev => prev + decoder.decode(value));  // React state update
-}`}</code>
-        </div>
+}`} />
       </section>
 
       {/* ── 6. Function Calling ────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Function Calling: LLM + реальный мир</h2>
+        <SectionTitle>Function Calling: LLM + реальный мир</SectionTitle>
         <p className={s.lead}>
           LLM не умеет лезть в интернет, читать базу данных или вызывать ваш код.
           Но может <em>попросить тебя</em> это сделать — и получить результат.
@@ -249,8 +243,7 @@ while (true) {
           Модель читает описания и сама решает: нужно ли вызвать инструмент,
           чтобы ответить на вопрос пользователя.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`// Полный цикл на TypeScript:
+        <CodeHighlight lang="ts" code={`// Полный цикл на TypeScript:
 import OpenAI from 'openai';
 
 const tools = [{
@@ -300,8 +293,7 @@ async function chat(userMessage: string) {
   }
 
   return msg1.content;
-}`}</code>
-        </div>
+}`} />
         <div className={s.callout}>
           <div className={s.calloutLabel}>ПАРАЛЛЕЛЬНЫЕ ВЫЗОВЫ</div>
           <p className={s.calloutText}>
@@ -314,7 +306,7 @@ async function chat(userMessage: string) {
 
       {/* ── 7. Structured Output ───────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Structured Output: надёжный JSON из LLM</h2>
+        <SectionTitle>Structured Output: надёжный JSON из LLM</SectionTitle>
         <p className={s.lead}>
           LLM возвращает текст. Но часто нужен JSON с конкретной схемой.
           Есть три способа — с очень разной надёжностью.
@@ -333,8 +325,7 @@ async function chat(userMessage: string) {
             <div className={s.relDesc}>Гарантирует точную схему через JSON Schema. GPT-4o+. Никаких сюрпризов.</div>
           </div>
         </div>
-        <div className={s.codeBlock}>
-          <code>{`// OpenAI Structured Outputs + Zod:
+        <CodeHighlight lang="ts" code={`// OpenAI Structured Outputs + Zod:
 import { zodResponseFormat } from 'openai/helpers/zod';
 import { z } from 'zod';
 
@@ -361,13 +352,12 @@ const article = res.choices[0].message.parsed;
 // Anthropic: передаёшь schema в промпт, парсишь ответ через Zod
 // anthropic не имеет нативных Structured Outputs — используй промпт:
 // "Ответь строго в JSON формате: { title: string, summary: string }"
-// + JSON.parse(res.content[0].text) + articleSchema.parse(data)`}</code>
-        </div>
+// + JSON.parse(res.content[0].text) + articleSchema.parse(data)`} />
       </section>
 
       {/* ── 8. Обработка ошибок ────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Обработка ошибок: production-ready</h2>
+        <SectionTitle>Обработка ошибок: production-ready</SectionTitle>
         <p className={s.lead}>
           API недоступен, rate limit, токенов не хватает — в проде всё это случается.
           Вот как выглядит надёжный wrapper.
@@ -386,9 +376,9 @@ const article = res.choices[0].message.parsed;
             </div>
           ))}
         </div>
-        <div className={s.codeBlock}>
-          <code>{`// Production-ready wrapper с retry:
+        <CodeHighlight lang="ts" code={`// Production-ready wrapper с retry:
 import OpenAI from 'openai';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -425,13 +415,12 @@ async function safeCompletion(
     }
     throw err;   // Неожиданная ошибка — пробрасываем выше
   }
-}`}</code>
-        </div>
+}`} />
       </section>
 
       {/* ── 9. Cost & Caching ──────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Стоимость, кэширование и production советы</h2>
+        <SectionTitle>Стоимость, кэширование и production советы</SectionTitle>
         <div className={s.tipsList}>
           {[
             {
@@ -478,7 +467,7 @@ async function safeCompletion(
 
       {/* ── 10. Quiz ───────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверь себя</h2>
+        <SectionTitle>Проверь себя</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

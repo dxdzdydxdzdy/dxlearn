@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 import { Callout } from '@/components/ui/Callout/Callout';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
@@ -11,7 +12,7 @@ export function FlexboxArticle() {
 
       {/* 1 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Что такое Flexbox</h2>
+        <SectionTitle>Что такое Flexbox</SectionTitle>
         <p className={s.prose}>
           <strong>Flexbox</strong> (Flexible Box Layout) — модель CSS для раскладки элементов в
           одном измерении: либо по строке, либо по столбцу. В отличие от float и inline-block,
@@ -32,7 +33,7 @@ export function FlexboxArticle() {
 
       {/* 2 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Свойства контейнера</h2>
+        <SectionTitle>Свойства контейнера</SectionTitle>
         <table className={s.table}>
           <thead className={s.tableHead}>
             <tr>
@@ -70,7 +71,7 @@ export function FlexboxArticle() {
 
       {/* 3 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Свойства элементов</h2>
+        <SectionTitle>Свойства элементов</SectionTitle>
         <table className={s.table}>
           <thead className={s.tableHead}>
             <tr>
@@ -114,7 +115,7 @@ export function FlexboxArticle() {
 
       {/* 4 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Интерактивная песочница</h2>
+        <SectionTitle>Интерактивная песочница</SectionTitle>
         <p className={s.prose}>
           Меняй параметры и наблюдай, как они влияют на раскладку. Справа — CSS-код, который
           будет применён к контейнеру.
@@ -124,7 +125,7 @@ export function FlexboxArticle() {
 
       {/* 5 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Типичные паттерны</h2>
+        <SectionTitle>Типичные паттерны</SectionTitle>
         <CodeHighlight lang="css" code={`/* 1. Центрирование по обеим осям */
 .centered {
   display: flex;
@@ -168,7 +169,7 @@ main { flex: 1; } /* растягивается, прижимая footer */
 
       {/* 6 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Flexbox vs Grid</h2>
+        <SectionTitle>Flexbox vs Grid</SectionTitle>
         <table className={s.table}>
           <thead className={s.tableHead}>
             <tr>
@@ -200,7 +201,7 @@ main { flex: 1; } /* растягивается, прижимая footer */
 
       {/* 7 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Самопроверка</h2>
+        <SectionTitle>Самопроверка</SectionTitle>
         <p className={s.prose}>6 задач — от базовых осей до расчёта flex-grow.</p>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>

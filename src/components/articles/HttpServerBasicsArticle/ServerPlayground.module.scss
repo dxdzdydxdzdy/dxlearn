@@ -1,0 +1,197 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.playground {
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $bg-base;
+}
+
+.playgroundHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-default;
+}
+
+.playgroundTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 340px;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+// ── Server code panel ─────────────────────────────────────────────────────────
+
+.codePanel {
+  border-right: 1px solid $border-subtle;
+  overflow: auto;
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.codePanelHeader {
+  padding: $space-2 $space-4;
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.code {
+  padding: $space-4;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  line-height: 1.8;
+  color: $text-secondary;
+  white-space: pre;
+}
+
+.codeLine {
+  display: block;
+  padding: 0 $space-2;
+  border-radius: $radius-sm;
+  transition: background $t-normal, color $t-normal;
+  margin: 0 -#{$space-2};
+
+  &.active {
+    background: rgba(0, 229, 160, 0.1);
+    color: $accent;
+  }
+
+  &.dim { color: $text-muted; }
+}
+
+// ── Client panel ──────────────────────────────────────────────────────────────
+
+.clientPanel {
+  display: flex;
+  flex-direction: column;
+}
+
+.clientPanelHeader {
+  padding: $space-2 $space-4;
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.requestList {
+  padding: $space-3;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.requestBtn {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-2 $space-3;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  background: $bg-surface;
+  cursor: pointer;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  text-align: left;
+  transition: border-color $t-fast, background $t-fast;
+  width: 100%;
+
+  &:hover { border-color: $border-strong; background: $bg-elevated; }
+  &.active { border-color: $accent; background: $accent-dim; }
+}
+
+.method {
+  font-size: 11px;
+  font-weight: 700;
+  width: 36px;
+  flex-shrink: 0;
+
+  &.get  { color: $accent; }
+  &.post { color: $info; }
+  &.del  { color: $error; }
+}
+
+.url {
+  color: $text-primary;
+  flex: 1;
+}
+
+.requestDesc {
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.divider {
+  height: 1px;
+  background: $border-subtle;
+  margin: $space-1 $space-3;
+}
+
+// ── Response ──────────────────────────────────────────────────────────────────
+
+.response {
+  margin: $space-3;
+  margin-top: 0;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  overflow: hidden;
+  animation: fadeIn 150ms ease;
+}
+
+.responseStatus {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-3;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+  font-family: $font-mono;
+  font-size: $text-sm;
+}
+
+.statusCode {
+  font-weight: 700;
+
+  &.ok   { color: $accent; }
+  &.miss { color: $error; }
+  &.err  { color: $warn; }
+}
+
+.responseBody {
+  padding: $space-3;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.placeholder {
+  padding: $space-5 $space-3;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

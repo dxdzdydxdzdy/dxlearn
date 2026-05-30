@@ -1,7 +1,9 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { LoraVisualizer } from './LoraVisualizer';
 import { QUIZ_QUESTIONS } from './quizData';
 import s from './FineTuningArticle.module.scss';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 export function FineTuningArticle() {
   return (
@@ -9,7 +11,7 @@ export function FineTuningArticle() {
 
       {/* ── 1. Что такое fine-tuning ──────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Что такое fine-tuning</h2>
+        <SectionTitle>Что такое fine-tuning</SectionTitle>
         <p className={s.lead}>
           Большие языковые модели — GPT, Claude, Llama — обучены на триллионах
           слов из интернета. Они знают язык, умеют рассуждать, понимают контекст.
@@ -70,7 +72,7 @@ export function FineTuningArticle() {
 
       {/* ── 2. Полный vs LoRA vs QLoRA ───────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Full Fine-Tuning vs LoRA vs QLoRA</h2>
+        <SectionTitle>Full Fine-Tuning vs LoRA vs QLoRA</SectionTitle>
         <p className={s.body}>
           Первый вопрос при fine-tuning: <strong>какой метод использовать</strong>?
           Полное обучение всех весов даёт максимальное качество, но требует
@@ -103,7 +105,7 @@ export function FineTuningArticle() {
 
       {/* ── 3. Датасет ───────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Как подготовить датасет</h2>
+        <SectionTitle>Как подготовить датасет</SectionTitle>
         <p className={s.body}>
           Качество датасета важнее его размера. 200 идеально написанных
           примеров лучше 2000 с ошибками и противоречиями. Модель буквально
@@ -200,7 +202,7 @@ export function FineTuningArticle() {
 
       {/* ── 4. Процесс обучения ───────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Процесс: от датасета до модели</h2>
+        <SectionTitle>Процесс: от датасета до модели</SectionTitle>
         <p className={s.body}>
           Инструменты для fine-tuning сейчас доступны всем. Основной стек —
           Hugging Face. Вот как выглядит весь процесс:
@@ -320,7 +322,7 @@ merged_model.push_to_hub("username/my-model")`}</div>
 
       {/* ── 5. Оценка качества ────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Как оценивать результат</h2>
+        <SectionTitle>Как оценивать результат</SectionTitle>
         <p className={s.body}>
           После обучения нужно понять: стало ли лучше? Есть несколько подходов,
           которые обычно комбинируют:
@@ -392,7 +394,7 @@ merged_model.push_to_hub("username/my-model")`}</div>
 
       {/* ── 6. DPO: обучение на предпочтениях ────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>DPO: когда нужно улучшить качество ответов</h2>
+        <SectionTitle>DPO: когда нужно улучшить качество ответов</SectionTitle>
         <p className={s.body}>
           Instruction fine-tuning учит модель <em>что говорить</em>. Но иногда нужно
           учить <em>как выбирать между вариантами</em> — делать ответы более
@@ -422,9 +424,7 @@ merged_model.push_to_hub("username/my-model")`}</div>
           </div>
         </div>
 
-        <div className={s.codeBlock}>
-          <div className={s.codeBlockHeader}>DPO через TRL</div>
-          <code>{`from trl import DPOTrainer, DPOConfig
+        <CodeHighlight lang="ts" filename="DPO через TRL" code={`from trl import DPOTrainer, DPOConfig
 
 # Датасет нужен в формате: prompt, chosen, rejected
 dpo_dataset = load_dataset("your-preference-dataset")
@@ -443,13 +443,12 @@ trainer = DPOTrainer(
     tokenizer=tokenizer,
 )
 
-trainer.train()`}</code>
-        </div>
+trainer.train()`} />
       </section>
 
       {/* ── 7. Облачные сервисы ───────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Fine-tuning без своих GPU</h2>
+        <SectionTitle>Fine-tuning без своих GPU</SectionTitle>
         <p className={s.body}>
           Не у всех есть кластер с A100. Вот где можно обучать в облаке:
         </p>
@@ -506,7 +505,7 @@ trainer.train()`}</code>
 
       {/* ── 8. Quiz ─────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверь себя</h2>
+        <SectionTitle>Проверь себя</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

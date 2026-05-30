@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 import { Callout } from '@/components/ui/Callout/Callout';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
@@ -11,7 +12,7 @@ export function HowBrowserWorksArticle() {
 
       {/* 1 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Зачем разработчику знать, как работает браузер</h2>
+        <SectionTitle>Зачем разработчику знать, как работает браузер</SectionTitle>
         <p className={s.prose}>
           Когда пользователь жалуется «сайт долго грузится», ты должен знать где именно —
           DNS? Сервер? Рендер? Без понимания pipeline браузера ты слепой.
@@ -27,7 +28,7 @@ export function HowBrowserWorksArticle() {
 
       {/* 2 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Задержки и как с ними работать</h2>
+        <SectionTitle>Задержки и как с ними работать</SectionTitle>
         <table className={s.table}>
           <thead className={s.tableHead}>
             <tr><th>Этап</th><th>Типичная задержка</th><th>Как ускорить</th></tr>
@@ -52,7 +53,7 @@ export function HowBrowserWorksArticle() {
 
       {/* 3 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Инструменты разработчика</h2>
+        <SectionTitle>Инструменты разработчика</SectionTitle>
         <CodeHighlight lang="bash" code={`# DevTools → Network Tab:
 # - Waterfall: визуализация всех этапов загрузки
 # - Timing: DNS / Initial connection / TTFB / Content Download
@@ -75,7 +76,7 @@ export function HowBrowserWorksArticle() {
 
       {/* 4 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Кэширование на каждом уровне</h2>
+        <SectionTitle>Кэширование на каждом уровне</SectionTitle>
         <CodeHighlight lang="bash" code={`# Уровни кэша (от быстрого к медленному):
 # 1. Memory cache      — уже загруженные ресурсы текущей вкладки
 # 2. Service Worker    — программируемый кэш (PWA, офлайн)
@@ -93,7 +94,7 @@ export function HowBrowserWorksArticle() {
 
       {/* 5 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Самопроверка</h2>
+        <SectionTitle>Самопроверка</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

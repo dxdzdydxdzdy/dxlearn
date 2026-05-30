@@ -32,6 +32,40 @@
   color: $text-secondary;
 }
 
+.copyBtn {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  letter-spacing: $letter-wide;
+  text-transform: uppercase;
+  color: $text-muted;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $space-1 $space-2;
+  border-radius: $radius-sm;
+  transition: color $t-fast, background $t-normal;
+  line-height: 1;
+
+  &:hover {
+    color: $text-secondary;
+    background: $bg-hover;
+  }
+
+  &:focus-visible {
+    outline: 1px solid $accent;
+    outline-offset: 2px;
+  }
+}
+
+.copyBtnDone {
+  color: $accent;
+
+  &:hover {
+    color: $accent;
+    background: $accent-dim;
+  }
+}
+
 .pre {
   margin: 0;
   @include custom-scrollbar;

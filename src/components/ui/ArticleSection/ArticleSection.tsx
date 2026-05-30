@@ -13,6 +13,10 @@ export function ArticleH2({ children }: { children: React.ReactNode }) {
   return <h2 className={s.h2}>{children}</h2>;
 }
 
+export function SectionTitle({ children }: { children: React.ReactNode }) {
+  return <h2 className={s.sectionTitle}>{children}</h2>;
+}
+
 export function ArticleH3({ children }: { children: React.ReactNode }) {
   return <h3 className={s.h3}>{children}</h3>;
 }

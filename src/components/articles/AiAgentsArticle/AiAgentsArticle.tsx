@@ -1,7 +1,9 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { AgentPlayground } from './AgentPlayground';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { QUIZ_QUESTIONS } from './quizData';
 import s from './AiAgentsArticle.module.scss';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 export function AiAgentsArticle() {
   return (
@@ -9,7 +11,7 @@ export function AiAgentsArticle() {
 
       {/* ── 1. Что такое агент ──────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Агент = LLM + инструменты + цикл</h2>
+        <SectionTitle>Агент = LLM + инструменты + цикл</SectionTitle>
         <p className={s.lead}>
           Обычный LLM-запрос — это функция: один вход, один выход, без состояния.
           Агент — это <strong>цикл</strong>: модель решает что делать, вызывает инструменты,
@@ -29,8 +31,7 @@ export function AiAgentsArticle() {
             </div>
           ))}
         </div>
-        <div className={s.codeBlock}>
-          <code>{`// Простейший агентский цикл (псевдокод):
+        <CodeHighlight lang="ts" code={`// Простейший агентский цикл (псевдокод):
 const messages = [{ role: 'system', content: systemPrompt }];
 messages.push({ role: 'user', content: userQuery });
 
@@ -55,13 +56,12 @@ for (let i = 0; i < MAX_ITERATIONS; i++) {
     // ↑ Цикл продолжается: модель видит результаты и решает дальше
   }
 }
-throw new Error('Max iterations reached');`}</code>
-        </div>
+throw new Error('Max iterations reached');`} />
       </section>
 
       {/* ── 2. Tool Calling ─────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Tool Calling: как это работает</h2>
+        <SectionTitle>Tool Calling: как это работает</SectionTitle>
         <p className={s.lead}>
           Модель не «вызывает» функцию напрямую — она генерирует структурированный JSON
           с именем инструмента и аргументами. Твой код читает этот JSON, вызывает
@@ -97,8 +97,7 @@ throw new Error('Max iterations reached');`}</code>
             </div>
           ))}
         </div>
-        <div className={s.codeBlock}>
-          <code>{`// Шаг 1: Определяем tool schema (формат OpenAI)
+        <CodeHighlight lang="ts" code={`// Шаг 1: Определяем tool schema (формат OpenAI)
 const tools = [
   {
     type: 'function',
@@ -155,13 +154,12 @@ if (response.choices[0].finish_reason === 'tool_calls') {
     ],
     tools,
   });
-}`}</code>
-        </div>
+}`} />
       </section>
 
       {/* ── 3. ReAct паттерн ────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>ReAct: Reasoning + Acting</h2>
+        <SectionTitle>ReAct: Reasoning + Acting</SectionTitle>
         <p className={s.lead}>
           ReAct (Yao et al., 2022) — это не фреймворк, а паттерн.
           Перед каждым действием модель явно рассуждает: <strong>Thought</strong>.
@@ -172,8 +170,7 @@ if (response.choices[0].finish_reason === 'tool_calls') {
         <div className={s.twoCols}>
           <div className={s.colCard}>
             <div className={s.colTitle} style={{ color: '#ff5f6a' }}>Без ReAct (просто tool calling)</div>
-            <div className={s.codeBlock}>
-              <code>{`User: Найди столицу Австралии
+            <CodeHighlight lang="ts" code={`User: Найди столицу Австралии
 
 // Модель напрямую → action:
 get_info("столица Австралии")
@@ -185,13 +182,11 @@ get_info("столица Австралии")
 // Проблема: нет рассуждения —
 // модель не объясняет почему
 // выбрала именно этот инструмент
-// и с этими параметрами`}</code>
-            </div>
+// и с этими параметрами`} />
           </div>
           <div className={s.colCard}>
             <div className={s.colTitle} style={{ color: '#00e5a0' }}>С ReAct</div>
-            <div className={s.codeBlock}>
-              <code>{`User: Найди столицу Австралии
+            <CodeHighlight lang="ts" code={`User: Найди столицу Австралии
 
 Thought: Многие думают что это
   Сидней, но это неверно. Лучше
@@ -206,8 +201,7 @@ Observation: "Канберра, основана
 Thought: Подтверждено — Канберра.
   Могу дать полный ответ.
 
-Answer: Канберра (не Сидней!)`}</code>
-            </div>
+Answer: Канберра (не Сидней!)`} />
           </div>
         </div>
         <div className={s.callout}>
@@ -224,7 +218,7 @@ Answer: Канберра (не Сидней!)`}</code>
 
       {/* ── 4. Agent Playground ─────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Интерактив: смотри ReAct в действии</h2>
+        <SectionTitle>Интерактив: смотри ReAct в действии</SectionTitle>
         <p className={s.body}>
           Выбери вопрос и нажми <strong>Запустить агента</strong>.
           Третий запрос самый интересный — два последовательных tool call
@@ -235,7 +229,7 @@ Answer: Канберра (не Сидней!)`}</code>
 
       {/* ── 5. Виды памяти ──────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Виды памяти агента</h2>
+        <SectionTitle>Виды памяти агента</SectionTitle>
         <p className={s.lead}>
           Агент без памяти — это Гай Пирс из «Помни»: каждый раз с нуля.
           Вот четыре типа памяти от самой простой к самой сложной.
@@ -281,8 +275,7 @@ Answer: Канберра (не Сидней!)`}</code>
             </div>
           ))}
         </div>
-        <div className={s.codeBlock}>
-          <code>{`// Паттерн: суммаризация при переполнении контекста
+        <CodeHighlight lang="ts" code={`// Паттерн: суммаризация при переполнении контекста
 async function manageContext(messages: Message[]): Promise<Message[]> {
   const totalTokens = countTokens(messages);
 
@@ -305,13 +298,12 @@ async function manageContext(messages: Message[]): Promise<Message[]> {
     { role: 'assistant', content: \`[Предыдущий контекст]: \${summary}\` },
     ...recent,
   ];
-}`}</code>
-        </div>
+}`} />
       </section>
 
       {/* ── 6. Multi-agent ──────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Multi-agent: оркестратор и субагенты</h2>
+        <SectionTitle>Multi-agent: оркестратор и субагенты</SectionTitle>
         <p className={s.lead}>
           Один агент хорош для одной задачи. Для сложных проектов —
           система агентов: оркестратор разбивает задачу и делегирует
@@ -338,8 +330,7 @@ async function manageContext(messages: Message[]): Promise<Message[]> {
             ))}
           </div>
         </div>
-        <div className={s.codeBlock}>
-          <code>{`// OpenAI Swarm — простейший multi-agent
+        <CodeHighlight lang="ts" code={`// OpenAI Swarm — простейший multi-agent
 import Swarm from 'openai-swarm';
 
 const client = new Swarm();
@@ -376,13 +367,12 @@ const orchestrator = {
 const result = await client.run({
   agent: orchestrator,
   messages: [{ role: 'user', content: 'Напиши отчёт про рынок AI в 2024' }],
-});`}</code>
-        </div>
+});`} />
       </section>
 
       {/* ── 7. Когда использовать агентов ───────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Агент vs цепочка vs простой промпт</h2>
+        <SectionTitle>Агент vs цепочка vs простой промпт</SectionTitle>
         <p className={s.body}>
           Агенты — не серебряная пуля. Они дороже, медленнее и менее предсказуемы.
           Используй самый простой подход который решает задачу.
@@ -444,7 +434,7 @@ const result = await client.run({
 
       {/* ── 8. Риски ────────────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Риски и как их нейтрализовать</h2>
+        <SectionTitle>Риски и как их нейтрализовать</SectionTitle>
         <div className={s.risksList}>
           {[
             {
@@ -498,14 +488,14 @@ const result = await client.run({
 
       {/* ── 9. Практика: пишем агента ───────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Практика: агент с инструментами на TypeScript</h2>
+        <SectionTitle>Практика: агент с инструментами на TypeScript</SectionTitle>
         <p className={s.body}>
           Минимальный production-ready агент: валидация параметров, обработка ошибок,
           ограничение итераций. Копируй и дорабатывай под свою задачу.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`import OpenAI from 'openai';
+        <CodeHighlight lang="ts" code={`import OpenAI from 'openai';
 import { z } from 'zod';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 const client = new OpenAI();
 
@@ -615,8 +605,7 @@ export async function runAgent(userMessage: string): Promise<string> {
 
   return 'Достигнут лимит итераций. Последний известный результат: ' +
     messages.findLast(m => m.role === 'assistant')?.content ?? '';
-}`}</code>
-        </div>
+}`} />
         <div className={s.infoCard}>
           <div className={s.infoLabel}>ФРЕЙМВОРКИ</div>
           <p className={s.infoText}>
@@ -632,7 +621,7 @@ export async function runAgent(userMessage: string): Promise<string> {
 
       {/* ── 10. Quiz ──────────────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверь себя</h2>
+        <SectionTitle>Проверь себя</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

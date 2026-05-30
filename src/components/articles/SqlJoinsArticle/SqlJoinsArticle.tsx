@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { JoinVisualizer } from '../SqlQueriesArticle/JoinVisualizer';
@@ -44,7 +45,7 @@ export function SqlJoinsArticle() {
 
       {/* 1. Зачем JOIN */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Зачем нужен JOIN</h2>
+        <SectionTitle>Зачем нужен JOIN</SectionTitle>
         <p className={s.lead}>
           Реляционные базы данных хранят данные в нескольких таблицах — это нормализация.
           Заказы отдельно от пользователей, пользователи отдельно от отделов.
@@ -82,7 +83,7 @@ INNER JOIN departments d ON u.dept_id = d.id`} />
 
       {/* 2. Визуализация */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Типы JOIN — интерактивно</h2>
+        <SectionTitle>Типы JOIN — интерактивно</SectionTitle>
         <p className={s.lead}>
           Выбери тип JOIN — увидишь какие строки попадут в результат.
         </p>
@@ -91,7 +92,7 @@ INNER JOIN departments d ON u.dept_id = d.id`} />
 
       {/* 3. Обзор типов */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Пять типов JOIN</h2>
+        <SectionTitle>Пять типов JOIN</SectionTitle>
         <div className={s.keyGrid}>
           {JOIN_TYPES.map(j => (
             <div key={j.name} className={s.keyCard} style={{ '--kc': j.color } as React.CSSProperties}>
@@ -105,7 +106,7 @@ INNER JOIN departments d ON u.dept_id = d.id`} />
 
       {/* 4. INNER JOIN */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>INNER JOIN</h2>
+        <SectionTitle>INNER JOIN</SectionTitle>
         <p className={s.lead}>
           Пересечение двух множеств. Строка попадает в результат только если
           условие ON истинно для пары строк из обеих таблиц.
@@ -139,7 +140,7 @@ ORDER BY o.amount DESC;`} />
 
       {/* 5. LEFT JOIN */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>LEFT JOIN — сохранить всех слева</h2>
+        <SectionTitle>LEFT JOIN — сохранить всех слева</SectionTitle>
         <p className={s.lead}>
           Возвращает все строки левой таблицы. Для строк без совпадения в правой таблице —
           колонки правой заполняются NULL. Незаменим когда нужно «всё из A, и если есть — из B».
@@ -180,7 +181,7 @@ ORDER BY total DESC;`} />
 
       {/* 6. RIGHT и FULL OUTER */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>RIGHT JOIN и FULL OUTER JOIN</h2>
+        <SectionTitle>RIGHT JOIN и FULL OUTER JOIN</SectionTitle>
 
         <CodeHighlight lang="sql" code={`-- RIGHT JOIN = LEFT JOIN с переставленными таблицами
 -- Оба запроса дают одинаковый результат:
@@ -208,7 +209,7 @@ FULL OUTER JOIN departments d ON u.dept_id = d.id;
 
       {/* 7. CROSS JOIN и SELF JOIN */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>CROSS JOIN и SELF JOIN</h2>
+        <SectionTitle>CROSS JOIN и SELF JOIN</SectionTitle>
 
         <CodeHighlight lang="sql" code={`-- CROSS JOIN: каждая строка × каждую строку (без ON)
 SELECT u.name, d.title
@@ -228,7 +229,7 @@ ORDER BY e.name;
 
       {/* 8. Несколько JOIN */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Несколько JOIN подряд</h2>
+        <SectionTitle>Несколько JOIN подряд</SectionTitle>
         <p className={s.lead}>
           JOIN можно цеплять один за другим. PostgreSQL строит промежуточный результат
           последовательно: сначала users + departments, потом результат + orders.
@@ -271,7 +272,7 @@ ORDER BY total DESC;`} />
 
       {/* 9. ON vs USING */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>ON vs USING</h2>
+        <SectionTitle>ON vs USING</SectionTitle>
 
         <CodeHighlight lang="sql" code={`-- ON: явное условие, колонки могут называться по-разному
 SELECT u.name, d.title
@@ -292,7 +293,7 @@ JOIN bonus_tiers b ON o.amount BETWEEN b.min_val AND b.max_val;`} />
 
       {/* 10. Практика */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Практика — 10 задач на JOIN</h2>
+        <SectionTitle>Практика — 10 задач на JOIN</SectionTitle>
         <p className={s.lead}>
           От простого INNER JOIN до тройных соединений и anti-join. Пиши запрос, жми «Проверить».
         </p>
@@ -301,7 +302,7 @@ JOIN bonus_tiers b ON o.amount BETWEEN b.min_val AND b.max_val;`} />
 
       {/* 11. Quiz */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверь себя — 22 вопроса</h2>
+        <SectionTitle>Проверь себя — 22 вопроса</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

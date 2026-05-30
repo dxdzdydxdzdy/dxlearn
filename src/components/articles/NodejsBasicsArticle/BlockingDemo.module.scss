@@ -1,0 +1,200 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.demo {
+  background: $bg-base;
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-default;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.title {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.controls {
+  display: flex;
+  gap: $space-2;
+  align-items: center;
+}
+
+.btn {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  padding: $space-1 $space-3;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  background: none;
+  color: $text-secondary;
+  cursor: pointer;
+  transition: color $t-fast, border-color $t-fast, background $t-fast;
+
+  &:hover:not(:disabled) { color: $accent; border-color: rgba(0, 229, 160, 0.4); }
+  &:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  &.primary {
+    color: $accent;
+    border-color: rgba(0, 229, 160, 0.4);
+    background: $accent-dim;
+
+    &:hover:not(:disabled) { background: rgba(0, 229, 160, 0.18); }
+  }
+}
+
+.modeBar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid $border-default;
+}
+
+.modeBtn {
+  padding: $space-2 $space-4;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color $t-fast, border-color $t-fast;
+  text-align: center;
+
+  &:hover { color: $text-secondary; }
+
+  &.active {
+    color: $text-primary;
+    border-bottom-color: $accent;
+  }
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 280px;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.lane {
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+
+  &:first-child { border-right: 1px solid $border-subtle; @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; } }
+}
+
+.laneTitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.requests {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  flex: 1;
+}
+
+.request {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-3;
+  border-radius: $radius-sm;
+  border: 1px solid $border-subtle;
+  background: $bg-surface;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  transition: border-color $t-normal, background $t-normal;
+  position: relative;
+  overflow: hidden;
+
+  &.waiting {
+    color: $text-muted;
+    border-color: $border-subtle;
+  }
+
+  &.active {
+    color: $text-primary;
+    border-color: $warn;
+    background: rgba(240, 192, 64, 0.06);
+  }
+
+  &.done {
+    color: $accent;
+    border-color: rgba(0, 229, 160, 0.3);
+    background: $accent-dim;
+  }
+}
+
+.requestDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: background $t-normal;
+}
+
+.requestLabel {
+  flex: 1;
+}
+
+.requestTime {
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: $warn;
+  transition: width 100ms linear;
+}
+
+.totalTime {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  padding-top: $space-1;
+  border-top: 1px solid $border-subtle;
+  transition: color $t-normal;
+
+  &.fast { color: $accent; }
+  &.slow { color: $warn; }
+}
+
+.hint {
+  grid-column: 1 / -1;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  text-align: center;
+  padding: $space-6;
+}
+
+.note {
+  padding: $space-2 $space-4;
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  border-top: 1px solid $border-subtle;
+  background: $bg-elevated;
+}

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getCourse, courses, type Article } from '@/content/courses';
+import { calcReadingTime } from '@/lib/readingTime';
 import s from './page.module.scss';
 
 interface Props {
@@ -33,6 +34,7 @@ const COURSE_META: Record<string, { color: string; glow: string }> = {
   databases:          { color: '#00e5a0', glow: 'rgba(0,229,160,0.12)'   },
   backend:            { color: '#57ab5a', glow: 'rgba(87,171,90,0.12)'   },
   devops:             { color: '#ff7b72', glow: 'rgba(255,123,114,0.12)' },
+  algorithms:         { color: '#fb923c', glow: 'rgba(251,146,60,0.12)'  },
 };
 
 // ── Group articles by section ─────────────────────────────────────────────────
@@ -103,7 +105,13 @@ export default async function CoursePage({ params }: Props) {
                   {article.interactive && (
                     <span className={s.interactiveBadge}>◆ live</span>
                   )}
-                  {article.tags?.slice(0, 3).map(tag => (
+                  {(() => {
+                    const mins = calcReadingTime(article.slug);
+                    return mins !== null
+                      ? <span className={s.readTime}>{mins} мин</span>
+                      : null;
+                  })()}
+                  {article.tags?.slice(0, 2).map(tag => (
                     <span key={tag} className={s.tagChip}>{tag}</span>
                   ))}
                 </div>

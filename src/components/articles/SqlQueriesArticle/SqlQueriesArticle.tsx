@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { SqlPlayground } from './SqlPlayground';
 import { JoinVisualizer } from './JoinVisualizer';
 import { SqlChallenges } from './SqlChallenges';
@@ -31,7 +32,7 @@ export function SqlQueriesArticle() {
 
       {/* 1. Playground */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Интерактивный SQL-плейграунд</h2>
+        <SectionTitle>Интерактивный SQL-плейграунд</SectionTitle>
         <p className={s.lead}>
           Пиши настоящие SQL-запросы прямо в браузере. Три таблицы:
           <code> users</code>, <code>orders</code>, <code>departments</code>.
@@ -42,7 +43,7 @@ export function SqlQueriesArticle() {
 
       {/* 2. Execution order */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Порядок выполнения запроса</h2>
+        <SectionTitle>Порядок выполнения запроса</SectionTitle>
         <p className={s.lead}>
           SQL — декларативный язык. Ты описываешь <em>что</em> хочешь, а не <em>как</em> это получить.
           Но понимать логический порядок выполнения критично — особенно для WHERE vs HAVING и алиасов.
@@ -70,7 +71,7 @@ export function SqlQueriesArticle() {
 
       {/* 3. SELECT + WHERE */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>SELECT и WHERE</h2>
+        <SectionTitle>SELECT и WHERE</SectionTitle>
         <p className={s.lead}>
           WHERE поддерживает богатый набор операторов. Важно знать нюансы каждого.
         </p>
@@ -112,7 +113,7 @@ export function SqlQueriesArticle() {
 
       {/* 4. GROUP BY + aggregates */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>GROUP BY и агрегатные функции</h2>
+        <SectionTitle>GROUP BY и агрегатные функции</SectionTitle>
         <p className={s.lead}>
           GROUP BY объединяет строки с одинаковыми значениями в группы.
           Агрегатные функции вычисляют одно значение для каждой группы.
@@ -158,7 +159,7 @@ ORDER BY cnt DESC`} />
 
       {/* 5. JOIN */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>JOIN: объединение таблиц</h2>
+        <SectionTitle>JOIN: объединение таблиц</SectionTitle>
         <p className={s.lead}>
           JOIN соединяет строки из двух таблиц по условию. Тип JOIN определяет, что происходит
           со строками без совпадений.
@@ -185,7 +186,7 @@ ORDER BY total DESC`} />
 
       {/* 6. NULL handling */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>NULL: трёхзначная логика</h2>
+        <SectionTitle>NULL: трёхзначная логика</SectionTitle>
         <p className={s.lead}>
           NULL — не пустая строка, не 0. NULL означает «неизвестно». Это меняет всё.
         </p>
@@ -226,7 +227,7 @@ ORDER BY total DESC`} />
 
       {/* 7. Window functions */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Оконные функции</h2>
+        <SectionTitle>Оконные функции</SectionTitle>
         <p className={s.lead}>
           Оконные функции вычисляют значение для каждой строки относительно «окна» — набора соседних строк.
           В отличие от GROUP BY, они не схлопывают строки.
@@ -275,7 +276,7 @@ ORDER BY salary`} />
 
       {/* 8. Subqueries + CTEs */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Подзапросы и CTE</h2>
+        <SectionTitle>Подзапросы и CTE</SectionTitle>
 
         <CodeHighlight lang="sql" code={`-- Скалярный подзапрос: сравнение с одним значением
 SELECT name, salary
@@ -308,7 +309,7 @@ ORDER BY cnt DESC`} />
 
       {/* 9. Challenges */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Практика: напиши сам</h2>
+        <SectionTitle>Практика: напиши сам</SectionTitle>
         <p className={s.lead}>
           6 задач с реальными данными. Пиши запрос, нажимай «Проверить» — система сравнит
           результат с ожидаемым.
@@ -318,7 +319,7 @@ ORDER BY cnt DESC`} />
 
       {/* 10. Quiz */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверь себя — 22 вопроса</h2>
+        <SectionTitle>Проверь себя — 22 вопроса</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

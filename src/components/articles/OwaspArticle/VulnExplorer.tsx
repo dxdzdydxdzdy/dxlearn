@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import s from './VulnExplorer.module.scss';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 

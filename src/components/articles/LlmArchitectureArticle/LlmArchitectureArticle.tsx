@@ -1,7 +1,9 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { LlmGenerator } from './LlmGenerator';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { QUIZ_QUESTIONS } from './quizData';
 import s from './LlmArchitectureArticle.module.scss';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 export function LlmArchitectureArticle() {
   return (
@@ -9,14 +11,13 @@ export function LlmArchitectureArticle() {
 
       {/* ── 1. Главная идея ─────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>LLM не думает — он угадывает следующий токен</h2>
+        <SectionTitle>LLM не думает — он угадывает следующий токен</SectionTitle>
         <p className={s.lead}>
           ChatGPT, Claude, Gemini — как бы умно они ни звучали, внутри происходит одно и то же:
           модель смотрит на весь текст до этого момента и предсказывает, какой кусочек текста
           должен идти следующим.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`Промпт: "Столица Франции —"
+        <CodeHighlight lang="ts" code={`Промпт: "Столица Франции —"
 
 Модель вычисляет вероятности следующего токена:
   "Пар"     → 94.2%  ← побеждает
@@ -29,8 +30,7 @@ export function LlmArchitectureArticle() {
 Снова вычисляет... → "иж" → 99.7%
 Добавляет "иж". Итог: "Париж".
 
-Вот и весь "интеллект" — один токен за раз.`}</code>
-        </div>
+Вот и весь "интеллект" — один токен за раз.`} />
         <p className={s.body}>
           Каждый шаг — отдельный прогон через всю модель. Никакого «обдумывания» —
           только статистика паттернов из обучающих данных. Сложность ответов возникает не потому что
@@ -48,7 +48,7 @@ export function LlmArchitectureArticle() {
 
       {/* ── 2. Токены ───────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Токен — единица текста для модели</h2>
+        <SectionTitle>Токен — единица текста для модели</SectionTitle>
         <p className={s.lead}>
           Модель не работает с буквами и не работает со словами. Она работает с <strong>токенами</strong> —
           кусочками текста, которые определяет специальный алгоритм — <strong>токенизатор</strong>.
@@ -88,7 +88,7 @@ export function LlmArchitectureArticle() {
 
       {/* ── 3. Interactive ───────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Попробуй: токенизация и temperature</h2>
+        <SectionTitle>Попробуй: токенизация и temperature</SectionTitle>
         <p className={s.body}>
           Посмотри как реально разбивается текст на токены — и как параметр temperature
           меняет выбор следующего слова.
@@ -98,14 +98,13 @@ export function LlmArchitectureArticle() {
 
       {/* ── 4. Embeddings ────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Токены → векторы: пространство смыслов</h2>
+        <SectionTitle>Токены → векторы: пространство смыслов</SectionTitle>
         <p className={s.lead}>
           Модель не работает с токенами напрямую. Каждый токен сначала превращается
           в <strong>вектор чисел</strong> — длинный список вроде [0.21, -0.87, 1.45, ...].
           Это называется <strong>embedding</strong>.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`# Каждый токен → вектор из 4096 чисел (в GPT-4)
+        <CodeHighlight lang="ts" code={`# Каждый токен → вектор из 4096 чисел (в GPT-4)
 "кот"    → [0.21, -0.87,  1.45, ..., -0.12]
 "кошка"  → [0.19, -0.91,  1.43, ..., -0.10]  ← близко к "кот"
 "автомобиль" → [-1.2, 0.34, -0.87, ..., 0.67]  ← далеко
@@ -115,8 +114,7 @@ export function LlmArchitectureArticle() {
 
 # Знаменитый пример:
 # вектор("король") - вектор("мужчина") + вектор("женщина")
-# ≈ вектор("королева")  ← это работает буквально!`}</code>
-        </div>
+# ≈ вектор("королева")  ← это работает буквально!`} />
         <p className={s.body}>
           Близкие по смыслу слова — близкие векторы в этом пространстве. Модель обучает эти векторы
           вместе со всеми остальными весами. После обучения в этом пространстве закодирована
@@ -127,7 +125,7 @@ export function LlmArchitectureArticle() {
 
       {/* ── 5. Трансформер ───────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Трансформер: архитектура за 5 минут</h2>
+        <SectionTitle>Трансформер: архитектура за 5 минут</SectionTitle>
         <p className={s.lead}>
           «Трансформер» — это архитектура нейросети, предложенная в 2017 году в статье
           «Attention is All You Need». Она заменила RNN и стала основой всех современных LLM.
@@ -189,14 +187,13 @@ export function LlmArchitectureArticle() {
 
       {/* ── 6. Attention ─────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Attention: нейрон смотрит на контекст</h2>
+        <SectionTitle>Attention: нейрон смотрит на контекст</SectionTitle>
         <p className={s.lead}>
           Главная инновация трансформера — механизм <strong>Attention</strong>.
           Он решает проблему, которая была у предыдущих архитектур:
           как токен может учитывать любой другой токен в тексте, независимо от расстояния?
         </p>
-        <div className={s.codeBlock}>
-          <code>{`Текст: "Иван пришёл домой. Он был уставший."
+        <CodeHighlight lang="ts" code={`Текст: "Иван пришёл домой. Он был уставший."
 
 Вопрос: кто такой "Он"?
 
@@ -208,8 +205,7 @@ Attention для слова "Он":
   "уставший"→ вес 0.01
 
 Итог: "Он" получает вектор = сумма векторов,
-взвешенная по этим весам → смысл разрешён.`}</code>
-        </div>
+взвешенная по этим весам → смысл разрешён.`} />
         <p className={s.body}>
           Каждый токен задаёт три вектора: <strong>Query</strong> (что ищу),
           <strong> Key</strong> (что я из себя представляю) и <strong>Value</strong> (что я передам).
@@ -235,7 +231,7 @@ Attention для слова "Он":
 
       {/* ── 7. Context Window ────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Context Window: сколько модель может «видеть»</h2>
+        <SectionTitle>Context Window: сколько модель может «видеть»</SectionTitle>
         <p className={s.lead}>
           Attention вычисляется между всеми токенами сразу — но это ограничено числом токенов,
           которые модель может обработать за один раз. Это и есть <strong>context window</strong>.
@@ -269,7 +265,7 @@ Attention для слова "Он":
 
       {/* ── 8. Температура и генерация ───────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Как рождается текст: sampling</h2>
+        <SectionTitle>Как рождается текст: sampling</SectionTitle>
         <p className={s.lead}>
           Модель выдаёт вероятности для каждого токена в словаре (~100K токенов).
           Как выбрать один? Это называется <strong>sampling стратегия</strong>.
@@ -312,13 +308,12 @@ Attention для слова "Он":
 
       {/* ── 9. Масштаб ──────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Почему больше = умнее: scaling laws</h2>
+        <SectionTitle>Почему больше = умнее: scaling laws</SectionTitle>
         <p className={s.lead}>
           В 2020 году OpenAI обнаружили <strong>scaling laws</strong>: качество модели предсказуемо
           растёт с увеличением трёх вещей — числа параметров, объёма данных и вычислительного бюджета.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`# Scaling laws (Kaplan et al., 2020):
+        <CodeHighlight lang="ts" code={`# Scaling laws (Kaplan et al., 2020):
 Loss ∝ (параметры)^(-0.076)
 Loss ∝ (токены данных)^(-0.095)
 Loss ∝ (FLOPs)^(-0.050)
@@ -332,8 +327,7 @@ GPT-4  (2023):    ~1T параметров (оценка)
 # Chinchilla (DeepMind, 2022):
 # Для оптимального обучения нужно:
 # токены ≈ 20 × параметры
-# Llama 3 8B обучен на 15T токенах`}</code>
-        </div>
+# Llama 3 8B обучен на 15T токенах`} />
         <p className={s.body}>
           С ростом масштаба появились <strong>emergent abilities</strong> — способности, которых
           нет у малых моделей. Арифметика, chain-of-thought рассуждения, программирование,
@@ -354,7 +348,7 @@ GPT-4  (2023):    ~1T параметров (оценка)
 
       {/* ── 10. Итог ─────────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Итог: как всё работает вместе</h2>
+        <SectionTitle>Итог: как всё работает вместе</SectionTitle>
         <div className={s.flowSteps}>
           {[
             { num: '1', title: 'Токенизация', desc: 'Текст → список токенов через BPE словарь (~100K токенов)' },
@@ -377,7 +371,7 @@ GPT-4  (2023):    ~1T параметров (оценка)
 
       {/* ── Quiz ─────────────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверь себя</h2>
+        <SectionTitle>Проверь себя</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

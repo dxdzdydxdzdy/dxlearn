@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 import { Callout } from '@/components/ui/Callout/Callout';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
@@ -11,7 +12,7 @@ export function ProgressiveSsrArticle() {
 
       {/* 1 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проблема традиционного SSR</h2>
+        <SectionTitle>Проблема традиционного SSR</SectionTitle>
         <p className={s.prose}>
           В классическом SSR сервер собирает весь HTML — загружает все данные, рендерит все
           компоненты — и только потом отправляет клиенту. Страница с медленным блоком
@@ -27,7 +28,7 @@ export function ProgressiveSsrArticle() {
 
       {/* 2 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>React Suspense как граница потока</h2>
+        <SectionTitle>React Suspense как граница потока</SectionTitle>
         <CodeHighlight lang="js" code={`// app/page.tsx (Next.js App Router)
 import { Suspense } from 'react';
 
@@ -65,7 +66,7 @@ async function ArticleList() {
 
       {/* 3 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>React Server Components</h2>
+        <SectionTitle>React Server Components</SectionTitle>
         <CodeHighlight lang="js" code={`// Server Component — запускается ТОЛЬКО на сервере
 // Нет 'use client' = Server Component по умолчанию
 async function ProductPage({ id }: { id: string }) {
@@ -95,7 +96,7 @@ async function ProductPage({ id }: { id: string }) {
 
       {/* 4 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Самопроверка</h2>
+        <SectionTitle>Самопроверка</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

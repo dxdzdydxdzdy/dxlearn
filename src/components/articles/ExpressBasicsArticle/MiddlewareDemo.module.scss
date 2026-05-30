@@ -1,0 +1,236 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.demo {
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $bg-base;
+}
+
+.demoHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-default;
+  gap: $space-3;
+  flex-wrap: wrap;
+}
+
+.demoTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.controls {
+  display: flex;
+  gap: $space-2;
+  align-items: center;
+}
+
+.btn {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  padding: $space-1 $space-3;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  background: none;
+  color: $text-secondary;
+  cursor: pointer;
+  transition: color $t-fast, border-color $t-fast, background $t-fast;
+
+  &:hover:not(:disabled) { color: $accent; border-color: rgba(0, 229, 160, 0.4); }
+  &:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  &.primary {
+    color: $accent;
+    border-color: rgba(0, 229, 160, 0.4);
+    background: $accent-dim;
+  }
+}
+
+.toggle {
+  display: flex;
+  gap: $space-1;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: 2px;
+}
+
+.toggleBtn {
+  font-family: $font-mono;
+  font-size: 11px;
+  padding: $space-1 $space-2;
+  border: none;
+  border-radius: 2px;
+  background: none;
+  color: $text-muted;
+  cursor: pointer;
+  transition: background $t-fast, color $t-fast;
+
+  &.active {
+    background: $bg-elevated;
+    color: $text-primary;
+  }
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+// ── Pipeline ──────────────────────────────────────────────────────────────────
+
+.pipeline {
+  padding: $space-5 $space-4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  border-right: 1px solid $border-subtle;
+
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.requestBadge {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  padding: $space-1 $space-3;
+  border-radius: $radius-sm;
+  border: 1px solid $border-default;
+  color: $text-secondary;
+  background: $bg-elevated;
+  margin-bottom: $space-2;
+}
+
+.arrow {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  transition: color $t-normal;
+
+  &.active { color: $accent; }
+}
+
+.mwBox {
+  width: 100%;
+  max-width: 220px;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  overflow: hidden;
+  transition: border-color $t-normal;
+
+  &.pending {}
+  &.running { border-color: $warn; }
+  &.passed  { border-color: $accent; }
+  &.blocked { border-color: $error; }
+}
+
+.mwHead {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-3;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+  transition: background $t-normal;
+
+  .running & { background: rgba(240, 192, 64, 0.08); color: $warn; }
+  .passed  & { background: $accent-dim; color: $accent; }
+  .blocked & { background: rgba(255, 95, 106, 0.08); color: $error; }
+}
+
+.mwDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: $text-muted;
+  transition: background $t-normal;
+
+  .running & { background: $warn; }
+  .passed  & { background: $accent; }
+  .blocked & { background: $error; }
+}
+
+.mwAction {
+  padding: $space-1 $space-3;
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  transition: color $t-normal;
+
+  .running & { color: $warn; }
+  .passed  & { color: $accent; }
+  .blocked & { color: $error; }
+}
+
+.responseBadge {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  padding: $space-1 $space-3;
+  border-radius: $radius-sm;
+  border: 1px solid transparent;
+  margin-top: $space-2;
+  opacity: 0;
+  transition: opacity $t-normal, border-color $t-normal;
+
+  &.visible { opacity: 1; }
+  &.ok      { border-color: rgba(0, 229, 160, 0.4); color: $accent; background: $accent-dim; }
+  &.err     { border-color: rgba(255, 95, 106, 0.4); color: $error; background: rgba(255, 95, 106, 0.08); }
+}
+
+// ── Log panel ─────────────────────────────────────────────────────────────────
+
+.logPanel {
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.logTitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-1;
+}
+
+.logLine {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  line-height: $line-normal;
+  animation: slideIn 150ms ease;
+}
+
+.logTime { color: $text-muted; margin-right: $space-2; }
+.logOk   { color: $accent; }
+.logWarn { color: $warn; }
+.logErr  { color: $error; }
+.logMuted{ color: $text-muted; }
+
+.logEmpty {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  padding: $space-4 0;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-4px); }
+  to   { opacity: 1; transform: translateX(0); }
+}

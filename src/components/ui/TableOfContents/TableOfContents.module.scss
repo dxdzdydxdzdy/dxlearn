@@ -1,0 +1,83 @@
+@use '../../../styles/tokens' as *;
+
+.aside {
+  // Hidden below 1300px — not enough space next to 260px sidebar + 760px content
+  @media (max-width: 1299px) { display: none; }
+
+  width: 200px;
+  flex-shrink: 0;
+
+  // sticky requires align-self: flex-start — иначе flex растягивает до высоты контента
+  position: sticky;
+  top: calc(#{$header-height} + #{$space-10});
+  align-self: flex-start;
+  max-height: calc(100dvh - #{$header-height} - #{$space-20});
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: $border-subtle transparent;
+}
+
+.nav {
+  padding-right: $space-2;
+}
+
+.label {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  text-transform: uppercase;
+  margin-bottom: $space-3;
+  padding-left: $space-3;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-2;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $space-2 $space-3;
+  border-radius: $radius-sm;
+  text-align: left;
+  transition: background $t-fast;
+
+  &:hover {
+    background: $bg-elevated;
+
+    .text  { color: $text-secondary; }
+    .dot   { background: $text-muted; }
+  }
+}
+
+.active {
+  .text { color: $accent; }
+  .dot  { background: $accent; box-shadow: 0 0 6px $accent-glow; }
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: $border-default;
+  flex-shrink: 0;
+  margin-top: 6px;
+  transition: background $t-fast, box-shadow $t-fast;
+}
+
+.text {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-muted;
+  line-height: $line-normal;
+  transition: color $t-fast;
+}

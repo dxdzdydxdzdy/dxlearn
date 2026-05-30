@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 import { Callout } from '@/components/ui/Callout/Callout';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
@@ -12,7 +13,7 @@ export function BackendArticle() {
 
       {/* 1 — Кто такой бэкенд-разработчик */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Кто такой бэкенд-разработчик</h2>
+        <SectionTitle>Кто такой бэкенд-разработчик</SectionTitle>
         <p className={s.prose}>
           Бэкенд — это всё, что происходит <strong>после того, как пользователь нажал кнопку</strong>.
           Получить данные из базы, проверить права, вызвать стороннее API, поставить задачу в очередь,
@@ -59,7 +60,7 @@ export function BackendArticle() {
 
       {/* 2 — CPU vs IO */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>CPU-bound vs IO-bound: главное различие</h2>
+        <SectionTitle>CPU-bound vs IO-bound: главное различие</SectionTitle>
         <p className={s.prose}>
           Это та вещь, которую многие упускают даже на middle-уровне — и это видно сразу.
           Тип задачи определяет, какой инструмент параллелизма использовать.
@@ -112,7 +113,7 @@ with ProcessPoolExecutor(max_workers=4) as pool:
 
       {/* 3 — 8 доменов */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>8 доменов бэкенд-разработчика</h2>
+        <SectionTitle>8 доменов бэкенд-разработчика</SectionTitle>
         <p className={s.prose}>
           Выбери домен слева, переключай уровень и смотри что нужно знать — и что спрашивают
           на собеседованиях. Вопросы кликабельны — подсказка появится при клике.
@@ -122,7 +123,7 @@ with ProcessPoolExecutor(max_workers=4) as pool:
 
       {/* 4 — Базы данных подробнее */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Базы данных: SQL vs NoSQL vs Columnar</h2>
+        <SectionTitle>Базы данных: SQL vs NoSQL vs Columnar</SectionTitle>
         <table className={s.table}>
           <thead className={s.tableHead}>
             <tr><th>Тип</th><th>Представитель</th><th>Когда использовать</th><th>Когда не нужен</th></tr>
@@ -171,7 +172,7 @@ COMMIT; -- или ROLLBACK при ошибке`} />
 
       {/* 5 — Авторизация */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Авторизация и аутентификация</h2>
+        <SectionTitle>Авторизация и аутентификация</SectionTitle>
         <p className={s.prose}>
           Встречается в каждом приложении. Ошибки здесь — утечки данных и взломы.
           Нужно понимать разницу между <strong>аутентификацией</strong> (кто ты?) и
@@ -222,7 +223,7 @@ is_valid = bcrypt.checkpw(password.encode(), password_hash)
 
       {/* 6 — Рынок труда */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Рынок труда 2026</h2>
+        <SectionTitle>Рынок труда 2026</SectionTitle>
         <table className={s.table}>
           <thead className={s.tableHead}>
             <tr><th>Уровень</th><th>Зарплата</th><th>Что ожидается</th></tr>
@@ -251,7 +252,7 @@ is_valid = bcrypt.checkpw(password.encode(), password_hash)
 
       {/* 7 — Quiz */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Самопроверка</h2>
+        <SectionTitle>Самопроверка</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

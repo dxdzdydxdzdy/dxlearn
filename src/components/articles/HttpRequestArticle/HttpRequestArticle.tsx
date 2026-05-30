@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 import { Callout } from '@/components/ui/Callout/Callout';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
@@ -19,7 +20,7 @@ export function HttpRequestArticle() {
 
       {/* 1 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Зачем знать HTTP</h2>
+        <SectionTitle>Зачем знать HTTP</SectionTitle>
         <p className={s.prose}>
           Каждый раз, когда твой код вызывает <code>fetch()</code> или axios — он отправляет HTTP-запрос.
           Каждый раз, когда Next.js получает страницу — это HTTP. REST API, GraphQL, WebSocket upgrade —
@@ -35,7 +36,7 @@ export function HttpRequestArticle() {
 
       {/* 2 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>HTTP-методы</h2>
+        <SectionTitle>HTTP-методы</SectionTitle>
         <p className={s.prose}>
           Метод — это <strong>намерение</strong>. REST-архитектура строится на том, что
           URL описывает ресурс, а метод — действие над ним.
@@ -66,7 +67,7 @@ export function HttpRequestArticle() {
 
       {/* 3 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Заголовки, которые используешь каждый день</h2>
+        <SectionTitle>Заголовки, которые используешь каждый день</SectionTitle>
         <CodeHighlight lang="js" code={`// Авторизованный POST-запрос с JSON
 const res = await fetch('/api/posts', {
   method: 'POST',
@@ -93,7 +94,7 @@ fetch('/api/data', { cache: 'no-store' });           // без кэша`} />
 
       {/* 4 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>HTTPS: зачем TLS</h2>
+        <SectionTitle>HTTPS: зачем TLS</SectionTitle>
         <p className={s.prose}>
           HTTP передаёт данные открытым текстом. <strong>HTTPS = HTTP + TLS</strong> — шифрование
           поверх TCP. Без HTTPS провайдер, роутер или публичный Wi-Fi видят всё: токены, пароли, тело запросов.
@@ -112,7 +113,7 @@ fetch('/api/data', { cache: 'no-store' });           // без кэша`} />
 
       {/* 5 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Самопроверка</h2>
+        <SectionTitle>Самопроверка</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

@@ -1,0 +1,158 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+// ── Wrapper ────────────────────────────────────────────────────────────────────
+
+.root {
+  position: relative;
+  display: inline-block;
+
+  &:hover .tooltip,
+  &:focus-within .tooltip {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+// ── Link ──────────────────────────────────────────────────────────────────────
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  text-decoration: none;
+  border-bottom: 1px solid $accent;
+  padding-bottom: 1px;
+  transition: color $t-fast;
+  cursor: pointer;
+
+  &:hover {
+    color: $accent;
+  }
+}
+
+// ── Tooltip ───────────────────────────────────────────────────────────────────
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  width: 280px;
+  z-index: $z-overlay;
+
+  background: $bg-elevated;
+  border: 1px solid $border-default;
+  border-radius: $radius-lg;
+  border-top: 3px solid $accent;
+
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 0 1px $border-subtle,
+    0 2px 16px $accent-glow;
+
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity 150ms ease, transform 150ms ease;
+
+  // flip right if near left edge overflow
+  @include mobile {
+    left: auto;
+    right: 0;
+    width: 240px;
+  }
+}
+
+// ── Tooltip innards ───────────────────────────────────────────────────────────
+
+.tooltipInner {
+  display: flex;
+  flex-direction: column;
+  padding: $space-3 $space-4;
+  gap: $space-2;
+}
+
+.tooltipCourse {
+  display: block;
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  text-transform: uppercase;
+}
+
+.tooltipTitle {
+  display: block;
+  font-family: $font-mono;
+  font-size: $text-md;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  line-height: $line-tight;
+}
+
+.tooltipDivider {
+  display: block;
+  height: 1px;
+  background: $border-subtle;
+  margin: $space-1 0;
+}
+
+.tooltipDesc {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.tooltipFooter {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  flex-wrap: wrap;
+  margin-top: $space-1;
+}
+
+.tooltipTag {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: 1px $space-2;
+}
+
+.tooltipInteractive {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $accent;
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.25);
+  border-radius: $radius-sm;
+  padding: 1px $space-2;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  &::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: $accent;
+    animation: pulse 2s ease infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}

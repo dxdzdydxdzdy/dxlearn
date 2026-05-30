@@ -1,7 +1,9 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { EmbeddingExplorer } from './EmbeddingExplorer';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { QUIZ_QUESTIONS } from './quizData';
 import s from './EmbeddingsArticle.module.scss';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 export function EmbeddingsArticle() {
   return (
@@ -9,21 +11,19 @@ export function EmbeddingsArticle() {
 
       {/* ── 1. Что такое эмбеддинг ──────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Числа со смыслом</h2>
+        <SectionTitle>Числа со смыслом</SectionTitle>
         <p className={s.lead}>
           Нейросеть не понимает слова. Она понимает числа.
           Значит, любой текст нужно превратить в числа — так, чтобы похожие тексты
           давали похожие числа. Это и есть <strong>эмбеддинг</strong>.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`# Каждое слово → вектор (список чисел):
+        <CodeHighlight lang="ts" code={`# Каждое слово → вектор (список чисел):
 "кошка"  → [0.21, -0.87,  1.45, 0.03, ..., -0.12]   # 1536 чисел
 "кот"    → [0.19, -0.91,  1.43, 0.01, ..., -0.10]   # очень похоже!
 "машина" → [-1.2,  0.34, -0.87, 0.67, ...,  0.45]   # совсем другое
 
 # Это не просто ID — это точка в пространстве.
-# Похожие слова → близкие точки → близкие векторы.`}</code>
-        </div>
+# Похожие слова → близкие точки → близкие векторы.`} />
         <p className={s.body}>
           Представь карту мира: города одной страны рядом, континенты разделены океанами.
           Эмбеддинговое пространство — то же самое, только для смыслов.
@@ -42,7 +42,7 @@ export function EmbeddingsArticle() {
 
       {/* ── 2. Как обучают ──────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Откуда берутся похожие векторы</h2>
+        <SectionTitle>Откуда берутся похожие векторы</SectionTitle>
         <p className={s.lead}>
           Никто не задаёт вручную: «кошке поставь 0.21 по первой оси».
           Векторы возникают из обучения.
@@ -52,8 +52,7 @@ export function EmbeddingsArticle() {
           «Кот лежал на диване» → попробуй предсказать «лежал» зная «кот» и «диване».
           «Собака лежала на диване» — то же самое, похожий контекст.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`# Обучение по контексту:
+        <CodeHighlight lang="ts" code={`# Обучение по контексту:
 "[кот] лежал на диване"   → кот видит этот контекст
 "[собака] лежала на диване" → собака видит тот же контекст
 
@@ -61,8 +60,7 @@ export function EmbeddingsArticle() {
 # давали похожие предсказания → похожие веса → похожие векторы.
 
 # Результат: "кошка" ≈ "кот" ≈ "собака" — все животные-питомцы
-# Хотя никто не объяснял модели что это животные!`}</code>
-        </div>
+# Хотя никто не объяснял модели что это животные!`} />
         <p className={s.body}>
           Современные модели (text-embedding-3, E5, BGE) учатся на парах «похожий/непохожий текст»:
           «эти два предложения похожи по смыслу — сделай их векторы близкими».
@@ -73,7 +71,7 @@ export function EmbeddingsArticle() {
 
       {/* ── 3. Косинусное сходство ──────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Как измерить близость: cosine similarity</h2>
+        <SectionTitle>Как измерить близость: cosine similarity</SectionTitle>
         <p className={s.lead}>
           Два вектора есть. Как понять — похожи они или нет?
           Самый популярный способ — <strong>косинусное сходство</strong>.
@@ -128,7 +126,7 @@ export function EmbeddingsArticle() {
 
       {/* ── 4. Интерактив ───────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Попробуй: карта смыслов</h2>
+        <SectionTitle>Попробуй: карта смыслов</SectionTitle>
         <p className={s.body}>
           Ниже — 20 слов в 2D-проекции их эмбеддингового пространства.
           Слова в кластерах потому что имеют похожие векторы.
@@ -139,7 +137,7 @@ export function EmbeddingsArticle() {
 
       {/* ── 5. Векторная арифметика ─────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Магия: арифметика смыслов</h2>
+        <SectionTitle>Магия: арифметика смыслов</SectionTitle>
         <p className={s.lead}>
           Если смыслы — это точки в пространстве, можно делать с ними математику.
           Самый знаменитый пример:
@@ -162,16 +160,14 @@ export function EmbeddingsArticle() {
           Что происходит: «король» − «мужчина» вычитает «мужское» из «королевского».
           Плюс «женщина» добавляет «женское». Результат — вектор, ближайший к которому в словаре «королева».
         </p>
-        <div className={s.codeBlock}>
-          <code>{`# Другие примеры — все работают:
+        <CodeHighlight lang="ts" code={`# Другие примеры — все работают:
 "Москва" − "Россия" + "Франция"  ≈ "Париж"
 "большой" − "большой" + "маленький" ≈ "маленький"
 "бежать" − "бежал" + "ходить"    ≈ "ходил"
 
 # Это значит что в пространстве эмбеддингов
 # отношения между понятиями закодированы как направления.
-# "Столица → страна" = единое направление для всех стран.`}</code>
-        </div>
+# "Столица → страна" = единое направление для всех стран.`} />
         <p className={s.body}>
           Это наглядно показывает: эмбеддинги не просто «числа» — они кодируют
           структуру языка и понятий. Пространство организовано осмысленно,
@@ -181,7 +177,7 @@ export function EmbeddingsArticle() {
 
       {/* ── 6. Sentence embeddings ──────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Эмбеддинг предложения, а не слова</h2>
+        <SectionTitle>Эмбеддинг предложения, а не слова</SectionTitle>
         <p className={s.lead}>
           Word embeddings — вектор одного слова. Но чаще нужно сравнивать целые предложения
           или параграфы. Для этого есть <strong>sentence embeddings</strong>.
@@ -190,8 +186,7 @@ export function EmbeddingsArticle() {
           Sentence embedding модель принимает произвольный текст (одно предложение, абзац,
           несколько параграфов) и выдаёт один вектор — «суть» всего текста.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`// OpenAI: text-embedding-3-small
+        <CodeHighlight lang="ts" code={`// OpenAI: text-embedding-3-small
 const res = await openai.embeddings.create({
   model: 'text-embedding-3-small',
   input: [
@@ -208,8 +203,7 @@ const res = await openai.embeddings.create({
 // cosine("грипп", "ОРВИ")     ≈ 0.91  ← очень похожи
 // cosine("грипп", "торт")     ≈ 0.12  ← не связаны
 
-// Можно передавать batches — экономит запросы к API`}</code>
-        </div>
+// Можно передавать batches — экономит запросы к API`} />
         <div className={s.modelsGrid}>
           {[
             { name: 'text-embedding-3-small', dims: '1536', note: 'OpenAI, быстро, дёшево', color: '#4db8ff' },
@@ -228,7 +222,7 @@ const res = await openai.embeddings.create({
 
       {/* ── 7. Семантический поиск ──────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Семантический поиск: поиск по смыслу</h2>
+        <SectionTitle>Семантический поиск: поиск по смыслу</SectionTitle>
         <p className={s.lead}>
           Классический поиск (LIKE, BM25) ищет точные слова.
           Семантический — ищет похожий <em>смысл</em>.
@@ -293,7 +287,7 @@ const res = await openai.embeddings.create({
 
       {/* ── 8. Куда ещё применяются ─────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Эмбеддинги везде</h2>
+        <SectionTitle>Эмбеддинги везде</SectionTitle>
         <p className={s.lead}>
           Семантический поиск — лишь одно применение. Раз у нас есть вектор «смысла» текста —
           с ним можно делать многое.
@@ -341,7 +335,7 @@ const res = await openai.embeddings.create({
 
       {/* ── 9. Практика: что учесть ─────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Практика: что важно знать</h2>
+        <SectionTitle>Практика: что важно знать</SectionTitle>
         <div className={s.practiceList}>
           {[
             {
@@ -382,7 +376,7 @@ const res = await openai.embeddings.create({
 
       {/* ── Quiz ──────────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверь себя</h2>
+        <SectionTitle>Проверь себя</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

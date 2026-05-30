@@ -1,0 +1,293 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: $accent;
+    background: $accent-dim;
+    border-radius: $radius-sm;
+    padding: 1px $space-2;
+    font-family: $font-mono;
+    font-size: 12px;
+  }
+  em { color: $text-primary; font-style: normal; }
+}
+
+// ── Anatomy diagram ───────────────────────────────────────────────────────────
+
+.anatomy {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-2;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.anatomyCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    border-radius: $radius-md $radius-md 0 0;
+    background: var(--card-color, $accent);
+  }
+}
+
+.anatomyName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.anatomyOrigin {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.anatomyDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  margin-top: $space-1;
+}
+
+// ── Problem box ───────────────────────────────────────────────────────────────
+
+.problemBox {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-left: 3px solid $error;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.problemTitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $error;
+  letter-spacing: $letter-wider;
+}
+
+.problemList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.problemItem {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  padding-left: $space-4;
+  position: relative;
+
+  &::before {
+    content: '×';
+    position: absolute;
+    left: 0;
+    color: $error;
+    font-family: $font-mono;
+  }
+}
+
+// ── Callout ───────────────────────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  strong { color: $text-primary; font-weight: 600; }
+}
+
+// ── Info card ─────────────────────────────────────────────────────────────────
+
+.infoCard {
+  background: $info-dim;
+  border: 1px solid rgba(77, 184, 255, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.infoLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $info;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.infoText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: $info;
+    background: rgba(77, 184, 255, 0.1);
+    border-radius: $radius-sm;
+    padding: 1px $space-2;
+    font-family: $font-mono;
+    font-size: 12px;
+  }
+}
+
+// ── Use-case grid ─────────────────────────────────────────────────────────────
+
+.useCaseGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.useCaseCard {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.useCaseHead {
+  padding: $space-2 $space-4;
+  font-family: $font-mono;
+  font-size: 11px;
+  letter-spacing: $letter-wider;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.useCaseList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.useCaseItem {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-2;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+
+  &:last-child { border-bottom: none; }
+}
+
+.icon {
+  flex-shrink: 0;
+  font-family: $font-mono;
+  font-size: 11px;
+  margin-top: 2px;
+
+  &.ok { color: $accent; }
+  &.no { color: $error; }
+}
+
+// ── npm ecosystem strip ───────────────────────────────────────────────────────
+
+.ecosystemRow {
+  display: flex;
+  gap: $space-3;
+  flex-wrap: wrap;
+}
+
+.ecosystemPkg {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-1 $space-3;
+  transition: color $t-fast, border-color $t-fast;
+
+  &:hover { color: $accent; border-color: rgba(0, 229, 160, 0.3); }
+}
+
+// ── History quote ─────────────────────────────────────────────────────────────
+
+.quote {
+  border-left: 3px solid $accent;
+  padding: $space-3 $space-5;
+  background: rgba(0, 229, 160, 0.03);
+  border-radius: 0 $radius-md $radius-md 0;
+}
+
+.quoteText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  font-style: italic;
+}
+
+.quoteAuthor {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  margin-top: $space-2;
+}
+

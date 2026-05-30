@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { Callout } from '@/components/ui/Callout/Callout';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { DevOpsDomainExplorer } from './DevOpsDomainExplorer';
@@ -11,7 +12,7 @@ export function DevOpsArticle() {
 
       {/* 1 — Что такое DevOps */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>DevOps — это культура, не должность</h2>
+        <SectionTitle>DevOps — это культура, не должность</SectionTitle>
         <p className={s.prose}>
           DevOps возник как ответ на войну между разработчиками («хочу деплоить быстро»)
           и operations («хочу стабильности»). Ключевая идея:{' '}
@@ -59,7 +60,7 @@ export function DevOpsArticle() {
 
       {/* 2 — История */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Как дошло до K8s и GitOps</h2>
+        <SectionTitle>Как дошло до K8s и GitOps</SectionTitle>
         <div className={s.timeline}>
           {[
             { year: '2009', title: '10+ Deploys Per Day', desc: 'Доклад Flickr на Velocity — первое публичное описание DevOps практик. Dev и Ops вместе деплоили 10+ раз в день.' },
@@ -80,7 +81,7 @@ export function DevOpsArticle() {
 
       {/* 3 — 6 доменов */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>6 доменов DevOps-инженера</h2>
+        <SectionTitle>6 доменов DevOps-инженера</SectionTitle>
         <p className={s.prose}>
           Реальная работа DevOps-инженера разбита на 6 областей.
           Выбери домен слева, переключай уровень (Junior / Middle / Senior),
@@ -91,7 +92,7 @@ export function DevOpsArticle() {
 
       {/* 4 — Pet project builder */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Собери стек пет-проекта</h2>
+        <SectionTitle>Собери стек пет-проекта</SectionTitle>
         <p className={s.prose}>
           Хочешь прокачаться? Возьми пет-проект и добавляй инструменты по одному.
           Каждый инструмент прокачивает определённые домены.
@@ -106,7 +107,7 @@ export function DevOpsArticle() {
 
       {/* 5 — Рынок труда */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Рынок труда 2026</h2>
+        <SectionTitle>Рынок труда 2026</SectionTitle>
         <p className={s.prose}>
           DevOps — одна из самых высокооплачиваемых специализаций в IT.
           Вот картина рынка по данным hh.ru + Habr Career на май 2026:
@@ -138,7 +139,7 @@ export function DevOpsArticle() {
 
       {/* 6 — С чего начать */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Roadmap: с чего начинать</h2>
+        <SectionTitle>Roadmap: с чего начинать</SectionTitle>
         <table className={s.table}>
           <thead className={s.tableHead}>
             <tr><th>Этап</th><th>Что изучить</th><th>Практика</th></tr>
@@ -166,7 +167,7 @@ export function DevOpsArticle() {
 
       {/* 7 — Квиз */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Самопроверка</h2>
+        <SectionTitle>Самопроверка</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

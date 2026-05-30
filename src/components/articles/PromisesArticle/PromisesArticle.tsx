@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 import { Callout } from '@/components/ui/Callout/Callout';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
@@ -13,7 +14,7 @@ export function PromisesArticle() {
 
       {/* 1 — Зачем промисы? */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Зачем промисы?</h2>
+        <SectionTitle>Зачем промисы?</SectionTitle>
         <p className={s.prose}>
           До промисов асинхронный код в JavaScript писался на колбэках. Когда операций несколько —
           колбэки вкладывались друг в друга, образуя знаменитую «пирамиду смерти» (callback hell):
@@ -60,7 +61,7 @@ getUser(userId)
 
       {/* 2 — Три состояния */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Три состояния промиса</h2>
+        <SectionTitle>Три состояния промиса</SectionTitle>
         <p className={s.prose}>
           Любой промис в каждый момент времени находится ровно в одном из трёх состояний:
         </p>
@@ -93,7 +94,7 @@ getUser(userId)
 
       {/* 3 — Создание промиса */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Создание промиса</h2>
+        <SectionTitle>Создание промиса</SectionTitle>
         <p className={s.prose}>
           Промис создаётся через конструктор <code>new Promise(executor)</code>, где <code>executor</code> —
           функция, которая принимает два колбэка: <code>resolve</code> и <code>reject</code>.
@@ -160,7 +161,7 @@ const data = await readFile('./config.json', 'utf8');`}
 
       {/* 4 — .then .catch .finally */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>.then, .catch, .finally</h2>
+        <SectionTitle>.then, .catch, .finally</SectionTitle>
         <p className={s.prose}>
           Эти три метода — основной интерфейс работы с промисами. Каждый из них возвращает
           <strong> новый промис</strong>, что позволяет строить цепочки.
@@ -211,7 +212,7 @@ api.get('/data')
 
       {/* 5 — Цепочки */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Цепочки промисов</h2>
+        <SectionTitle>Цепочки промисов</SectionTitle>
         <p className={s.prose}>
           Ключевое свойство <code>.then()</code>: он всегда возвращает <strong>новый промис</strong>.
           Значение, возвращённое из колбэка, становится значением этого нового промиса. Если
@@ -259,7 +260,7 @@ fetch('/api/user')
 
       {/* 6 — Комбинаторы */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Комбинаторы</h2>
+        <SectionTitle>Комбинаторы</SectionTitle>
         <p className={s.prose}>
           Комбинаторы — статические методы <code>Promise</code>, которые принимают массив промисов
           и возвращают один промис, агрегирующий их результаты. Каждый комбинатор ведёт себя по-разному
@@ -327,7 +328,7 @@ const data = await Promise.any([
 
       {/* 7 — async/await */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>async/await</h2>
+        <SectionTitle>async/await</SectionTitle>
         <p className={s.prose}>
           <code>async</code>/<code>await</code> — синтаксический сахар над промисами, появившийся в
           ES2017. Любая функция с ключевым словом <code>async</code> автоматически возвращает промис.
@@ -393,7 +394,7 @@ async function loadDashboard(userId) {
 
       {/* 8 — Обработка ошибок */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Обработка ошибок</h2>
+        <SectionTitle>Обработка ошибок</SectionTitle>
         <p className={s.prose}>
           Необработанный rejected промис в Node.js вызывает <code>UnhandledPromiseRejectionWarning</code>
           (а в новых версиях — завершает процесс). В браузере срабатывает событие
@@ -445,7 +446,7 @@ process.on('unhandledRejection', (reason, promise) => {
 
       {/* 9 — Антипаттерны */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Антипаттерны</h2>
+        <SectionTitle>Антипаттерны</SectionTitle>
         <p className={s.prose}>
           <strong>1. Promise constructor antipattern</strong> — оборачивание промиса в <code>new Promise()</code>
           без необходимости. Вместо того чтобы просто вернуть уже существующий промис, разработчик
@@ -518,7 +519,7 @@ async function loadData() {
 
       {/* 10 — Промисы и микрозадачи */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Промисы и микрозадачи</h2>
+        <SectionTitle>Промисы и микрозадачи</SectionTitle>
         <p className={s.prose}>
           Колбэки промисов (<code>.then()</code>, <code>.catch()</code>, <code>.finally()</code>) помещаются
           в <strong>Microtask Queue</strong>, а не в Macrotask Queue. Это означает, что они выполнятся
@@ -554,7 +555,7 @@ console.log('2: sync end');
       </section>
 
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Самопроверка</h2>
+        <SectionTitle>Самопроверка</SectionTitle>
         <p className={s.prose}>
           10 задач на порядок выполнения, цепочки, комбинаторы и async/await.
           Сложность нарастает от easy к hard.

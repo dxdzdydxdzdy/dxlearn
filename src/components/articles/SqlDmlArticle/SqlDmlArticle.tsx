@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { DmlPlayground } from './DmlPlayground';
@@ -87,7 +88,7 @@ export function SqlDmlArticle() {
 
       {/* 1. SQL: четыре группы команд */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>SQL: четыре группы команд</h2>
+        <SectionTitle>SQL: четыре группы команд</SectionTitle>
         <p className={s.lead}>
           SQL — это не один язык, а семейство подъязыков. Каждая группа команд отвечает
           за свою зону ответственности. Эта статья — про DML: команды, которые
@@ -121,7 +122,7 @@ export function SqlDmlArticle() {
 
       {/* 2. INSERT */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>INSERT — добавление строк</h2>
+        <SectionTitle>INSERT — добавление строк</SectionTitle>
         <p className={s.lead}>
           INSERT добавляет одну или несколько новых строк в таблицу.
           Без INSERT база данных навсегда осталась бы пустой.
@@ -187,7 +188,7 @@ const newUserId = res.rows[0].id;`} />
 
       {/* 3. UPDATE */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>UPDATE — изменение данных</h2>
+        <SectionTitle>UPDATE — изменение данных</SectionTitle>
         <p className={s.lead}>
           UPDATE изменяет значения в уже существующих строках.
           Он нужен потому что данные в реальном мире меняются:
@@ -244,7 +245,7 @@ WHERE e.dept_id = d.id
 
       {/* 4. DELETE */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>DELETE — удаление строк</h2>
+        <SectionTitle>DELETE — удаление строк</SectionTitle>
         <p className={s.lead}>
           DELETE физически удаляет строки из таблицы. Он нужен для очистки устаревших
           данных, реализации GDPR-запросов на забывание, удаления черновиков и временных записей.
@@ -298,7 +299,7 @@ TRUNCATE TABLE orders RESTART IDENTITY;`} />
 
       {/* 5. Danger zone */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>⚠ Опасные операции</h2>
+        <SectionTitle>⚠ Опасные операции</SectionTitle>
         <p className={s.lead}>
           UPDATE и DELETE без WHERE — одни из самых частых причин инцидентов в продакшне.
           Команды легальны, выполнятся мгновенно и затронут все строки.
@@ -352,7 +353,7 @@ COMMIT;  -- или ROLLBACK;`} />
 
       {/* 6. RETURNING */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>RETURNING — получить изменённые строки</h2>
+        <SectionTitle>RETURNING — получить изменённые строки</SectionTitle>
         <p className={s.lead}>
           RETURNING — PostgreSQL-расширение, которое возвращает строки после выполнения
           INSERT, UPDATE или DELETE. Это избавляет от дополнительного SELECT.
@@ -388,7 +389,7 @@ RETURNING product_id, quantity, price;
 
       {/* 7. ON CONFLICT / UPSERT */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>ON CONFLICT — UPSERT</h2>
+        <SectionTitle>ON CONFLICT — UPSERT</SectionTitle>
         <p className={s.lead}>
           Часто нужна операция «создай, если нет — обнови, если есть».
           Решение в лоб (SELECT → INSERT или UPDATE) создаёт race condition.
@@ -440,7 +441,7 @@ RETURNING token;`} />
 
       {/* 8. Playground */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Интерактивный плейграунд</h2>
+        <SectionTitle>Интерактивный плейграунд</SectionTitle>
         <p className={s.body}>
           Попробуйте INSERT, UPDATE, DELETE и TRUNCATE на живой базе данных.
           Зелёная подсветка — вставленные строки, жёлтая — обновлённые.
@@ -451,7 +452,7 @@ RETURNING token;`} />
 
       {/* 9. Практические паттерны */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Практические паттерны</h2>
+        <SectionTitle>Практические паттерны</SectionTitle>
         <p className={s.lead}>
           В реальных проектах DML используется не просто так, а по устоявшимся паттернам.
           Вот самые важные из них.
@@ -481,7 +482,7 @@ RETURNING token;`} />
 
       {/* 10. DML summary table */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Краткая шпаргалка</h2>
+        <SectionTitle>Краткая шпаргалка</SectionTitle>
 
         <div className={s.tableWrap}>
           <table className={s.table}>
@@ -525,7 +526,7 @@ RETURNING token;`} />
 
       {/* 11. Quiz */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Тест</h2>
+        <SectionTitle>Тест</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

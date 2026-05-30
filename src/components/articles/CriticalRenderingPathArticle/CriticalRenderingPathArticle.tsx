@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 import { Callout } from '@/components/ui/Callout/Callout';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
@@ -20,7 +21,7 @@ export function CriticalRenderingPathArticle() {
 
       {/* 1 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Что такое Critical Rendering Path</h2>
+        <SectionTitle>Что такое Critical Rendering Path</SectionTitle>
         <p className={s.prose}>
           <strong>Critical Rendering Path</strong> (CRP) — последовательность шагов, которые браузер
           выполняет от получения первого байта HTML до отображения первого пикселя на экране.
@@ -48,7 +49,7 @@ export function CriticalRenderingPathArticle() {
 
       {/* 2 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>DOM и CSSOM</h2>
+        <SectionTitle>DOM и CSSOM</SectionTitle>
         <p className={s.prose}>
           HTML-парсер строит DOM по мере чтения потока байт. CSS-парсер строит CSSOM — дерево,
           описывающее финальные стили каждого узла. Оба процесса инкрементальны, но CSSOM не
@@ -75,7 +76,7 @@ export function CriticalRenderingPathArticle() {
 
       {/* 3 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Waterfall: до и после оптимизаций</h2>
+        <SectionTitle>Waterfall: до и после оптимизаций</SectionTitle>
         <p className={s.prose}>
           Переключи сценарий, чтобы увидеть, как async/defer, preload и inline-CSS меняют
           порядок и параллельность загрузки ресурсов.
@@ -90,7 +91,7 @@ export function CriticalRenderingPathArticle() {
 
       {/* 4 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Layout, Paint, Composite</h2>
+        <SectionTitle>Layout, Paint, Composite</SectionTitle>
         <p className={s.prose}>
           После построения Render Tree браузер вычисляет геометрию (<strong>Layout</strong> /
           reflow), рисует пиксели (<strong>Paint</strong>) и склеивает слои (<strong>Composite</strong>).
@@ -139,7 +140,7 @@ el.style.transform = 'translateY(10px)'; // только Composite`} />
 
       {/* 5 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Ключевые метрики</h2>
+        <SectionTitle>Ключевые метрики</SectionTitle>
         <table className={s.table}>
           <thead className={s.tableHead}>
             <tr>
@@ -172,7 +173,7 @@ el.style.transform = 'translateY(10px)'; // только Composite`} />
 
       {/* 6 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Чеклист оптимизаций</h2>
+        <SectionTitle>Чеклист оптимизаций</SectionTitle>
         <CodeHighlight lang="html" code={`<!-- 1. Встроить критический CSS -->
 <style>/* только above-the-fold стили */</style>
 
@@ -193,7 +194,7 @@ el.style.transform = 'translateY(10px)'; // только Composite`} />
 
       {/* 7 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Самопроверка</h2>
+        <SectionTitle>Самопроверка</SectionTitle>
         <p className={s.prose}>5 задач — от базового понимания блокировки до layout thrashing.</p>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>

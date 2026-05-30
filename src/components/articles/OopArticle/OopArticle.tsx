@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 import { Callout } from '@/components/ui/Callout/Callout';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
@@ -18,7 +19,7 @@ export function OopArticle() {
 
       {/* 1 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Зачем ООП в современной разработке</h2>
+        <SectionTitle>Зачем ООП в современной разработке</SectionTitle>
         <p className={s.prose}>
           ООП — не религия, а инструмент. Когда проект растёт, <strong>организация кода становится
           критичной</strong>. ООП даёт словарь: классы, интерфейсы, наследование — это способ описать
@@ -42,7 +43,7 @@ export function OopArticle() {
 
       {/* 2 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Полиморфизм: один код, разное поведение</h2>
+        <SectionTitle>Полиморфизм: один код, разное поведение</SectionTitle>
         <p className={s.prose}>
           Самый мощный инструмент ООП. Функция написана один раз — работает с любым объектом,
           реализующим нужный интерфейс. Меняй параметры фигур ниже и наблюдай как один вызов
@@ -53,7 +54,7 @@ export function OopArticle() {
 
       {/* 3 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Инкапсуляция: приватные поля и методы</h2>
+        <SectionTitle>Инкапсуляция: приватные поля и методы</SectionTitle>
         <CodeHighlight lang="js" code={`class UserService {
   #users = new Map(); // приватно — снаружи не видно
 
@@ -81,7 +82,7 @@ svc.add({ id: 1, email: 'alex@test.com' });
 
       {/* 4 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Композиция vs Наследование</h2>
+        <SectionTitle>Композиция vs Наследование</SectionTitle>
         <CodeHighlight lang="js" code={`// ❌ Глубокая иерархия — хрупко
 class Animal extends LivingThing {}
 class Pet extends Animal {}
@@ -108,7 +109,7 @@ class Dog {
 
       {/* 5 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Самопроверка</h2>
+        <SectionTitle>Самопроверка</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

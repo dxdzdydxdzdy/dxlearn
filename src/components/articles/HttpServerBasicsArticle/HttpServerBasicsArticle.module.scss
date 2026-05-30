@@ -1,0 +1,252 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: $accent;
+    background: $accent-dim;
+    border-radius: $radius-sm;
+    padding: 1px $space-2;
+    font-family: $font-mono;
+    font-size: 12px;
+  }
+}
+
+// ── Analogy card ──────────────────────────────────────────────────────────────
+
+.analogy {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-left: 3px solid $accent;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.analogyLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $accent;
+  letter-spacing: $letter-wider;
+}
+
+.analogyRow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.analogyCol {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.analogyTerm {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.analogyDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.analogyArrow {
+  font-family: $font-mono;
+  color: $text-muted;
+  font-size: $text-md;
+  text-align: center;
+  @include mobile { display: none; }
+}
+
+// ── Step breakdown ────────────────────────────────────────────────────────────
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  border-bottom: 1px solid $border-subtle;
+  align-items: start;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.stepNum {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  color: $accent;
+  padding: $space-3 $space-4;
+  border-right: 1px solid $border-subtle;
+  text-align: center;
+  background: rgba(0, 229, 160, 0.03);
+}
+
+.stepBody {
+  padding: $space-3 $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.stepTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.stepDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+
+  code {
+    color: $accent;
+    background: $accent-dim;
+    border-radius: $radius-sm;
+    padding: 1px $space-2;
+    font-family: $font-mono;
+    font-size: 11px;
+  }
+}
+
+// ── Callout ───────────────────────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: $accent;
+    background: rgba(0, 229, 160, 0.15);
+    border-radius: $radius-sm;
+    padding: 1px $space-2;
+    font-family: $font-mono;
+    font-size: 11px;
+  }
+}
+
+// ── Status codes ──────────────────────────────────────────────────────────────
+
+.statusGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-2;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.statusCard {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.statusCode {
+  font-family: $font-mono;
+  font-size: $text-lg;
+  font-weight: 700;
+}
+
+.statusName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-primary;
+}
+
+.statusDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  margin-top: $space-1;
+}
+
+// ── Warning card ──────────────────────────────────────────────────────────────
+
+.warnCard {
+  background: rgba(240, 192, 64, 0.06);
+  border: 1px solid rgba(240, 192, 64, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.warnLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $warn;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.warnText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  strong { color: $text-primary; font-weight: 600; }
+}

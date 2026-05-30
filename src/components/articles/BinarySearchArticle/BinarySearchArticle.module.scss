@@ -1,0 +1,132 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article { display: flex; flex-direction: column; gap: $space-10; }
+.section  { display: flex; flex-direction: column; gap: $space-4; }
+
+
+.lead { font-size: $text-base; color: $text-secondary; line-height: $line-loose; max-width: 72ch; strong { color: $text-primary; font-weight: 600; } }
+.body { font-size: $text-sm; color: $text-secondary; line-height: $line-loose; max-width: 72ch; strong { color: $text-primary; font-weight: 600; } em { color: $info; font-style: normal; } code { font-family: $font-mono; font-size: 0.9em; color: $accent; background: $accent-dim; padding: 1px 5px; border-radius: $radius-sm; } }
+
+// ── Comparison ────────────────────────────────────────────────────────────────
+
+.comparison {
+  display: grid; grid-template-columns: 1fr 1fr; gap: $space-3;
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.compCard {
+  background: $bg-elevated; border: 1px solid $border-subtle; border-radius: $radius-md; padding: $space-4;
+  display: flex; flex-direction: column; gap: $space-2;
+}
+
+.compLabel { font-family: $font-mono; font-size: $text-sm; font-weight: 700; }
+.compComplexity { font-family: $font-mono; font-size: $text-lg; font-weight: 700; color: $text-primary; }
+.compList { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: $space-1;
+  li { font-size: $text-sm; color: $text-muted; display: flex; align-items: center; gap: $space-2;
+    &::before { content: '—'; color: $border-default; } } }
+
+// ── Demo ─────────────────────────────────────────────────────────────────────
+
+.demo {
+  background: $bg-base; border: 1px solid $border-subtle; border-radius: $radius-md; overflow: hidden;
+  display: flex; flex-direction: column; gap: 0;
+}
+
+.arrayWrap {
+  display: flex; flex-wrap: wrap; gap: $space-1; padding: $space-4;
+}
+
+.cell {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  min-width: 36px; padding: $space-2;
+  border: 1px solid $border-subtle; border-radius: $radius-sm;
+  background: $bg-elevated; position: relative; transition: all $t-fast;
+}
+
+.cellOut   { opacity: 0.25; }
+.cellActive { border-color: rgba(77,184,255,0.4); background: rgba(77,184,255,0.08); }
+.cellMid    { border-color: rgba(240,192,64,0.6); background: rgba(240,192,64,0.12); }
+.cellFound  { border-color: $accent; background: $accent-dim; }
+
+.cellVal { font-family: $font-mono; font-size: $text-sm; font-weight: 700; color: $text-primary; }
+.cellIdx { font-family: $font-mono; font-size: 9px; color: $text-muted; }
+.midLabel {
+  position: absolute; top: -18px;
+  font-family: $font-mono; font-size: 9px; color: $warn; letter-spacing: 0;
+}
+
+.controls {
+  display: flex; align-items: center; gap: $space-3; padding: $space-3 $space-4;
+  border-top: 1px solid $border-subtle; background: $bg-elevated; flex-wrap: wrap;
+}
+
+.targetWrap { display: flex; align-items: center; gap: $space-2; }
+.controlLabel { font-family: $font-mono; font-size: $text-sm; color: $text-muted; }
+
+.select {
+  font-family: $font-mono; font-size: $text-sm; color: $text-primary;
+  background: $bg-base; border: 1px solid $border-default; border-radius: $radius-sm;
+  padding: $space-1 $space-3; cursor: pointer;
+  &:focus { outline: 1px solid $accent; }
+}
+
+.btn {
+  font-family: $font-mono; font-size: $text-sm; padding: $space-2 $space-4;
+  background: $accent; color: $text-inverted; border: none; border-radius: $radius-sm;
+  cursor: pointer; font-weight: 700; transition: background $t-fast;
+  &:hover:not(:disabled) { background: #00cccc; }
+  &:disabled { opacity: 0.4; cursor: not-allowed; }
+}
+
+.btnSecondary { background: $bg-base; color: $text-secondary; border: 1px solid $border-default;
+  &:hover { background: $bg-elevated; color: $text-primary; } }
+
+.log {
+  padding: $space-3 $space-4; border-top: 1px solid $border-subtle;
+  min-height: 80px; display: flex; flex-direction: column; gap: $space-1;
+}
+
+.logLabel { font-family: $font-mono; font-size: 10px; color: $text-muted; letter-spacing: $letter-wider; margin-bottom: $space-1; }
+
+.logLine {
+  display: flex; gap: $space-3; font-family: $font-mono; font-size: $text-sm; color: $text-muted;
+  align-items: baseline;
+}
+.logLineCurrent { color: $text-primary; }
+.logNum { color: $text-muted; min-width: 20px; }
+.logEmpty { font-family: $font-mono; font-size: $text-sm; color: $text-muted; font-style: italic; }
+
+.stats {
+  display: flex; gap: $space-4; padding: $space-3 $space-4;
+  border-top: 1px solid $border-subtle; background: $bg-elevated;
+  flex-wrap: wrap;
+}
+
+.stat { display: flex; flex-direction: column; gap: 2px; }
+.statLabel { font-family: $font-mono; font-size: 10px; color: $text-muted; letter-spacing: $letter-wider; }
+.statVal { font-family: $font-mono; font-size: $text-lg; font-weight: 700; color: $accent; }
+
+// ── Pitfalls ──────────────────────────────────────────────────────────────────
+
+.pitfalls { display: flex; flex-direction: column; gap: $space-3; }
+
+.pitfall {
+  background: $bg-elevated; border: 1px solid $border-subtle;
+  border-radius: $radius-md; padding: $space-4;
+  display: flex; flex-direction: column; gap: $space-2;
+}
+
+.pitfallBad, .pitfallGood {
+  display: flex; align-items: baseline; gap: $space-2;
+  font-family: $font-mono; font-size: $text-sm;
+}
+.pitfallBad  { color: #ff7b72; }
+.pitfallGood { color: $accent; }
+
+.pitfallSign { flex-shrink: 0; font-weight: 700; }
+
+.pitfallWhy {
+  font-size: $text-sm; color: $text-muted; line-height: $line-normal;
+  padding-left: $space-5; border-left: 2px solid $border-subtle;
+}

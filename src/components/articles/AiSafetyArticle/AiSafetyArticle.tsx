@@ -1,7 +1,9 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { AttackSimulator } from './AttackSimulator';
 import { QUIZ_QUESTIONS } from './quizData';
 import s from './AiSafetyArticle.module.scss';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 export function AiSafetyArticle() {
   return (
@@ -9,7 +11,7 @@ export function AiSafetyArticle() {
 
       {/* ── 1. Введение ──────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Почему безопасность AI — это отдельная дисциплина</h2>
+        <SectionTitle>Почему безопасность AI — это отдельная дисциплина</SectionTitle>
         <p className={s.lead}>
           LLM-приложения уязвимы иначе, чем традиционные веб-сервисы. SQL-инъекция
           работает через плохую валидацию ввода. Prompt injection работает через
@@ -64,7 +66,7 @@ export function AiSafetyArticle() {
 
       {/* ── 2. Prompt Injection ───────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Prompt Injection: аналог SQL-инъекции для LLM</h2>
+        <SectionTitle>Prompt Injection: аналог SQL-инъекции для LLM</SectionTitle>
         <p className={s.body}>
           В SQL-инъекции пользователь вставляет SQL-код в строку запроса.
           В prompt injection пользователь вставляет <strong>инструкции</strong>
@@ -118,9 +120,7 @@ export function AiSafetyArticle() {
           </div>
         </div>
 
-        <div className={s.codeBlock}>
-          <div className={s.codeBlockHeader}>Защита: явное разделение system и user контента</div>
-          <code>{`// ❌ Уязвимо: user content смешан с instructions
+        <CodeHighlight lang="ts" filename="Защита: явное разделение system и user контента" code={`// ❌ Уязвимо: user content смешан с instructions
 const prompt = \`
   Ты помощник поддержки. Отвечай кратко.
 
@@ -154,13 +154,12 @@ async function checkForInjection(text: string): Promise<boolean> {
 
 if (await checkForInjection(userMessage)) {
   return { error: 'Запрос содержит недопустимый контент' };
-}`}</code>
-        </div>
+}`} />
       </section>
 
       {/* ── 3. Симулятор атак ────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Симулятор атак: смотри как это работает</h2>
+        <SectionTitle>Симулятор атак: смотри как это работает</SectionTitle>
         <p className={s.body}>
           Четыре реальных сценария атак — с уязвимым и защищённым ответом.
           Переключай режимы чтобы понять разницу:
@@ -171,7 +170,7 @@ if (await checkForInjection(userMessage)) {
 
       {/* ── 4. Галлюцинации ──────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Галлюцинации: уверенная ложь</h2>
+        <SectionTitle>Галлюцинации: уверенная ложь</SectionTitle>
         <p className={s.body}>
           LLM генерирует токены, оптимизируя вероятность следующего токена,
           а не истинность утверждения. Результат: модель с одинаковой уверенностью
@@ -217,9 +216,7 @@ if (await checkForInjection(userMessage)) {
           </div>
         </div>
 
-        <div className={s.codeBlock}>
-          <div className={s.codeBlockHeader}>Faithfulness check: проверяем что ответ основан на контексте</div>
-          <code>{`// После RAG: проверить что ответ поддерживается контекстом
+        <CodeHighlight lang="ts" filename="Faithfulness check: проверяем что ответ основан на контексте" code={`// После RAG: проверить что ответ поддерживается контекстом
 async function checkFaithfulness(
   context: string,
   answer: string,
@@ -256,13 +253,12 @@ const { faithful, score, issues } = await checkFaithfulness(context, answer);
 if (!faithful || score < 0.7) {
   // Добавить disclaimer или пересгенерировать
   return addDisclaimer(answer, issues);
-}`}</code>
-        </div>
+}`} />
       </section>
 
       {/* ── 5. Guardrails ────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Guardrails: архитектура защиты</h2>
+        <SectionTitle>Guardrails: архитектура защиты</SectionTitle>
         <p className={s.body}>
           Guardrails — это прослойка проверок вокруг LLM. Правильная архитектура
           выглядит как кольца защиты: каждый слой отсекает свой класс проблем.
@@ -311,9 +307,7 @@ if (!faithful || score < 0.7) {
           </div>
         </div>
 
-        <div className={s.codeBlock}>
-          <div className={s.codeBlockHeader}>Guardrails AI: декларативные правила для LLM</div>
-          <code>{`# Python: Guardrails AI (популярный фреймворк)
+        <CodeHighlight lang="python" filename="Guardrails AI: декларативные правила для LLM" code={`# Python: Guardrails AI (популярный фреймворк)
 from guardrails import Guard
 from guardrails.hub import ToxicLanguage, DetectPII, ValidLength
 
@@ -347,13 +341,12 @@ async function guardedLLMCall(input: string): Promise<string> {
   if (!faithful) return addUncertaintyDisclaimer(response);
 
   return await redactPII(response);  // PII из чужих данных в ответе
-}`}</code>
-        </div>
+}`} />
       </section>
 
       {/* ── 6. Privacy ───────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Privacy: личные данные в AI-системах</h2>
+        <SectionTitle>Privacy: личные данные в AI-системах</SectionTitle>
         <p className={s.body}>
           Пользователи постоянно вставляют в чаты персональные данные: письма
           с именами, документы с ИНН, переписки с контактами. Эти данные могут
@@ -399,9 +392,7 @@ async function guardedLLMCall(input: string): Promise<string> {
           </div>
         </div>
 
-        <div className={s.codeBlock}>
-          <div className={s.codeBlockHeader}>PII Detection и redaction</div>
-          <code>{`import { Anthropic } from '@anthropic-ai/sdk';
+        <CodeHighlight lang="ts" filename="PII Detection и redaction" code={`import { Anthropic } from '@anthropic-ai/sdk';
 
 // Используем LLM для детекции PII (или специальную библиотеку: presidio, spacy)
 async function detectAndRedactPII(text: string): Promise<{
@@ -435,13 +426,12 @@ if (hasPII) {
   console.log(\`[PRIVACY] Detected: \${types.join(', ')}\`);  // в лог только типы, не данные
 }
 
-const llmResponse = await callLLM(redacted);  // модель получает redacted версию`}</code>
-        </div>
+const llmResponse = await callLLM(redacted);  // модель получает redacted версию`} />
       </section>
 
       {/* ── 7. Red Teaming ───────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Red Teaming: тестируй как атакующий</h2>
+        <SectionTitle>Red Teaming: тестируй как атакующий</SectionTitle>
         <p className={s.body}>
           Лучшая защита — думать как атакующий. Red Teaming — это{' '}
           <strong>намеренные попытки сломать систему</strong>. Делают это
@@ -495,7 +485,7 @@ const llmResponse = await callLLM(redacted);  // модель получает r
 
       {/* ── 8. Compliance ────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Регуляции и compliance</h2>
+        <SectionTitle>Регуляции и compliance</SectionTitle>
         <p className={s.body}>
           AI-системы попадают под растущее регуляторное внимание. Базовые
           вещи которые нужно знать:
@@ -545,7 +535,7 @@ const llmResponse = await callLLM(redacted);  // модель получает r
 
       {/* ── 9. Security checklist ────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Security Checklist для AI-приложений</h2>
+        <SectionTitle>Security Checklist для AI-приложений</SectionTitle>
 
         <div className={s.securityChecklist}>
           {[
@@ -607,7 +597,7 @@ const llmResponse = await callLLM(redacted);  // модель получает r
 
       {/* ── 10. Quiz ──────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверь себя</h2>
+        <SectionTitle>Проверь себя</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

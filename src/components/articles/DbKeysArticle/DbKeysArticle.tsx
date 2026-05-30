@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { OnDeleteDemo } from './OnDeleteDemo';
@@ -81,7 +82,7 @@ export function DbKeysArticle() {
 
       {/* 1. Зачем ключи */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Зачем нужны ключи</h2>
+        <SectionTitle>Зачем нужны ключи</SectionTitle>
         <p className={s.lead}>
           Без ключей реляционная база — просто набор таблиц без гарантий. Можно вставить двух пользователей
           с одинаковым id, создать заказ для несуществующего клиента, записать возраст «−5».
@@ -132,7 +133,7 @@ export function DbKeysArticle() {
 
       {/* 2. Обзор всех типов */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Четыре основных ключа</h2>
+        <SectionTitle>Четыре основных ключа</SectionTitle>
         <div className={s.keyGrid}>
           {KEY_CARDS.map(k => (
             <div
@@ -153,7 +154,7 @@ export function DbKeysArticle() {
 
       {/* 3. PRIMARY KEY */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>PRIMARY KEY — идентификатор строки</h2>
+        <SectionTitle>PRIMARY KEY — идентификатор строки</SectionTitle>
         <p className={s.lead}>
           Первичный ключ однозначно идентифицирует каждую строку таблицы.
           PostgreSQL создаёт уникальный B-tree индекс автоматически.
@@ -208,7 +209,7 @@ INSERT INTO user_roles VALUES (1, 2);  -- ERROR: duplicate key`} />
 
       {/* 4. FOREIGN KEY */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>FOREIGN KEY — ссылочная целостность</h2>
+        <SectionTitle>FOREIGN KEY — ссылочная целостность</SectionTitle>
         <p className={s.lead}>
           Внешний ключ гарантирует, что значение в одной таблице ссылается на существующую строку
           в другой. Без FK можно вставить заказ с <code>user_id = 999</code> — пользователя нет, а заказ есть.
@@ -292,7 +293,7 @@ WHERE c.contype = 'f'
 
       {/* 5. UNIQUE */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>UNIQUE — уникальность без идентификации</h2>
+        <SectionTitle>UNIQUE — уникальность без идентификации</SectionTitle>
         <p className={s.lead}>
           UNIQUE запрещает дубликаты, но это не первичный ключ — он может быть NULL,
           и таких ограничений может быть несколько на одной таблице.
@@ -327,7 +328,7 @@ INSERT INTO users (email) VALUES ('a@b.com'); -- ERROR: duplicate key`} />
 
       {/* 6. CHECK */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>CHECK — пользовательская валидация</h2>
+        <SectionTitle>CHECK — пользовательская валидация</SectionTitle>
         <p className={s.lead}>
           CHECK позволяет задать произвольное условие — СУБД проверит его при каждом INSERT и UPDATE.
           Это дешевле, чем валидация в приложении, и надёжнее: данные не испортятся даже при прямом SQL-доступе.
@@ -361,7 +362,7 @@ ALTER TABLE users
 
       {/* 7. Surrogate vs Natural */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Суррогатный vs натуральный ключ</h2>
+        <SectionTitle>Суррогатный vs натуральный ключ</SectionTitle>
         <p className={s.lead}>
           Натуральный ключ — это реальный атрибут предметной области (email, ИНН, артикул).
           Суррогатный — искусственный идентификатор (SERIAL, UUID), созданный только ради идентификации.
@@ -418,7 +419,7 @@ ALTER TABLE users
 
       {/* 8. SERIAL vs UUID */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>SERIAL, UUID v4, UUID v7 — что выбрать</h2>
+        <SectionTitle>SERIAL, UUID v4, UUID v7 — что выбрать</SectionTitle>
         <p className={s.lead}>
           Выбор типа PK влияет на производительность вставок, размер индекса
           и возможность работы в распределённых системах.
@@ -471,7 +472,7 @@ CREATE TABLE legacy_sessions (
 
       {/* 9. Ключи и индексы */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Ключи и индексы — что создаётся автоматически</h2>
+        <SectionTitle>Ключи и индексы — что создаётся автоматически</SectionTitle>
         <p className={s.lead}>
           Запомни одно правило: <strong>PK и UNIQUE → индекс есть. FK → индекса нет.</strong>
         </p>
@@ -500,7 +501,7 @@ CREATE TABLE legacy_sessions (
 
       {/* 10. Полная схема */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Полная схема с правильными ключами</h2>
+        <SectionTitle>Полная схема с правильными ключами</SectionTitle>
         <p className={s.lead}>
           Всё вместе — три таблицы с полным набором ограничений и ручными индексами на FK.
         </p>
@@ -555,7 +556,7 @@ CREATE INDEX idx_orders_status  ON orders (status);`} />
 
       {/* 11. Quiz */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверь себя — 16 вопросов</h2>
+        <SectionTitle>Проверь себя — 16 вопросов</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

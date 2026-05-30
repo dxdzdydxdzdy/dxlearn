@@ -1,0 +1,292 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: $accent;
+    background: $accent-dim;
+    border-radius: $radius-sm;
+    padding: 1px $space-2;
+    font-family: $font-mono;
+    font-size: 12px;
+  }
+}
+
+// ── Timeline ──────────────────────────────────────────────────────────────────
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.timelineItem {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  border-bottom: 1px solid $border-subtle;
+  align-items: stretch;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  @include mobile { grid-template-columns: 56px 1fr; }
+}
+
+.timelineYear {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $accent;
+  padding: $space-3 $space-4;
+  border-right: 1px solid $border-subtle;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 229, 160, 0.03);
+  flex-shrink: 0;
+}
+
+.timelineBody {
+  padding: $space-3 $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.timelineName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.timelineDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+// ── Engine table ──────────────────────────────────────────────────────────────
+
+.engineTable {
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.engineHead {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-default;
+
+  span {
+    padding: $space-2 $space-4;
+    font-family: $font-mono;
+    font-size: 11px;
+    color: $text-muted;
+    letter-spacing: $letter-wider;
+  }
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.engineRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid $border-subtle;
+  transition: background $t-fast;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $space-1;
+    padding: $space-3 $space-4;
+    border-bottom: 1px solid $border-subtle;
+  }
+}
+
+.engineCell {
+  padding: $space-3 $space-4;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  display: flex;
+  align-items: center;
+
+  @include mobile {
+    padding: 0;
+    &:first-child { color: $text-primary; font-weight: 600; }
+  }
+
+  &:first-child { color: $text-primary; font-weight: 600; }
+}
+
+.engineBadge {
+  display: inline-block;
+  padding: 2px $space-2;
+  border-radius: $radius-sm;
+  font-size: $text-sm;
+  font-family: $font-mono;
+  border: 1px solid;
+}
+
+// ── V8 internals ──────────────────────────────────────────────────────────────
+
+.pipelineRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-2;
+
+  @include mobile { grid-template-columns: repeat(2, 1fr); }
+}
+
+.pipelineStep {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  position: relative;
+
+  &:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $text-muted;
+    font-family: $font-mono;
+    font-size: $text-sm;
+    z-index: 1;
+
+    @include mobile { display: none; }
+  }
+}
+
+.pipelineStepName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.pipelineStepSub {
+  font-size: 11px;
+  color: $text-muted;
+  line-height: $line-normal;
+}
+
+// ── Info / callout cards ──────────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid rgba(0, 229, 160, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+.infoCard {
+  background: $info-dim;
+  border: 1px solid rgba(77, 184, 255, 0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.infoLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $info;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.infoText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  strong { color: $text-primary; font-weight: 600; }
+}
+
+// ── Stat grid ─────────────────────────────────────────────────────────────────
+
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.statCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.statValue {
+  font-family: $font-mono;
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $accent;
+}
+
+.statLabel {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}

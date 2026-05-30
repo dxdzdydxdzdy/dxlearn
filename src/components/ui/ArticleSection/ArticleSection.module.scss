@@ -25,6 +25,24 @@
   }
 }
 
+.sectionTitle {
+  font-size: $text-xl;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  font-family: $font-mono;
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+
+  &::before {
+    content: '§';
+    color: $accent;
+    font-size: $text-xl;
+    line-height: $line-tight;
+    flex-shrink: 0;
+  }
+}
+
 .h2 {
   font-size: $text-lg;
   font-weight: $weight-bold;

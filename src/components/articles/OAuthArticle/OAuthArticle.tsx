@@ -1,7 +1,9 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import s from './OAuthArticle.module.scss';
 import { OAuthFlowViewer } from './OAuthFlowViewer';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { QUIZ_QUESTIONS } from './quizData';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 export function OAuthArticle() {
   return (
@@ -9,7 +11,7 @@ export function OAuthArticle() {
 
       {/* ── 1. Зачем OAuth ──────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проблема: не давай пароль третьим сервисам</h2>
+        <SectionTitle>Проблема: не давай пароль третьим сервисам</SectionTitle>
         <p className={s.lead}>
           Представь: ты пользуешься Spotify и хочешь, чтобы он публиковал треки
           в твой Twitter. Без OAuth Spotify просил бы твой пароль Twitter.
@@ -55,7 +57,7 @@ export function OAuthArticle() {
 
       {/* ── 2. Четыре роли ──────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Четыре участника OAuth</h2>
+        <SectionTitle>Четыре участника OAuth</SectionTitle>
         <p className={s.body}>
           Каждый OAuth-флоу вовлекает четыре роли. Понять их — значит понять
           протокол.
@@ -102,7 +104,7 @@ export function OAuthArticle() {
 
       {/* ── 3. Grant Types ──────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Grant Types: четыре сценария</h2>
+        <SectionTitle>Grant Types: четыре сценария</SectionTitle>
         <p className={s.body}>
           OAuth 2.0 описывает несколько «флоу» для разных ситуаций.
           Знать нужно три:
@@ -160,7 +162,7 @@ export function OAuthArticle() {
 
       {/* ── 4. Flow Viewer ──────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>«Войти через Google» — пошагово</h2>
+        <SectionTitle>«Войти через Google» — пошагово</SectionTitle>
         <p className={s.body}>
           Нажмите на каждый шаг чтобы увидеть реальные HTTP запросы.
           Переключите на PKCE для сравнения с SPA вариантом.
@@ -170,7 +172,7 @@ export function OAuthArticle() {
 
       {/* ── 5. OpenID Connect ───────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>OpenID Connect: слой идентичности</h2>
+        <SectionTitle>OpenID Connect: слой идентичности</SectionTitle>
         <p className={s.lead}>
           OAuth 2.0 отвечает на вопрос «что можно». OpenID Connect добавляет ответ
           на «кто ты» — тонкий стандартный слой поверх OAuth.
@@ -234,13 +236,13 @@ export function OAuthArticle() {
 
       {/* ── 6. PKCE ─────────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>PKCE: почему нельзя просто хранить client_secret в SPA</h2>
+        <SectionTitle>PKCE: почему нельзя просто хранить client_secret в SPA</SectionTitle>
         <p className={s.body}>
           В браузерном SPA нет «секрета» — весь JavaScript виден в DevTools.
           Если вшить client_secret в код — его можно найти в Source вкладке.
           PKCE решает это математически.
         </p>
-        <pre className={s.codeBlock}><code>{`// 1. Генерируем случайный code_verifier (43–128 символов)
+        <CodeHighlight lang="ts" code={`// 1. Генерируем случайный code_verifier (43–128 символов)
 const verifier  = crypto.randomBytes(32).toString('base64url');
 // → "dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk"
 
@@ -259,7 +261,7 @@ sessionStorage.setItem('pkce_verifier', verifier);
 // 5. В token request (вместо client_secret):
 //    code_verifier=dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk
 //
-// Auth Server проверяет: SHA256(verifier) == challenge? ✓`}</code></pre>
+// Auth Server проверяет: SHA256(verifier) == challenge? ✓`} />
         <div className={s.callout}>
           <div className={s.calloutLabel}>// Почему это безопасно</div>
           <p className={s.calloutText}>
@@ -272,7 +274,7 @@ sessionStorage.setItem('pkce_verifier', verifier);
 
       {/* ── 7. Scopes ───────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Scopes: запрашивай только то, что нужно</h2>
+        <SectionTitle>Scopes: запрашивай только то, что нужно</SectionTitle>
         <p className={s.body}>
           Scope — строка, определяющая какие действия разрешены токену. Пользователь
           видит список разрешений на Consent Screen. Чем шире scopes — тем меньше
@@ -309,24 +311,24 @@ sessionStorage.setItem('pkce_verifier', verifier);
 
       {/* ── 8. Практика Node.js ─────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Практика: «Войти через Google» на Node.js</h2>
+        <SectionTitle>Практика: «Войти через Google» на Node.js</SectionTitle>
         <p className={s.body}>
           Минимальная реализация OAuth + OIDC с Google без готовых библиотек типа Passport.
           Так понятно что происходит под капотом.
         </p>
 
         <p className={s.body}><strong>1. Зарегистрировать приложение:</strong></p>
-        <pre className={s.codeBlock}><code>{`// console.cloud.google.com → APIs & Services → Credentials
+        <CodeHighlight lang="ts" code={`// console.cloud.google.com → APIs & Services → Credentials
 // Создать OAuth 2.0 Client ID
 // Authorised redirect URIs: http://localhost:3000/auth/callback
 
 // .env
 GOOGLE_CLIENT_ID=YOUR_CLIENT_ID.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=YOUR_SECRET
-GOOGLE_REDIRECT_URI=http://localhost:3000/auth/callback`}</code></pre>
+GOOGLE_REDIRECT_URI=http://localhost:3000/auth/callback`} />
 
         <p className={s.body}><strong>2. Redirect на Google:</strong></p>
-        <pre className={s.codeBlock}><code>{`const crypto = require('crypto');
+        <CodeHighlight lang="ts" code={`const crypto = require('crypto');
 
 app.get('/auth/google', (req, res) => {
   // Генерируем state для CSRF защиты
@@ -346,10 +348,10 @@ app.get('/auth/google', (req, res) => {
   res.redirect(
     'https://accounts.google.com/o/oauth2/v2/auth?' + params.toString()
   );
-});`}</code></pre>
+});`} />
 
         <p className={s.body}><strong>3. Обработать callback:</strong></p>
-        <pre className={s.codeBlock}><code>{`const { jwtVerify, createRemoteJWKSet } = require('jose');
+        <CodeHighlight lang="ts" code={`const { jwtVerify, createRemoteJWKSet } = require('jose');
 
 // Публичные ключи Google (кешируются автоматически)
 const GOOGLE_JWKS = createRemoteJWKSet(
@@ -401,7 +403,7 @@ app.get('/auth/callback', async (req, res) => {
   // 5. Создать собственную сессию
   req.session.userId = user.id;
   res.redirect('/dashboard');
-});`}</code></pre>
+});`} />
 
         <div className={s.callout}>
           <div className={s.calloutLabel}>// На продакшне — используй библиотеку</div>
@@ -416,7 +418,7 @@ app.get('/auth/callback', async (req, res) => {
 
       {/* ── 9. Ошибки ───────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Типичные ошибки</h2>
+        <SectionTitle>Типичные ошибки</SectionTitle>
         <div className={s.pitfallList}>
           <div className={s.pitfall}>
             <p className={s.pitfallTitle}>⚠ Не проверять state</p>
@@ -465,7 +467,7 @@ app.get('/auth/callback', async (req, res) => {
 
       {/* ── 10. Quiz ────────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверь себя</h2>
+        <SectionTitle>Проверь себя</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

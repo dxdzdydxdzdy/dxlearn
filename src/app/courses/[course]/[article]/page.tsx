@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getCourse, getArticle, courses } from '@/content/courses';
-import { Sidebar } from '@/components/layout/Sidebar/Sidebar';
+import { CollapsibleSidebar } from '@/components/layout/CollapsibleSidebar/CollapsibleSidebar';
 import { EventLoopArticle } from '@/components/articles/EventLoopArticle/EventLoopArticle';
 import { PromisesArticle } from '@/components/articles/PromisesArticle/PromisesArticle';
 import { PrototypesArticle } from '@/components/articles/PrototypesArticle/PrototypesArticle';
@@ -11,11 +11,15 @@ import { CascadeArticle } from '@/components/articles/CascadeArticle/CascadeArti
 import { FlexboxArticle } from '@/components/articles/FlexboxArticle/FlexboxArticle';
 import { HttpRequestArticle } from '@/components/articles/HttpRequestArticle/HttpRequestArticle';
 import { HowBrowserWorksArticle } from '@/components/articles/HowBrowserWorksArticle/HowBrowserWorksArticle';
+import { WhatIsBrowserArticle } from '@/components/articles/WhatIsBrowserArticle/WhatIsBrowserArticle';
 import { OopArticle } from '@/components/articles/OopArticle/OopArticle';
 import { ProgressiveSsrArticle } from '@/components/articles/ProgressiveSsrArticle/ProgressiveSsrArticle';
 import { StorageArticle } from '@/components/articles/StorageArticle/StorageArticle';
 import { CsrVsSsrArticle } from '@/components/articles/CsrVsSsrArticle/CsrVsSsrArticle';
 import { BackendArticle } from '@/components/articles/BackendArticle/BackendArticle';
+import { NodejsBasicsArticle } from '@/components/articles/NodejsBasicsArticle/NodejsBasicsArticle';
+import { HttpServerBasicsArticle } from '@/components/articles/HttpServerBasicsArticle/HttpServerBasicsArticle';
+import { ExpressBasicsArticle } from '@/components/articles/ExpressBasicsArticle/ExpressBasicsArticle';
 import { DevOpsArticle } from '@/components/articles/DevOpsArticle/DevOpsArticle';
 import { LinuxArticle } from '@/components/articles/LinuxArticle/LinuxArticle';
 import { DatabasesIntroArticle } from '@/components/articles/DatabasesIntroArticle/DatabasesIntroArticle';
@@ -42,7 +46,16 @@ import { FineTuningArticle } from '@/components/articles/FineTuningArticle/FineT
 import { MlTrainingLoopArticle } from '@/components/articles/MlTrainingLoopArticle/MlTrainingLoopArticle';
 import { AiInProductionArticle } from '@/components/articles/AiInProductionArticle/AiInProductionArticle';
 import { AiSafetyArticle } from '@/components/articles/AiSafetyArticle/AiSafetyArticle';
+import { BigOArticle } from '@/components/articles/BigOArticle/BigOArticle';
+import { BinarySearchArticle } from '@/components/articles/BinarySearchArticle/BinarySearchArticle';
+import { TwoPointersArticle } from '@/components/articles/TwoPointersArticle/TwoPointersArticle';
+import { SlidingWindowArticle } from '@/components/articles/SlidingWindowArticle/SlidingWindowArticle';
+import { SortingArticle } from '@/components/articles/SortingArticle/SortingArticle';
 import { PlaceholderArticle } from '@/components/articles/PlaceholderArticle/PlaceholderArticle';
+import { RelatedArticles } from '@/components/ui/RelatedArticles/RelatedArticles';
+import { TableOfContents } from '@/components/ui/TableOfContents/TableOfContents';
+import { ReadingProgress } from '@/components/ui/ReadingProgress/ReadingProgress';
+import { calcReadingTime } from '@/lib/readingTime';
 import s from './page.module.scss';
 
 interface Props {
@@ -70,6 +83,7 @@ export default async function ArticlePage({ params }: Props) {
   const articleIndex = course.articles.indexOf(article);
   const prevArticle = course.articles[articleIndex - 1];
   const nextArticle = course.articles[articleIndex + 1];
+  const readingTime = calcReadingTime(aSlug);
 
   function renderArticle() {
     if (cSlug === 'javascript' && aSlug === 'event-loop') return <EventLoopArticle />;
@@ -77,6 +91,7 @@ export default async function ArticlePage({ params }: Props) {
     if (cSlug === 'javascript' && aSlug === 'prototypes') return <PrototypesArticle />;
     if (cSlug === 'browser' && aSlug === 'critical-rendering-path') return <CriticalRenderingPathArticle />;
     if (cSlug === 'general' && aSlug === 'http-request') return <HttpRequestArticle />;
+    if (cSlug === 'general' && aSlug === 'what-is-browser') return <WhatIsBrowserArticle />;
     if (cSlug === 'general' && aSlug === 'how-browser-works') return <HowBrowserWorksArticle />;
     if (cSlug === 'general' && aSlug === 'oop') return <OopArticle />;
     if (cSlug === 'general' && aSlug === 'progressive-ssr') return <ProgressiveSsrArticle />;
@@ -85,6 +100,9 @@ export default async function ArticlePage({ params }: Props) {
     if (cSlug === 'css' && aSlug === 'cascade') return <CascadeArticle />;
     if (cSlug === 'css' && aSlug === 'flexbox') return <FlexboxArticle />;
     if (cSlug === 'backend' && aSlug === 'backend-roadmap') return <BackendArticle />;
+    if (cSlug === 'backend' && aSlug === 'nodejs-basics')        return <NodejsBasicsArticle />;
+    if (cSlug === 'backend' && aSlug === 'http-server-basics')   return <HttpServerBasicsArticle />;
+    if (cSlug === 'backend' && aSlug === 'express-basics')       return <ExpressBasicsArticle />;
     if (cSlug === 'backend' && aSlug === 'rest-api-design') return <RestApiArticle />;
     if (cSlug === 'backend' && aSlug === 'auth-jwt')        return <AuthJwtArticle />;
     if (cSlug === 'backend' && aSlug === 'oauth-openid')   return <OAuthArticle />;
@@ -111,16 +129,20 @@ export default async function ArticlePage({ params }: Props) {
     if (cSlug === 'ml-ai' && aSlug === 'ml-training-loop') return <MlTrainingLoopArticle />;
     if (cSlug === 'ml-ai' && aSlug === 'ai-in-production') return <AiInProductionArticle />;
     if (cSlug === 'ml-ai' && aSlug === 'ai-safety') return <AiSafetyArticle />;
+    if (cSlug === 'algorithms' && aSlug === 'big-o')             return <BigOArticle />;
+    if (cSlug === 'algorithms' && aSlug === 'binary-search')     return <BinarySearchArticle />;
+    if (cSlug === 'algorithms' && aSlug === 'two-pointers')      return <TwoPointersArticle />;
+    if (cSlug === 'algorithms' && aSlug === 'sliding-window')    return <SlidingWindowArticle />;
+    if (cSlug === 'algorithms' && aSlug === 'sorting-algorithms') return <SortingArticle />;
     return <PlaceholderArticle title={article!.title} />;
   }
 
   return (
     <div className={s.wrapper}>
-      <div className={s.sidebar}>
-        <Sidebar />
-      </div>
+      <CollapsibleSidebar />
 
       <main className={s.main}>
+        <ReadingProgress />
         <article className={s.article}>
           <nav className={s.breadcrumb}>
             <Link href="/courses">courses</Link>
@@ -133,16 +155,19 @@ export default async function ArticlePage({ params }: Props) {
           <div className={s.titleBlock}>
             <h1 className={s.articleTitle}>{article.title}</h1>
             <p className={s.articleDesc}>{article.description}</p>
-            {article.tags && (
-              <div className={s.tags}>
-                {article.tags.map((tag) => (
-                  <span key={tag} className={s.tag}>{tag}</span>
-                ))}
-              </div>
-            )}
+            <div className={s.titleMeta}>
+              {readingTime !== null && (
+                <span className={s.readingTime}>{readingTime} мин на чтение</span>
+              )}
+              {article.tags?.map((tag) => (
+                <span key={tag} className={s.tag}>{tag}</span>
+              ))}
+            </div>
           </div>
 
           {renderArticle()}
+
+          <RelatedArticles courseSlug={cSlug} articleSlug={aSlug} />
 
           <nav className={s.nav}>
             {prevArticle ? (
@@ -160,6 +185,7 @@ export default async function ArticlePage({ params }: Props) {
             )}
           </nav>
         </article>
+        <TableOfContents />
       </main>
     </div>
   );

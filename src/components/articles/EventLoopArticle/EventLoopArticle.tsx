@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { EventLoopDemo } from './EventLoopDemo';
 import { RenderPipelineDemo } from './RenderPipelineDemo';
 import { QuizBlock } from './QuizBlock';
@@ -116,7 +117,7 @@ export function EventLoopArticle() {
 
       {/* 1 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Зачем нужен Event Loop</h2>
+        <SectionTitle>Зачем нужен Event Loop</SectionTitle>
         <p className={s.prose}>
           JavaScript — однопоточный язык. В любой момент времени выполняется ровно одна инструкция.
           Но браузер при этом одновременно обрабатывает клики, показывает анимации, делает сетевые запросы
@@ -136,7 +137,7 @@ export function EventLoopArticle() {
 
       {/* 2 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Архитектура браузера</h2>
+        <SectionTitle>Архитектура браузера</SectionTitle>
         <p className={s.prose}>
           Браузер — это не монолит. Он состоит из нескольких независимых подсистем.
           Для понимания Event Loop важно видеть, что JS-движок — лишь одна из них.
@@ -152,7 +153,7 @@ export function EventLoopArticle() {
 
       {/* 3 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Call Stack — стек вызовов</h2>
+        <SectionTitle>Call Stack — стек вызовов</SectionTitle>
         <p className={s.prose}>
           Call Stack — это структура данных типа «стопка»: последний вошёл — первый вышел (LIFO).
           Каждый вызов функции кладёт фрейм на вершину стека. Когда функция возвращает результат —
@@ -198,7 +199,7 @@ function factorial(n) {
 
       {/* 4 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Web API — мост между движком и очередями</h2>
+        <SectionTitle>Web API — мост между движком и очередями</SectionTitle>
         <p className={s.prose}>
           <code>setTimeout</code>, обработчики событий, <code>fetch</code> — это не спецификация
           JavaScript. Это <strong>браузерные API</strong>. Когда ты вызываешь <code>setTimeout(fn, 300)</code>,
@@ -224,7 +225,7 @@ console.log("this runs first"); // ← выполнится раньше`}
 
       {/* 5 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Micro и Macro очереди</h2>
+        <SectionTitle>Micro и Macro очереди</SectionTitle>
         <p className={s.prose}>
           Очередей на самом деле <strong>две</strong>, и у них разный приоритет.
           После каждого шага (синхронный код или одна макрозадача) Event Loop сначала опустошает
@@ -239,7 +240,7 @@ console.log("this runs first"); // ← выполнится раньше`}
 
       {/* 6 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Порядок выполнения</h2>
+        <SectionTitle>Порядок выполнения</SectionTitle>
         <ExecutionOrder />
         <p className={s.prose} style={{ marginTop: 'var(--space-4, 1rem)' }}>
           Это означает: если макрозадача порождает промис — следующая макрозадача начнёт выполняться
@@ -249,7 +250,7 @@ console.log("this runs first"); // ← выполнится раньше`}
 
       {/* 7 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Интерактивный симулятор</h2>
+        <SectionTitle>Интерактивный симулятор</SectionTitle>
         <p className={s.prose}>
           Выбери сниппет, жми «next →» и наблюдай, как каждая строка кода двигает задачи между
           Call Stack, Microtask Queue, Macrotask Queue и консолью.
@@ -260,7 +261,7 @@ console.log("this runs first"); // ← выполнится раньше`}
 
       {/* 8 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>queueMicrotask и MutationObserver</h2>
+        <SectionTitle>queueMicrotask и MutationObserver</SectionTitle>
         <p className={s.prose}>
           <code>queueMicrotask(fn)</code> — явный способ добавить задачу в Microtask Queue, минуя
           промис. Полезен когда нужно запустить код «после текущей синхронной работы, но до любого
@@ -300,7 +301,7 @@ console.log("sync");
 
       {/* 9 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Стадии рендера</h2>
+        <SectionTitle>Стадии рендера</SectionTitle>
         <p className={s.prose}>
           Рендер страницы — не одна операция, а конвейер из четырёх стадий. Браузер запускает его
           не после каждой задачи, а порциями — накапливает изменения и перерисовывает разом
@@ -327,7 +328,7 @@ console.log("sync");
 
       {/* 10 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Ключевые правила</h2>
+        <SectionTitle>Ключевые правила</SectionTitle>
         <p className={s.prose}>
           <strong>1. Event Loop ≠ JS движок.</strong>{' '}
           V8 предоставляет Call Stack и Heap. Event Loop — браузер или Node.js.
@@ -379,7 +380,7 @@ function processChunk(items, index = 0) {
 
       {/* 11 */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Самопроверка</h2>
+        <SectionTitle>Самопроверка</SectionTitle>
         <p className={s.prose}>
           Проверь, насколько хорошо ты усвоил порядок выполнения задач.
           В каждом вопросе — фрагмент кода с несколькими <code>console.log</code>.

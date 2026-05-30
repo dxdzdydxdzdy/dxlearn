@@ -13,17 +13,6 @@
   gap: $space-4;
 }
 
-.sectionTitle {
-  font-size: $text-xl;
-  font-weight: 700;
-  color: $text-primary;
-  font-family: $font-mono;
-  display: flex;
-  align-items: center;
-  gap: $space-3;
-
-  &::before { content: '§'; color: $accent; font-size: $text-base; }
-}
 
 .lead {
   font-size: $text-base;

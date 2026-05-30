@@ -1,7 +1,9 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { RagPipeline } from './RagPipeline';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { QUIZ_QUESTIONS } from './quizData';
 import s from './RagArchitectureArticle.module.scss';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 export function RagArchitectureArticle() {
   return (
@@ -9,7 +11,7 @@ export function RagArchitectureArticle() {
 
       {/* ── 1. Проблема ────────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проблема: LLM не знает ваши данные</h2>
+        <SectionTitle>Проблема: LLM не знает ваши данные</SectionTitle>
         <p className={s.lead}>
           GPT-4, Claude, Gemini — обучены на публичных данных до определённой даты.
           Они не знают твою внутреннюю документацию, CRM, базу знаний поддержки,
@@ -18,8 +20,7 @@ export function RagArchitectureArticle() {
         <div className={s.twoCols}>
           <div className={s.colCard}>
             <div className={s.colTitle} style={{ color: '#ff5f6a' }}>❌ Наивные подходы</div>
-            <div className={s.codeBlock}>
-              <code>{`// Подход 1: дообучение (fine-tuning)
+            <CodeHighlight lang="ts" code={`// Подход 1: дообучение (fine-tuning)
 // ✗ Дорого ($500–50 000 за запуск)
 // ✗ Долго (часы/дни)
 // ✗ Данные "замораживаются" в весах
@@ -30,13 +31,11 @@ export function RagArchitectureArticle() {
 // ✗ 1M токенов = $3–30 за запрос
 // ✗ "Lost in the middle" —
 //   модель игнорирует середину
-// ✗ Latency 30–60 секунд`}</code>
-            </div>
+// ✗ Latency 30–60 секунд`} />
           </div>
           <div className={s.colCard}>
             <div className={s.colTitle} style={{ color: '#00e5a0' }}>✓ RAG — правильное решение</div>
-            <div className={s.codeBlock}>
-              <code>{`// Retrieve-Augment-Generate
+            <CodeHighlight lang="ts" code={`// Retrieve-Augment-Generate
 
 // Идея проста:
 // 1. Заранее разбить документы на чанки
@@ -49,15 +48,14 @@ export function RagArchitectureArticle() {
 // ✓ ~$0.01 за запрос вместо $3
 // ✓ Данные обновляются мгновенно
 // ✓ Модель цитирует источники
-// ✓ Latency 1–3 секунды`}</code>
-            </div>
+// ✓ Latency 1–3 секунды`} />
           </div>
         </div>
       </section>
 
       {/* ── 2. Два этапа RAG ───────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Два этапа: индексация и запрос</h2>
+        <SectionTitle>Два этапа: индексация и запрос</SectionTitle>
         <p className={s.lead}>
           RAG-система работает в двух режимах. <strong>Indexing</strong> — происходит заранее,
           один раз (или при обновлении документов). <strong>Querying</strong> — при каждом
@@ -160,7 +158,7 @@ export function RagArchitectureArticle() {
 
       {/* ── 3. RAG Pipeline Interactive ────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Интерактив: запусти RAG-пайплайн</h2>
+        <SectionTitle>Интерактив: запусти RAG-пайплайн</SectionTitle>
         <p className={s.body}>
           Ниже — симуляция реального RAG на базе знаний по Next.js.
           Выбери один из трёх запросов и нажми <strong>Search</strong>.
@@ -172,7 +170,7 @@ export function RagArchitectureArticle() {
 
       {/* ── 4. Chunking ────────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Chunking: от этого зависит всё</h2>
+        <SectionTitle>Chunking: от этого зависит всё</SectionTitle>
         <p className={s.lead}>
           Качество RAG на 60% определяется качеством чанкинга.
           Плохие чанки — плохой retrieval, и никакой reranker не спасёт.
@@ -235,7 +233,7 @@ export function RagArchitectureArticle() {
 
       {/* ── 5. Embedding модели ─────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Embedding-модели: сравнение</h2>
+        <SectionTitle>Embedding-модели: сравнение</SectionTitle>
         <p className={s.body}>
           Embedding-модель преобразует текст в вектор. Чем лучше модель улавливает
           семантику, тем точнее поиск. Ориентируйся на{' '}
@@ -326,14 +324,13 @@ export function RagArchitectureArticle() {
 
       {/* ── 6. Vector Search — HNSW ─────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Vector Search: как работает HNSW</h2>
+        <SectionTitle>Vector Search: как работает HNSW</SectionTitle>
         <p className={s.lead}>
           Нельзя сравнивать каждый запрос со всеми миллионами векторов — это O(N) и медленно.
           HNSW (Hierarchical Navigable Small World) решает задачу поиска приближённо,
           но невероятно быстро.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`// Наивный поиск — O(N):
+        <CodeHighlight lang="ts" code={`// Наивный поиск — O(N):
 vectors.map(v => cosineSim(query, v)).sort().slice(0, 3)
 // 1M чанков × 1536 dims = ~3B операций = ~1–3 секунды
 
@@ -352,8 +349,7 @@ vectors.map(v => cosineSim(query, v)).sort().slice(0, 3)
 // ef_search         — ширина поиска (точность vs скорость)
 
 // Результат: 99% recall при 100× ускорении vs brute force
-// 1M чанков → ответ за ~5–20 мс`}</code>
-        </div>
+// 1M чанков → ответ за ~5–20 мс`} />
         <div className={s.callout}>
           <div className={s.calloutLabel}>МЕТРИКА СХОДСТВА</div>
           <p className={s.calloutText}>
@@ -367,7 +363,7 @@ vectors.map(v => cosineSim(query, v)).sort().slice(0, 3)
 
       {/* ── 7. Reranking ────────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Reranking: два этапа поиска</h2>
+        <SectionTitle>Reranking: два этапа поиска</SectionTitle>
         <p className={s.lead}>
           Bi-encoder быстр но груб — он не анализирует запрос и документ вместе.
           Cross-encoder медленный но точный — он смотрит на пару целиком.
@@ -411,13 +407,12 @@ vectors.map(v => cosineSim(query, v)).sort().slice(0, 3)
 
       {/* ── 8. Prompt Assembly ──────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Prompt Assembly: как правильно вставлять контекст</h2>
+        <SectionTitle>Prompt Assembly: как правильно вставлять контекст</SectionTitle>
         <p className={s.lead}>
           Качество промпта определяет насколько модель будет придерживаться контекста
           и не будет галлюцинировать. Вот проверенный шаблон:
         </p>
-        <div className={s.codeBlock}>
-          <code>{`// ✓ Проверенный шаблон RAG-промпта:
+        <CodeHighlight lang="ts" code={`// ✓ Проверенный шаблон RAG-промпта:
 
 const systemPrompt = \`
 Ты — ассистент поддержки компании Acme Corp.
@@ -445,8 +440,7 @@ const userMessage = \`
 // 1. XML-теги разделяют контекст и вопрос
 // 2. Явный запрет галлюцинаций в system prompt
 // 3. Fallback инструкция ("честно скажи")
-// 4. Схема цитирования — проверяемые ответы`}</code>
-        </div>
+// 4. Схема цитирования — проверяемые ответы`} />
         <div className={s.warningCard}>
           <div className={s.warningLabel}>⚠ PROMPT INJECTION</div>
           <p className={s.warningText}>
@@ -461,7 +455,7 @@ const userMessage = \`
 
       {/* ── 9. Оценка качества RAGAS ────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Оценка качества: метрики RAGAS</h2>
+        <SectionTitle>Оценка качества: метрики RAGAS</SectionTitle>
         <p className={s.lead}>
           RAG без метрик — это доверяться интуиции. RAGAS (Retrieval Augmented Generation Assessment)
           даёт 4 измеримых показателя: два для retrieval, два для generation.
@@ -512,8 +506,7 @@ const userMessage = \`
             </div>
           ))}
         </div>
-        <div className={s.codeBlock}>
-          <code>{`// Запуск RAGAS evaluation (Python):
+        <CodeHighlight lang="ts" code={`// Запуск RAGAS evaluation (Python):
 from ragas import evaluate
 from ragas.metrics import (
     context_precision, context_recall,
@@ -535,13 +528,12 @@ result = evaluate(dataset, metrics=[
 ])
 # {'context_precision': 0.71, 'faithfulness': 0.88, ...}
 
-// Хорошие значения: precision > 0.7, faithfulness > 0.85`}</code>
-        </div>
+// Хорошие значения: precision > 0.7, faithfulness > 0.85`} />
       </section>
 
       {/* ── 10. Типичные ошибки ──────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>7 классических ошибок в RAG</h2>
+        <SectionTitle>7 классических ошибок в RAG</SectionTitle>
         <div className={s.problemsList}>
           {[
             {
@@ -601,9 +593,8 @@ result = evaluate(dataset, metrics=[
 
       {/* ── 11. Продвинутые паттерны ─────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Продвинутые паттерны</h2>
-        <div className={s.codeBlock}>
-          <code>{`// 1. Query Rewriting — улучшаем запрос перед поиском
+        <SectionTitle>Продвинутые паттерны</SectionTitle>
+        <CodeHighlight lang="ts" code={`// 1. Query Rewriting — улучшаем запрос перед поиском
 const rewritten = await llm.invoke(\`
   Перефразируй вопрос для лучшего поиска по документации.
   Исходный: "\${userQuery}"
@@ -630,8 +621,7 @@ if (Math.max(...relevanceScores) < 0.3) {
 
 // 4. Self-RAG — модель решает когда нужен retrieval
 // Генерируем токен [Retrieve] / [No Retrieve] / [Critique]
-// и выполняем соответствующее действие`}</code>
-        </div>
+// и выполняем соответствующее действие`} />
         <div className={s.infoCard}>
           <div className={s.infoLabel}>ИНСТРУМЕНТЫ</div>
           <p className={s.infoText}>
@@ -646,7 +636,7 @@ if (Math.max(...relevanceScores) < 0.3) {
 
       {/* ── 12. Quiz ──────────────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверь себя</h2>
+        <SectionTitle>Проверь себя</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

@@ -1,7 +1,9 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { VectorExplorer } from './VectorExplorer';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { QUIZ_QUESTIONS } from './quizData';
 import s from './VectorDatabasesArticle.module.scss';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 export function VectorDatabasesArticle() {
   return (
@@ -9,7 +11,7 @@ export function VectorDatabasesArticle() {
 
       {/* ── 1. Проблема ────────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Зачем вообще специальная база для векторов?</h2>
+        <SectionTitle>Зачем вообще специальная база для векторов?</SectionTitle>
         <p className={s.lead}>
           Вектор эмбеддинга — это массив из 1 536 чисел.
           Кажется, сохрани в PostgreSQL и ищи. Но «ближайший» вектор — это не «меньший»:
@@ -19,8 +21,7 @@ export function VectorDatabasesArticle() {
         <div className={s.twoCols}>
           <div className={s.colCard}>
             <div className={s.colTitle} style={{ color: '#ff5f6a' }}>Без специального индекса</div>
-            <div className={s.codeBlock}>
-              <code>{`-- Наивный поиск в PostgreSQL (без pgvector)
+            <CodeHighlight lang="ts" code={`-- Наивный поиск в PostgreSQL (без pgvector)
 SELECT id FROM docs
 ORDER BY embedding <-> $1  -- L2 distance
 LIMIT 10;
@@ -30,13 +31,11 @@ LIMIT 10;
 
 -- B-tree на числовом массиве не работает:
 -- нет понятия "порядка" — только расстояние
--- от конкретной точки запроса`}</code>
-            </div>
+-- от конкретной точки запроса`} />
           </div>
           <div className={s.colCard}>
             <div className={s.colTitle} style={{ color: '#00e5a0' }}>С HNSW индексом</div>
-            <div className={s.codeBlock}>
-              <code>{`-- pgvector с HNSW:
+            <CodeHighlight lang="ts" code={`-- pgvector с HNSW:
 CREATE INDEX ON docs
   USING hnsw (embedding vector_cosine_ops)
   WITH (m = 16, ef_construction = 64);
@@ -46,8 +45,7 @@ ORDER BY embedding <=> $1  -- cosine
 LIMIT 10;
 
 -- HNSW: O(log N), 5–20 мс для 1M векторов
--- Recall ~97–99% от точного поиска`}</code>
-            </div>
+-- Recall ~97–99% от точного поиска`} />
           </div>
         </div>
         <div className={s.callout}>
@@ -62,14 +60,13 @@ LIMIT 10;
 
       {/* ── 2. HNSW изнутри ─────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>HNSW: как работает граф под капотом</h2>
+        <SectionTitle>HNSW: как работает граф под капотом</SectionTitle>
         <p className={s.lead}>
           HNSW (Hierarchical Navigable Small World) — это многоуровневый граф.
           Верхний уровень разреженный: длинные «прыжки» для быстрого сближения.
           Нижний плотный: точный поиск в малой окрестности.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`// Алгоритм HNSW — поиск:
+        <CodeHighlight lang="ts" code={`// Алгоритм HNSW — поиск:
 
 // Уровень 3 (разреженный): 4 узла
 //  [A] ────────────────── [E]    ← входим здесь, прыгаем к E
@@ -94,8 +91,7 @@ LIMIT 10;
 // 3. Создать двунаправленные связи
 
 // Память = N × M × 2 × sizeof(uint32) + сами векторы
-// 1M векторов, M=16 → ~128 MB граф + 6 GB векторы (1536 dims × 4 байта)`}</code>
-        </div>
+// 1M векторов, M=16 → ~128 MB граф + 6 GB векторы (1536 dims × 4 байта)`} />
         <div className={s.infoCard}>
           <div className={s.infoLabel}>QUANTIZATION — ЭКОНОМИМ ПАМЯТЬ В 4–32×</div>
           <p className={s.infoText}>
@@ -111,7 +107,7 @@ LIMIT 10;
 
       {/* ── 3. VectorExplorer ──────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Интерактив: Brute Force vs HNSW</h2>
+        <SectionTitle>Интерактив: Brute Force vs HNSW</SectionTitle>
         <p className={s.body}>
           Выбери слово, нажми{' '}
           <strong>▶ Запустить поиск</strong> — и посмотри разницу двух подходов.
@@ -124,7 +120,7 @@ LIMIT 10;
 
       {/* ── 4. Сравнение баз ────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Обзор: pgvector, Qdrant, Pinecone, FAISS</h2>
+        <SectionTitle>Обзор: pgvector, Qdrant, Pinecone, FAISS</SectionTitle>
         <div className={s.compareTable}>
           <div className={s.compareTableHead}>
             <div className={s.compareTableHCell}>БАЗА</div>
@@ -218,14 +214,13 @@ LIMIT 10;
 
       {/* ── 5. pgvector — практика ──────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>pgvector: SQL + векторы в одном стеке</h2>
+        <SectionTitle>pgvector: SQL + векторы в одном стеке</SectionTitle>
         <p className={s.body}>
           pgvector — расширение PostgreSQL. Если у тебя уже есть Postgres —
           это нулевой overhead: никаких дополнительных сервисов, SQL-джоины
           с обычными таблицами, ACID транзакции, знакомый pg_dump.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`-- Установка и базовая настройка
+        <CodeHighlight lang="ts" code={`-- Установка и базовая настройка
 CREATE EXTENSION IF NOT EXISTS vector;
 
 -- Таблица с векторами
@@ -263,6 +258,7 @@ LIMIT 5;
 
 -- TypeScript (Drizzle ORM):
 import { sql } from 'drizzle-orm';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 const results = await db
   .select({
@@ -272,20 +268,18 @@ const results = await db
   })
   .from(documents)
   .orderBy(sql\`embedding <=> \${vectorParam}\`)
-  .limit(5);`}</code>
-        </div>
+  .limit(5);`} />
       </section>
 
       {/* ── 6. Qdrant — практика ────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Qdrant: production-grade с богатой фильтрацией</h2>
+        <SectionTitle>Qdrant: production-grade с богатой фильтрацией</SectionTitle>
         <p className={s.body}>
           Qdrant написан на Rust, имеет gRPC и REST API, поддерживает
           payload-фильтрацию, sparse+dense hybrid search, scalar quantization
           и шардирование. Лучший выбор когда нужны сложные фильтры или 10M+ векторов.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`import { QdrantClient } from '@qdrant/js-client-rest';
+        <CodeHighlight lang="ts" code={`import { QdrantClient } from '@qdrant/js-client-rest';
 
 const client = new QdrantClient({ url: 'http://localhost:6333' });
 
@@ -341,13 +335,12 @@ const hybridResults = await client.queryPoints('documents', {
   ],
   query: { fusion: 'rrf' },   // Reciprocal Rank Fusion
   limit: 5,
-});`}</code>
-        </div>
+});`} />
       </section>
 
       {/* ── 7. HNSW параметры ───────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Параметры HNSW: настройка под задачу</h2>
+        <SectionTitle>Параметры HNSW: настройка под задачу</SectionTitle>
         <p className={s.body}>
           Три параметра HNSW определяют компромисс между точностью, скоростью и памятью.
           Менять без перестройки индекса можно только <code>ef_search</code>.
@@ -384,8 +377,7 @@ const hybridResults = await client.queryPoints('documents', {
             </div>
           ))}
         </div>
-        <div className={s.codeBlock}>
-          <code>{`// Рекомендуемые конфигурации по сценарию:
+        <CodeHighlight lang="ts" code={`// Рекомендуемые конфигурации по сценарию:
 
 // ① Прототип / небольшой объём (<100K векторов)
 { m: 16, ef_construction: 64,  ef_search: 64  }
@@ -402,20 +394,18 @@ const hybridResults = await client.queryPoints('documents', {
 // ④ Экономия памяти (IoT, edge)
 { m: 8,  ef_construction: 64,  ef_search: 32  }
 // + SQ8 quantization → 4× меньше памяти
-// Recall ~94–95%`}</code>
-        </div>
+// Recall ~94–95%`} />
       </section>
 
       {/* ── 8. Hybrid Search ────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Hybrid Search: векторы + ключевые слова</h2>
+        <SectionTitle>Hybrid Search: векторы + ключевые слова</SectionTitle>
         <p className={s.lead}>
           Чисто векторный поиск плох для точных совпадений: артикулы, имена,
           коды ошибок. Чисто keyword-поиск (BM25) плох для семантики.
           Hybrid = лучшее от обоих через <strong>Reciprocal Rank Fusion</strong>.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`// Reciprocal Rank Fusion (RRF):
+        <CodeHighlight lang="ts" code={`// Reciprocal Rank Fusion (RRF):
 // score(d) = Σ 1 / (k + rank_i(d))
 // k=60 (константа-сглаживатель)
 
@@ -455,8 +445,7 @@ LIMIT 10;
   ],
   "query": {"fusion": "rrf"},
   "limit": 5
-}`}</code>
-        </div>
+}`} />
         <div className={s.warningCard}>
           <div className={s.warningLabel}>SPARSE VECTORS</div>
           <p className={s.warningText}>
@@ -470,7 +459,7 @@ LIMIT 10;
 
       {/* ── 9. Когда что выбирать ────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Когда что выбирать</h2>
+        <SectionTitle>Когда что выбирать</SectionTitle>
         <div className={s.whenGrid}>
           {[
             {
@@ -534,9 +523,8 @@ LIMIT 10;
 
       {/* ── 10. Production tips ──────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Production: что важно знать</h2>
-        <div className={s.codeBlock}>
-          <code>{`// 1. Размер памяти для 1M векторов (1536 dims):
+        <SectionTitle>Production: что важно знать</SectionTitle>
+        <CodeHighlight lang="ts" code={`// 1. Размер памяти для 1M векторов (1536 dims):
 // float32: 1M × 1536 × 4 байта = 6 GB
 // + HNSW граф (M=16): ~128 MB
 // + SQ8 quantization: 1.5 GB вместо 6 GB
@@ -567,8 +555,7 @@ for (let i = 0; i < chunks.length; i += BATCH) {
 // 5. Удаление устаревших документов:
 // Qdrant: client.delete('docs', { filter: { must: [...] } })
 // pgvector: DELETE FROM docs WHERE source = $1 — индекс обновится
-// FAISS: нет поддержки удаления → нужно перестраивать периодически`}</code>
-        </div>
+// FAISS: нет поддержки удаления → нужно перестраивать периодически`} />
         <div className={s.infoCard}>
           <div className={s.infoLabel}>SUPABASE = pgvector БЕСПЛАТНО</div>
           <p className={s.infoText}>
@@ -582,7 +569,7 @@ for (let i = 0; i < chunks.length; i += BATCH) {
 
       {/* ── 11. Quiz ──────────────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверь себя</h2>
+        <SectionTitle>Проверь себя</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

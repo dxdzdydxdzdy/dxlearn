@@ -1,123 +1,457 @@
 @use '../styles/tokens' as *;
 @use '../styles/mixins' as *;
 
+// ─────────────────────────────────────────────────────────────────────────────
+//  Page wrapper
+// ─────────────────────────────────────────────────────────────────────────────
+
 .page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 $space-8 $space-24;
+
+  @include mobile { padding: 0 $space-5 $space-16; }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  Hero
+// ─────────────────────────────────────────────────────────────────────────────
+
+.hero {
+  position: relative;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100dvh;
-  padding: $space-20 $space-8;
-  max-width: 900px;
-  margin: 0 auto;
+  padding: $space-20 0 calc(#{$header-height} + #{$space-20});
+  overflow: hidden;
 
   @include mobile {
-    padding: $space-16 $space-5;
+    padding: $space-12 0 calc(#{$header-height} + #{$space-16});
   }
+}
+
+// Subtle dot-grid noise (pure CSS, no images)
+.heroNoise {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(0, 229, 160, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .eyebrow {
-  @include terminal-label;
-  color: $accent;
-  margin-bottom: $space-5;
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: $space-3;
-
-  &::before {
-    content: '';
-    display: block;
-    width: 20px;
-    height: 1px;
-    background: $accent;
-  }
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  text-transform: uppercase;
+  margin-bottom: $space-8;
 }
 
-.title {
-  font-size: $text-3xl;
+.eyebrowDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $accent;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px $accent-glow;
+
+  // Slow pulse
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1;   box-shadow: 0 0 8px $accent-glow; }
+  50%       { opacity: 0.4; box-shadow: 0 0 3px $accent-glow; }
+}
+
+.headline {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(2.8rem, 7vw, $text-3xl);
   font-weight: $weight-bold;
   line-height: $line-tight;
   color: $text-primary;
-  margin-bottom: $space-6;
-
-  @include mobile {
-    font-size: $text-2xl;
-  }
+  margin-bottom: $space-8;
+  letter-spacing: -0.01em;
 }
 
-.titleMuted {
-  color: $text-muted;
+.headlineDim { color: $text-muted; }
+
+.headlineAccent { color: $accent; }
+
+.cursor {
+  display: inline-block;
+  color: $accent;
+  animation: blink 1.1s step-end infinite;
+  margin-left: 2px;
 }
 
-.subtitle {
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.sub {
+  position: relative;
+  z-index: 1;
   font-size: $text-md;
   color: $text-secondary;
   line-height: $line-loose;
-  max-width: 540px;
-  margin-bottom: $space-10;
+  max-width: 600px;
+  margin-bottom: $space-12;
 }
 
-.actions {
+.heroActions {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: $space-6;
   flex-wrap: wrap;
 }
 
-.divider {
-  width: 1px;
-  height: 16px;
-  background: $border-default;
-}
-
-.meta {
-  @include terminal-label;
-  color: $text-muted;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
   gap: $space-3;
-  margin-top: $space-20;
-
-  @include tablet {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include mobile {
-    grid-template-columns: 1fr;
-  }
-}
-
-.card {
-  @include terminal-border;
+  padding: $space-4 $space-8;
+  background: $accent;
+  color: $text-inverted;
+  font-family: $font-mono;
+  font-size: $text-base;
+  font-weight: $weight-bold;
+  letter-spacing: $letter-wide;
   border-radius: $radius-md;
-  padding: $space-5;
-  background: $bg-surface;
-  transition: border-color $t-normal, background $t-normal;
-  cursor: pointer;
+  text-decoration: none;
+  transition: background $t-normal, box-shadow $t-normal, transform $t-normal;
 
   &:hover {
-    border-color: $border-strong;
+    background: #00cccc; // slight shift
+    box-shadow: 0 0 24px $accent-glow, 0 4px 16px rgba(0, 229, 160, 0.3);
+    transform: translateY(-1px);
+
+    .ctaArrow { transform: translateX(4px); }
+  }
+
+  &:active { transform: translateY(0); }
+}
+
+.ctaArrow {
+  transition: transform $t-normal;
+}
+
+.heroMeta {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  letter-spacing: $letter-wide;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  Stats bar
+// ─────────────────────────────────────────────────────────────────────────────
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  background: $bg-surface;
+  overflow: hidden;
+  margin-bottom: $space-20;
+
+  @include mobile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-1;
+  padding: $space-6 $space-5;
+
+  @include mobile { padding: $space-5; }
+}
+
+.statNum {
+  font-family: $font-mono;
+  font-size: $text-xl;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  line-height: 1;
+}
+
+.statLabel {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  text-transform: uppercase;
+}
+
+.statDivider {
+  width: 1px;
+  height: 40px;
+  background: $border-subtle;
+  flex-shrink: 0;
+
+  @include mobile { display: none; }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  Features
+// ─────────────────────────────────────────────────────────────────────────────
+
+.features {
+  margin-bottom: $space-20;
+}
+
+.sectionLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-6;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-3;
+
+  @include tablet  { grid-template-columns: repeat(2, 1fr); }
+  @include mobile  { grid-template-columns: 1fr; }
+}
+
+.featureCard {
+  background: $bg-surface;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-6;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  transition: border-color $t-normal, background $t-normal;
+
+  &:hover {
+    border-color: $border-default;
     background: $bg-elevated;
   }
 }
 
-.cardLabel {
-  @include terminal-label;
-  color: $text-muted;
-  margin-bottom: $space-2;
+.featureIcon {
+  font-family: $font-mono;
+  font-size: $text-lg;
+  color: $accent;
+  line-height: 1;
 }
 
-.cardTitle {
+.featureTitle {
+  font-family: $font-mono;
   font-size: $text-base;
   font-weight: $weight-bold;
   color: $text-primary;
-  margin-bottom: $space-2;
 }
 
-.cardDesc {
+.featureDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  flex: 1;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  Courses grid
+// ─────────────────────────────────────────────────────────────────────────────
+
+.coursesSection {
+  margin-bottom: $space-20;
+}
+
+.coursesSectionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $space-6;
+}
+
+.seeAll {
+  font-family: $font-mono;
   font-size: $text-sm;
   color: $text-muted;
-  line-height: $line-normal;
+  letter-spacing: $letter-wide;
+  transition: color $t-fast;
+
+  &:hover { color: $accent; }
 }
+
+.courseGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: $space-3;
+
+  @include tablet  { grid-template-columns: repeat(3, 1fr); }
+  @include mobile  { grid-template-columns: repeat(2, 1fr); }
+}
+
+.courseCard {
+  position: relative;
+  background: $bg-surface;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4 $space-4 $space-5;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  overflow: hidden;
+  transition: border-color $t-normal, background $t-normal, box-shadow $t-normal;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--cc, #{$accent});
+    opacity: 0;
+    transition: opacity $t-normal;
+  }
+
+  &:hover:not(.courseCardEmpty) {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: $bg-elevated;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+
+    &::before { opacity: 1; }
+    .courseTitle { color: var(--cc, #{$accent}); }
+    .courseArrow { opacity: 1; transform: translateX(3px); }
+  }
+}
+
+.courseCardEmpty {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.courseCardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.courseIcon {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: $weight-bold;
+  color: var(--cc, #{$accent});
+  letter-spacing: 0;
+}
+
+.courseArrow {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  opacity: 0;
+  transition: opacity $t-fast, transform $t-normal;
+}
+
+.comingSoon {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.courseTitle {
+  font-family: $font-mono;
+  font-size: $text-base;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  line-height: $line-tight;
+  transition: color $t-fast;
+}
+
+.courseMeta {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-muted;
+  letter-spacing: $letter-wide;
+  margin-top: auto;
+}
+
+.courseLive {
+  color: var(--cc, #{$accent});
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  Bottom CTA
+// ─────────────────────────────────────────────────────────────────────────────
+
+.bottomCta {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  background: $bg-surface;
+  overflow: hidden;
+  position: relative;
+
+  // Accent glow bg
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 200px;
+    background: radial-gradient(ellipse, $accent-glow 0%, transparent 70%);
+    pointer-events: none;
+  }
+}
+
+.bottomCtaInner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: $space-16 $space-8;
+  gap: $space-6;
+
+  @include mobile { padding: $space-12 $space-5; }
+}
+
+.bottomCtaLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.bottomCtaTitle {
+  font-size: $text-xl;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  line-height: $line-tight;
+
+  @include mobile { font-size: $text-lg; }
+}
+
+.bottomCtaAccent { color: $accent; }

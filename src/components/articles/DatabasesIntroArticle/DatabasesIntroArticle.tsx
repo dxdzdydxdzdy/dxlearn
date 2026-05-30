@@ -1,3 +1,4 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { DbTimeline } from './DbTimeline';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { QUIZ_QUESTIONS } from './quizData';
@@ -44,7 +45,7 @@ export function DatabasesIntroArticle() {
 
       {/* 1. Зачем нужны базы данных */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Зачем нужны базы данных</h2>
+        <SectionTitle>Зачем нужны базы данных</SectionTitle>
         <p className={s.lead}>
           До баз данных данные хранились в файлах. Каждое приложение придумывало свой формат.
           Найти связанные записи или избежать дублирования — ручная работа программиста.
@@ -79,7 +80,7 @@ export function DatabasesIntroArticle() {
 
       {/* 2. История и эволюция */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>История и эволюция</h2>
+        <SectionTitle>История и эволюция</SectionTitle>
         <p className={s.lead}>
           За 70 лет базы данных прошли путь от плоских файлов на жёстких дисках размером с холодильник
           до глобально-распределённых систем с транзакциями через континенты.
@@ -89,7 +90,7 @@ export function DatabasesIntroArticle() {
 
       {/* 3. Реляционная модель */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Реляционная модель</h2>
+        <SectionTitle>Реляционная модель</SectionTitle>
         <p className={s.lead}>
           В 1970 году Эдгар Кодд опубликовал статью, которая изменила всё. Идея проста:
           данные — это таблицы (relations), операции над ними — реляционная алгебра.
@@ -147,7 +148,7 @@ export function DatabasesIntroArticle() {
 
       {/* 4. SQL язык */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>SQL — язык запросов</h2>
+        <SectionTitle>SQL — язык запросов</SectionTitle>
         <p className={s.lead}>
           SQL (Structured Query Language) был разработан в IBM в 1974 году как «почти человеческий» язык
           для работы с реляционными данными. В 1986 году стал стандартом ANSI.
@@ -189,7 +190,7 @@ export function DatabasesIntroArticle() {
 
       {/* 5. Почему появился NoSQL */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Почему появился NoSQL</h2>
+        <SectionTitle>Почему появился NoSQL</SectionTitle>
         <p className={s.lead}>
           В 2000-х интернет взорвался. Google, Amazon, Facebook работают с петабайтами данных
           и миллиардами пользователей. Классический SQL не был рассчитан на это.
@@ -231,7 +232,7 @@ export function DatabasesIntroArticle() {
 
       {/* 6. Типы NoSQL */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Типы NoSQL баз данных</h2>
+        <SectionTitle>Типы NoSQL баз данных</SectionTitle>
         <p className={s.lead}>
           NoSQL — зонтичный термин для десятков разных решений. Основные четыре типа:
         </p>
@@ -261,7 +262,7 @@ export function DatabasesIntroArticle() {
 
       {/* 7. SQL vs NoSQL сравнение */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>SQL vs NoSQL — сравнение</h2>
+        <SectionTitle>SQL vs NoSQL — сравнение</SectionTitle>
 
         <div className={s.tableWrap}>
           <table className={s.table}>
@@ -331,7 +332,7 @@ export function DatabasesIntroArticle() {
 
       {/* 8. CAP теорема */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>CAP теорема</h2>
+        <SectionTitle>CAP теорема</SectionTitle>
         <p className={s.lead}>
           В 2000 году Эрик Брюер сформулировал теорему: распределённая система не может одновременно
           гарантировать все три свойства.
@@ -380,7 +381,7 @@ export function DatabasesIntroArticle() {
 
       {/* 9. Как выбрать БД */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Как выбрать базу данных</h2>
+        <SectionTitle>Как выбрать базу данных</SectionTitle>
         <p className={s.lead}>
           Универсального ответа нет. Но есть системный подход: опиши задачу, выбери по критериям.
         </p>
@@ -432,7 +433,7 @@ export function DatabasesIntroArticle() {
 
       {/* Quiz */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверь себя</h2>
+        <SectionTitle>Проверь себя</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 

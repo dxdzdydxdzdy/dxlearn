@@ -1,117 +1,144 @@
 @use '../../../styles/tokens' as *;
 @use '../../../styles/mixins' as *;
 
-
 .sidebar {
-  position: fixed;
-  top: $header-height;
-  left: 0;
-  bottom: 0;
-  width: $sidebar-width;
-  z-index: $z-sidebar;
-  background: $bg-base;
-  border-right: 1px solid $border-subtle;
+  flex: 1;
   overflow-y: auto;
-  padding: $space-6 0;
+  overflow-x: hidden;
+  padding: $space-3 0 $space-6;
   @include custom-scrollbar;
-
-  @include tablet {
-    display: none;
-  }
 }
 
-.section {
-  margin-bottom: $space-6;
-}
+// ── Section label ─────────────────────────────────────────────────────────────
 
 .sectionLabel {
   @include terminal-label;
-  padding: 0 $space-5 $space-2;
+  padding: 0 $space-4 $space-3;
   color: $text-muted;
-  display: flex;
-  align-items: center;
-  gap: $space-2;
 
   &::before {
-    content: '//';
-    color: $text-muted;
+    content: '// ';
     opacity: 0.5;
   }
 }
 
+// ── Course accordion ──────────────────────────────────────────────────────────
+
 .courseGroup {
-  margin-bottom: $space-4;
+  margin-bottom: $space-1;
 }
 
-.courseTitle {
-  @include terminal-label;
-  padding: $space-2 $space-5;
-  color: $text-secondary;
-  cursor: default;
+.courseHeader {
   display: flex;
   align-items: center;
   gap: $space-2;
+  padding: $space-2 $space-4;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  transition: background $t-fast;
+  border-radius: 0;
 
-  &::before {
-    content: '▸';
-    font-size: $text-sm;
-    color: $text-muted;
-  }
+  &:hover { background: $bg-elevated; }
+  &.active .courseTitle { color: $text-primary; }
+}
 
-  &.open::before {
-    content: '▾';
+.courseChevron {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  flex-shrink: 0;
+  transition: transform $t-normal, color $t-fast;
+  width: 12px;
+  text-align: center;
+
+  .courseHeader.open & {
+    transform: rotate(90deg);
     color: $accent;
   }
 }
+
+.courseTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  flex: 1;
+  transition: color $t-fast;
+}
+
+.courseCount {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+// ── Articles collapse ─────────────────────────────────────────────────────────
+
+.articlesWrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows $t-normal;
+
+  &.open { grid-template-rows: 1fr; }
+}
+
+.articlesInner {
+  overflow: hidden;
+}
+
+// ── Article list ──────────────────────────────────────────────────────────────
 
 .articleList {
   padding: 0;
   list-style: none;
   margin: 0;
+  padding-bottom: $space-2;
 }
+
+// ── Sub-section label ─────────────────────────────────────────────────────────
 
 .subSection {
-  @include terminal-label;
-  padding: $space-3 $space-5 $space-1;
+  font-family: $font-mono;
+  font-size: 10px;
   color: $text-muted;
-  opacity: 0.65;
-  margin-top: $space-1;
-  font-size: 9px;
   letter-spacing: $letter-wider;
-
-  &::before {
-    content: '──';
-    margin-right: $space-2;
-    opacity: 0.4;
-  }
+  text-transform: uppercase;
+  padding: $space-3 $space-4 $space-1 $space-8;
+  opacity: 0.5;
 }
 
-.nested {
-  padding-left: $space-2;
-}
+// ── Article link ──────────────────────────────────────────────────────────────
 
 .articleLink {
   display: flex;
   align-items: center;
   gap: $space-2;
-  padding: $space-2 $space-5 $space-2 calc($space-5 + 14px);
+  padding: $space-1 $space-4 $space-1 $space-8;
   font-size: $text-sm;
   color: $text-muted;
-  line-height: $line-tight;
+  line-height: $line-normal;
   transition: color $t-fast, background $t-fast;
-  border-left: 2px solid transparent;
-  margin-left: $space-5;
-  padding-left: $space-4;
+  position: relative;
 
-  &:hover {
-    color: $text-secondary;
-    background: $bg-hover;
-  }
+  &:hover { color: $text-secondary; background: $bg-elevated; }
 
   &.active {
     color: $accent;
-    border-left-color: $accent;
     background: $accent-dim;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: $accent;
+      border-radius: 0 $radius-sm $radius-sm 0;
+    }
   }
 }
 
@@ -119,10 +146,20 @@
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: $text-muted;
   flex-shrink: 0;
+  background: $text-muted;
+  transition: background $t-fast;
 
-  .active & {
-    background: $accent;
-  }
+  .active & { background: $accent; }
+}
+
+// ── Empty course ──────────────────────────────────────────────────────────────
+
+.emptyLabel {
+  padding: $space-2 $space-4 $space-2 $space-8;
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  opacity: 0.4;
+  letter-spacing: $letter-wider;
 }

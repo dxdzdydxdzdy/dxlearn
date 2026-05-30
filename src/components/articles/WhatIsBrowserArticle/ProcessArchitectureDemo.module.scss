@@ -1,0 +1,243 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.demo {
+  background: $bg-base;
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.demoHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-default;
+}
+
+.demoTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.tabBar {
+  display: flex;
+  gap: $space-1;
+}
+
+.tab {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  padding: $space-1 $space-3;
+  border: 1px solid $border-default;
+  border-radius: $radius-sm;
+  background: none;
+  cursor: pointer;
+  transition: color $t-fast, background $t-fast, border-color $t-fast;
+
+  &:hover { color: $text-secondary; border-color: $border-strong; }
+  &.active {
+    color: $accent;
+    border-color: rgba(0, 229, 160, 0.4);
+    background: $accent-dim;
+  }
+}
+
+.body {
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+
+  @include mobile { padding: $space-4 $space-3; }
+}
+
+// ── Process diagram ───────────────────────────────────────────────────────────
+
+.diagram {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.browserProcess {
+  border: 1px solid rgba(0, 229, 160, 0.35);
+  border-radius: $radius-md;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color $t-normal;
+
+  &:hover, &.selected { border-color: $accent; }
+}
+
+.browserProcessHeader {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  background: rgba(0, 229, 160, 0.06);
+}
+
+.processDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.processName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.processPid {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  margin-left: auto;
+}
+
+.subProcesses {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-2;
+  padding: $space-2 $space-3 $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.subProcess {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-3;
+  cursor: pointer;
+  transition: border-color $t-fast, background $t-fast;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+
+  &:hover { border-color: $border-strong; background: $bg-elevated; }
+
+  &.selected {
+    border-color: var(--proc-color, $accent);
+    background: color-mix(in srgb, var(--proc-color, $accent) 8%, transparent);
+  }
+}
+
+.subProcessName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.subProcessSub {
+  font-size: 11px;
+  color: $text-muted;
+  line-height: $line-normal;
+}
+
+// ── Detail panel ──────────────────────────────────────────────────────────────
+
+.detail {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  animation: fadeIn 150ms ease;
+}
+
+.detailHeader {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.detailDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.detailName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.detailCol {
+  padding: $space-4;
+
+  &:first-child { border-right: 1px solid $border-subtle; @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; } }
+}
+
+.detailLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.detailDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  strong { color: $text-primary; font-weight: 600; }
+}
+
+.accessList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  margin-top: $space-2;
+}
+
+.accessItem {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-2;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.accessIcon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-size: 11px;
+
+  &.ok { color: $accent; }
+  &.no { color: $error; }
+}
+
+.hint {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  text-align: center;
+  padding: $space-5;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

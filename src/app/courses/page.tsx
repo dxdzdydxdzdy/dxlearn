@@ -1,5 +1,13 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import { CourseCard } from './CourseCard';
+import {
+  siMdnwebdocs, siJavascript, siCss, siHtml5,
+  siReact, siRedux, siTypescript, siGooglechrome,
+  siWebpack, siPostgresql, siNodedotjs, siDocker,
+  siAnthropic, siLeetcode,
+} from 'simple-icons';
+import type { SimpleIcon } from 'simple-icons';
+import { BrandIcon } from '@/components/ui/BrandIcon/BrandIcon';
 import { courses } from '@/content/courses';
 import s from './page.module.scss';
 
@@ -7,19 +15,23 @@ export const metadata: Metadata = { title: 'Courses' };
 
 // ── Per-course visual identity ────────────────────────────────────────────────
 
-const COURSE_META: Record<string, { color: string; glow: string; icon: string }> = {
-  general:            { color: '#d2a679', glow: 'rgba(210,166,121,0.14)', icon: '◎'  },
-  javascript:         { color: '#f0db4f', glow: 'rgba(240,219,79,0.14)',  icon: 'JS' },
-  css:                { color: '#c96daa', glow: 'rgba(201,109,170,0.14)', icon: 'CSS'},
-  html:               { color: '#e34c26', glow: 'rgba(227,76,38,0.14)',   icon: '<>' },
-  react:              { color: '#61dafb', glow: 'rgba(97,218,251,0.14)',  icon: '⚛'  },
-  'state-management': { color: '#9b59e0', glow: 'rgba(155,89,224,0.14)', icon: 'ST' },
-  typescript:         { color: '#4a9eff', glow: 'rgba(74,158,255,0.14)',  icon: 'TS' },
-  browser:            { color: '#4db8ff', glow: 'rgba(77,184,255,0.14)',  icon: '◫'  },
-  webpack:            { color: '#8dd6f9', glow: 'rgba(141,214,249,0.14)', icon: 'WP' },
-  databases:          { color: '#00e5a0', glow: 'rgba(0,229,160,0.14)',   icon: 'DB' },
-  backend:            { color: '#57ab5a', glow: 'rgba(87,171,90,0.14)',   icon: 'BE' },
-  devops:             { color: '#ff7b72', glow: 'rgba(255,123,114,0.14)', icon: 'DO' },
+interface CourseMeta { color: string; glow: string; icon: SimpleIcon | null; fallback?: string }
+
+const COURSE_META: Record<string, CourseMeta> = {
+  general:            { color: '#d2a679', glow: 'rgba(210,166,121,0.14)', icon: siMdnwebdocs },
+  javascript:         { color: '#f0db4f', glow: 'rgba(240,219,79,0.14)',  icon: siJavascript },
+  css:                { color: '#c96daa', glow: 'rgba(201,109,170,0.14)', icon: siCss        },
+  html:               { color: '#e34c26', glow: 'rgba(227,76,38,0.14)',   icon: siHtml5      },
+  react:              { color: '#61dafb', glow: 'rgba(97,218,251,0.14)',  icon: siReact      },
+  'state-management': { color: '#9b59e0', glow: 'rgba(155,89,224,0.14)', icon: siRedux      },
+  typescript:         { color: '#3178c6', glow: 'rgba(49,120,198,0.14)',  icon: siTypescript },
+  browser:            { color: '#4db8ff', glow: 'rgba(77,184,255,0.14)',  icon: siGooglechrome },
+  webpack:            { color: '#8dd6f9', glow: 'rgba(141,214,249,0.14)', icon: siWebpack    },
+  databases:          { color: '#336791', glow: 'rgba(51,103,145,0.14)',  icon: siPostgresql },
+  backend:            { color: '#57ab5a', glow: 'rgba(87,171,90,0.14)',   icon: siNodedotjs  },
+  devops:             { color: '#2496ed', glow: 'rgba(36,150,237,0.14)',  icon: siDocker     },
+  'ml-ai':            { color: '#cc785c', glow: 'rgba(204,120,92,0.14)',  icon: siAnthropic  },
+  algorithms:         { color: '#ffa116', glow: 'rgba(255,161,22,0.14)',  icon: siLeetcode   },
 };
 
 // ── Grid size by article count ────────────────────────────────────────────────
@@ -45,7 +57,7 @@ export default function CoursesPage() {
 
       <div className={s.grid}>
         {courses.map((course) => {
-          const meta    = COURSE_META[course.slug] ?? { color: '#00e5a0', glow: 'rgba(0,229,160,0.12)', icon: '•' };
+          const meta    = COURSE_META[course.slug] ?? { color: '#00e5a0', glow: 'rgba(0,229,160,0.12)', icon: null, fallback: '•' };
           const size    = cardSize(course.articles.length);
           const isEmpty = course.articles.length === 0;
 
@@ -62,15 +74,16 @@ export default function CoursesPage() {
             <>
               {/* Top row: icon + arrow */}
               <div className={s.cardTop}>
-                <span className={s.cardIcon}>{meta.icon}</span>
+                <span className={s.cardIcon}>
+                  {meta.icon
+                    ? <BrandIcon icon={meta.icon} size={22} color={meta.color} />
+                    : meta.fallback}
+                </span>
                 {isEmpty
                   ? <span className={s.comingSoon}>скоро</span>
                   : <span className={s.cardArrow}>→</span>
                 }
               </div>
-
-              {/* Eyebrow */}
-              <div className={s.cardEyebrow}>// {course.slug}</div>
 
               {/* Title */}
               <h2 className={s.cardTitle}>{course.title}</h2>
@@ -117,23 +130,15 @@ export default function CoursesPage() {
             </>
           );
 
-          return isEmpty ? (
-            <div
+          return (
+            <CourseCard
               key={course.slug}
+              href={isEmpty ? undefined : `/courses/${course.slug}`}
               className={cls}
               style={{ '--cc': meta.color, '--cg': meta.glow } as React.CSSProperties}
             >
               {inner}
-            </div>
-          ) : (
-            <Link
-              key={course.slug}
-              href={`/courses/${course.slug}`}
-              className={cls}
-              style={{ '--cc': meta.color, '--cg': meta.glow } as React.CSSProperties}
-            >
-              {inner}
-            </Link>
+            </CourseCard>
           );
         })}
       </div>

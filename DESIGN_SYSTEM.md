@@ -121,13 +121,35 @@
 <ArrowLink href="/courses" size="lg">CTA-ссылка</ArrowLink>
 ```
 
-### `<CodeBlock code="..." lang="..." filename="..." />`
-Блок кода с header (язык или имя файла). Без syntax highlighting (добавишь по необходимости).
+### `<CodeHighlight code="..." lang="..." filename="..." />` ⬅ основной компонент для кода
+
+Блок кода с подсветкой синтаксиса (highlight.js) и встроенной кнопкой **Copy**.  
+Это **единственный** правильный способ отображать код в статьях.
 
 ```tsx
-<CodeBlock lang="js" code={`const x = 1;`} />
-<CodeBlock filename="app.tsx" code={`export default function ...`} />
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
+
+// Базовое использование — в шапке показывает язык
+<CodeHighlight lang="ts" code={`const x = 1;`} />
+
+// С именем файла — в шапке показывает filename
+<CodeHighlight lang="ts" filename="server.ts" code={`import express from 'express';`} />
+
+// Другие языки
+<CodeHighlight lang="sql"    code={`SELECT * FROM users`} />
+<CodeHighlight lang="python" code={`def train(model): ...`} />
+<CodeHighlight lang="bash"   code={`npm install && npm start`} />
 ```
+
+Поддерживаемые языки: `ts`, `js`, `typescript`, `javascript`, `python`, `py`, `sql`, `css`, `html`, `bash`, `sh`
+
+> **Запрещено:** создавать собственные `s.codeBlock`, `s.codeBlockHeader` классы в SCSS статей.
+> Никаких `<div className={s.codeBlock}>`, `<pre className={s.codeBlock}>`.
+> Только `<CodeHighlight>`.
+
+### `<CodeBlock code="..." lang="..." filename="..." />` (устарел, не использовать)
+
+~~Без syntax highlighting. Не используй в новых статьях — только `<CodeHighlight>`.~~
 
 ### `<Callout variant="..." />`
 Выделенный блок с иконкой. Варианты: `info` `warn` `accent`.

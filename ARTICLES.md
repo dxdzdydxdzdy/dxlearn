@@ -137,17 +137,34 @@ $space-8 // 32px   $space-10 // 40px  $space-12 // 48px
 
 ## UI-компоненты
 
-### CodeHighlight — подсветка синтаксиса
+### CodeHighlight — подсветка синтаксиса ⬅ ЕДИНСТВЕННЫЙ компонент для кода
 
 ```tsx
 import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
+// Без имени файла — в шапке показывает язык
+<CodeHighlight lang="ts" code={`const x = 1;`} />
+
+// С именем файла — в шапке показывает filename
+<CodeHighlight lang="ts" filename="server.ts" code={`import express from 'express';`} />
+
+// SQL
 <CodeHighlight lang="sql" code={`SELECT * FROM users WHERE id = 1`} />
+
+// Python
+<CodeHighlight lang="python" code={`def train(model, data): ...`} />
+
+// Bash
+<CodeHighlight lang="bash" code={`npm install && npm run build`} />
 ```
 
-Поддерживаемые языки: `sql`, `javascript`, `js`, `typescript`, `ts`, `css`, `html`, `bash`, `sh`
+Поддерживаемые языки: `ts`, `js`, `typescript`, `javascript`, `python`, `py`, `sql`, `css`, `html`, `bash`, `sh`
 
-**Важно:** это серверный компонент (`'use client'` не нужен). Если используется внутри клиентского компонента — это нормально, Next.js разберётся.
+Компонент имеет встроенную **кнопку Copy** — не нужно добавлять отдельно.
+
+> **ЗАПРЕЩЕНО:** никогда не создавай собственный `s.codeBlock` / `s.codeBlockHeader` паттерн в SCSS статьи.
+> Никаких `<div className={s.codeBlock}>`, `<pre className={s.codeBlock}>`, `<div className={s.codeBlockHeader}>`.
+> Всегда используй `<CodeHighlight>` — это единственная точка входа для любого блока кода в статьях.
 
 ### QuizBlock — тест
 
@@ -182,7 +199,7 @@ export interface QuizQuestion {
 // Без 'use client' если статья статическая
 // С 'use client' только если в самом компоненте есть state
 
-import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight'; // ← обязателен
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { QUIZ_QUESTIONS } from './quizData';
 import s from './MyTopicArticle.module.scss';
@@ -194,7 +211,14 @@ export function MyTopicArticle() {
       <section className={s.section}>
         <h2 className={s.sectionTitle}>Заголовок раздела</h2>
         <p className={s.lead}>Вводный абзац...</p>
-        <CodeHighlight lang="sql" code={`...`} />
+
+        {/* ✅ ПРАВИЛЬНО: используй CodeHighlight для любого кода */}
+        <CodeHighlight lang="ts" code={`const x = 1;`} />
+        <CodeHighlight lang="ts" filename="server.ts" code={`import express from 'express';`} />
+
+        {/* ❌ ЗАПРЕЩЕНО: никогда не делай так */}
+        {/* <div className={s.codeBlock}><code>{`...`}</code></div> */}
+        {/* <pre className={s.codeBlock}>{`...`}</pre>              */}
       </section>
 
       {/* ... остальные секции ... */}
@@ -442,6 +466,7 @@ ArticleNameArticle.tsx          ← НЕТ 'use client'
 - Показывать и плохой вариант, и хороший — с объяснением почему
 - Комментарии в коде: `-- Что делает эта строка`, `// зачем этот шаг`
 - В SQL-примерах использовать конкретные значения из БД: `WHERE dept_id = 1`, `salary > 100000`
+- **Для любого блока кода** — только `<CodeHighlight>`. Никаких пользовательских `div/pre` с `s.codeBlock`.
 
 ### Чего НЕ делать
 

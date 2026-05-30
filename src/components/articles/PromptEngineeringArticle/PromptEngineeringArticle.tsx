@@ -1,7 +1,9 @@
+import { SectionTitle } from '@/components/ui/ArticleSection/ArticleSection';
 import { PromptLab } from './PromptLab';
 import { QuizBlock } from '@/components/ui/QuizBlock/QuizBlock';
 import { QUIZ_QUESTIONS } from './quizData';
 import s from './PromptEngineeringArticle.module.scss';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 export function PromptEngineeringArticle() {
   return (
@@ -9,7 +11,7 @@ export function PromptEngineeringArticle() {
 
       {/* ── 1. Не магия — инженерия ─────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Промпт — это спецификация, не заклинание</h2>
+        <SectionTitle>Промпт — это спецификация, не заклинание</SectionTitle>
         <p className={s.lead}>
           Prompt engineering — не про магические слова. Это про точность.
           LLM — вероятностная машина: промпт смещает распределение вероятностей
@@ -39,7 +41,7 @@ export function PromptEngineeringArticle() {
 
       {/* ── 2. Анатомия хорошего промпта ───────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Анатомия промпта: 5 строительных блоков</h2>
+        <SectionTitle>Анатомия промпта: 5 строительных блоков</SectionTitle>
         <p className={s.lead}>
           Хороший промпт отвечает на 5 вопросов. Не каждый раз нужны все пять —
           но чем больше ответов, тем предсказуемее результат.
@@ -101,14 +103,13 @@ export function PromptEngineeringArticle() {
 
       {/* ── 3. Few-shot ─────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Few-shot: примеры говорят лучше слов</h2>
+        <SectionTitle>Few-shot: примеры говорят лучше слов</SectionTitle>
         <p className={s.lead}>
           «Классифицируй отзывы как позитивные или негативные» — звучит понятно.
           Но что считать нейтральным? Как обрабатывать сарказм?
           Три примера ответят на это лучше любого описания.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`// Zero-shot — только инструкция:
+        <CodeHighlight lang="ts" code={`// Zero-shot — только инструкция:
 "Классифицируй отзыв: 'Ну такое, ожидал лучшего'"
 
 // Ответ: NEGATIVE  ← спорно
@@ -128,8 +129,7 @@ export function PromptEngineeringArticle() {
 // ✓ Покрывают все классы равномерно
 // ✓ Включают edge cases из продакшена
 // ✓ Показывают формат ответа который нужен
-// ✗ Не противоречат друг другу`}</code>
-        </div>
+// ✗ Не противоречат друг другу`} />
         <div className={s.infoCard}>
           <div className={s.infoLabel}>СКОЛЬКО ПРИМЕРОВ?</div>
           <p className={s.infoText}>
@@ -142,7 +142,7 @@ export function PromptEngineeringArticle() {
 
       {/* ── 4. Chain-of-Thought ─────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Chain-of-Thought: заставь модель думать вслух</h2>
+        <SectionTitle>Chain-of-Thought: заставь модель думать вслух</SectionTitle>
         <p className={s.lead}>
           LLM генерирует токен за токеном. Если следующий токен — сразу ответ,
           модель «угадывает». Если до ответа идут шаги рассуждения — каждый токен
@@ -172,8 +172,7 @@ export function PromptEngineeringArticle() {
 // 6 / 2 = 3, 3 + 3 = 6 → 6`}</code></div>
           </div>
         </div>
-        <div className={s.codeBlock}>
-          <code>{`// Zero-shot CoT — магическая фраза работает:
+        <CodeHighlight lang="ts" code={`// Zero-shot CoT — магическая фраза работает:
 "Реши задачу. Думай пошагово перед ответом."
 
 // Few-shot CoT — ещё лучше, показываем формат рассуждения:
@@ -188,8 +187,7 @@ export function PromptEngineeringArticle() {
 
 // Для Claude — явная инструкция:
 "Перед ответом напиши <thinking>рассуждение</thinking>,
-затем <answer>итоговый ответ</answer>"`}</code>
-        </div>
+затем <answer>итоговый ответ</answer>"`} />
         <div className={s.callout}>
           <div className={s.calloutLabel}>КОГДА CoT РЕАЛЬНО ПОМОГАЕТ</div>
           <p className={s.calloutText}>
@@ -202,14 +200,13 @@ export function PromptEngineeringArticle() {
 
       {/* ── 5. XML структура ────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>XML-разметка: чёткие границы секций</h2>
+        <SectionTitle>XML-разметка: чёткие границы секций</SectionTitle>
         <p className={s.lead}>
           Когда промпт длинный — модель может «перемешать» секции.
           XML-теги создают явные семантические границы,
           которые модель надёжно распознаёт.
         </p>
-        <div className={s.codeBlock}>
-          <code>{`<!-- Anthropic рекомендует XML для Claude -->
+        <CodeHighlight lang="ts" code={`<!-- Anthropic рекомендует XML для Claude -->
 
 <system>
   <role>Ты технический писатель, специализирующийся на документации API.</role>
@@ -241,8 +238,7 @@ export function PromptEngineeringArticle() {
   [код примера]
 </output_format>
 
-<!-- Результат: документация точно по шаблону, без отклонений -->`}</code>
-        </div>
+<!-- Результат: документация точно по шаблону, без отклонений -->`} />
         <p className={s.body}>
           Без XML при длинном промпте модель может «забыть» что в разделе rules
           и начать нарушать ограничения. С тегами — каждая секция чётко отделена.
@@ -253,7 +249,7 @@ export function PromptEngineeringArticle() {
 
       {/* ── 6. PromptLab ────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Интерактив: собери промпт из техник</h2>
+        <SectionTitle>Интерактив: собери промпт из техник</SectionTitle>
         <p className={s.body}>
           Включай техники по одной и смотри как собирается промпт и меняется качество ответа.
           Начни без всего — потом добавляй: роль, примеры, цепочку мыслей, формат.
@@ -263,7 +259,7 @@ export function PromptEngineeringArticle() {
 
       {/* ── 7. JSON из LLM ──────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>JSON из LLM: надёжные паттерны</h2>
+        <SectionTitle>JSON из LLM: надёжные паттерны</SectionTitle>
         <p className={s.lead}>
           Если нужен машиночитаемый результат — недостаточно написать «верни JSON».
           Вот паттерны от наименее к наиболее надёжному.
@@ -309,6 +305,7 @@ export function PromptEngineeringArticle() {
               color: '#00e5a0',
               code: `import { z } from 'zod';
 import { zodResponseFormat } from 'openai/helpers/zod';
+import { CodeHighlight } from '@/components/ui/CodeHighlight/CodeHighlight';
 
 const Schema = z.object({
   sentiment: z.enum(['POSITIVE', 'NEUTRAL', 'NEGATIVE']),
@@ -342,7 +339,7 @@ const res = await openai.beta.chat.completions.parse({
 
       {/* ── 8. Типичные ошибки ──────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>10 ошибок которые делают все</h2>
+        <SectionTitle>10 ошибок которые делают все</SectionTitle>
         <div className={s.mistakesList}>
           {[
             {
@@ -419,7 +416,7 @@ const res = await openai.beta.chat.completions.parse({
 
       {/* ── 9. Продвинутые техники ──────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Продвинутые техники</h2>
+        <SectionTitle>Продвинутые техники</SectionTitle>
         <div className={s.advGrid}>
           {[
             {
@@ -472,7 +469,7 @@ const res = await openai.beta.chat.completions.parse({
 
       {/* ── 10. Quiz ────────────────────────────────────────────────────────── */}
       <section className={s.section}>
-        <h2 className={s.sectionTitle}>Проверь себя</h2>
+        <SectionTitle>Проверь себя</SectionTitle>
         <QuizBlock questions={QUIZ_QUESTIONS} />
       </section>
 
