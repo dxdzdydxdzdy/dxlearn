@@ -29,26 +29,26 @@ const COURSE_META: Record<string, { color: string; icon: SimpleIcon }> = {
   nestjs:             { color: '#e0234e', icon: siNestjs        },
 };
 
-const FEATURES = [
+const FOR_WHOM = [
   {
-    icon: '◆',
-    title: 'Интерактивно',
-    desc: 'Event Loop, Flexbox, SQL — запускаешь прямо в браузере. Не читаешь про механизм — видишь его в работе.',
+    icon: '↺',
+    title: 'Освежить знания',
+    desc: 'Давно не трогал замыкания или забыл как работает Event Loop? Чёткие объяснения без лишней воды.',
   },
   {
-    icon: '§',
-    title: 'С проверкой',
-    desc: 'После каждой темы — квиз из 15 вопросов с подробными объяснениями. Знаешь или думаешь что знаешь?',
+    icon: '→',
+    title: 'Познать базу',
+    desc: 'Только вкатываешься в программирование? Материал выстроен от основ — с примерами и интерактивными демо.',
   },
   {
     icon: '⊕',
-    title: 'Под капотом',
-    desc: 'Не "как использовать", а "почему работает именно так". Прототипная цепочка, Transformer attention, B-tree.',
+    title: 'Изучить новое',
+    desc: 'Знаешь фронтенд, но хочешь разобраться с бэкендом, алгоритмами или ML? Здесь есть и то, и другое, и третье.',
   },
   {
-    icon: '///',
-    title: 'На русском',
-    desc: 'Технические термины не переводятся, но объяснения — живые, без воды. Как ментор, а не как учебник.',
+    icon: '◆',
+    title: 'Подготовиться к собеседованию',
+    desc: 'От учений к бою. Квизы после каждой темы, вопросы в формате интервью, разбор подводных камней.',
   },
 ];
 
@@ -66,7 +66,7 @@ export default function HomePage() {
 
         <p className={s.eyebrow}>
           <span className={s.eyebrowDot} />
-          devlearn — интерактивные курсы
+          dxlearn — интерактивные курсы
         </p>
 
         <h1 className={s.headline}>
@@ -115,11 +115,11 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ── Features ──────────────────────────────────────────────────────────── */}
+      {/* ── For whom ──────────────────────────────────────────────────────────── */}
       <section className={s.features}>
-        <p className={s.sectionLabel}>// почему devlearn</p>
+        <p className={s.sectionLabel}>// кому это подойдёт</p>
         <div className={s.featureGrid}>
-          {FEATURES.map(f => (
+          {FOR_WHOM.map(f => (
             <div key={f.title} className={s.featureCard}>
               <span className={s.featureIcon}>{f.icon}</span>
               <h3 className={s.featureTitle}>{f.title}</h3>

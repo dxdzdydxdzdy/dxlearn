@@ -1,0 +1,187 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: #e0234e;
+    background: rgba(224, 35, 78, 0.1);
+    border-radius: $radius-sm;
+    padding: 1px $space-2;
+    font-family: $font-mono;
+    font-size: 12px;
+  }
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: #e0234e;
+    background: rgba(224, 35, 78, 0.1);
+    border-radius: $radius-sm;
+    padding: 1px $space-2;
+    font-family: $font-mono;
+    font-size: 12px;
+  }
+  em { font-style: normal; color: $text-primary; }
+}
+
+// ── Method comparison table ───────────────────────────────────────────────────
+
+.methodTable {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.methodHead {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr 1fr;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+
+  @include mobile { grid-template-columns: 70px 1fr 1fr; }
+}
+
+.methodRow {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr 1fr;
+  border-bottom: 1px solid $border-subtle;
+  align-items: start;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  @include mobile { grid-template-columns: 70px 1fr 1fr; }
+}
+
+.mhCell {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  padding: $space-2 $space-3;
+  border-right: 1px solid $border-subtle;
+
+  &:last-child { border-right: none; }
+}
+
+.mCell {
+  font-size: $text-sm;
+  color: $text-secondary;
+  padding: $space-3;
+  border-right: 1px solid $border-subtle;
+  line-height: $line-normal;
+
+  &:last-child { border-right: none; }
+
+  code {
+    color: #e0234e;
+    background: rgba(224, 35, 78, 0.1);
+    border-radius: $radius-sm;
+    padding: 0 $space-1;
+    font-family: $font-mono;
+    font-size: 11px;
+  }
+
+  @include mobile {
+    &:last-child { display: none; }
+  }
+}
+
+.mName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+// ── Aside / snoska ────────────────────────────────────────────────────────────
+
+.aside {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-left: 3px solid rgba(77, 184, 255, 0.6);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.asideTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $info;
+  letter-spacing: $letter-wide;
+}
+
+.asideBody {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: $info;
+    background: $info-dim;
+    border-radius: $radius-sm;
+    padding: 1px $space-2;
+    font-family: $font-mono;
+    font-size: 11px;
+  }
+}
+
+// ── Warn ──────────────────────────────────────────────────────────────────────
+
+.warn {
+  background: rgba(240, 192, 64, 0.06);
+  border: 1px solid rgba(240, 192, 64, 0.25);
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+}
+
+.warnLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: $warn;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.warnText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  code {
+    color: $warn;
+    background: $warn-dim;
+    border-radius: $radius-sm;
+    padding: 1px $space-2;
+    font-family: $font-mono;
+    font-size: 11px;
+  }
+}

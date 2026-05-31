@@ -1,0 +1,280 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.root {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  background: $bg-surface;
+  overflow: hidden;
+}
+
+// ── Top bar ───────────────────────────────────────────────────────────────────
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.label {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  letter-spacing: $letter-wide;
+}
+
+.resetBtn {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  background: transparent;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-1 $space-3;
+  cursor: pointer;
+  transition: all $t-fast;
+
+  &:hover { color: $text-primary; border-color: $border-default; }
+}
+
+// ── State panel ───────────────────────────────────────────────────────────────
+
+.stateBar {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-2 $space-4;
+  background: $bg-base;
+  border-bottom: 1px solid $border-subtle;
+  flex-wrap: wrap;
+}
+
+.stateLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  flex-shrink: 0;
+}
+
+.taskList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.taskChip {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-secondary;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: 2px $space-2;
+  transition: all $t-fast;
+
+  &.done {
+    color: $accent;
+    border-color: rgba(0,229,160,0.25);
+    text-decoration: line-through;
+    opacity: 0.7;
+  }
+}
+
+.empty {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+// ── Op list ───────────────────────────────────────────────────────────────────
+
+.opList {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.opBtn {
+  display: grid;
+  grid-template-columns: 68px 140px 1fr;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-2 $space-4;
+  background: transparent;
+  border: none;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: background $t-fast;
+
+  &:hover { background: $bg-elevated; }
+
+  @include mobile { grid-template-columns: 56px 1fr; }
+}
+
+.opActive {
+  background: $bg-elevated;
+  border-left-color: var(--mc);
+}
+
+.badge {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+.opPath {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+
+  @include mobile { display: none; }
+}
+
+.opDesc {
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+// ── Form ──────────────────────────────────────────────────────────────────────
+
+.form {
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.urlBar {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  background: $bg-base;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-3;
+  transition: border-color $t-normal;
+}
+
+.urlMethod {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.urlPath {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.fieldLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.input {
+  flex: 1;
+  max-width: 260px;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-3;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-primary;
+
+  &:focus { outline: none; border-color: $border-default; }
+}
+
+.checkField { align-items: center; }
+
+.checkVal {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+}
+
+.sendBtn {
+  align-self: flex-start;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-inverted;
+  border: none;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-5;
+  cursor: pointer;
+  font-weight: 700;
+  transition: opacity $t-fast;
+
+  &:hover:not(:disabled) { opacity: 0.85; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+// ── Response ──────────────────────────────────────────────────────────────────
+
+.res {
+  border-top: 1px solid $border-subtle;
+}
+
+.resHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.resLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.resStatus {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  padding: 1px $space-2;
+  border-radius: $radius-sm;
+
+  &.ok  { color: $accent; background: $accent-dim; }
+  &.err { color: $error;  background: $error-dim;  }
+}
+
+.resPre {
+  margin: 0;
+  padding: $space-4;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  line-height: $line-loose;
+  color: $text-secondary;
+  background: $bg-base;
+  overflow-x: auto;
+  max-height: 260px;
+
+  :global(.k) { color: $info;  }
+  :global(.s) { color: $accent; }
+  :global(.b) { color: #e0234e; }
+  :global(.n) { color: $warn;  }
+}

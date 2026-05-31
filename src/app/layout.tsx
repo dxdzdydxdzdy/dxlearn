@@ -7,6 +7,10 @@ import '@/styles/globals.scss';
 export const metadata: Metadata = {
   title: { default: 'dxlearn', template: '%s — dxlearn' },
   description: 'Интерактивные курсы по веб-разработке',
+  verification: {
+    google: 'RK79_tykQlJawxSuG-Ou20zlPeSV_piwYkRGfrYsWFw',
+    yandex: 'ee409c6ea22671f8',
+  },
   manifest: '/manifest.webmanifest',
   appleWebApp: {
     capable: true,
