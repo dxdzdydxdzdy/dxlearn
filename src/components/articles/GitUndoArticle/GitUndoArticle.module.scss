@@ -1,0 +1,160 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article { display: flex; flex-direction: column; gap: $space-10; }
+.section  { display: flex; flex-direction: column; gap: $space-4; }
+
+.lead {
+  font-size: $text-base; color: $text-secondary; line-height: $line-loose; max-width: 72ch;
+  strong { color: $text-primary; font-weight: 600; }
+  code   { color: $accent; background: $accent-dim; border-radius: $radius-sm; padding: 1px $space-2; font-family: $font-mono; font-size: 12px; }
+}
+
+.body {
+  font-size: $text-sm; color: $text-secondary; line-height: $line-loose; max-width: 72ch;
+  code { color: $accent; background: $accent-dim; border-radius: $radius-sm; padding: 1px $space-2; font-family: $font-mono; font-size: 12px; }
+}
+
+// ── Three tool cards ──────────────────────────────────────────────────────────
+
+.threeCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-4;
+
+  @include tablet { grid-template-columns: 1fr; }
+}
+
+.toolCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  border-top: 3px solid rgba(0,229,160,0.4);
+}
+
+.toolCardWarn {
+  border-top-color: rgba(240,192,64,0.5);
+}
+
+.toolCmd {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $accent;
+}
+
+.toolZone {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wide;
+}
+
+.toolDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  flex: 1;
+}
+
+.toolSafe {
+  font-family: $font-mono;
+  font-size: 11px;
+  margin-top: $space-2;
+}
+
+.toolSafeGreen  { color: $accent; }
+.toolSafeYellow { color: $warn; }
+
+// ── Reset table ───────────────────────────────────────────────────────────────
+
+.resetTable {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.resetHead {
+  display: grid;
+  grid-template-columns: 100px 1fr 1fr 1fr;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+
+  > div {
+    font-family: $font-mono;
+    font-size: 10px;
+    color: $text-muted;
+    letter-spacing: $letter-wider;
+    padding: $space-2 $space-3;
+    border-right: 1px solid $border-subtle;
+    &:last-child { border-right: none; }
+  }
+}
+
+.resetRow {
+  display: grid;
+  grid-template-columns: 100px 1fr 1fr 1fr;
+  border-bottom: 1px solid $border-subtle;
+  &:last-child { border-bottom: none; }
+}
+
+.reset_safe    { background: rgba(0,229,160,0.03); }
+.reset_caution { background: rgba(240,192,64,0.03); }
+.reset_danger  { background: rgba(255,95,106,0.03); }
+
+.resetFlag {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  padding: $space-3;
+  border-right: 1px solid $border-subtle;
+
+  .reset_safe    & { color: $accent; }
+  .reset_caution & { color: $warn; }
+  .reset_danger  & { color: $error; }
+}
+
+.resetCell {
+  font-size: $text-sm;
+  color: $text-secondary;
+  padding: $space-3;
+  border-right: 1px solid $border-subtle;
+  line-height: $line-normal;
+  &:last-child { border-right: none; }
+}
+
+// ── Warn card ─────────────────────────────────────────────────────────────────
+
+.warnCard {
+  background: rgba(255,95,106,0.06);
+  border: 1px solid rgba(255,95,106,0.25);
+  border-radius: $radius-md;
+  padding: $space-4;
+}
+
+.warnLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $error;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.warnText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  code {
+    color: $error;
+    background: rgba(255,95,106,0.1);
+    border-radius: $radius-sm;
+    padding: 1px $space-1;
+    font-family: $font-mono;
+    font-size: 11px;
+  }
+}

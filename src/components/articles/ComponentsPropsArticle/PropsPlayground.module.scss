@@ -1,0 +1,268 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.wrap {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $bg-base;
+}
+
+// ── Header ────────────────────────────────────────────────────────────────────
+
+.header {
+  padding: $space-2 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.headerLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+// ── Layout ────────────────────────────────────────────────────────────────────
+
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+// ── Editor ────────────────────────────────────────────────────────────────────
+
+.editor {
+  border-right: 1px solid $border-subtle;
+  display: flex;
+  flex-direction: column;
+  padding: $space-4;
+  gap: $space-4;
+
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.editorTitle {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.fieldMeta {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.fieldName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $info;
+  font-weight: 600;
+}
+
+.fieldType {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  background: rgba(255,255,255,0.04);
+  border-radius: $radius-sm;
+  padding: 1px $space-2;
+}
+
+.input {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-primary;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-3;
+  outline: none;
+  transition: border-color $t-fast;
+
+  &:focus { border-color: rgba(0,229,160,0.4); }
+}
+
+.toggle {
+  align-self: flex-start;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  padding: $space-1 $space-4;
+  border-radius: $radius-sm;
+  border: 1px solid;
+  cursor: pointer;
+  transition: all $t-fast;
+  min-width: 60px;
+}
+
+.toggleOn  { color: $accent; border-color: rgba(0,229,160,0.4); background: rgba(0,229,160,0.08); }
+.toggleOff { color: $text-muted; border-color: $border-subtle; background: transparent; }
+
+.resetBtn {
+  align-self: flex-start;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  background: transparent;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-1 $space-3;
+  cursor: pointer;
+  margin-top: auto;
+  transition: color $t-fast, border-color $t-fast;
+
+  &:hover { color: $text-secondary; border-color: rgba(255,255,255,0.15); }
+}
+
+// ── Output ────────────────────────────────────────────────────────────────────
+
+.output {
+  display: flex;
+  flex-direction: column;
+  padding: $space-4;
+  gap: $space-3;
+}
+
+.outputTitle {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.outputCard {
+  padding: $space-4;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+}
+
+// ── The UserCard component ────────────────────────────────────────────────────
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+}
+
+.cardAvatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(0,229,160,0.12);
+  border: 2px solid rgba(0,229,160,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-mono;
+  font-size: $text-md;
+  font-weight: 700;
+  color: $accent;
+  flex-shrink: 0;
+}
+
+.cardBody { display: flex; flex-direction: column; gap: $space-1; min-width: 0; }
+
+.cardNameRow { display: flex; align-items: center; gap: $space-2; }
+
+.cardName {
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.verified {
+  font-size: 11px;
+  color: $accent;
+  background: rgba(0,229,160,0.1);
+  border: 1px solid rgba(0,229,160,0.25);
+  border-radius: 50%;
+  width: 16px; height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardRole {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  margin-top: 2px;
+}
+
+.statusDot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+
+.dotOnline  { background: $accent; box-shadow: 0 0 4px rgba(0,229,160,0.5); }
+.dotOffline { background: $text-muted; }
+
+.statusText { color: $text-secondary; }
+.metaDivider { opacity: 0.4; }
+.msgCount {}
+
+.empty { color: $text-muted; font-style: italic; font-weight: 400; }
+
+// ── JSX preview ───────────────────────────────────────────────────────────────
+
+.jsxPreview {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-3 $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  line-height: $line-loose;
+}
+
+.jsxLine { display: flex; align-items: baseline; }
+.jsxIndent { white-space: pre; }
+.jsxTag   { color: $info; }
+.jsxAttr  { color: $accent; }
+.jsxPunct { color: $text-muted; }
+.jsxStr   { color: #e09c55; }
+.jsxBrace { color: $warn; }
+
+// ── Footer ────────────────────────────────────────────────────────────────────
+
+.footer {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+  padding: $space-3 $space-5;
+  border-top: 1px solid $border-subtle;
+  background: $info-dim;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.footerIcon { color: $info; font-size: 16px; flex-shrink: 0; }

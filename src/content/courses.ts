@@ -95,6 +95,7 @@ export const courses: Course[] = [
     a('null-prototype-object', 'Объект без прототипа',          'Object.create(null) и зачем создавать объекты без Object.prototype.',                      ['objects']),
     a('garbage-collector',     'Сборщик мусора',                'Mark-and-sweep, достижимость, утечки памяти и WeakRef.',                                   ['runtime']),
     a('collections',           'Map, WeakMap, Set, WeakSet',    'Коллекции ES6: когда использовать вместо объектов и массивов.',                             ['data-structures']),
+    a('package-managers',      'npm, yarn и pnpm',              'Что такое пакетный менеджер, как устроен package.json, в чём разница между npm, yarn и pnpm и как выбрать.', ['tooling'], true),
   ]),
 
   // ── CSS ────────────────────────────────────────────────────────────────────
@@ -109,7 +110,44 @@ export const courses: Course[] = [
   ]),
 
   // ── React ──────────────────────────────────────────────────────────────────
-  c('react', 'React', 'Компонентная модель, хуки, рендеринг и оптимизации.', []),
+  c('react', 'React', 'Компонентная модель, хуки, рендеринг и оптимизации.', [
+
+    s('Основы', [
+      a('why-react',        'Что такое React и зачем он нужен',  'Проблема DOM, декларативный подход, Virtual DOM и компонентная модель — с интерактивными демо.',   ['basics'],       true),
+      a('jsx',              'JSX — синтаксис и правила',          'Как JSX превращается в React.createElement, что можно и нельзя в JSX, выражения и фрагменты.',      ['basics'],       true),
+      a('components-props', 'Компоненты и пропсы',                'Функциональные компоненты, props, children, дефолтные значения, типизация через TypeScript.',        ['basics'],       true),
+      a('rendering',        'Рендеринг и списки',                 'Условный рендеринг, .map() со списками, почему key критически важен и как выбрать ключ.',             ['basics'],       true),
+      a('styles',           'Стили в React',                      'CSS Modules, inline styles, className — сравнение подходов с примерами.',                             ['basics']),
+    ]),
+
+    s('Состояние', [
+      a('use-state',        'useState',                           'Локальное состояние, иммутабельность обновлений, батчинг, функциональная форма setState.',            ['hooks', 'state'], true),
+      a('forms',            'Формы в React',                      'Controlled компоненты, onChange, submit, работа с несколькими полями и валидация.',                   ['hooks'],          true),
+      a('use-reducer',      'useReducer',                         'Reducer + dispatch для сложного состояния. Когда useState не хватает и как мыслить редьюсерами.',     ['hooks', 'state'], true),
+      a('lifting-state',    'Подъём состояния',                   'Lifting state up, однонаправленный поток данных, как делиться состоянием между компонентами.',        ['patterns']),
+    ]),
+
+    s('Эффекты', [
+      a('use-effect',       'useEffect',                          'Побочные эффекты, массив зависимостей, cleanup, stale closures и частые ловушки.',                    ['hooks'],        true),
+      a('fetch-in-react',   'Загрузка данных',                    'Fetch внутри useEffect, состояния loading/error/data, AbortController, race conditions.',             ['hooks'],        true),
+    ]),
+
+    s('Refs и контекст', [
+      a('use-ref',          'useRef',                             'Доступ к DOM-элементам, хранение значений без перерендера, forwardRef.',                              ['hooks']),
+      a('use-context',      'useContext',                         'createContext, передача данных без prop drilling, когда контекст — не решение.',                       ['hooks'],        true),
+    ]),
+
+    s('Производительность', [
+      a('memo-callback',    'React.memo, useCallback, useMemo',   'Предотвращение лишних рендеров: когда нужны, когда вредят, как измерить эффект.',                    ['performance'],  true),
+      a('profiler',         'Поиск лишних рендеров',              'React DevTools Profiler, инструменты отладки, как найти узкое место.',                                ['performance']),
+    ]),
+
+    s('Паттерны', [
+      a('custom-hooks',     'Кастомные хуки',                     'Создание своих хуков, правила, useFetch / useDebounce / useLocalStorage — разбор паттернов.',         ['patterns'],     true),
+      a('composition',      'Композиция компонентов',             'Слоты через children, именованные дочерние компоненты, compound components.',                         ['patterns']),
+    ]),
+
+  ]),
 
   // ── State Management ───────────────────────────────────────────────────────
   c('state-management', 'State Management', 'Redux, Zustand, Jotai, Context — управление состоянием.', []),
@@ -238,6 +276,26 @@ export const courses: Course[] = [
       a('ai-safety',        'Безопасность AI',    'Prompt injection, hallucinations, guardrails, jailbreak, Red Teaming — когда не доверять модели.', ['safety', 'ai'],     true),
     ]),
 
+  ]),
+
+  // ── NestJS ─────────────────────────────────────────────────────────────────
+  c('nestjs', 'NestJS', 'TypeScript-фреймворк для создания масштабируемых и эффективных серверных приложений.', [
+
+    s('Основы', [
+      a('nestjs-intro',       'Введение и первый запуск',                   'Устанавливаем Nest CLI, создаём приложение, разбираем структуру файлов и запускаем первый сервер.',                    ['nestjs', 'basics'],       true),
+      a('nestjs-rest',        'REST-декораторы, DTO и обработка ошибок',    'GET, POST, @Param, @Body — работаем с HTTP-запросами. DTO как контракт данных. NotFoundException.',                   ['nestjs', 'rest', 'dto'],  true),
+    ]),
+
+  ]),
+
+  // ── Git ────────────────────────────────────────────────────────────────────
+  c('git', 'Git', 'Контроль версий с нуля: коммиты, ветки, GitHub и работа в команде.', [
+    a('git-basics',   'Что такое Git',                  'Зачем нужен контроль версий, как Git хранит данные снапшотами и почему у каждого полная копия репозитория.', ['git', 'basics'], true),
+    a('git-start',    'Первый репозиторий',              'git init, add, commit и три зоны которые путают всех: рабочая директория, staging area, репозиторий.', ['git'], true),
+    a('git-history',  'История и навигация',             'git log, diff, show, status. Как читать коммиты, хэши и HEAD.', ['git']),
+    a('git-branches', 'Ветки',                           'Что такое ветка, git branch, switch, merge. Конфликты — почему возникают и как решать.', ['git'], true),
+    a('git-remote',   'GitHub: удалённые репозитории',   'git remote, clone, push, pull, fetch. Разница между pull и fetch. Как устроен GitHub.', ['git']),
+    a('git-undo',     'Отмена изменений',                'restore, reset, revert — три инструмента для трёх ситуаций. Что опасно, что безопасно.', ['git']),
   ]),
 
   // ── DevOps ─────────────────────────────────────────────────────────────────

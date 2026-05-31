@@ -1,0 +1,78 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.root {
+  background: $bg-surface;
+  border: 1px solid rgba(240, 192, 64, 0.25);
+  border-radius: $radius-lg;
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.icon {
+  color: $warn;
+  font-size: $text-base;
+  line-height: 1;
+}
+
+.title {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $warn;
+  font-weight: 700;
+  letter-spacing: $letter-wide;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+}
+
+.num {
+  flex-shrink: 0;
+  min-width: 20px;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $warn;
+  padding-top: 2px;
+}
+
+.text {
+  flex: 1;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  code {
+    color: $warn;
+    background: $warn-dim;
+    border-radius: $radius-sm;
+    padding: 1px $space-2;
+    font-family: $font-mono;
+    font-size: 11px;
+  }
+
+  strong {
+    color: $text-primary;
+    font-weight: 600;
+  }
+}

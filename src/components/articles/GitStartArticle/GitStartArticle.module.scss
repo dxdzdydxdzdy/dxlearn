@@ -1,0 +1,192 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article { display: flex; flex-direction: column; gap: $space-10; }
+.section  { display: flex; flex-direction: column; gap: $space-4; }
+
+.lead {
+  font-size: $text-base; color: $text-secondary; line-height: $line-loose; max-width: 72ch;
+  strong { color: $text-primary; font-weight: 600; }
+}
+
+.body {
+  font-size: $text-sm; color: $text-secondary; line-height: $line-loose; max-width: 72ch;
+  strong { color: $text-primary; font-weight: 600; }
+  em { font-style: normal; color: $text-primary; }
+  code {
+    color: $accent; background: $accent-dim; border-radius: $radius-sm;
+    padding: 1px $space-2; font-family: $font-mono; font-size: 12px;
+  }
+}
+
+// ── Три зоны — объяснение ─────────────────────────────────────────────────────
+
+.zonesExplain {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.zoneCard {
+  padding: $space-4;
+  border-right: 1px solid $border-subtle;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+
+  &:last-child { border-right: none; }
+
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; &:last-child { border-bottom: none; } }
+}
+
+.zoneNum {
+  font-family: $font-mono;
+  font-size: $text-xl;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.zoneName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.zoneCmd {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.zoneDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  margin-top: $space-1;
+}
+
+// ── Callouts ──────────────────────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid rgba(0,229,160,0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px; font-family: $font-mono; color: $accent;
+  letter-spacing: $letter-wider; margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm; color: $text-secondary; line-height: $line-loose;
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: $accent; background: rgba(0,229,160,0.15); border-radius: $radius-sm;
+    padding: 1px $space-1; font-family: $font-mono; font-size: 11px;
+  }
+}
+
+.warnCard {
+  background: rgba(240,192,64,0.06);
+  border: 1px solid rgba(240,192,64,0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.warnLabel {
+  font-size: 11px; font-family: $font-mono; color: $warn;
+  letter-spacing: $letter-wider; margin-bottom: $space-2;
+}
+
+.warnText {
+  font-size: $text-sm; color: $text-secondary; line-height: $line-loose;
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: $warn; background: rgba(240,192,64,0.1); border-radius: $radius-sm;
+    padding: 1px $space-1; font-family: $font-mono; font-size: 11px;
+  }
+}
+
+// ── Commit message tips ───────────────────────────────────────────────────────
+
+.msgGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.msgCol {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.msgLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  letter-spacing: $letter-wider;
+  padding: $space-1 $space-2;
+  border-radius: $radius-sm;
+  align-self: flex-start;
+
+  &.bad  { color: $error; background: rgba(255,95,106,0.1); }
+  &.good { color: $accent; background: $accent-dim; }
+}
+
+.msgItem {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  padding: $space-2 $space-3;
+  border-radius: $radius-sm;
+  border: 1px solid $border-subtle;
+  background: $bg-elevated;
+
+  &.bad  { color: $error;  border-color: rgba(255,95,106,0.2); }
+  &.good { color: $accent; border-color: rgba(0,229,160,0.2);  }
+}
+
+// ── Workflow ──────────────────────────────────────────────────────────────────
+
+.workflow {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.workflowStep {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  align-items: start;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  @include mobile { grid-template-columns: 1fr; gap: $space-1; }
+}
+
+.workflowNum {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  color: $accent;
+  padding-top: 3px;
+}
+
+.workflowBody { display: flex; flex-direction: column; gap: $space-1; }
+.workflowTitle { font-family: $font-mono; font-size: $text-sm; font-weight: 600; color: $text-primary; }
+.workflowDesc  { font-size: $text-sm; color: $text-muted; line-height: $line-normal; }

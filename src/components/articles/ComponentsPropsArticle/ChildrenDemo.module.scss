@@ -1,0 +1,221 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.wrap {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $bg-base;
+}
+
+// ── Component definition (top) ────────────────────────────────────────────────
+
+.componentDef {
+  border-bottom: 1px solid $border-subtle;
+}
+
+.defHeader {
+  padding: $space-2 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.defLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $accent;
+  letter-spacing: $letter-wide;
+}
+
+.defCode {
+  margin: 0;
+  padding: $space-4 $space-5;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  overflow-x: auto;
+  background: transparent;
+}
+
+// ── Examples section ──────────────────────────────────────────────────────────
+
+.examples {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-elevated;
+  overflow-x: auto;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+.tab {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: $space-3 $space-4;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color $t-fast, border-color $t-fast;
+
+  &:hover { color: $text-secondary; }
+}
+
+.tabActive {
+  color: $accent;
+  border-bottom-color: $accent;
+}
+
+// ── Split ─────────────────────────────────────────────────────────────────────
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  animation: fadeIn 150ms ease;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.splitPane {
+  display: flex;
+  flex-direction: column;
+  padding: $space-4;
+  border-right: 1px solid $border-subtle;
+
+  &:last-child { border-right: none; }
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; &:last-child { border-bottom: none; } }
+}
+
+.splitLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-3;
+}
+
+.usageCode {
+  margin: 0;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-3 $space-4;
+  overflow-x: auto;
+  line-height: $line-loose;
+  flex: 1;
+}
+
+.preview {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+}
+
+// ── Card shell (rendered component) ──────────────────────────────────────────
+
+.cardShell {
+  width: 100%;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.cardHeader {
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+  background: rgba(0,229,160,0.04);
+}
+
+.cardBody {
+  padding: $space-3 $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+// ── Preview content styles ────────────────────────────────────────────────────
+
+.previewText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  margin: 0;
+  line-height: $line-normal;
+}
+
+.profileRow {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.previewAvatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(0,229,160,0.12);
+  border: 2px solid rgba(0,229,160,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-family: $font-mono; font-weight: 700; font-size: $text-sm; color: $accent;
+  flex-shrink: 0;
+}
+
+.previewName {
+  font-size: $text-sm; font-weight: 700; color: $text-primary;
+}
+
+.previewRole {
+  font-family: $font-mono; font-size: 11px; color: $text-muted;
+}
+
+.previewBtns {
+  display: flex; gap: $space-2; flex-wrap: wrap;
+}
+
+.previewBtn {
+  font-family: $font-mono; font-size: $text-sm;
+  border-radius: $radius-sm; border: 1px solid;
+  padding: $space-1 $space-3; cursor: default;
+}
+
+.btnDanger { color: $error; border-color: rgba(255,95,106,0.4); background: rgba(255,95,106,0.06); }
+.btnGhost  { color: $text-muted; border-color: $border-subtle; background: transparent; }
+
+.nestedCards {
+  display: flex; flex-direction: column; gap: $space-3;
+}
+
+// ── Note ──────────────────────────────────────────────────────────────────────
+
+.note {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-2;
+  padding: $space-3 $space-5;
+  border-top: 1px solid $border-subtle;
+  background: $info-dim;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.noteIcon { font-size: 14px; flex-shrink: 0; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

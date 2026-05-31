@@ -1,0 +1,174 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article { display: flex; flex-direction: column; gap: $space-10; }
+.section  { display: flex; flex-direction: column; gap: $space-4; }
+
+.lead {
+  font-size: $text-base; color: $text-secondary; line-height: $line-loose; max-width: 72ch;
+  strong { color: $text-primary; font-weight: 600; }
+}
+
+.body {
+  font-size: $text-sm; color: $text-secondary; line-height: $line-loose; max-width: 72ch;
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: $accent; background: $accent-dim; border-radius: $radius-sm;
+    padding: 1px $space-2; font-family: $font-mono; font-size: 12px;
+  }
+}
+
+// ── Callouts ──────────────────────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid rgba(0,229,160,0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px; font-family: $font-mono; color: $accent;
+  letter-spacing: $letter-wider; margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm; color: $text-secondary; line-height: $line-loose;
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: $accent; background: rgba(0,229,160,0.15); border-radius: $radius-sm;
+    padding: 1px $space-1; font-family: $font-mono; font-size: 11px;
+  }
+}
+
+// ── HEAD diagram ──────────────────────────────────────────────────────────────
+
+.headDiagram {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  align-items: flex-start;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  overflow-x: auto;
+}
+
+.headRow {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  flex-wrap: wrap;
+}
+
+.headPointer {
+  color: $accent;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.headArrow {
+  color: $text-muted;
+}
+
+.headBranch {
+  color: $info;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.headCommit {
+  color: $text-muted;
+  white-space: nowrap;
+}
+
+.headNote {
+  font-size: 11px;
+  color: $text-muted;
+  margin-top: $space-1;
+}
+
+// ── Diff explanation ──────────────────────────────────────────────────────────
+
+.diffTable {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.diffRow {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  border-bottom: 1px solid $border-subtle;
+  align-items: start;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.diffCmd {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $accent;
+  padding: $space-3 $space-4;
+  border-right: 1px solid $border-subtle;
+  background: rgba(0,229,160,0.03);
+  font-weight: 600;
+
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.diffDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  padding: $space-3 $space-4;
+  line-height: $line-normal;
+}
+
+// ── Flags table ───────────────────────────────────────────────────────────────
+
+.flagsTable {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.flagRow {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  border-bottom: 1px solid $border-subtle;
+  align-items: start;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.flagName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $info;
+  padding: $space-3 $space-4;
+  border-right: 1px solid $border-subtle;
+  background: rgba(77,184,255,0.03);
+
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.flagDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  padding: $space-3 $space-4;
+  line-height: $line-normal;
+
+  code {
+    color: $accent; background: $accent-dim; border-radius: $radius-sm;
+    padding: 1px $space-1; font-family: $font-mono; font-size: 11px;
+  }
+}

@@ -1,0 +1,128 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article { display: flex; flex-direction: column; gap: $space-10; }
+.section  { display: flex; flex-direction: column; gap: $space-4; }
+
+.lead {
+  font-size: $text-base; color: $text-secondary; line-height: $line-loose; max-width: 72ch;
+  strong { color: $text-primary; font-weight: 600; }
+  code   { color: $accent; background: $accent-dim; border-radius: $radius-sm; padding: 1px $space-2; font-family: $font-mono; font-size: 12px; }
+}
+
+.body {
+  font-size: $text-sm; color: $text-secondary; line-height: $line-loose; max-width: 72ch;
+  code { color: $accent; background: $accent-dim; border-radius: $radius-sm; padding: 1px $space-2; font-family: $font-mono; font-size: 12px; }
+}
+
+// ── Key point ─────────────────────────────────────────────────────────────────
+
+.keyPoint {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-4;
+  padding: $space-4 $space-5;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+
+  strong { color: $text-primary; font-weight: 600; }
+  code   { color: $accent; background: $accent-dim; border-radius: $radius-sm; padding: 1px $space-1; font-family: $font-mono; font-size: 11px; }
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.keyIcon {
+  font-size: 18px;
+  color: $accent;
+  opacity: 0.6;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+// ── Two columns ───────────────────────────────────────────────────────────────
+
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-4;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.factCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.factLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.factCode {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $accent;
+  background: $accent-dim;
+  border-radius: $radius-sm;
+  padding: $space-3 $space-4;
+  white-space: pre;
+}
+
+.factNote {
+  font-size: $text-sm;
+  color: $text-muted;
+  line-height: $line-normal;
+}
+
+// ── Types table ───────────────────────────────────────────────────────────────
+
+.typesTable {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.typesRow {
+  display: grid;
+  grid-template-columns: 160px 220px 1fr;
+  border-bottom: 1px solid $border-subtle;
+  align-items: start;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.typeProp {
+  font-family: $font-mono; font-size: $text-sm; color: $info;
+  padding: $space-3 $space-4;
+  border-right: 1px solid $border-subtle;
+  white-space: nowrap;
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.typeEx {
+  font-family: $font-mono; font-size: 11px; color: $accent;
+  padding: $space-3 $space-4;
+  border-right: 1px solid $border-subtle;
+  white-space: nowrap;
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.typeUse {
+  font-size: $text-sm; color: $text-secondary;
+  padding: $space-3 $space-4;
+  line-height: $line-normal;
+}

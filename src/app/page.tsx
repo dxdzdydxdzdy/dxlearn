@@ -3,7 +3,7 @@ import {
   siMdnwebdocs, siJavascript, siCss, siHtml5,
   siReact, siRedux, siTypescript, siGooglechrome,
   siWebpack, siPostgresql, siNodedotjs, siDocker,
-  siAnthropic, siLeetcode,
+  siAnthropic, siLeetcode, siGit, siNestjs,
 } from 'simple-icons';
 import type { SimpleIcon } from 'simple-icons';
 import { BrandIcon } from '@/components/ui/BrandIcon/BrandIcon';
@@ -25,6 +25,8 @@ const COURSE_META: Record<string, { color: string; icon: SimpleIcon }> = {
   devops:             { color: '#2496ed', icon: siDocker       },
   'ml-ai':            { color: '#cc785c', icon: siAnthropic    },
   algorithms:         { color: '#ffa116', icon: siLeetcode     },
+  git:                { color: '#f05032', icon: siGit           },
+  nestjs:             { color: '#e0234e', icon: siNestjs        },
 };
 
 const FEATURES = [

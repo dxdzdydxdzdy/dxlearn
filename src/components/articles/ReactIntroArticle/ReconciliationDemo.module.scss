@@ -1,0 +1,273 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.wrap {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $bg-base;
+}
+
+// ── Controls ──────────────────────────────────────────────────────────────────
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+  gap: $space-4;
+  flex-wrap: wrap;
+}
+
+.triggerBtn {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $accent;
+  background: rgba(0,229,160,0.07);
+  border: 1px solid rgba(0,229,160,0.35);
+  border-radius: $radius-sm;
+  padding: $space-2 $space-4;
+  cursor: pointer;
+  transition: all $t-fast;
+
+  &:hover:not(:disabled) { background: rgba(0,229,160,0.12); }
+}
+
+.triggerBtnDisabled {
+  color: $text-muted;
+  border-color: $border-subtle;
+  background: transparent;
+  cursor: default;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.stat {
+  display: flex;
+  align-items: baseline;
+  gap: $space-2;
+}
+
+.statNum {
+  font-family: $font-mono;
+  font-size: $text-md;
+  font-weight: 700;
+  color: $accent;
+}
+
+.statLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.statDivider {
+  width: 1px;
+  height: 20px;
+  background: $border-subtle;
+}
+
+// ── Phase bar ─────────────────────────────────────────────────────────────────
+
+.phaseBar {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  min-height: 36px;
+}
+
+.phaseDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: $text-muted;
+  flex-shrink: 0;
+  transition: background 200ms;
+}
+
+.phaseDotActive {
+  background: $accent;
+  box-shadow: 0 0 6px rgba(0,229,160,0.6);
+  animation: pulse 800ms ease infinite alternate;
+}
+
+.phaseText {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+}
+
+// ── Tree ──────────────────────────────────────────────────────────────────────
+
+.treeWrap {
+  position: relative;
+  padding: $space-5 $space-4 $space-6;
+}
+
+.edgesSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.treeGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, auto);
+  gap: $space-4 $space-3;
+  position: relative;
+  z-index: 1;
+}
+
+// ── Nodes ─────────────────────────────────────────────────────────────────────
+
+.node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: $space-2 $space-3;
+  border-radius: $radius-md;
+  border: 1px solid $border-subtle;
+  background: $bg-elevated;
+  text-align: center;
+  transition: border-color 200ms, background 200ms, box-shadow 200ms, opacity 200ms;
+  min-height: 58px;
+  position: relative;
+}
+
+.nodeLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-secondary;
+  transition: color 200ms;
+}
+
+.nodeSub {
+  font-family: $font-mono;
+  font-size: 9px;
+  color: $text-muted;
+  line-height: 1.2;
+}
+
+// State badge
+.stateBadge {
+  position: absolute;
+  top: -8px;
+  right: -4px;
+  font-family: $font-mono;
+  font-size: 9px;
+  color: $info;
+  background: rgba(77,184,255,0.12);
+  border: 1px solid rgba(77,184,255,0.3);
+  border-radius: $radius-sm;
+  padding: 0 4px;
+}
+
+// Node state variants
+.nodeIdle { }
+
+.nodeHasState {
+  border-color: rgba(77,184,255,0.3);
+  .nodeLabel { color: $info; }
+}
+
+.nodeTrigger {
+  border-color: $warn;
+  background: rgba(240,192,64,0.08);
+  box-shadow: 0 0 10px rgba(240,192,64,0.25);
+  animation: shake 200ms ease;
+  .nodeLabel { color: $warn; }
+}
+
+.nodeVdom {
+  border-color: rgba(0,229,160,0.3);
+  background: rgba(0,229,160,0.05);
+  .nodeLabel { color: $accent; }
+}
+
+.nodeDiff {
+  border-color: rgba(0,229,160,0.5);
+  background: rgba(0,229,160,0.08);
+  box-shadow: 0 0 8px rgba(0,229,160,0.2);
+  .nodeLabel { color: $accent; }
+}
+
+.nodePatch {
+  border-color: $accent;
+  background: rgba(0,229,160,0.12);
+  box-shadow: 0 0 12px rgba(0,229,160,0.35);
+  animation: pop 300ms ease;
+  .nodeLabel { color: $accent; }
+}
+
+.nodeUnchanged {
+  opacity: 0.35;
+}
+
+.nodeDim {
+  opacity: 0.4;
+}
+
+// ── Legend ────────────────────────────────────────────────────────────────────
+
+.legend {
+  display: flex;
+  gap: $space-5;
+  padding: $space-3 $space-4;
+  border-top: 1px solid $border-subtle;
+  background: $bg-elevated;
+  flex-wrap: wrap;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid;
+}
+
+.dotPatch     { background: rgba(0,229,160,0.2);  border-color: $accent; }
+.dotUnchanged { background: $border-subtle;        border-color: $text-muted; opacity: 0.4; }
+.dotState     { background: rgba(77,184,255,0.15); border-color: $info; }
+
+// ── Animations ────────────────────────────────────────────────────────────────
+
+@keyframes pulse {
+  from { opacity: 0.6; }
+  to   { opacity: 1; }
+}
+
+@keyframes shake {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(-3px); }
+  75%  { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}

@@ -1,0 +1,239 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.root {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  background: $bg-surface;
+  overflow: hidden;
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.label {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  letter-spacing: $letter-wide;
+}
+
+.resetBtn {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  background: transparent;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-1 $space-3;
+  cursor: pointer;
+  transition: all $t-fast;
+
+  &:hover { color: $text-primary; border-color: $border-default; }
+}
+
+// ── Endpoint list ─────────────────────────────────────────────────────────────
+
+.epList {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.epBtn {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-2 $space-4;
+  background: transparent;
+  border: none;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: all $t-fast;
+
+  &:hover { background: $bg-elevated; }
+}
+
+.epActive {
+  background: $bg-elevated;
+  border-left-color: #e0234e;
+}
+
+.method {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  min-width: 44px;
+
+  &.get  { color: #00e5a0; }
+  &.post { color: #4db8ff; }
+}
+
+.epPath {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+}
+
+// ── Request panel ─────────────────────────────────────────────────────────────
+
+.reqPanel {
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.urlBar {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-3;
+  overflow: hidden;
+}
+
+.badge {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  padding: 1px $space-2;
+  border-radius: $radius-sm;
+  flex-shrink: 0;
+
+  &.get  { color: #00e5a0; background: rgba(0,229,160,0.1); }
+  &.post { color: #4db8ff; background: rgba(77,184,255,0.1); }
+}
+
+.urlText {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.inputLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  min-width: 48px;
+}
+
+.input {
+  flex: 1;
+  max-width: 240px;
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-3;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-primary;
+  transition: border-color $t-fast;
+
+  &:focus {
+    outline: none;
+    border-color: #e0234e;
+  }
+}
+
+.bodyArea {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.bodyLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wide;
+}
+
+.bodyRow {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.sendBtn {
+  align-self: flex-start;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-inverted;
+  background: #e0234e;
+  border: none;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-5;
+  cursor: pointer;
+  font-weight: 700;
+  transition: opacity $t-fast;
+
+  &:hover:not(:disabled) { opacity: 0.85; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+// ── Response panel ────────────────────────────────────────────────────────────
+
+.resPanel {
+  border-top: 1px solid $border-subtle;
+}
+
+.resHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.resLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.resStatus {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  padding: 1px $space-2;
+  border-radius: $radius-sm;
+
+  &.ok  { color: $accent; background: $accent-dim; }
+  &.err { color: $error; background: $error-dim; }
+}
+
+.resPre {
+  margin: 0;
+  padding: $space-4;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  line-height: $line-loose;
+  color: $text-secondary;
+  background: $bg-base;
+  overflow-x: auto;
+  max-height: 320px;
+
+  :global(.key)  { color: $info; }
+  :global(.str)  { color: $accent; }
+  :global(.bool) { color: #e0234e; }
+  :global(.num)  { color: $warn; }
+}

@@ -1,0 +1,240 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article { display: flex; flex-direction: column; gap: $space-10; }
+.section  { display: flex; flex-direction: column; gap: $space-4; }
+
+.lead {
+  font-size: $text-base; color: $text-secondary; line-height: $line-loose; max-width: 72ch;
+  strong { color: $text-primary; font-weight: 600; }
+  code   { color: $accent; background: $accent-dim; border-radius: $radius-sm; padding: 1px $space-2; font-family: $font-mono; font-size: 12px; }
+}
+
+.body {
+  font-size: $text-sm; color: $text-secondary; line-height: $line-loose; max-width: 72ch;
+  strong { color: $text-primary; font-weight: 600; }
+  code   { color: $accent; background: $accent-dim; border-radius: $radius-sm; padding: 1px $space-2; font-family: $font-mono; font-size: 12px; }
+}
+
+// ── Fact cards ────────────────────────────────────────────────────────────────
+
+.twoCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-4;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.factCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+}
+
+.factLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.factText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  code { color: $accent; background: $accent-dim; border-radius: $radius-sm; padding: 1px $space-1; font-family: $font-mono; font-size: 11px; }
+}
+
+// ── Warning / Info cards ──────────────────────────────────────────────────────
+
+.warnCard {
+  background: rgba(255,95,106,0.06);
+  border: 1px solid rgba(255,95,106,0.25);
+  border-radius: $radius-md;
+  padding: $space-4;
+}
+
+.warnLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $error;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.warnText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  code { color: $error; background: rgba(255,95,106,0.1); border-radius: $radius-sm; padding: 1px $space-1; font-family: $font-mono; font-size: 11px; }
+}
+
+.infoCard {
+  background: $info-dim;
+  border: 1px solid rgba(77,184,255,0.25);
+  border-radius: $radius-md;
+  padding: $space-4;
+}
+
+.infoLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $info;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.infoText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  code { color: $info; background: rgba(77,184,255,0.1); border-radius: $radius-sm; padding: 1px $space-1; font-family: $font-mono; font-size: 11px; }
+}
+
+// ── Command table ─────────────────────────────────────────────────────────────
+
+.cmdTable {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.cmdRow {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  border-bottom: 1px solid $border-subtle;
+  align-items: start;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.cmdCell {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $accent;
+  padding: $space-3 $space-4;
+  border-right: 1px solid $border-subtle;
+  background: rgba(0,229,160,0.02);
+  font-weight: 600;
+  white-space: nowrap;
+
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.cmdDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  padding: $space-3 $space-4;
+  line-height: $line-normal;
+}
+
+// ── Merge comparison table ────────────────────────────────────────────────────
+
+.mergeTable {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.mergeRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid $border-subtle;
+
+  &:last-child { border-bottom: none; }
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.mergeHead {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  padding: $space-2 $space-4;
+  background: $bg-elevated;
+  border-right: 1px solid $border-subtle;
+
+  &:last-child { border-right: none; }
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.mergeCell {
+  font-size: $text-sm;
+  color: $text-secondary;
+  padding: $space-3 $space-4;
+  border-right: 1px solid $border-subtle;
+  line-height: $line-normal;
+
+  &:last-child { border-right: none; }
+  code { color: $accent; background: $accent-dim; border-radius: $radius-sm; padding: 1px $space-1; font-family: $font-mono; font-size: 11px; }
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+// ── Workflow steps ────────────────────────────────────────────────────────────
+
+.workflow {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.wfStep {
+  display: flex;
+  gap: $space-5;
+  padding: $space-4 $space-5;
+  border-bottom: 1px solid $border-subtle;
+  align-items: flex-start;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.wfNum {
+  font-family: $font-mono;
+  font-size: $text-md;
+  font-weight: 700;
+  color: $accent;
+  min-width: 24px;
+  line-height: 1;
+  padding-top: 2px;
+}
+
+.wfBody {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  min-width: 0;
+}
+
+.wfTitle {
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+  font-family: $font-mono;
+}
+
+.wfCode {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $accent;
+  background: $accent-dim;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-3;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.wfDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}

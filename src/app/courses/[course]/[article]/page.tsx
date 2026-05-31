@@ -51,6 +51,18 @@ import { BinarySearchArticle } from '@/components/articles/BinarySearchArticle/B
 import { TwoPointersArticle } from '@/components/articles/TwoPointersArticle/TwoPointersArticle';
 import { SlidingWindowArticle } from '@/components/articles/SlidingWindowArticle/SlidingWindowArticle';
 import { SortingArticle } from '@/components/articles/SortingArticle/SortingArticle';
+import { PackageManagersArticle } from '@/components/articles/PackageManagersArticle/PackageManagersArticle';
+import { GitBasicsArticle } from '@/components/articles/GitBasicsArticle/GitBasicsArticle';
+import { GitStartArticle } from '@/components/articles/GitStartArticle/GitStartArticle';
+import { GitHistoryArticle } from '@/components/articles/GitHistoryArticle/GitHistoryArticle';
+import { GitBranchesArticle } from '@/components/articles/GitBranchesArticle/GitBranchesArticle';
+import { GitRemoteArticle } from '@/components/articles/GitRemoteArticle/GitRemoteArticle';
+import { GitUndoArticle } from '@/components/articles/GitUndoArticle/GitUndoArticle';
+import { ReactIntroArticle } from '@/components/articles/ReactIntroArticle/ReactIntroArticle';
+import { JSXArticle } from '@/components/articles/JSXArticle/JSXArticle';
+import { ComponentsPropsArticle } from '@/components/articles/ComponentsPropsArticle/ComponentsPropsArticle';
+import { NestjsIntroArticle } from '@/components/articles/NestjsIntroArticle/NestjsIntroArticle';
+import { NestjsRestArticle } from '@/components/articles/NestjsRestArticle/NestjsRestArticle';
 import { PlaceholderArticle } from '@/components/articles/PlaceholderArticle/PlaceholderArticle';
 import { RelatedArticles } from '@/components/ui/RelatedArticles/RelatedArticles';
 import { TableOfContents } from '@/components/ui/TableOfContents/TableOfContents';
@@ -134,6 +146,18 @@ export default async function ArticlePage({ params }: Props) {
     if (cSlug === 'algorithms' && aSlug === 'two-pointers')      return <TwoPointersArticle />;
     if (cSlug === 'algorithms' && aSlug === 'sliding-window')    return <SlidingWindowArticle />;
     if (cSlug === 'algorithms' && aSlug === 'sorting-algorithms') return <SortingArticle />;
+    if (cSlug === 'javascript' && aSlug === 'package-managers') return <PackageManagersArticle />;
+    if (cSlug === 'git' && aSlug === 'git-basics')    return <GitBasicsArticle />;
+    if (cSlug === 'git' && aSlug === 'git-start')     return <GitStartArticle />;
+    if (cSlug === 'git' && aSlug === 'git-history')   return <GitHistoryArticle />;
+    if (cSlug === 'git' && aSlug === 'git-branches')  return <GitBranchesArticle />;
+    if (cSlug === 'git' && aSlug === 'git-remote')    return <GitRemoteArticle />;
+    if (cSlug === 'git' && aSlug === 'git-undo')      return <GitUndoArticle />;
+    if (cSlug === 'react' && aSlug === 'why-react')   return <ReactIntroArticle />;
+    if (cSlug === 'react' && aSlug === 'jsx')              return <JSXArticle />;
+    if (cSlug === 'react' && aSlug === 'components-props') return <ComponentsPropsArticle />;
+    if (cSlug === 'nestjs' && aSlug === 'nestjs-intro') return <NestjsIntroArticle />;
+    if (cSlug === 'nestjs' && aSlug === 'nestjs-rest')  return <NestjsRestArticle />;
     return <PlaceholderArticle title={article!.title} />;
   }
 

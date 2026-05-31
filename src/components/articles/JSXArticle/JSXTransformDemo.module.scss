@@ -1,0 +1,164 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.wrap {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $bg-base;
+}
+
+// ── Tabs ──────────────────────────────────────────────────────────────────────
+
+.tabs {
+  display: flex;
+  overflow-x: auto;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-elevated;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+.tab {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: $space-3 $space-4;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color $t-fast, border-color $t-fast;
+
+  &:hover { color: $text-secondary; }
+}
+
+.tabActive {
+  color: $accent;
+  border-bottom-color: $accent;
+}
+
+// ── Split ─────────────────────────────────────────────────────────────────────
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 56px 1fr;
+  animation: fadeIn 150ms ease;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.pane {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.paneHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: rgba(255,255,255,0.015);
+}
+
+.paneLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.paneSub {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  opacity: 0.6;
+}
+
+.code {
+  margin: 0;
+  padding: $space-4 $space-5;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  line-height: $line-loose;
+  overflow-x: auto;
+  flex: 1;
+  background: transparent;
+}
+
+// Syntax colouring for JSX
+.jsx {
+  color: $text-secondary;
+}
+
+// Syntax colouring for compiled (lighter, more muted — it's "generated")
+.compiled {
+  color: $text-muted;
+}
+
+// ── Arrow ─────────────────────────────────────────────────────────────────────
+
+.arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid $border-subtle;
+  border-right: 1px solid $border-subtle;
+  gap: $space-2;
+  padding: $space-4 0;
+
+  @include mobile {
+    flex-direction: row;
+    border-left: none; border-right: none;
+    border-top: 1px solid $border-subtle;
+    border-bottom: 1px solid $border-subtle;
+    padding: $space-3;
+  }
+}
+
+.arrowLine {
+  width: 1px;
+  flex: 1;
+  min-height: 16px;
+  background: linear-gradient(to bottom, transparent, $accent, transparent);
+  opacity: 0.35;
+
+  @include mobile {
+    width: 30px; height: 1px; min-height: unset;
+    background: linear-gradient(to right, transparent, $accent, transparent);
+  }
+}
+
+.arrowText {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $accent;
+  opacity: 0.7;
+  text-align: center;
+  line-height: 1.4;
+}
+
+// ── Note ──────────────────────────────────────────────────────────────────────
+
+.note {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+  padding: $space-3 $space-5;
+  border-top: 1px solid $border-subtle;
+  background: $info-dim;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.noteIcon { font-size: 14px; flex-shrink: 0; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

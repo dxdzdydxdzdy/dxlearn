@@ -1,0 +1,212 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.demo {
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $bg-base;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-default;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.title {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+// ── Timeline ──────────────────────────────────────────────────────────────────
+
+.timeline {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  padding: $space-6 $space-5 $space-4;
+  overflow-x: auto;
+  @include custom-scrollbar;
+
+  @include mobile { padding: $space-4 $space-3; }
+}
+
+.commitWrap {
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+
+.connector {
+  width: 40px;
+  height: 2px;
+  background: $border-default;
+  margin-top: 20px;
+  flex-shrink: 0;
+
+  &.active { background: $accent; }
+}
+
+.commit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-2;
+  cursor: pointer;
+  width: 100px;
+}
+
+.commitDot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid $border-default;
+  background: $bg-elevated;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  transition: border-color $t-fast, background $t-fast, color $t-fast;
+  flex-shrink: 0;
+
+  .commit.selected & {
+    border-color: $accent;
+    background: $accent-dim;
+    color: $accent;
+  }
+
+  .commit:hover & {
+    border-color: $border-strong;
+    color: $text-secondary;
+  }
+}
+
+.commitLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  text-align: center;
+  line-height: $line-normal;
+  transition: color $t-fast;
+
+  .commit.selected & { color: $accent; }
+  .commit:hover & { color: $text-secondary; }
+}
+
+.commitDate {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  opacity: 0.6;
+  text-align: center;
+}
+
+// ── Snapshot view ─────────────────────────────────────────────────────────────
+
+.divider {
+  height: 1px;
+  background: $border-subtle;
+  margin: 0 $space-5;
+
+  @include mobile { margin: 0 $space-3; }
+}
+
+.snapshot {
+  padding: $space-4 $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  animation: fadeIn 150ms ease;
+
+  @include mobile { padding: $space-4 $space-3; }
+}
+
+.snapshotTitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.files {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.file {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-3;
+}
+
+.fileIcon {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+
+.fileInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  min-width: 0;
+}
+
+.fileName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-primary;
+  font-weight: 600;
+}
+
+.fileContent {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-secondary;
+  line-height: $line-normal;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.fileStatus {
+  font-family: $font-mono;
+  font-size: 10px;
+  padding: 1px $space-2;
+  border-radius: $radius-sm;
+  flex-shrink: 0;
+  align-self: flex-start;
+
+  &.new      { color: $accent; background: $accent-dim; }
+  &.modified { color: $warn;   background: $warn-dim;   }
+  &.same     { color: $text-muted; }
+}
+
+.hint {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  text-align: center;
+  padding: $space-6;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

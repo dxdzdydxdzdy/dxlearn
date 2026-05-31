@@ -18,6 +18,8 @@ const COURSE_COLOR: Record<string, string> = {
   backend:            '#57ab5a',
   devops:             '#ff7b72',
   'ml-ai':            '#a78bfa',
+  git:                '#f05032',
+  algorithms:         '#ffa116',
 };
 
 interface Props {

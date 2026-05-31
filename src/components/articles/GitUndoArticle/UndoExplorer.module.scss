@@ -1,0 +1,220 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.wrap {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $bg-base;
+}
+
+// ── Layout ────────────────────────────────────────────────────────────────────
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 320px;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+// ── List ──────────────────────────────────────────────────────────────────────
+
+.list {
+  border-right: 1px solid $border-subtle;
+  display: flex;
+  flex-direction: column;
+
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.listHeader {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: rgba(255,255,255,0.02);
+}
+
+.scenarioBtn {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $border-subtle;
+  cursor: pointer;
+  transition: background $t-fast;
+  width: 100%;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.scenarioBtnActive {
+  background: rgba(0,229,160,0.04) !important;
+  border-left: 2px solid $accent;
+}
+
+.situationText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  text-align: left;
+
+  .scenarioBtnActive & { color: $text-primary; }
+}
+
+// ── Safety dot ────────────────────────────────────────────────────────────────
+
+.safetyDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.dot_safe    { background: $accent; }
+.dot_caution { background: $warn; }
+.dot_danger  { background: $error; }
+
+// ── Detail panel ──────────────────────────────────────────────────────────────
+
+.detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.detailHeader {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: rgba(255,255,255,0.02);
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  padding: $space-8;
+}
+
+.solution {
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  animation: fadeIn 160ms ease;
+}
+
+// ── Safety badge ──────────────────────────────────────────────────────────────
+
+.safetyBadge {
+  display: inline-flex;
+  align-items: center;
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  padding: $space-1 $space-3;
+  border-radius: $radius-sm;
+  border: 1px solid;
+  align-self: flex-start;
+  letter-spacing: $letter-wide;
+}
+
+.badge_safe    { color: $accent; border-color: rgba(0,229,160,0.4);  background: rgba(0,229,160,0.08); }
+.badge_caution { color: $warn;   border-color: rgba(240,192,64,0.4); background: rgba(240,192,64,0.08); }
+.badge_danger  { color: $error;  border-color: rgba(255,95,106,0.4); background: rgba(255,95,106,0.08); }
+
+// ── Command block ─────────────────────────────────────────────────────────────
+
+.commandBlock {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.commandLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.commandCode {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $accent;
+  background: $accent-dim;
+  border: 1px solid rgba(0,229,160,0.2);
+  border-radius: $radius-sm;
+  padding: $space-3 $space-4;
+  margin: 0;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+// ── Explanation ───────────────────────────────────────────────────────────────
+
+.explanationText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+// ── Tip ───────────────────────────────────────────────────────────────────────
+
+.tipBlock {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  background: $info-dim;
+  border: 1px solid rgba(77,184,255,0.2);
+  border-radius: $radius-sm;
+}
+
+.tipIcon { font-size: 13px; flex-shrink: 0; }
+
+.tipText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+// ── Legend ────────────────────────────────────────────────────────────────────
+
+.legend {
+  display: flex;
+  gap: $space-5;
+  padding: $space-3 $space-4;
+  border-top: 1px solid $border-subtle;
+  background: $bg-elevated;
+  flex-wrap: wrap;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}

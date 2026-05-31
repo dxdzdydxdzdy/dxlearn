@@ -1,0 +1,169 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: $space-10;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.lead {
+  font-size: $text-base;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: #e0234e;
+    background: rgba(224, 35, 78, 0.1);
+    border-radius: $radius-sm;
+    padding: 1px $space-2;
+    font-family: $font-mono;
+    font-size: 12px;
+  }
+}
+
+.body {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  max-width: 72ch;
+
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: #e0234e;
+    background: rgba(224, 35, 78, 0.1);
+    border-radius: $radius-sm;
+    padding: 1px $space-2;
+    font-family: $font-mono;
+    font-size: 12px;
+  }
+  em { font-style: normal; color: $text-primary; }
+}
+
+// ── Block grid (3 columns) ────────────────────────────────────────────────────
+
+.blockGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.block {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  transition: border-color $t-fast;
+
+  &:hover { border-color: $border-default; }
+}
+
+.blockName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: #e0234e;
+}
+
+.blockRole {
+  font-size: $text-xs;
+  color: $text-muted;
+  font-family: $font-mono;
+  letter-spacing: $letter-wide;
+  text-transform: uppercase;
+}
+
+.blockDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+// ── File tree ─────────────────────────────────────────────────────────────────
+
+.fileTree {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  line-height: 2;
+  color: $text-secondary;
+  overflow-x: auto;
+}
+
+.fileDir  { color: $text-primary; font-weight: 600; }
+.fileFile { color: $text-muted; }
+.fileNote { color: $text-muted; opacity: 0.5; font-size: 11px; }
+.fileKey  { color: #e0234e; }
+
+// ── Callout ───────────────────────────────────────────────────────────────────
+
+.callout {
+  background: rgba(224, 35, 78, 0.06);
+  border: 1px solid rgba(224, 35, 78, 0.2);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px;
+  font-family: $font-mono;
+  color: #e0234e;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: #e0234e;
+    background: rgba(224, 35, 78, 0.1);
+    border-radius: $radius-sm;
+    padding: 1px $space-2;
+    font-family: $font-mono;
+    font-size: 11px;
+  }
+}
+
+
+// ── Compare: Express vs Nest ──────────────────────────────────────────────────
+
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.compareCol { display: flex; flex-direction: column; gap: $space-2; }
+
+.compareLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  letter-spacing: $letter-wider;
+  padding: $space-1 $space-3;
+  border-radius: $radius-sm;
+  align-self: flex-start;
+
+  &.neutral { color: $info; background: $info-dim; border: 1px solid rgba(77,184,255,0.2); }
+  &.nest    { color: #e0234e; background: rgba(224,35,78,0.08); border: 1px solid rgba(224,35,78,0.2); }
+}

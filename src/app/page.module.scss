@@ -383,6 +383,11 @@
   color: $text-primary;
   line-height: $line-tight;
   transition: color $t-fast;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .courseMeta {

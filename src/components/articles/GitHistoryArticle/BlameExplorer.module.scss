@@ -1,0 +1,211 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.demo {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $bg-base;
+}
+
+.header {
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+// ── File panel ────────────────────────────────────────────────────────────────
+
+.filePanel {
+  border-right: 1px solid $border-subtle;
+  display: flex;
+  flex-direction: column;
+
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.panelTitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-elevated;
+}
+
+.blameLine {
+  display: grid;
+  grid-template-columns: 24px 58px 44px 1fr;
+  gap: 0;
+  align-items: center;
+  padding: 3px $space-3;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+  transition: background $t-fast;
+  font-family: $font-mono;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  &.active     { background: rgba(0,229,160,0.08); }
+  &.sameCommit { background: rgba(0,229,160,0.03); }
+}
+
+.lineNo {
+  font-size: 11px;
+  color: $text-muted;
+  user-select: none;
+  text-align: right;
+  padding-right: $space-2;
+}
+
+.lineHash {
+  font-size: 11px;
+  font-weight: 600;
+  padding-right: $space-2;
+  white-space: nowrap;
+}
+
+.lineDate {
+  font-size: 10px;
+  color: $text-muted;
+  padding-right: $space-2;
+  white-space: nowrap;
+}
+
+.lineCode {
+  font-size: $text-sm;
+  color: $text-primary;
+  white-space: pre;
+}
+
+// ── Info panel ────────────────────────────────────────────────────────────────
+
+.infoPanel {
+  display: flex;
+  flex-direction: column;
+}
+
+.commitInfo {
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  animation: fadeIn 150ms ease;
+}
+
+.infoRow {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.infoLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.infoVal {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+
+  &.hash    { color: $info; }
+  &.message { color: $text-primary; font-size: 13px; line-height: $line-normal; }
+}
+
+// ── Legend ────────────────────────────────────────────────────────────────────
+
+.legend {
+  margin-top: $space-2;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-3;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.legendTitle {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-1;
+}
+
+.legendLine {
+  display: flex;
+  gap: $space-2;
+  align-items: baseline;
+}
+
+.legendNum {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $accent;
+  min-width: 20px;
+}
+
+.legendCode {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.placeholder {
+  padding: $space-6;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  text-align: center;
+}
+
+// ── Author legend bar ─────────────────────────────────────────────────────────
+
+.authorLegend {
+  display: flex;
+  gap: $space-5;
+  padding: $space-3 $space-4;
+  border-top: 1px solid $border-subtle;
+  background: $bg-elevated;
+  flex-wrap: wrap;
+}
+
+.authorItem {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.authorDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.authorName {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-secondary;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(4px); }
+  to   { opacity: 1; transform: translateX(0); }
+}

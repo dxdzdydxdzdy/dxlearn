@@ -1,0 +1,140 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.wrap {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $bg-base;
+}
+
+// ── Terminal bar ──────────────────────────────────────────────────────────────
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  min-height: 44px;
+}
+
+.prompt { color: $accent; font-weight: 700; }
+
+.cmd { color: $text-primary; }
+
+.init { color: $text-muted; font-style: italic; }
+
+// ── HEAD indicator strip ──────────────────────────────────────────────────────
+
+.headStrip {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: rgba(255,255,255,0.01);
+  font-family: $font-mono;
+  font-size: $text-sm;
+}
+
+.headLabel {
+  color: $accent;
+  font-weight: 700;
+}
+
+.headArrow {
+  color: $text-muted;
+}
+
+.headBranch {
+  font-weight: 700;
+  transition: color 200ms ease;
+}
+
+// ── Graph ─────────────────────────────────────────────────────────────────────
+
+.graphWrap {
+  padding: $space-5 $space-3 $space-3;
+  background: $bg-base;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 260px;
+}
+
+// ── Description ───────────────────────────────────────────────────────────────
+
+.desc {
+  padding: $space-4 $space-5;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  border-top: 1px solid $border-subtle;
+  min-height: 56px;
+}
+
+// ── Navigation ────────────────────────────────────────────────────────────────
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-4;
+  border-top: 1px solid $border-subtle;
+  background: $bg-elevated;
+  gap: $space-4;
+}
+
+.btn {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  background: transparent;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-4;
+  cursor: pointer;
+  transition: color $t-fast, border-color $t-fast;
+  white-space: nowrap;
+
+  &:hover:not(:disabled) {
+    color: $accent;
+    border-color: rgba(0,229,160,0.4);
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: $border-subtle;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background $t-fast, transform $t-fast;
+
+  &:hover { background: $text-muted; }
+}
+
+.dotActive {
+  background: $accent;
+  transform: scale(1.25);
+}

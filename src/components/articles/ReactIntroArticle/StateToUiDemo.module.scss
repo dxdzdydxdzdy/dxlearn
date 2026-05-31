@@ -1,0 +1,331 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.wrap {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $bg-base;
+}
+
+// ── Panels ────────────────────────────────────────────────────────────────────
+
+.panels {
+  display: grid;
+  grid-template-columns: 1fr 48px 1fr;
+  min-height: 280px;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: rgba(255,255,255,0.02);
+}
+
+.panelLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $accent;
+  letter-spacing: $letter-wider;
+}
+
+.panelHint {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+}
+
+// ── Arrow ─────────────────────────────────────────────────────────────────────
+
+.arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $space-1;
+  border-left: 1px solid $border-subtle;
+  border-right: 1px solid $border-subtle;
+  padding: $space-3 0;
+
+  @include mobile {
+    flex-direction: row;
+    border-left: none; border-right: none;
+    border-top: 1px solid $border-subtle;
+    border-bottom: 1px solid $border-subtle;
+    padding: $space-3;
+  }
+}
+
+.arrowLine {
+  width: 2px;
+  flex: 1;
+  min-height: 24px;
+  background: linear-gradient(to bottom, transparent, $accent, transparent);
+  opacity: 0.4;
+
+  @include mobile {
+    width: 40px;
+    height: 2px;
+    min-height: unset;
+    background: linear-gradient(to right, transparent, $accent, transparent);
+  }
+}
+
+.arrowLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  writing-mode: vertical-lr;
+
+  @include mobile { writing-mode: horizontal-tb; }
+}
+
+// ── State fields ──────────────────────────────────────────────────────────────
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding: $space-4;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  cursor: default;
+}
+
+.fieldKey {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $info;
+  min-width: 76px;
+}
+
+.fieldType {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  min-width: 48px;
+}
+
+.fieldInput {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-primary;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-1 $space-3;
+  flex: 1;
+  outline: none;
+  transition: border-color $t-fast;
+
+  &:focus { border-color: rgba(0,229,160,0.4); }
+}
+
+.numControls {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.numBtn {
+  width: 26px;
+  height: 26px;
+  font-family: $font-mono;
+  font-size: 16px;
+  color: $text-secondary;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color $t-fast, border-color $t-fast;
+
+  &:hover { color: $accent; border-color: rgba(0,229,160,0.4); }
+}
+
+.numVal {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: #e09c55;
+  min-width: 24px;
+  text-align: center;
+}
+
+.toggle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  padding: $space-1 $space-3;
+  border-radius: $radius-sm;
+  border: 1px solid;
+  cursor: pointer;
+  transition: all $t-fast;
+}
+
+.toggleOn {
+  color: $accent;
+  border-color: rgba(0,229,160,0.4);
+  background: rgba(0,229,160,0.08);
+}
+
+.toggleOff {
+  color: $text-muted;
+  border-color: $border-subtle;
+  background: transparent;
+}
+
+// ── State code preview ────────────────────────────────────────────────────────
+
+.stateCode {
+  margin: $space-1 $space-4 $space-4;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: $font-mono;
+  font-size: 11px;
+}
+
+.codeComment { color: $text-muted; font-style: italic; }
+.codeLine    { color: $text-secondary; }
+.codeKey     { color: $info; }
+.codePunct   { color: $text-muted; }
+.codeStr     { color: $accent; }
+.codeNum     { color: #e09c55; }
+.codeTrue    { color: $accent; }
+.codeFalse   { color: $error; }
+
+// ── UI card ───────────────────────────────────────────────────────────────────
+
+.uiCard {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  margin: $space-4;
+  padding: $space-4 $space-5;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  animation: fadeIn 120ms ease;
+}
+
+.uiAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0,229,160,0.12);
+  border: 2px solid rgba(0,229,160,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-mono;
+  font-size: $text-md;
+  font-weight: 700;
+  color: $accent;
+  flex-shrink: 0;
+}
+
+.uiBody { display: flex; flex-direction: column; gap: $space-1; min-width: 0; }
+
+.uiName {
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.uiEmpty { color: $text-muted; font-style: italic; }
+
+.uiStatus {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.uiDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.uiDotOn  { background: $accent;  box-shadow: 0 0 5px rgba(0,229,160,0.5); }
+.uiDotOff { background: $text-muted; }
+
+.uiMsgs {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-size: $text-sm;
+  color: $text-secondary;
+}
+
+.uiBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 $space-2;
+  background: $accent;
+  color: $bg-base;
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 10px;
+}
+
+// ── Note ──────────────────────────────────────────────────────────────────────
+
+.noCodeNote {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-2;
+  padding: $space-3 $space-4 $space-4;
+  font-size: $text-sm;
+  color: $text-muted;
+  line-height: $line-normal;
+
+  code {
+    font-family: $font-mono;
+    font-size: 11px;
+    color: $error;
+    background: rgba(255,95,106,0.1);
+    border-radius: $radius-sm;
+    padding: 1px $space-1;
+  }
+
+  em { color: $accent; font-style: normal; font-weight: 600; }
+}
+
+.noCodeIcon {
+  font-size: 16px;
+  color: $accent;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0.5; transform: scale(0.99); }
+  to   { opacity: 1;   transform: scale(1); }
+}

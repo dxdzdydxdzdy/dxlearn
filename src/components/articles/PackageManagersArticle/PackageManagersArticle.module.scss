@@ -1,0 +1,280 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article { display: flex; flex-direction: column; gap: $space-10; }
+.section  { display: flex; flex-direction: column; gap: $space-4; }
+
+.lead {
+  font-size: $text-base; color: $text-secondary; line-height: $line-loose; max-width: 72ch;
+  strong { color: $text-primary; font-weight: 600; }
+}
+
+.body {
+  font-size: $text-sm; color: $text-secondary; line-height: $line-loose; max-width: 72ch;
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: $accent; background: $accent-dim; border-radius: $radius-sm;
+    padding: 1px $space-2; font-family: $font-mono; font-size: 12px;
+  }
+}
+
+// ── Manager cards (npm / yarn / pnpm) ─────────────────────────────────────────
+
+.managerGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.managerCard {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.managerHead {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-elevated;
+}
+
+.managerName {
+  font-family: $font-mono;
+  font-size: $text-base;
+  font-weight: 700;
+}
+
+.managerYear {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  margin-left: auto;
+}
+
+.managerBody {
+  padding: $space-3 $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.managerDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+.managerPros {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.managerPro {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  padding-left: $space-4;
+  position: relative;
+
+  &::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: $accent;
+    font-family: $font-mono;
+    font-size: 11px;
+  }
+}
+
+.managerCon {
+  @extend .managerPro;
+
+  &::before {
+    content: '~';
+    color: $warn;
+  }
+}
+
+// ── package.json field table ──────────────────────────────────────────────────
+
+.fieldTable {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  border-bottom: 1px solid $border-subtle;
+  align-items: start;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.fieldName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $accent;
+  padding: $space-3 $space-4;
+  border-right: 1px solid $border-subtle;
+  background: rgba(0,229,160,0.03);
+  font-weight: 600;
+
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.fieldDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  padding: $space-3 $space-4;
+  line-height: $line-normal;
+
+  code {
+    color: $accent; background: $accent-dim; border-radius: $radius-sm;
+    padding: 1px $space-1; font-family: $font-mono; font-size: 11px;
+  }
+}
+
+// ── Semver grid ───────────────────────────────────────────────────────────────
+
+.semverGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-2;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.semverCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.semverPrefix {
+  font-family: $font-mono;
+  font-size: $text-xl;
+  font-weight: 700;
+}
+
+.semverExample {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.semverDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+// ── Comparison table ──────────────────────────────────────────────────────────
+
+.compTable {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.compHeader {
+  display: grid;
+  grid-template-columns: 1fr repeat(3, 100px);
+  padding: $space-2 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  min-width: 400px;
+}
+
+.compHeaderManager {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  justify-content: center;
+}
+
+.compRow {
+  display: grid;
+  grid-template-columns: 1fr repeat(3, 100px);
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  align-items: center;
+  min-width: 400px;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.compCriteria {
+  font-size: $text-sm;
+  color: $text-secondary;
+}
+
+.compCell {
+  text-align: center;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+}
+
+// ── Callouts ──────────────────────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid rgba(0,229,160,0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px; font-family: $font-mono; color: $accent;
+  letter-spacing: $letter-wider; margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm; color: $text-secondary; line-height: $line-loose;
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: $accent; background: rgba(0,229,160,0.15); border-radius: $radius-sm;
+    padding: 1px $space-1; font-family: $font-mono; font-size: 11px;
+  }
+}
+
+.infoCard {
+  background: $info-dim;
+  border: 1px solid rgba(77,184,255,0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.infoLabel {
+  font-size: 11px; font-family: $font-mono; color: $info;
+  letter-spacing: $letter-wider; margin-bottom: $space-2;
+}
+
+.infoText {
+  font-size: $text-sm; color: $text-secondary; line-height: $line-loose;
+  strong { color: $text-primary; font-weight: 600; }
+}

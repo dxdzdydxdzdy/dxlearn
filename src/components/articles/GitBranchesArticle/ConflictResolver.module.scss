@@ -1,0 +1,248 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.wrap {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $bg-base;
+}
+
+// ── Top bar ───────────────────────────────────────────────────────────────────
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+  gap: $space-4;
+  flex-wrap: wrap;
+}
+
+.filename {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-primary;
+  font-weight: 600;
+}
+
+.status {
+  font-family: $font-mono;
+  font-size: $text-sm;
+}
+
+.ok        { color: $accent; }
+.remaining { color: $warn; }
+
+// ── Body layout ───────────────────────────────────────────────────────────────
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 320px;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+// ── Pane shared styles ────────────────────────────────────────────────────────
+
+.filePane,
+.resultPane {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.filePane {
+  border-right: 1px solid $border-subtle;
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.paneTitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: rgba(255,255,255,0.02);
+}
+
+.fileContent,
+.resultContent {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+// ── Code lines ────────────────────────────────────────────────────────────────
+
+.codeLine {
+  display: flex;
+  align-items: baseline;
+  font-family: $font-mono;
+  font-size: 12px;
+  line-height: 1.7;
+  padding: 0 $space-3;
+}
+
+.lineNo {
+  min-width: 28px;
+  color: $text-muted;
+  font-size: 11px;
+  text-align: right;
+  padding-right: $space-3;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.lineText {
+  color: $text-secondary;
+  white-space: pre;
+}
+
+.codeBlock {
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+}
+
+// ── Conflict block ────────────────────────────────────────────────────────────
+
+.conflictBlock {
+  border-top: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  margin: 2px 0;
+  position: relative;
+}
+
+.conflictResolved {
+  background: rgba(0,229,160,0.03);
+}
+
+.conflictMarker {
+  font-family: $font-mono;
+  font-size: 11px;
+  padding: 2px $space-3 2px 36px;
+  line-height: 1.6;
+
+  &[data-side="ours"]   { color: $accent; background: rgba(0,229,160,0.06); }
+  &[data-side="theirs"] { color: $warn;   background: rgba(240,192,64,0.06); }
+}
+
+.conflictSep {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  padding: 2px $space-3 2px 36px;
+  background: rgba(255,255,255,0.02);
+}
+
+.oursLine   .lineText { color: $accent;  }
+.theirsLine .lineText { color: #f0c040; }
+.oursLine   { background: rgba(0,229,160,0.04); }
+.theirsLine { background: rgba(240,192,64,0.04); }
+
+// ── Action buttons ────────────────────────────────────────────────────────────
+
+.actions {
+  display: flex;
+  gap: $space-2;
+  padding: $space-2 $space-3 $space-2 36px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  flex-wrap: wrap;
+}
+
+.actionBtn {
+  font-family: $font-mono;
+  font-size: 11px;
+  padding: $space-1 $space-3;
+  border-radius: $radius-sm;
+  border: 1px solid;
+  cursor: pointer;
+  transition: opacity $t-fast, transform $t-fast;
+  background: transparent;
+
+  &:hover { opacity: 0.8; transform: translateY(-1px); }
+  &:active { transform: translateY(0); }
+}
+
+.oursBtn {
+  color: $accent;
+  border-color: rgba(0,229,160,0.4);
+  background: rgba(0,229,160,0.06);
+}
+
+.theirsBtn {
+  color: $warn;
+  border-color: rgba(240,192,64,0.4);
+  background: rgba(240,192,64,0.06);
+}
+
+// ── Resolved state ────────────────────────────────────────────────────────────
+
+.resolvedLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $accent;
+  padding: $space-2 $space-3 $space-2 36px;
+  background: rgba(0,229,160,0.06);
+  border-bottom: 1px solid rgba(0,229,160,0.1);
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.undoBtn {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  background: transparent;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: 1px $space-2;
+  cursor: pointer;
+  margin-left: auto;
+
+  &:hover { color: $text-secondary; }
+}
+
+.resolvedLine .lineText { color: $text-secondary; }
+
+// ── Result pane ───────────────────────────────────────────────────────────────
+
+.placeholder .lineText {
+  color: $warn;
+  font-style: italic;
+}
+
+// ── Done panel ────────────────────────────────────────────────────────────────
+
+.done {
+  margin: $space-4;
+  border: 1px solid rgba(0,229,160,0.25);
+  border-radius: $radius-md;
+  padding: $space-4;
+  background: rgba(0,229,160,0.05);
+  animation: fadeUp 300ms ease;
+}
+
+.doneTitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $accent;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-3;
+}
+
+.doneCode {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

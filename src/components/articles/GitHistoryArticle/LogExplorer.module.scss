@@ -1,0 +1,221 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.demo {
+  border: 1px solid $border-default;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $bg-base;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-default;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+// ── Log panel ─────────────────────────────────────────────────────────────────
+
+.logPanel {
+  border-right: 1px solid $border-subtle;
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.logTitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-elevated;
+}
+
+.log {
+  display: flex;
+  flex-direction: column;
+}
+
+.logEntry {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  cursor: pointer;
+  border-bottom: 1px solid $border-subtle;
+  transition: background $t-fast;
+  position: relative;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+  &.selected { background: $accent-dim; }
+}
+
+.logGraph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0;
+  width: 16px;
+}
+
+.logDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid $border-default;
+  background: $bg-base;
+  flex-shrink: 0;
+  transition: border-color $t-fast, background $t-fast;
+
+  .logEntry.selected & { border-color: $accent; background: $accent; }
+}
+
+.logLine {
+  width: 2px;
+  flex: 1;
+  min-height: 8px;
+  background: $border-subtle;
+}
+
+.logMeta {
+  flex: 1;
+  min-width: 0;
+}
+
+.logHash {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  margin-bottom: $space-1;
+}
+
+.logHead {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $accent;
+  background: $accent-dim;
+  border: 1px solid rgba(0,229,160,0.25);
+  border-radius: $radius-sm;
+  padding: 0 $space-1;
+  margin-left: $space-1;
+}
+
+.logMessage {
+  font-size: $text-sm;
+  color: $text-primary;
+  font-weight: 600;
+  line-height: $line-tight;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logAuthor {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+}
+
+// ── Detail panel ──────────────────────────────────────────────────────────────
+
+.detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.detailTitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-elevated;
+}
+
+.detailContent {
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  animation: fadeIn 150ms ease;
+}
+
+.detailRow {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.detailLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.detailValue {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+
+  &.accent { color: $accent; }
+  &.hash   { color: $info; }
+}
+
+.diffBlock {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  overflow: hidden;
+}
+
+.diffHeader {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  padding: $space-1 $space-3;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-base;
+}
+
+.diffLine {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  padding: 2px $space-3;
+  line-height: 1.6;
+  white-space: pre;
+
+  &.added   { color: $accent; background: rgba(0,229,160,0.06); }
+  &.removed { color: $error;  background: rgba(255,95,106,0.06); }
+  &.context { color: $text-muted; }
+}
+
+.placeholder {
+  padding: $space-6;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(4px); }
+  to   { opacity: 1; transform: translateX(0); }
+}

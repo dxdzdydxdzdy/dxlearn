@@ -1,0 +1,210 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.wrap {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $bg-base;
+}
+
+// ── Layout ────────────────────────────────────────────────────────────────────
+
+.layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  min-height: 320px;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+// ── Tile list ─────────────────────────────────────────────────────────────────
+
+.tileList {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid $border-subtle;
+
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.tileHeader {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: rgba(255,255,255,0.02);
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-3;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  cursor: pointer;
+  transition: background $t-fast;
+  width: 100%;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.tileActive {
+  background: rgba(0,229,160,0.04) !important;
+  border-left: 2px solid $accent;
+}
+
+.tileLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-secondary;
+  text-align: left;
+  line-height: $line-normal;
+
+  .tileActive & { color: $text-primary; }
+}
+
+.tileDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot_ok      { background: $accent; }
+.dot_warn    { background: $warn; }
+.dot_err     { background: $error; }
+.dot_nothing { background: $text-muted; }
+
+// ── Detail panel ──────────────────────────────────────────────────────────────
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  padding: $space-4;
+  animation: fadeIn 160ms ease;
+}
+
+.detailHeader {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+// ── Code block ────────────────────────────────────────────────────────────────
+
+.codeBlock {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.codeLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.code {
+  margin: 0;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-3 $space-4;
+  white-space: pre;
+  overflow-x: auto;
+  line-height: $line-loose;
+}
+
+// ── Result block ──────────────────────────────────────────────────────────────
+
+.resultBlock {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.resultLabel {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.resultBox {
+  padding: $space-3 $space-4;
+  border-radius: $radius-sm;
+  border: 1px solid;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.result_ok      { background: rgba(0,229,160,0.05);   border-color: rgba(0,229,160,0.2); }
+.result_warn    { background: rgba(240,192,64,0.05);  border-color: rgba(240,192,64,0.2); }
+.result_err     { background: rgba(255,95,106,0.05);  border-color: rgba(255,95,106,0.2); }
+.result_nothing { background: rgba(255,255,255,0.02); border-color: $border-subtle; }
+
+.resultText {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-primary;
+}
+
+.resultMuted { color: $text-muted; font-style: italic; }
+
+// ── Status badge ──────────────────────────────────────────────────────────────
+
+.statusBadge {
+  display: inline-flex;
+  align-self: flex-start;
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px $space-3;
+  border-radius: $radius-sm;
+  border: 1px solid;
+}
+
+.badge_ok      { color: $accent; border-color: rgba(0,229,160,0.4);  background: rgba(0,229,160,0.08); }
+.badge_warn    { color: $warn;   border-color: rgba(240,192,64,0.4); background: rgba(240,192,64,0.08); }
+.badge_err     { color: $error;  border-color: rgba(255,95,106,0.4); background: rgba(255,95,106,0.08); }
+.badge_nothing { color: $text-muted; border-color: $border-subtle; background: transparent; }
+
+// ── Note ──────────────────────────────────────────────────────────────────────
+
+.noteBlock {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  background: $info-dim;
+  border: 1px solid rgba(77,184,255,0.15);
+  border-radius: $radius-sm;
+  margin-top: auto;
+}
+
+.noteIcon { font-size: 14px; flex-shrink: 0; }
+
+.noteText {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(4px); }
+  to   { opacity: 1; transform: translateX(0); }
+}

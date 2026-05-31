@@ -1,0 +1,165 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article { display: flex; flex-direction: column; gap: $space-10; }
+.section  { display: flex; flex-direction: column; gap: $space-4; }
+
+.lead {
+  font-size: $text-base; color: $text-secondary; line-height: $line-loose; max-width: 72ch;
+  strong { color: $text-primary; font-weight: 600; }
+  code   { color: $accent; background: $accent-dim; border-radius: $radius-sm; padding: 1px $space-2; font-family: $font-mono; font-size: 12px; }
+}
+
+.body {
+  font-size: $text-sm; color: $text-secondary; line-height: $line-loose; max-width: 72ch;
+  code { color: $accent; background: $accent-dim; border-radius: $radius-sm; padding: 1px $space-2; font-family: $font-mono; font-size: 12px; }
+}
+
+// ── Rules cards ───────────────────────────────────────────────────────────────
+
+.rulesCards {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.ruleCard {
+  display: flex;
+  gap: $space-5;
+  padding: $space-4 $space-5;
+  border-bottom: 1px solid $border-subtle;
+  align-items: flex-start;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+}
+
+.ruleNum {
+  font-family: $font-mono;
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $accent;
+  opacity: 0.35;
+  min-width: 28px;
+  line-height: 1;
+  padding-top: 2px;
+}
+
+.ruleBody { display: flex; flex-direction: column; gap: $space-2; }
+
+.ruleTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.ruleWhy {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+// ── Attrs table ───────────────────────────────────────────────────────────────
+
+.attrsTable {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.attrsRow {
+  display: grid;
+  grid-template-columns: 160px 28px 200px 1fr;
+  align-items: center;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  gap: $space-3;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  @include mobile { grid-template-columns: 1fr 1fr; gap: $space-2; }
+}
+
+.attrsHtml {
+  font-family: $font-mono; font-size: $text-sm;
+  color: $error; background: rgba(255,95,106,0.08);
+  border-radius: $radius-sm; padding: 1px $space-2;
+}
+
+.attrsArrow { color: $text-muted; text-align: center; }
+
+.attrsJsx {
+  font-family: $font-mono; font-size: $text-sm;
+  color: $accent; background: $accent-dim;
+  border-radius: $radius-sm; padding: 1px $space-2;
+}
+
+.attrsWhy {
+  font-size: $text-sm; color: $text-muted; line-height: $line-normal;
+
+  @include mobile { grid-column: 1 / -1; }
+}
+
+// ── Conditional table ─────────────────────────────────────────────────────────
+
+.condTable {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.condRow {
+  display: grid;
+  grid-template-columns: 180px 1fr 1fr;
+  align-items: start;
+  border-bottom: 1px solid $border-subtle;
+  gap: 0;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $bg-elevated; }
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.condPattern {
+  font-family: $font-mono; font-size: $text-sm; font-weight: 600;
+  color: $info; padding: $space-3 $space-4;
+  border-right: 1px solid $border-subtle;
+  display: block;
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.condWhen {
+  font-size: $text-sm; color: $text-secondary;
+  padding: $space-3 $space-4; line-height: $line-normal;
+  border-right: 1px solid $border-subtle;
+  @include mobile { border-right: none; border-bottom: 1px solid $border-subtle; }
+}
+
+.condEx {
+  font-family: $font-mono; font-size: 11px;
+  color: $text-muted; padding: $space-3 $space-4;
+  display: block; line-height: $line-loose;
+}
+
+// ── Fragment note ─────────────────────────────────────────────────────────────
+
+.fragmentNote {
+  padding: $space-4 $space-5;
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+
+  code {
+    font-family: $font-mono; font-size: 12px; color: $accent;
+    background: $accent-dim; border-radius: $radius-sm;
+    padding: 1px $space-1;
+  }
+}

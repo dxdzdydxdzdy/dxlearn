@@ -1,0 +1,339 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.wrap {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $bg-base;
+}
+
+// ── Terminal bar ──────────────────────────────────────────────────────────────
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+  padding: $space-3 $space-4;
+  background: $bg-elevated;
+  border-bottom: 1px solid $border-subtle;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  min-height: 44px;
+  flex-wrap: wrap;
+}
+
+.note   { color: $text-muted; font-style: italic; }
+.prompt { color: $accent; font-weight: 700; }
+.cmd    { color: $text-primary; }
+.init   { color: $text-muted; font-style: italic; }
+
+// ── Two-panel layout ──────────────────────────────────────────────────────────
+
+.panels {
+  display: grid;
+  grid-template-columns: 1fr 72px 1fr;
+  min-height: 200px;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+// ── Single panel ──────────────────────────────────────────────────────────────
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  background: rgba(255,255,255,0.02);
+}
+
+.panelIcon {
+  font-size: 13px;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.panelTitle {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: $letter-wider;
+}
+
+.panelBody {
+  flex: 1;
+  padding: $space-4;
+}
+
+// ── Divider ───────────────────────────────────────────────────────────────────
+
+.divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid $border-subtle;
+  border-right: 1px solid $border-subtle;
+  background: rgba(255,255,255,0.01);
+  padding: $space-3 0;
+
+  @include mobile {
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid $border-subtle;
+    border-bottom: 1px solid $border-subtle;
+    padding: $space-3;
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.flowArrow {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  letter-spacing: 1px;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  transition: color 200ms ease;
+
+  @include mobile {
+    writing-mode: horizontal-tb;
+  }
+}
+
+.flowPush  { color: $accent; }
+.flowFetch { color: $info; }
+
+// ── Commit list ───────────────────────────────────────────────────────────────
+
+.commitList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.commitRow {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+  padding: 3px 0;
+}
+
+.commitNew .dot {
+  border-color: $accent;
+  background: rgba(0,229,160,0.15);
+  box-shadow: 0 0 6px rgba(0,229,160,0.4);
+}
+
+.commitNew .hash {
+  color: $accent;
+}
+
+// ── Graph column ──────────────────────────────────────────────────────────────
+
+.graph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 14px;
+  padding-top: 4px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid $border-subtle;
+  background: $bg-base;
+  flex-shrink: 0;
+  transition: border-color 200ms, background 200ms, box-shadow 200ms;
+}
+
+.dotHead {
+  border-color: $accent;
+  background: rgba(0,229,160,0.1);
+}
+
+.vline {
+  width: 2px;
+  flex: 1;
+  min-height: 10px;
+  background: $border-subtle;
+  margin: 2px 0;
+}
+
+// ── Commit info ───────────────────────────────────────────────────────────────
+
+.commitInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 1px;
+}
+
+.hashRow {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.hash {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-muted;
+  transition: color 200ms;
+}
+
+.hashHead { color: $accent; }
+
+.msg {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $text-secondary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// ── Branch tags ───────────────────────────────────────────────────────────────
+
+.tag {
+  font-family: $font-mono;
+  font-size: 10px;
+  padding: 1px $space-2;
+  border-radius: $radius-sm;
+  border: 1px solid;
+  transition: box-shadow 200ms;
+  white-space: nowrap;
+}
+
+.tag_local {
+  color: $accent;
+  border-color: rgba(0,229,160,0.35);
+  background: rgba(0,229,160,0.08);
+}
+
+.tag_tracking {
+  color: $info;
+  border-color: rgba(77,184,255,0.35);
+  background: rgba(77,184,255,0.08);
+}
+
+.tag_head {
+  color: $accent;
+  border-color: rgba(0,229,160,0.5);
+  background: rgba(0,229,160,0.15);
+  font-weight: 700;
+}
+
+.tagNew {
+  box-shadow: 0 0 6px rgba(0,229,160,0.35);
+  animation: tagPop 400ms ease;
+}
+
+@keyframes tagPop {
+  0%   { transform: scale(0.8); opacity: 0; }
+  60%  { transform: scale(1.1); }
+  100% { transform: scale(1);   opacity: 1; }
+}
+
+// ── Empty panel ───────────────────────────────────────────────────────────────
+
+.emptyPanel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 80px;
+  padding: $space-6;
+}
+
+.emptyText {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  font-style: italic;
+}
+
+// ── Description ───────────────────────────────────────────────────────────────
+
+.desc {
+  padding: $space-4 $space-5;
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  border-top: 1px solid $border-subtle;
+  min-height: 56px;
+}
+
+// ── Navigation ────────────────────────────────────────────────────────────────
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-4;
+  border-top: 1px solid $border-subtle;
+  background: $bg-elevated;
+  gap: $space-4;
+}
+
+.btn {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-secondary;
+  background: transparent;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-4;
+  cursor: pointer;
+  transition: color $t-fast, border-color $t-fast;
+  white-space: nowrap;
+
+  &:hover:not(:disabled) {
+    color: $accent;
+    border-color: rgba(0,229,160,0.4);
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.dot2 {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: $border-subtle;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background $t-fast, transform $t-fast;
+
+  &:hover { background: $text-muted; }
+}
+
+.dot2Active {
+  background: $accent;
+  transform: scale(1.25);
+}

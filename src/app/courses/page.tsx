@@ -4,7 +4,7 @@ import {
   siMdnwebdocs, siJavascript, siCss, siHtml5,
   siReact, siRedux, siTypescript, siGooglechrome,
   siWebpack, siPostgresql, siNodedotjs, siDocker,
-  siAnthropic, siLeetcode,
+  siAnthropic, siLeetcode, siGit, siNestjs,
 } from 'simple-icons';
 import type { SimpleIcon } from 'simple-icons';
 import { BrandIcon } from '@/components/ui/BrandIcon/BrandIcon';
@@ -32,6 +32,8 @@ const COURSE_META: Record<string, CourseMeta> = {
   devops:             { color: '#2496ed', glow: 'rgba(36,150,237,0.14)',  icon: siDocker     },
   'ml-ai':            { color: '#cc785c', glow: 'rgba(204,120,92,0.14)',  icon: siAnthropic  },
   algorithms:         { color: '#ffa116', glow: 'rgba(255,161,22,0.14)',  icon: siLeetcode   },
+  git:                { color: '#f05032', glow: 'rgba(240,80,50,0.14)',   icon: siGit        },
+  nestjs:             { color: '#e0234e', glow: 'rgba(224,35,78,0.14)',   icon: siNestjs     },
 };
 
 // ── Grid size by article count ────────────────────────────────────────────────

@@ -1,0 +1,177 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.root {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  background: $bg-surface;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.label {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  letter-spacing: $letter-wide;
+}
+
+.runBtn {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: #e0234e;
+  background: rgba(224, 35, 78, 0.08);
+  border: 1px solid rgba(224, 35, 78, 0.3);
+  border-radius: $radius-sm;
+  padding: $space-1 $space-3;
+  cursor: pointer;
+  transition: all $t-fast;
+
+  &:hover:not(:disabled) {
+    background: rgba(224, 35, 78, 0.15);
+    border-color: rgba(224, 35, 78, 0.5);
+  }
+
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+// ── Flow row ─────────────────────────────────────────────────────────────────
+
+.flow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: $space-6 $space-5;
+  flex-wrap: wrap;
+  gap: $space-2;
+
+  @include mobile { flex-direction: column; align-items: flex-start; }
+}
+
+.stepWrap {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: $space-3 $space-4;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  background: $bg-elevated;
+  cursor: pointer;
+  transition: all 180ms ease;
+  min-width: 110px;
+
+  &:hover { border-color: var(--sc); }
+}
+
+.stepLabel {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+  transition: color $t-fast;
+}
+
+.stepSub {
+  font-family: $font-mono;
+  font-size: 10px;
+  color: $text-muted;
+}
+
+.stepActive {
+  border-color: var(--sc);
+  background: rgba(0,0,0,0.3);
+  box-shadow: 0 0 12px rgba(0,0,0,0.4);
+
+  .stepLabel { color: var(--sc); }
+}
+
+.stepPassed {
+  border-color: rgba(0,229,160,0.3);
+  .stepLabel { color: $accent; }
+}
+
+.stepWaiting {
+  opacity: 0.4;
+}
+
+.arrow {
+  font-family: $font-mono;
+  font-size: $text-md;
+  color: $text-muted;
+  transition: color $t-normal;
+
+  &.arrowActive { color: $accent; }
+
+  @include mobile { transform: rotate(90deg); }
+}
+
+// ── Detail panel ─────────────────────────────────────────────────────────────
+
+.detail {
+  border-top: 1px solid $border-subtle;
+  padding: $space-4 $space-5;
+  min-height: 120px;
+}
+
+.hint {
+  font-size: $text-sm;
+  color: $text-muted;
+  line-height: $line-loose;
+  font-family: $font-mono;
+}
+
+.detailTop {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  margin-bottom: $space-2;
+}
+
+.detailName {
+  font-family: $font-mono;
+  font-size: $text-base;
+  font-weight: 700;
+}
+
+.detailSub {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.detailDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-loose;
+  margin-bottom: $space-3;
+  max-width: 64ch;
+}
+
+.detailCode {
+  background: $bg-base;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-3 $space-4;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $accent;
+  line-height: $line-loose;
+  overflow-x: auto;
+  margin: 0;
+
+  code { font-family: inherit; }
+}

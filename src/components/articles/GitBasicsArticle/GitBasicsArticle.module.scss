@@ -1,0 +1,221 @@
+@use '../../../styles/tokens' as *;
+@use '../../../styles/mixins' as *;
+
+.article { display: flex; flex-direction: column; gap: $space-10; }
+.section  { display: flex; flex-direction: column; gap: $space-4; }
+
+.lead {
+  font-size: $text-base; color: $text-secondary; line-height: $line-loose; max-width: 72ch;
+  strong { color: $text-primary; font-weight: 600; }
+}
+
+.body {
+  font-size: $text-sm; color: $text-secondary; line-height: $line-loose; max-width: 72ch;
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: $accent; background: $accent-dim; border-radius: $radius-sm;
+    padding: 1px $space-2; font-family: $font-mono; font-size: 12px;
+  }
+}
+
+// ── Problem: без git ──────────────────────────────────────────────────────────
+
+.chaosBox {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-left: 3px solid $error;
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.chaosLabel {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $error;
+  letter-spacing: $letter-wider;
+  margin-bottom: $space-3;
+}
+
+.fileList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.chaosFile {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: $text-muted;
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+
+  &::before { content: '📄'; font-size: 13px; }
+
+  &.bad  { color: $error;   opacity: 0.8; }
+  &.ques { color: $warn; }
+}
+
+// ── Концепции (три карточки) ──────────────────────────────────────────────────
+
+.conceptGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.conceptCard {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.conceptNum {
+  font-family: $font-mono;
+  font-size: $text-xl;
+  font-weight: 700;
+  color: $accent;
+  line-height: 1;
+}
+
+.conceptTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.conceptDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+}
+
+// ── Distributed vs Centralized ────────────────────────────────────────────────
+
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @include mobile { grid-template-columns: 1fr; }
+}
+
+.compareCard {
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.compareHead {
+  padding: $space-2 $space-4;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-elevated;
+}
+
+.compareBody {
+  padding: $space-3 $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.compareItem {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: $line-normal;
+  padding-left: $space-4;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    left: 0;
+    font-family: $font-mono;
+    font-size: 11px;
+  }
+
+  &.pro::before  { content: '✓'; color: $accent; }
+  &.con::before  { content: '✗'; color: $error; }
+}
+
+// ── Callouts ──────────────────────────────────────────────────────────────────
+
+.callout {
+  background: $accent-dim;
+  border: 1px solid rgba(0,229,160,0.25);
+  border-radius: $radius-md;
+  padding: $space-4 $space-5;
+}
+
+.calloutLabel {
+  font-size: 11px; font-family: $font-mono; color: $accent;
+  letter-spacing: $letter-wider; margin-bottom: $space-2;
+}
+
+.calloutText {
+  font-size: $text-sm; color: $text-secondary; line-height: $line-loose;
+  strong { color: $text-primary; font-weight: 600; }
+  code {
+    color: $accent; background: rgba(0,229,160,0.15); border-radius: $radius-sm;
+    padding: 1px $space-1; font-family: $font-mono; font-size: 11px;
+  }
+}
+
+// ── Config steps ──────────────────────────────────────────────────────────────
+
+.configSteps {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.configStep {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  align-items: start;
+
+  &:last-child { border-bottom: none; }
+
+  @include mobile { grid-template-columns: 1fr; gap: $space-1; }
+}
+
+.configNum {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  color: $accent;
+  padding-top: 2px;
+}
+
+.configBody {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.configTitle {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.configNote {
+  font-size: $text-sm;
+  color: $text-muted;
+  line-height: $line-normal;
+}

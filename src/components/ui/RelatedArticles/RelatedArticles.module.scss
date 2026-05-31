@@ -88,15 +88,20 @@
   color: $text-primary;
   line-height: $line-normal;
   transition: color $t-fast;
+
+  // Clamp to 2 lines so long titles don't throw off card heights
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .cardDesc {
   font-size: $text-sm;
   color: $text-muted;
   line-height: $line-normal;
-  flex: 1;
 
-  // Clamp to 2 lines
+  // No flex: 1 here — that caused the element to stretch and break line-clamp
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
