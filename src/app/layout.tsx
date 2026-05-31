@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: { default: 'dxlearn', template: '%s — dxlearn' },
   description: 'Интерактивные курсы по веб-разработке',
   verification: {
-    google: 'RK79_tykQlJawxSuG-Ou20zlPeSV_piwYkRGfrYsWFw',
+    google: 'SFZwoj_B0yyaV5FP7QCrsb3KgzpwIjQDijz5fdZK_MQ',
     yandex: 'ee409c6ea22671f8',
   },
   manifest: '/manifest.webmanifest',
